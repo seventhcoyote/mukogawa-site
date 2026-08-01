@@ -411,50 +411,6 @@ p:last-child { margin-bottom: 0; }
 }
 .losango--sangue { --lado: var(--sangue-vivo); }
 
-/* ---------- borda de página ----------
-   Faixa de arte sangrando no topo e na base do documento. Não é decoração
-   solta: usa o halftone e a cor dos dois lados, então lê como continuação do
-   mundo e não como enfeite de tema. */
-.borda-pagina {
-  position: relative;
-  height: clamp(54px, 7vw, 92px);
-  overflow: hidden;
-  pointer-events: none;
-  background: var(--vazio);
-}
-.borda-pagina::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 46% 150% at 18% 100%, color-mix(in srgb, var(--sangue) 40%, transparent), transparent 70%),
-    radial-gradient(ellipse 42% 140% at 82% 100%, color-mix(in srgb, var(--aco-fundo) 46%, transparent), transparent 72%),
-    linear-gradient(180deg, var(--vazio), color-mix(in srgb, var(--tinta-2) 90%, transparent));
-}
-/* dentes: a silhueta recortada que dá o corte de quadrinho */
-.borda-pagina::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--vazio);
-  -webkit-mask-image: conic-gradient(from 210deg at 50% 0, #000 0 60deg, transparent 60deg);
-          mask-image: conic-gradient(from 210deg at 50% 0, #000 0 60deg, transparent 60deg);
-  -webkit-mask-size: clamp(46px, 6vw, 78px) 100%;
-          mask-size: clamp(46px, 6vw, 78px) 100%;
-  -webkit-mask-repeat: repeat-x;
-          mask-repeat: repeat-x;
-}
-.borda-pagina--topo { transform: scaleY(-1); }
-
-.borda-pagina .grao {
-  position: absolute;
-  inset: 0;
-  color: #000;
-  opacity: .3;
-  background-image: radial-gradient(circle at center, currentColor 1px, transparent 1.6px);
-  background-size: 5px 5px;
-}
-
 /* ---------- botão de topo ----------
    Ancorado no fim da página, não flutuante. É como a referência faz, e tem uma
    vantagem prática: não depende de JS, de IntersectionObserver nem de listener
