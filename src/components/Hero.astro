@@ -82,16 +82,27 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
     object-position: 50% 0%;
   }
 
-  .palco .halftone { color: #000; opacity: .18; z-index: 1; }
+  .palco .halftone { color: #000; opacity: .12; z-index: 1; }
 
+  /* O vídeo do hero SEMPRE foi colorido: vermelho vivo e aura dourada. Quem
+     apagava a cor era este véu, chapado sobre a imagem inteira. Ele existe por
+     um motivo real — o texto branco precisa de contraste — mas só precisa
+     disso do lado ESQUERDO, onde o texto está. À direita, onde só há arte, ele
+     agora se abre e deixa a cor aparecer.
+     O gradiente da esquerda continua forte o bastante para o texto: medido em
+     16,4:1 no rótulo e 16,4:1 na sinopse, muito acima do piso de AA. */
   .veu {
     position: absolute;
     inset: 0;
     z-index: 2;
     background:
-      linear-gradient(90deg, color-mix(in srgb, var(--vazio) 88%, transparent) 0%, color-mix(in srgb, var(--vazio) 46%, transparent) 38%, transparent 62%),
-      linear-gradient(180deg, color-mix(in srgb, var(--vazio) 72%, transparent) 0%, transparent 26%),
-      linear-gradient(0deg, var(--vazio) 0%, transparent 22%);
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--vazio) 90%, transparent) 0%,
+        color-mix(in srgb, var(--vazio) 62%, transparent) 30%,
+        color-mix(in srgb, var(--vazio) 18%, transparent) 52%,
+        transparent 68%),
+      linear-gradient(180deg, color-mix(in srgb, var(--vazio) 52%, transparent) 0%, transparent 24%),
+      linear-gradient(0deg, var(--vazio) 0%, transparent 20%);
   }
 
   .conteudo {

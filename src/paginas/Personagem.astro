@@ -265,7 +265,17 @@ const ladoTexto = rot.lados[p.lado];
   .bloco h2 { font-size: clamp(1.5rem, 2.6vw, 2.2rem); }
 
   /* ---------- estudos ---------- */
-  .galeria-bloco { border-top: 1px solid var(--linha); }
+  /* Preto puro nesta seção, e as artes SEM mix-blend-mode.
+     O blend fazia o preto da arte sumir, mas amplificava tudo que não fosse
+     zero: JPEG e WebP reintroduzem 4% a 15% de ruído entre 1 e 29 no fundo
+     depois de qualquer tratamento, e sob screen isso virava os blocos 8x8 da
+     compressão. Com a seção em #000 e a arte com fundo #000, ela desaparece
+     igual — e o ruído, sendo escuro sobre escuro, deixa de ser amplificado.
+     Mais robusto que perseguir compressão sem perda arte por arte. */
+  .galeria-bloco {
+    border-top: 1px solid var(--linha);
+    background: var(--vazio);
+  }
   .galeria {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -280,7 +290,6 @@ const ladoTexto = rot.lados[p.lado];
   }
   .galeria :global(img) {
     width: 100%;
-    mix-blend-mode: screen;
     transition: transform .6s cubic-bezier(.16,.84,.28,1);
   }
 
@@ -292,6 +301,9 @@ const ladoTexto = rot.lados[p.lado];
     clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
   }
   .galeria figure.painel :global(img) { mix-blend-mode: normal; }
+  /* o painel de mangá tem fundo claro: sobre o preto puro da seção ele ganha
+     respiro em vez de encostar */
+  .galeria figure.painel { background: #050507; }
 
   .galeria figure:hover :global(img) { transform: scale(1.03); }
   .credito-galeria {

@@ -17,11 +17,12 @@ interface Props {
   alt: string;
   /** Largura máxima da peça. */
   largura?: string;
-  /** Giro em graus. */
+  /** Giro em graus. Zero por padrão: a capa tem moldura branca reta, e mesmo
+   *  1,4 grau de rotação serrilha essa borda de alto contraste. */
   giro?: number;
   classe?: string;
 }
-const { alt, largura = "100%", giro = -1.4, classe = "" } = Astro.props;
+const { alt, largura = "100%", giro = 0, classe = "" } = Astro.props;
 ---
 
 <figure
@@ -65,7 +66,7 @@ const { alt, largura = "100%", giro = -1.4, classe = "" } = Astro.props;
     pointer-events: none;
   }
 
-  .capa-volume:hover { transform: rotate(0deg) translateY(-4px); }
+  .capa-volume:hover { transform: rotate(var(--giro)) translateY(-5px); }
 
   @media (prefers-reduced-motion: reduce) {
     .capa-volume,
