@@ -1,9 +1,8 @@
 ---
-import { Image } from "astro:assets";
+import CapaVolume from "../components/CapaVolume.astro";
 import { idiomaDaUrl } from "../i18n/idiomas";
 import { usarUI } from "../i18n/ui";
 import { LOJA } from "../i18n/conteudo/loja";
-import capa from "../assets/loja/capa-volume-1.jpg";
 
 interface Props {
   /** A Loja desliga: lá a capa já é protagonista no topo e repetiria na mesma
@@ -41,10 +40,9 @@ const REGIOES = ["BR", "US", "JP", "OUTRO"] as const;
 
   <div class:list={["envelope", "interno", { "interno--capa": comCapa }]}>
     {comCapa && (
-      <figure class="capa-espera">
-        <Image src={capa} alt={LOJA[idioma].capaAlt} widths={[300, 560]}
-               sizes="(max-width: 900px) 46vw, 260px" loading="lazy" />
-      </figure>
+      <div class="capa-espera">
+        <CapaVolume alt={LOJA[idioma].capaAlt} giro={-2} />
+      </div>
     )}
     <div class="coluna-texto">
     <p class="rotulo rotulo--lado" data-lado="rebeldes">{t("espera.rotulo")}</p>
@@ -100,6 +98,9 @@ const REGIOES = ["BR", "US", "JP", "OUTRO"] as const;
 
 <style>
   .espera {
+    /* O respiro padrão de seção deixava sobra grande acima e abaixo do
+       formulário. Aqui o conteúdo é compacto e não precisa dele. */
+    padding-block: clamp(48px, 6vh, 78px);
     position: relative;
     overflow: hidden;
     background:
@@ -161,9 +162,13 @@ const REGIOES = ["BR", "US", "JP", "OUTRO"] as const;
     background: linear-gradient(90deg, #141418, #26262c 55%, #0a0a0c);
   }
 
+  /* No celular a capa ficaria empilhada ACIMA do texto, empurrando o formulário
+     para fora da primeira tela — atrapalhando justamente a conversão que ela
+     deveria ajudar. Ela vale ao lado, não em cima: abaixo de 900px sai de cena.
+     Na Loja continua visível, porque lá é o assunto da página. */
   @media (max-width: 900px) {
-    .interno--capa { grid-template-columns: 1fr; }
-    .capa-espera { order: -1; max-width: 210px; }
+    .interno--capa { display: block; max-width: 780px; }
+    .capa-espera { display: none; }
   }
 
   h2 { margin: 20px 0 18px; }

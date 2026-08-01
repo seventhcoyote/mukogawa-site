@@ -1,0 +1,115 @@
+---
+/**
+ * A capa do volume 1, em movimento.
+ *
+ * A versão animada é colorida e com a aura acesa — bem mais rica que a estática
+ * em preto e branco. O site já usa vídeo no hero, então movimento aqui é
+ * coerente com o sistema, não enfeite solto.
+ *
+ * A capa tem moldura branca e crédito impresso: é peça acabada. Num site preto
+ * ela só funciona tratada como OBJETO — lombada, sombra e um leve giro. Colada,
+ * viraria o retângulo que este projeto recusa.
+ *
+ * Quem pede menos movimento recebe o pôster estático, sem vídeo nenhum: o
+ * `<video>` só é montado quando a preferência permite.
+ */
+interface Props {
+  alt: string;
+  /** Largura máxima da peça. */
+  largura?: string;
+  /** Giro em graus. */
+  giro?: number;
+  classe?: string;
+}
+const { alt, largura = "100%", giro = -1.4, classe = "" } = Astro.props;
+---
+
+<figure
+  class:list={["capa-volume", classe]}
+  style={`--largura:${largura}; --giro:${giro}deg`}
+  data-capa
+>
+  <img class="poster" src="/video/capa-volume-1-poster.jpg" alt={alt} loading="lazy" decoding="async" />
+  <span class="lombada" aria-hidden="true"></span>
+</figure>
+
+<style>
+  .capa-volume {
+    position: relative;
+    margin: 0;
+    width: 100%;
+    max-width: var(--largura);
+    transform: rotate(var(--giro));
+    transition: transform .5s cubic-bezier(.2, .8, .2, 1);
+  }
+
+  .capa-volume :global(img),
+  .capa-volume :global(video) {
+    display: block;
+    width: 100%;
+    height: auto;
+    box-shadow:
+      0 2px 0 rgba(255, 255, 255, .06),
+      -10px 0 22px -12px rgba(0, 0, 0, .9),
+      0 30px 56px -26px rgba(0, 0, 0, 1),
+      0 0 84px -28px color-mix(in srgb, var(--sangue) 60%, transparent);
+  }
+
+  /* a espessura do volume, do lado da lombada */
+  .lombada {
+    position: absolute;
+    inset: 2% auto 2% -8px;
+    width: 8px;
+    background: linear-gradient(90deg, #16161a, #2a2a31 55%, #0a0a0c);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .8);
+    pointer-events: none;
+  }
+
+  .capa-volume:hover { transform: rotate(0deg) translateY(-4px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .capa-volume,
+    .capa-volume:hover { transition: none; transform: rotate(var(--giro)); }
+  }
+</style>
+
+<script>
+  // O vídeo entra no lugar do pôster só depois que a página carregou e só se a
+  // pessoa não pediu menos movimento. Assim a capa nunca fica em branco: o
+  // pôster já está lá desde o primeiro quadro.
+  const trocar = () => {
+    const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (semMovimento) return;
+
+    document.querySelectorAll<HTMLElement>("[data-capa]").forEach((figura) => {
+      const poster = figura.querySelector("img.poster") as HTMLImageElement | null;
+      if (!poster || figura.querySelector("video")) return;
+
+      const video = document.createElement("video");
+      video.src = "/video/capa-volume-1.mp4";
+      video.poster = "/video/capa-volume-1-poster.jpg";
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.autoplay = true;
+      video.setAttribute("aria-hidden", "true");
+      video.setAttribute("tabindex", "-1");
+      video.setAttribute("disablepictureinpicture", "");
+      video.setAttribute("controlslist", "nodownload nofullscreen noremoteplayback");
+
+      video.addEventListener("loadeddata", () => {
+        poster.remove();
+        video.play().catch(() => {});
+      }, { once: true });
+
+      // Se o vídeo não carregar, o pôster continua no lugar dele.
+      video.addEventListener("error", () => video.remove(), { once: true });
+
+      figura.insertBefore(video, poster);
+      video.style.display = "block";
+    });
+  };
+
+  if (document.readyState === "complete") trocar();
+  else window.addEventListener("load", trocar);
+</script>
