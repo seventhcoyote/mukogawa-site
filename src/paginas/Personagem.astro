@@ -36,6 +36,11 @@ const ESTUDOS: Record<string, string[]> = {
   serafins: ["serafins-estudos"],
 };
 
+// Os estudos de traço solto NÃO passam pelo pipeline de imagem do Astro.
+// Motivo medido: o WebP gerado por ele reintroduz 11% a 17% de ruído entre 1 e
+// 29 no fundo, e sobre a seção em preto puro isso faz a arte inteira virar um
+// retângulo mais claro. São servidos como PNG sem perda direto de public/,
+// gerados por ferramentas/normalizar-estudos.mjs.
 const galeriaArquivos = import.meta.glob<{ default: ImageMetadata }>(
   "../assets/estudos/*.jpg",
   { eager: true },
@@ -51,9 +56,14 @@ const PAINEIS = new Set([
   "satis-busto", "satis-estudo", "satis",
 ]);
 
-const galeria = (ESTUDOS[p.slug] ?? [])
-  .map((n) => ({ arte: galeriaArquivos[`../assets/estudos/${n}.jpg`]?.default, painel: PAINEIS.has(n) }))
-  .filter((g) => g.arte) as { arte: ImageMetadata; painel: boolean }[];
+const galeria = (ESTUDOS[p.slug] ?? []).map((n) => {
+  const painel = PAINEIS.has(n);
+  return painel
+    // painel de mangá: fundo claro, sem blend, o pipeline do Astro serve bem
+    ? { nome: n, painel, arte: galeriaArquivos[`../assets/estudos/${n}.jpg`]?.default, png: null }
+    // traço solto: PNG sem perda, servido cru
+    : { nome: n, painel, arte: null, png: `/estudos/${n}.png` };
+}).filter((g) => g.arte || g.png);
 
 const i = personagens.findIndex((x) => x.slug === p.slug);
 const anterior = personagens[(i - 1 + personagens.length) % personagens.length];
@@ -131,13 +141,17 @@ const ladoTexto = rot.lados[p.lado];
           <div class:list={["galeria", { "galeria--unica": galeria.length === 1 }]}>
             {galeria.map((g, n) => (
               <figure class:list={{ painel: g.painel }}>
-                <Image
-                  src={g.arte}
-                  alt={`${p.nome} — estudo ${n + 1}`}
-                  widths={[420, 820]}
-                  sizes="(max-width: 760px) 92vw, 44vw"
-                  loading="lazy"
-                />
+                {g.png ? (
+                  <img src={g.png} alt={`${p.nome} — estudo ${n + 1}`} loading="lazy" decoding="async" />
+                ) : (
+                  <Image
+                    src={g.arte!}
+                    alt={`${p.nome} — estudo ${n + 1}`}
+                    widths={[420, 820]}
+                    sizes="(max-width: 760px) 92vw, 44vw"
+                    loading="lazy"
+                  />
+                )}
               </figure>
             ))}
           </div>
@@ -288,8 +302,11 @@ const ladoTexto = rot.lados[p.lado];
     margin: 0;
     overflow: hidden;
   }
-  .galeria :global(img) {
+  .galeria :global(img),
+  .galeria img {
+    display: block;
     width: 100%;
+    height: auto;
     transition: transform .6s cubic-bezier(.16,.84,.28,1);
   }
 
@@ -305,7 +322,8 @@ const ladoTexto = rot.lados[p.lado];
      respiro em vez de encostar */
   .galeria figure.painel { background: #050507; }
 
-  .galeria figure:hover :global(img) { transform: scale(1.03); }
+  .galeria figure:hover :global(img),
+  .galeria figure:hover img { transform: scale(1.03); }
   .credito-galeria {
     margin: 22px 0 0;
     font-family: var(--fonte-ui);
