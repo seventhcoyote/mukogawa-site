@@ -30,7 +30,7 @@ const porClasse = classesDoIdioma(idioma).map((c) => ({
         </p>
       </div>
 
-      <nav class="indice" aria-label="Índice por classe">
+      <nav class="indice" aria-label={rot.indicePorClasse}>
         {porClasse.map((c) => (
           <a href={`#classe-${c.num}`}>
             <span class="kanji" aria-hidden="true">{c.kanji}</span>
@@ -53,7 +53,7 @@ const porClasse = classesDoIdioma(idioma).map((c) => ({
   <section class="secao secao--curta">
     <div class="envelope">
       <div class="cabecalho-secao">
-        <div class="topo"><p class="rotulo">Por classe</p></div>
+        <div class="topo"><p class="rotulo">{rot.porClasse}</p></div>
         <h2>{rot.tituloClasses}</h2>
       </div>
 

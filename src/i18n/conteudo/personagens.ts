@@ -73,6 +73,16 @@ export const ROTULOS_PERSONAGENS: Record<Idioma, {
   todos: string;
   todosCurto: string;
   estudos: string;
+  /** rótulo da seção que descreve a classe do personagem */
+  ordem: string;
+  /** rótulo da seção que descreve o personagem em si */
+  oEterno: string;
+  /** rótulo da galeria de estudos */
+  doCaderno: string;
+  anterior: string;
+  proximo: string;
+  porClasse: string;
+  indicePorClasse: string;
   lados: Record<Lado, string>;
 }> = {
   pt: {
@@ -87,6 +97,13 @@ export const ROTULOS_PERSONAGENS: Record<Idioma, {
     todos: "Todos os personagens",
     todosCurto: "Todos",
     estudos: "Estudos",
+    ordem: "A ordem",
+    oEterno: "O Eterno",
+    doCaderno: "Do caderno",
+    anterior: "Anterior",
+    proximo: "Próximo",
+    porClasse: "Por classe",
+    indicePorClasse: "Índice por classe",
     lados: { hoste: "Hoste", rebeldes: "Rebeldes" },
   },
   en: {
@@ -101,6 +118,13 @@ export const ROTULOS_PERSONAGENS: Record<Idioma, {
     todos: "All characters",
     todosCurto: "All",
     estudos: "Studies",
+    ordem: "The order",
+    oEterno: "The Eternal",
+    doCaderno: "From the sketchbook",
+    anterior: "Previous",
+    proximo: "Next",
+    porClasse: "By class",
+    indicePorClasse: "Index by class",
     lados: { hoste: "Host", rebeldes: "Guest" },
   },
   es: {
@@ -115,6 +139,13 @@ export const ROTULOS_PERSONAGENS: Record<Idioma, {
     todos: "Todos los personajes",
     todosCurto: "Todos",
     estudos: "Estudios",
+    ordem: "El orden",
+    oEterno: "El Eterno",
+    doCaderno: "Del cuaderno",
+    anterior: "Anterior",
+    proximo: "Siguiente",
+    porClasse: "Por clase",
+    indicePorClasse: "Índice por clase",
     lados: { hoste: "Hueste", rebeldes: "Rebeldes" },
   },
   ja: {
@@ -129,6 +160,13 @@ export const ROTULOS_PERSONAGENS: Record<Idioma, {
     todos: "登場人物一覧",
     todosCurto: "一覧",
     estudos: "習作",
+    ordem: "階級",
+    oEterno: "永遠者",
+    doCaderno: "手帳より",
+    anterior: "前へ",
+    proximo: "次へ",
+    porClasse: "階級別",
+    indicePorClasse: "階級別索引",
     lados: { hoste: "天軍", rebeldes: "客人" },
   },
 };

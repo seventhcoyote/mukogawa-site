@@ -56,6 +56,15 @@ const xDefault = new URL(equivalente(Astro.url.pathname, PADRAO), Astro.site).to
     <meta name="description" content={descricao} />
     <link rel="canonical" href={canonica} />
 
+    {/* A fonte de display só era descoberta depois do CSS baixar e ser
+        processado: medido, o CSS começava em 56ms e a fonte em 101ms, em
+        localhost — numa rede móvel essa espera em série custa muito mais, e
+        ela desenha o título, que é o maior elemento da tela. O preload põe as
+        duas na mesma leva do CSS. A variante CJK fica de fora de propósito:
+        são 150 KB que o unicode-range só busca quando há kanji na página. */}
+    <link rel="preload" href="/fontes/zen-old-mincho-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fontes/zen-old-mincho-latin-600.woff2" as="font" type="font/woff2" crossorigin />
+
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#0d0d0f" />

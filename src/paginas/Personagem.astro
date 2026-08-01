@@ -111,7 +111,7 @@ const ladoTexto = rot.lados[p.lado];
       <div class="envelope colunas">
         <div class="bloco">
           <div class="cabecalho-secao">
-            <div class="topo"><p class="rotulo">A ordem</p></div>
+            <div class="topo"><p class="rotulo">{rot.ordem}</p></div>
             <h2>{p.classe}</h2>
           </div>
           <div class="corpo"><p>{p.sobreClasse}</p></div>
@@ -119,7 +119,7 @@ const ladoTexto = rot.lados[p.lado];
 
         <div class="bloco">
           <div class="cabecalho-secao">
-            <div class="topo"><p class="rotulo">O Eterno</p></div>
+            <div class="topo"><p class="rotulo">{rot.oEterno}</p></div>
             <h2>{p.nome}</h2>
           </div>
           <div class="corpo">
@@ -133,7 +133,7 @@ const ladoTexto = rot.lados[p.lado];
       <section class="secao secao--curta galeria-bloco">
         <div class="envelope">
           <div class="cabecalho-secao">
-            <div class="topo"><p class="rotulo">Do caderno</p></div>
+            <div class="topo"><p class="rotulo">{rot.doCaderno}</p></div>
             <h2>{rot.estudos}</h2>
           </div>
 
@@ -162,12 +162,12 @@ const ladoTexto = rot.lados[p.lado];
 
     <nav class="passo" aria-label={rot.titulo}>
       <a class="anterior" href={`${base}/${anterior.slug}`}>
-        <span class="dir">Anterior</span>
+        <span class="dir">{rot.anterior}</span>
         <span class="nome">{anterior.nome}</span>
       </a>
       <a class="todos" href={base}>{rot.todosCurto}</a>
       <a class="proximo" href={`${base}/${proximo.slug}`}>
-        <span class="dir">Próximo</span>
+        <span class="dir">{rot.proximo}</span>
         <span class="nome">{proximo.nome}</span>
       </a>
     </nav>

@@ -52,6 +52,10 @@ export const UI = {
     "espera.erroEnvio": "Não deu para enviar agora. Tente de novo em instantes.",
     "espera.nota": "Edições, preços e frete são responsabilidade do varejista de cada região. As datas seguem o calendário atual da editora e podem mudar.",
     "regiao.BR": "Brasil", "regiao.US": "Estados Unidos", "regiao.JP": "Japão", "regiao.OUTRO": "Outra",
+    "404.rotulo": "Erro 404",
+    "404.titulo": "Página não encontrada",
+    "404.texto": "O endereço que você abriu não existe, ou deixou de existir. Os caminhos abaixo continuam valendo.",
+    "404.voltar": "Ir para o início",
   },
 
   en: {
@@ -95,6 +99,10 @@ export const UI = {
     "espera.erroEnvio": "Could not send just now. Try again in a moment.",
     "espera.nota": "Editions, pricing and shipping are handled by the retailer for each region. Dates shown are current publisher schedule and may change.",
     "regiao.BR": "Brazil", "regiao.US": "United States", "regiao.JP": "Japan", "regiao.OUTRO": "Other",
+    "404.rotulo": "Error 404",
+    "404.titulo": "Page not found",
+    "404.texto": "The address you opened does not exist, or no longer does. The paths below still hold.",
+    "404.voltar": "Go to the home page",
   },
 
   es: {
@@ -138,6 +146,10 @@ export const UI = {
     "espera.erroEnvio": "No se pudo enviar ahora. Inténtalo de nuevo en un momento.",
     "espera.nota": "Ediciones, precios y envío son responsabilidad del minorista de cada región. Las fechas siguen el calendario actual de la editorial y pueden cambiar.",
     "regiao.BR": "Brasil", "regiao.US": "Estados Unidos", "regiao.JP": "Japón", "regiao.OUTRO": "Otra",
+    "404.rotulo": "Error 404",
+    "404.titulo": "Página no encontrada",
+    "404.texto": "La dirección que abriste no existe, o dejó de existir. Los caminos de abajo siguen valiendo.",
+    "404.voltar": "Ir al inicio",
   },
 
   ja: {
@@ -181,6 +193,10 @@ export const UI = {
     "espera.erroEnvio": "現在送信できませんでした。しばらくして再度お試しください。",
     "espera.nota": "版・価格・配送は各地域の販売元が取り扱います。日程は現行の刊行予定であり、変更される場合があります。",
     "regiao.BR": "ブラジル", "regiao.US": "アメリカ合衆国", "regiao.JP": "日本", "regiao.OUTRO": "その他",
+    "404.rotulo": "エラー404",
+    "404.titulo": "ページが見つかりません",
+    "404.texto": "開いた住所は存在しないか、すでに失われている。下の道はいまも通じている。",
+    "404.voltar": "トップへ",
   },
 } as const;
 
