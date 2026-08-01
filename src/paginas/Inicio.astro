@@ -65,9 +65,8 @@ const hrefPersonagens = rota("personagens", idioma);
         <h2>{c.narrativaTitulo}</h2>
       </div>
 
-      <div class="formatos">
-        {formatos.map((f, iF) => (
-          <Revelar atraso={iF * 90}>
+      <Revelar><div class="formatos">
+        {formatos.map((f) => (
           <article class:list={["formato", { "formato--destaque": f.destaque }]}>
             <div class="moldura">
               <Image
@@ -83,7 +82,6 @@ const hrefPersonagens = rota("personagens", idioma);
             <h3>{f.titulo}</h3>
             <p class="texto">{f.texto}</p>
           </article>
-          </Revelar>
         ))}
       </div>
     </div>
@@ -195,17 +193,34 @@ const hrefPersonagens = rota("personagens", idioma);
   .formatos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-rows: auto auto auto auto;
     gap: clamp(20px, 2.6vw, 38px);
   }
   /* Os três cards seguem o mesmo ritmo vertical mesmo quando o selo
      quebra em duas linhas, senão os títulos desalinham. */
-  .formato { display: flex; flex-direction: column; }
-  .formato h3 { margin: 8px 0 12px; }
+  /* Subgrid: os três cards compartilham as MESMAS linhas, então moldura, selo,
+     título e texto ficam alinhados mesmo quando um selo ocupa duas linhas e os
+     outros só uma — que era o caso de "Em desenvolvimento // Ainda sem
+     produção" e empurrava o título do Anime 12px para baixo. Vale em qualquer
+     idioma, sem depender de min-height chutado. */
+  .formato {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
+    align-content: start;
+  }
+  .formato h3 { margin: 8px 0 12px; align-self: start; }
   .formato .selo {
     margin-bottom: 14px;
-    min-height: 2.6em;
     display: flex;
     align-items: flex-start;
+  }
+
+  /* Navegador sem subgrid: volta ao empilhamento simples, com um piso de duas
+     linhas no selo para o desalinhamento ficar pequeno em vez de gritante. */
+  @supports not (grid-template-rows: subgrid) {
+    .formato { display: flex; flex-direction: column; }
+    .formato .selo { min-height: 3.6em; }
   }
   .formato .texto { color: var(--cinza); font-size: .98rem; }
   .formato--destaque .selo { color: var(--sangue-vivo); }
