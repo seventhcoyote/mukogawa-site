@@ -1,0 +1,133 @@
+---
+/**
+ * Abertura: preto, a marca acende, o site entra.
+ *
+ * É o padrão dos portais de obra japoneses. A referência que o Bruno trouxe
+ * (bleach-anime.com) guarda `sessionStorage["op"]` e toca a abertura UMA VEZ
+ * por sessão — não a cada página. Essa é a decisão que separa uma abertura de
+ * uma pedágio, e está copiada aqui.
+ *
+ * As outras cinco regras, todas por um motivo:
+ *
+ * 1. SÓ NA HOME. Quem abre /personagens/helel veio de um link compartilhado e
+ *    quer o Helel, não a marca.
+ * 2. O CONTEÚDO NÃO ESPERA. O overlay cobre, mas a página inteira já carregou
+ *    por baixo. Nada é adiado, nada é escondido de robô de busca.
+ * 3. NADA DE FLASH. O componente é o PRIMEIRO elemento do <body>, e a decisão
+ *    de exibir é tomada por um script síncrono logo abaixo dele — o navegador
+ *    executa antes de continuar lendo o resto da página, então antes do
+ *    primeiro quadro. Fosse depois, o site apareceria e o preto cairia por
+ *    cima, que é pior do que não ter abertura nenhuma.
+ * 4. SEMPRE DÁ PARA PULAR. Clique, toque ou tecla. E quem pede menos movimento
+ *    (prefers-reduced-motion) nunca vê.
+ * 5. NUNCA TRAVA. Animação não roda em aba oculta — lição registrada no
+ *    HANDOFF, que já causou dois diagnósticos errados neste projeto. Sem uma
+ *    trava de tempo, quem abre o site em nova aba em segundo plano voltaria
+ *    para uma tela preta permanente. O temporizador de segurança é o que
+ *    garante que isso não acontece.
+ *
+ * Sem JavaScript não há abertura, e é o comportamento certo: o site é estático
+ * e funciona inteiro sem ela.
+ */
+import { Image } from "astro:assets";
+import logo from "../assets/marca/logo-mukogawa.png";
+
+/** Duração total, em milissegundos. Ver a animação `abertura` no estilo. */
+const DURACAO = 1900;
+---
+
+<div id="abertura" class="abertura" hidden aria-hidden="true">
+  <Image class="emblema" src={logo} alt="" widths={[320, 640]} sizes="300px" loading="eager" fetchpriority="high" />
+</div>
+
+<script is:inline define:vars={{ DURACAO }}>
+  // Síncrono e logo abaixo do elemento, de propósito: precisa decidir antes do
+  // primeiro quadro, e para isso o navegador tem de executar este script antes
+  // de continuar lendo o resto da página.
+  (() => {
+    const caixa = document.getElementById("abertura");
+    if (!caixa) return;
+
+    let jaViu = false;
+    try { jaViu = sessionStorage.getItem("mukogawa.abertura") === "1"; } catch { jaViu = true; }
+    const semMovimento = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (jaViu || semMovimento) { caixa.remove(); return; }
+
+    try { sessionStorage.setItem("mukogawa.abertura", "1"); } catch { /* modo privado */ }
+
+    caixa.hidden = false;
+    document.documentElement.classList.add("abrindo");
+
+    let encerrado = false;
+    const encerrar = () => {
+      if (encerrado) return;
+      encerrado = true;
+      document.documentElement.classList.remove("abrindo");
+      caixa.classList.add("saindo");
+      setTimeout(() => caixa.remove(), 700);
+      removeEventListener("keydown", encerrar);
+      removeEventListener("pointerdown", encerrar);
+    };
+
+    addEventListener("keydown", encerrar, { once: true });
+    addEventListener("pointerdown", encerrar, { once: true });
+
+    // A trava. Vale também para aba em segundo plano, onde a animação não roda
+    // e o `animationend` nunca chegaria.
+    setTimeout(encerrar, DURACAO);
+    caixa.addEventListener("animationend", (e) => {
+      if (e.animationName.startsWith("abertura")) encerrar();
+    });
+  })();
+</script>
+
+<style is:global>
+  /* Enquanto a abertura está no ar, a página não rola por baixo dela. */
+  html.abrindo { overflow: hidden; }
+  html.abrindo body { overflow: hidden; }
+</style>
+
+<style>
+  .abertura {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: grid;
+    place-items: center;
+    background: var(--vazio);
+    cursor: pointer;
+  }
+  .abertura[hidden] { display: none; }
+
+  .emblema {
+    width: min(300px, 62vw);
+    height: auto;
+    opacity: 0;
+    animation: abertura-emblema 1.9s cubic-bezier(.22, .72, .28, 1) forwards;
+  }
+
+  /* Acende, sustenta, e recua um fio antes de sair — o recuo é o que faz
+     parecer que a marca some para dentro do site, e não que a tela apagou. */
+  @keyframes abertura-emblema {
+      0% { opacity: 0; transform: scale(1.06); filter: blur(6px); }
+     32% { opacity: 1; transform: scale(1);    filter: blur(0); }
+     74% { opacity: 1; transform: scale(1);    filter: blur(0); }
+    100% { opacity: 0; transform: scale(.985); filter: blur(0); }
+  }
+
+  .abertura.saindo {
+    animation: abertura-fim .55s ease forwards;
+    pointer-events: none;
+  }
+  @keyframes abertura-fim {
+    to { opacity: 0; }
+  }
+
+  /* Cinto e suspensório: o script já remove a abertura antes de chegar aqui,
+     mas se o JS falhar no meio, quem pediu menos movimento não fica preso
+     atrás de uma tela preta. */
+  @media (prefers-reduced-motion: reduce) {
+    .abertura { display: none; }
+  }
+</style>

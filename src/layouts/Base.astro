@@ -2,7 +2,8 @@
 import "../styles/global.css";
 import Cabecalho from "../components/Cabecalho.astro";
 import Rodape from "../components/Rodape.astro";
-import { IDIOMAS, ATIVOS, PADRAO, idiomaDaUrl, equivalente } from "../i18n/idiomas";
+import Intro from "../components/Intro.astro";
+import { IDIOMAS, ATIVOS, PADRAO, idiomaDaUrl, equivalente, rota } from "../i18n/idiomas";
 import { usarUI } from "../i18n/ui";
 
 interface Props {
@@ -18,6 +19,10 @@ const { titulo, descricao, og = "/og.jpg", colado = false } = Astro.props;
 
 const idioma = idiomaDaUrl(Astro.url.pathname);
 const t = usarUI(idioma);
+
+// A abertura só existe na home. Quem abre uma página interna veio de um link
+// compartilhado e quer aquela página, não a marca.
+const ehInicio = Astro.url.pathname.replace(/\/$/, "") === rota("inicio", idioma).replace(/\/$/, "");
 
 // O tagline muda de idioma junto com o resto. O inglês é o título do próprio
 // site antigo, e o português agora é a tradução dele — as duas versões passam
@@ -91,6 +96,8 @@ const xDefault = new URL(equivalente(Astro.url.pathname, PADRAO), Astro.site).to
   </head>
 
   <body>
+    {ehInicio && <Intro />}
+
     <a class="pular-para-conteudo" href="#conteudo">{t("cta.pular")}</a>
     <Cabecalho />
     <main id="conteudo" class={colado ? "" : "respiro"}>
