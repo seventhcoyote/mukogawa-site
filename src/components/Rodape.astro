@@ -3,18 +3,11 @@ import { Image } from "astro:assets";
 import logo from "../assets/marca/logo-mukogawa.png";
 import { idiomaDaUrl, rota as caminho } from "../i18n/idiomas";
 import { usarUI } from "../i18n/ui";
+import { REDES as redes, EMAILS } from "../config/site";
 
 const idioma = idiomaDaUrl(Astro.url.pathname);
 const t = usarUI(idioma);
 const inicio = caminho("inicio", idioma);
-
-// Redes. X e Facebook já ocupam o lugar mas ficam inertes até os perfis
-// existirem: um link morto é pior que um "em breve" honesto.
-const redes = [
-  { nome: "Instagram", icone: "instagram", href: "https://www.instagram.com/israelsubira/" },
-  { nome: "X", icone: "x", href: null },
-  { nome: "Facebook", icone: "facebook", href: null },
-];
 
 const secoes = [
   {
@@ -99,8 +92,8 @@ const secoes = [
       <div class="coluna">
         <p class="titulo">{t("rodape.contato")}</p>
         <ul>
-          <li><a href="mailto:contato@mukogawa.com">contato@mukogawa.com</a></li>
-          <li><a href="mailto:imprensa@mukogawa.com">{t("rodape.imprensa")}</a></li>
+          <li><a href={`mailto:${EMAILS.contato}`}>{EMAILS.contato}</a></li>
+          <li><a href={`mailto:${EMAILS.imprensa}`}>{t("rodape.imprensa")}</a></li>
         </ul>
       </div>
     </div>
@@ -110,6 +103,10 @@ const secoes = [
       <p class="creditos">
         {t("rodape.creditos")}
       </p>
+      <a class="ao-topo" href="#conteudo">
+        <span class="losango" aria-hidden="true"></span>
+        <span>{t("cta.aoTopo")}</span>
+      </a>
     </div>
   </div>
 </footer>
@@ -192,15 +189,20 @@ const secoes = [
   }
   .coluna a:hover { color: var(--osso); }
 
+  /* Três itens agora: direitos, créditos de arte e o botão de topo, que antes
+     ocupava uma faixa de 154px sozinho depois do rodapé. */
   .base {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 10px 24px;
     margin-top: clamp(40px, 6vw, 72px);
     padding-top: 24px;
     border-top: 1px solid var(--linha);
   }
+  .base .creditos { margin-inline-start: auto; }
+  .base .ao-topo { flex: none; }
   .base p {
     margin: 0;
     font-family: var(--fonte-ui);

@@ -204,9 +204,13 @@ const ladoTexto = rot.lados[p.lado];
     user-select: none;
   }
 
+  /* Sem z-index aqui, pelo mesmo motivo registrado na História: ele criava
+     contexto de empilhamento e matava o mix-blend-mode do retrato, que voltava
+     a pintar o próprio preto (0,0,0) sobre a --tinta (6,6,8) do fundo — um
+     retângulo de degrau 6, seis vezes o pior caso que o projeto tolera.
+     A ordem do DOM já basta: .fundo vem antes e fica atrás. */
   .grade {
     position: relative;
-    z-index: 1;
     display: grid;
     grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
     gap: clamp(28px, 5vw, 70px);

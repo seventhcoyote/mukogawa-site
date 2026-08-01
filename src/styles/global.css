@@ -415,12 +415,17 @@ p:last-child { margin-bottom: 0; }
    Ancorado no fim da página, não flutuante. É como a referência faz, e tem uma
    vantagem prática: não depende de JS, de IntersectionObserver nem de listener
    de rolagem — coisas que não rodam em aba oculta e que eu não conseguiria
-   verificar de forma honesta. Chega-se ao fim da página e ele está lá. */
+   verificar de forma honesta. Chega-se ao fim da página e ele está lá.
+
+   Ele morava numa faixa própria depois do rodapé, que media 154px de altura
+   para abrigar um botão de 78px: espaço morto por construção. Agora vive na
+   linha de base do rodapé, deitado, e não acrescenta altura nenhuma à página. */
 .ao-topo {
-  display: inline-grid;
-  place-items: center;
-  gap: 8px;
-  padding: 20px 26px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;            /* alvo de toque */
+  padding: 0 18px;
   border: 1px solid var(--linha-forte);
   color: var(--cinza);
   font-family: var(--fonte-ui);
@@ -429,7 +434,7 @@ p:last-child { margin-bottom: 0; }
   letter-spacing: .28em;
   text-transform: uppercase;
   text-decoration: none;
-  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
   transition: border-color .2s ease, color .2s ease, background .2s ease;
 }
 .ao-topo:hover {
@@ -438,13 +443,6 @@ p:last-child { margin-bottom: 0; }
   background: color-mix(in srgb, var(--sangue) 10%, transparent);
 }
 .ao-topo .losango { --lado: var(--sangue-vivo); }
-
-.faixa-ao-topo {
-  display: flex;
-  justify-content: flex-end;
-  padding: clamp(26px, 3.4vw, 44px) var(--gutter) clamp(20px, 2.6vw, 32px);
-  background: var(--vazio);
-}
 
 @media (prefers-reduced-motion: reduce) {
   .ao-topo { transition: none; }

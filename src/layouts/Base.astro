@@ -89,12 +89,7 @@ const xDefault = new URL(equivalente(Astro.url.pathname, PADRAO), Astro.site).to
     </main>
     <Rodape />
 
-    <div class="faixa-ao-topo">
-      <a class="ao-topo" href="#conteudo">
-        <span class="losango" aria-hidden="true"></span>
-        <span>{t("cta.aoTopo")}</span>
-      </a>
-    </div>
+    {import.meta.env.DEV && <script is:inline src="/_auditoria.js"></script>}
 
     <style>
       .respiro { padding-top: 76px; }

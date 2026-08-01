@@ -20,7 +20,6 @@ const c = INICIO[idiomaDaUrl(Astro.url.pathname)];
     </div>
 
     <div class="contagem" data-alvo={ALVO} data-aria={c.anuncioAria(0).replace("0", "{n}")}>
-      <span class="brasa" aria-hidden="true"></span>
       <span class="numero" data-dias>—</span>
       <span class="unidade">{c.anuncioDias}</span>
     </div>
@@ -63,9 +62,12 @@ const c = INICIO[idiomaDaUrl(Astro.url.pathname)];
   }
   .frase strong { font-weight: 700; white-space: nowrap; }
 
-  /* O contador era um número ao lado da palavra "dias" — o elemento com mais
-     potencial dramático da página e o mais apagado. Agora tem brasa própria,
-     pulsando devagar, e o número sobe até o valor real na entrada. */
+  /* O contador é o elemento com mais potencial dramático da página. Chegou a
+     ter uma brasa por baixo — dois gradientes radiais pulsando — para o número
+     não se perder no vermelho. Não lia como fogo, lia como borrão sobre a arte,
+     e saiu por decisão do Bruno. O que segura o número agora é o próprio peso:
+     4,4rem em display sobre o vermelho dá 5,3:1 de contraste, acima de AA.
+     As bordas verticais e a sombra fixa fazem o resto. */
   .contagem {
     position: relative;
     display: flex;
@@ -74,32 +76,6 @@ const c = INICIO[idiomaDaUrl(Astro.url.pathname)];
     padding-inline: clamp(18px, 2.5vw, 34px);
     border-inline: 1px solid rgba(255, 255, 255, .22);
   }
-  /* Sobre o vermelho forte do anúncio, um brilho branco a 30% simplesmente não
-     aparecia. Agora é uma brasa escura por baixo, que dá contraste ao número, e
-     o próprio número respira junto. */
-  .brasa {
-    position: absolute;
-    inset: -55% -22%;
-    pointer-events: none;
-    background:
-      radial-gradient(ellipse at center, rgba(0, 0, 0, .55), transparent 68%),
-      radial-gradient(ellipse at center, rgba(255, 190, 150, .5), transparent 58%);
-    animation: brasa-pulsa 3.4s ease-in-out infinite;
-  }
-  @keyframes brasa-pulsa {
-    0%, 100% { opacity: .55; transform: scale(1); }
-    50%      { opacity: 1;   transform: scale(1.07); }
-  }
-  .numero {
-    position: relative;
-    text-shadow: 0 0 26px rgba(0, 0, 0, .6);
-    animation: numero-respira 3.4s ease-in-out infinite;
-  }
-  @keyframes numero-respira {
-    0%, 100% { text-shadow: 0 0 26px rgba(0, 0, 0, .6); }
-    50%      { text-shadow: 0 0 34px rgba(255, 210, 180, .55), 0 0 26px rgba(0, 0, 0, .6); }
-  }
-  .numero[data-contando] { color: #fff; }
   .numero {
     font-family: var(--fonte-display);
     font-weight: 700;
@@ -107,6 +83,7 @@ const c = INICIO[idiomaDaUrl(Astro.url.pathname)];
     line-height: 1;
     color: #fff;
     font-variant-numeric: tabular-nums;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, .35);
   }
   .unidade {
     font-family: var(--fonte-ui);
@@ -129,12 +106,6 @@ const c = INICIO[idiomaDaUrl(Astro.url.pathname)];
     .interno .botao { width: 100%; }
   }
 
-  /* O resto do projeto respeita esta preferência em seis lugares; a brasa e o
-     número precisavam entrar na conta. */
-  @media (prefers-reduced-motion: reduce) {
-    .brasa,
-    .numero { animation: none; }
-  }
 </style>
 
 <script>
@@ -155,13 +126,11 @@ const c = INICIO[idiomaDaUrl(Astro.url.pathname)];
     if (!semMovimento && restam > 0 && !document.hidden) {
       const duracao = 900;
       const inicio = performance.now();
-      saida.dataset.contando = "";
       const passo = (agora: number) => {
         const t = Math.min(1, (agora - inicio) / duracao);
         const suave = 1 - Math.pow(1 - t, 3);
         saida.textContent = String(Math.round(restam * suave));
         if (t < 1) requestAnimationFrame(passo);
-        else delete saida.dataset.contando;
       };
       requestAnimationFrame(passo);
     }
