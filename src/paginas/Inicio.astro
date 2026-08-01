@@ -190,11 +190,19 @@ const hrefPersonagens = rota("personagens", idioma);
   }
 
   /* ---------- três formas ---------- */
+  /* O gap precisa ser declarado nos dois eixos separadamente. Um `gap` único
+     valia também para as QUATRO linhas do subgrid, e cada espaço interno do
+     card levava 37px de gap somado ao próprio margin: moldura→selo saía em
+     57px, selo→título em 59px, título→texto em 49px. Entre as colunas o
+     respiro é bem-vindo; dentro do card ele afastava informação que pertence
+     junta. A separação vertical agora é só dos margins, que estão logo abaixo
+     e são o ritmo de leitura de fato. */
   .formatos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     grid-template-rows: auto auto auto auto;
-    gap: clamp(20px, 2.6vw, 38px);
+    column-gap: clamp(20px, 2.6vw, 38px);
+    row-gap: clamp(40px, 4vw, 56px);   /* entre FILEIRAS de cards, ver abaixo */
   }
   /* Os três cards seguem o mesmo ritmo vertical mesmo quando o selo
      quebra em duas linhas, senão os títulos desalinham. */
@@ -203,18 +211,35 @@ const hrefPersonagens = rota("personagens", idioma);
      outros só uma — que era o caso de "Em desenvolvimento // Ainda sem
      produção" e empurrava o título do Anime 12px para baixo. Vale em qualquer
      idioma, sem depender de min-height chutado. */
+  /* O subgrid herda os gaps do pai por padrão, mas pode declarar os seus — e é
+     disso que este layout precisa, porque as mesmas linhas servem a dois papéis
+     opostos: separar um card do outro quando eles empilham, e separar moldura,
+     selo, título e texto DENTRO do card. O pai cuida do primeiro (row-gap
+     grande, só entre fileiras); o card zera o seu e deixa o ritmo interno com
+     os margins. Sem esta linha, em uma e em duas colunas os cards encostavam
+     um no outro — medido em 0px. */
   .formato {
     display: grid;
     grid-template-rows: subgrid;
     grid-row: span 4;
     align-content: start;
+    row-gap: 0;
   }
-  .formato h3 { margin: 8px 0 12px; align-self: start; }
+  /* O ritmo vertical do card, agora sem gap somando por baixo. Selo e título
+     são a mesma unidade de informação — quem lê "Primeiro volume // dezembro
+     de 2026" está lendo a legenda de "Mangá" — então ficam próximos, e o
+     respiro maior fica entre a arte e o texto. */
+  /* A linha do título sobra ~13px além do texto: são as métricas da Zen Old
+     Mincho, que reserva caixa de linha de fonte CJK. Margin não tira essa
+     folga — só decide de que lado ela cai. `center` divide, para o título não
+     ficar nem colado no selo nem solto do texto. */
+  .formato h3 { margin: 0 0 10px; align-self: center; }
   .formato .selo {
-    margin-bottom: 14px;
+    margin: 0 0 8px;
     display: flex;
     align-items: flex-start;
   }
+  .formato .texto { margin: 0; }
 
   /* Navegador sem subgrid: volta ao empilhamento simples, com um piso de duas
      linhas no selo para o desalinhamento ficar pequeno em vez de gritante. */
@@ -231,7 +256,7 @@ const hrefPersonagens = rota("personagens", idioma);
     isolation: isolate;
     aspect-ratio: 4 / 3;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     border: 1px solid var(--linha);
     clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
   }
