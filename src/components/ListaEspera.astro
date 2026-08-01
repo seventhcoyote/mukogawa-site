@@ -1,6 +1,17 @@
 ---
+import { Image } from "astro:assets";
 import { idiomaDaUrl } from "../i18n/idiomas";
 import { usarUI } from "../i18n/ui";
+import { LOJA } from "../i18n/conteudo/loja";
+import capa from "../assets/loja/capa-volume-1.jpg";
+
+interface Props {
+  /** A Loja desliga: lá a capa já é protagonista no topo e repetiria na mesma
+   *  página. Nas outras, ela é a única imagem do produto no momento em que se
+   *  pede o e-mail — e é aí que ela trabalha. */
+  comCapa?: boolean;
+}
+const { comCapa = true } = Astro.props;
 
 // A loja ainda não existe: enquanto isso, o site converte para lista de espera.
 // O endpoint é plugável (Formspree, Buttondown, Beehiiv, função na Vercel).
@@ -28,7 +39,14 @@ const REGIOES = ["BR", "US", "JP", "OUTRO"] as const;
   <span class="halftone" aria-hidden="true"></span>
   <span class="selo" aria-hidden="true">壱</span>
 
-  <div class="envelope interno">
+  <div class:list={["envelope", "interno", { "interno--capa": comCapa }]}>
+    {comCapa && (
+      <figure class="capa-espera">
+        <Image src={capa} alt={LOJA[idioma].capaAlt} widths={[300, 560]}
+               sizes="(max-width: 900px) 46vw, 260px" loading="lazy" />
+      </figure>
+    )}
+    <div class="coluna-texto">
     <p class="rotulo rotulo--lado" data-lado="rebeldes">{t("espera.rotulo")}</p>
 
     <h2>{t("espera.titulo")}</h2>
@@ -76,6 +94,7 @@ const REGIOES = ["BR", "US", "JP", "OUTRO"] as const;
     <p class="rodape-nota">
       {t("espera.nota")}
     </p>
+    </div>
   </div>
 </section>
 
@@ -106,6 +125,46 @@ const REGIOES = ["BR", "US", "JP", "OUTRO"] as const;
   }
 
   .interno { position: relative; z-index: 1; max-width: 780px; }
+
+  /* Com a capa, o bloco vira duas colunas e ganha largura. O selo 壱 de fundo
+     fica do lado direito, então a capa entra à direita também e o selo passa a
+     funcionar como carimbo atrás dela, não como concorrente. */
+  .interno--capa {
+    max-width: 1080px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 260px);
+    align-items: center;
+    gap: clamp(28px, 5vw, 64px);
+  }
+  .interno--capa .coluna-texto { min-width: 0; }
+
+  .capa-espera {
+    order: 2;
+    margin: 0;
+    position: relative;
+    transform: rotate(-2deg);
+  }
+  .capa-espera :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    box-shadow:
+      0 2px 0 rgba(255, 255, 255, .05),
+      0 26px 44px -22px rgba(0, 0, 0, 1),
+      0 0 70px -26px color-mix(in srgb, var(--sangue) 70%, transparent);
+  }
+  .capa-espera::before {
+    content: "";
+    position: absolute;
+    inset: 2% auto 2% -6px;
+    width: 6px;
+    background: linear-gradient(90deg, #141418, #26262c 55%, #0a0a0c);
+  }
+
+  @media (max-width: 900px) {
+    .interno--capa { grid-template-columns: 1fr; }
+    .capa-espera { order: -1; max-width: 210px; }
+  }
 
   h2 { margin: 20px 0 18px; }
   .apoio { color: var(--cinza); max-width: 52ch; margin-bottom: 30px; }

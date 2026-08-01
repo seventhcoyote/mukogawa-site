@@ -17,6 +17,10 @@ export interface Regiao {
 }
 
 interface ConteudoLoja {
+  capaRotulo: string;
+  capaTitulo: string;
+  capaTexto: string;
+  capaAlt: string;
   titulo: string;
   rotulo: string;
   lead: string;
@@ -30,6 +34,10 @@ interface ConteudoLoja {
 
 export const LOJA: Record<Idioma, ConteudoLoja> = {
   pt: {
+    capaRotulo: "Volume 01 // Capa",
+    capaTitulo: "This Is Why We Fight",
+    capaTexto: "A capa do primeiro volume, com arte de Guilherme Match. É por ela que a obra chega às mãos de quem ainda não conhece o mundo.",
+    capaAlt: "Capa do volume 1 de Mukō-Gawa: um guerreiro alado de armadura, empunhando uma lâmina, sobre fundo vermelho",
     titulo: "Loja",
     rotulo: "Onde comprar",
     lead: "Edições, preços, frete e disponibilidade são responsabilidade do varejista da sua região.",
@@ -52,6 +60,10 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
   },
 
   en: {
+    capaRotulo: "Volume 01 // Cover",
+    capaTitulo: "This Is Why We Fight",
+    capaTexto: "The cover of the first volume, with art by Guilherme Match. It is how the work reaches the hands of someone who does not yet know this world.",
+    capaAlt: "Cover of Mukō-Gawa volume 1: a winged warrior in armour, blade drawn, against a red field",
     titulo: "Shop",
     rotulo: "Where to buy",
     lead: "Editions, pricing, shipping and availability are handled by the retailer for your region.",
@@ -75,6 +87,10 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
 
   // Traduzido do PT-BR. Pendente de revisão por falante nativo.
   es: {
+    capaRotulo: "Volumen 01 // Portada",
+    capaTitulo: "This Is Why We Fight",
+    capaTexto: "La portada del primer volumen, con arte de Guilherme Match. Es por ella que la obra llega a las manos de quien aún no conoce este mundo.",
+    capaAlt: "Portada del volumen 1 de Mukō-Gawa: un guerrero alado con armadura, espada en mano, sobre fondo rojo",
     titulo: "Tienda",
     rotulo: "Dónde comprar",
     lead: "Ediciones, precios, envío y disponibilidad son responsabilidad del minorista de tu región.",
@@ -98,6 +114,10 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
 
   // Base: site modelo. Pendente de revisão.
   ja: {
+    capaRotulo: "第1巻 // 表紙",
+    capaTitulo: "This Is Why We Fight",
+    capaTexto: "第1巻の表紙。作画はギリェルミ・マッチ。まだこの世界を知らない読者の手に、作品が最初に届く姿である。",
+    capaAlt: "『向こう側』第1巻の表紙：赤を背に、刃を携えた翼ある鎧の戦士",
     titulo: "ショップ",
     rotulo: "購入先",
     lead: "版・価格・配送・在庫は各地域の販売元が取り扱います。",

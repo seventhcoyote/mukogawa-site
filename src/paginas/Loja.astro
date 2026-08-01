@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
+import capa from "../assets/loja/capa-volume-1.jpg";
 import ListaEspera from "../components/ListaEspera.astro";
 import { LOJA } from "../i18n/conteudo/loja";
 import { rota } from "../i18n/idiomas";
@@ -21,6 +23,18 @@ const hrefFaq = rota("faq", idioma);
         <div class="topo"><p class="rotulo">{c.rotulo}</p></div>
         <h1>{c.titulo}</h1>
         <p class="lead">{c.lead}</p>
+      </div>
+
+      <div class="vitrine">
+        <figure class="capa">
+          <Image src={capa} alt={c.capaAlt} widths={[520, 900, 1400]}
+                 sizes="(max-width: 900px) 78vw, 40vw" loading="eager" />
+        </figure>
+        <div class="sobre-capa">
+          <p class="rotulo rotulo--lado" data-lado="rebeldes">{c.capaRotulo}</p>
+          <h2>{c.capaTitulo}</h2>
+          <p class="texto-capa">{c.capaTexto}</p>
+        </div>
       </div>
 
       <ul class="regioes">
@@ -55,10 +69,61 @@ const hrefFaq = rota("faq", idioma);
     </div>
   </section>
 
-  <ListaEspera />
+  <ListaEspera comCapa={false} />
 </Base>
 
 <style>
+  /* A capa tem moldura branca própria e crédito impresso: é uma peça acabada,
+     não uma imagem para sangrar no fundo. Num site preto, colar isso viraria o
+     retângulo que este projeto recusa. Tratada como objeto físico — lombada,
+     sombra e um leve giro — a borda branca vira papel e passa a fazer sentido. */
+  .vitrine {
+    display: grid;
+    grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(28px, 5vw, 72px);
+    margin-bottom: clamp(48px, 7vw, 96px);
+  }
+
+  .capa {
+    position: relative;
+    margin: 0;
+    transform: rotate(-1.4deg);
+    transition: transform .5s cubic-bezier(.2, .8, .2, 1);
+  }
+  .capa :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    box-shadow:
+      0 2px 0 rgba(255, 255, 255, .06),
+      -10px 0 22px -12px rgba(0, 0, 0, .9),
+      0 34px 60px -28px rgba(0, 0, 0, 1),
+      0 0 90px -30px color-mix(in srgb, var(--sangue) 60%, transparent);
+  }
+  /* lombada: a espessura do volume, do lado esquerdo */
+  .capa::before {
+    content: "";
+    position: absolute;
+    inset: 2% auto 2% -9px;
+    width: 9px;
+    background: linear-gradient(90deg, #16161a, #2a2a31 55%, #0a0a0c);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .8);
+  }
+  .capa:hover { transform: rotate(0deg) translateY(-4px); }
+
+  .sobre-capa h2 { margin: 16px 0 18px; font-size: clamp(1.8rem, 3.2vw, 2.9rem); }
+  .texto-capa { color: var(--cinza); max-width: 46ch; margin: 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .capa, .capa:hover { transition: none; transform: rotate(-1.4deg); }
+  }
+
+  @media (max-width: 900px) {
+    .vitrine { grid-template-columns: 1fr; gap: clamp(24px, 5vw, 40px); }
+    .capa { max-width: 320px; margin-inline: auto; }
+  }
+
   h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); }
 
   .regioes {
