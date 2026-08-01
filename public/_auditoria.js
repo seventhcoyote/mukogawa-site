@@ -184,8 +184,13 @@
       return `${t}=${l.length}` + l.map((a) => `\n    ${a.alvo} :: ${a.msg}`).join("");
     }),
   ];
+  // O resultado vai para o DOM, não para a tela. `display: none` não atrapalha
+  // nem o --dump-dom nem o textContent lido por CDP, que são as duas formas de
+  // leitura usadas — e evita o painel de texto aparecendo embaixo do rodapé
+  // durante o desenvolvimento.
   const pre = document.createElement("pre");
   pre.id = "AUDITORIA";
+  pre.style.display = "none";
   pre.textContent = linhas.join("\n");
   if (!so) document.body.appendChild(pre);
 })();
