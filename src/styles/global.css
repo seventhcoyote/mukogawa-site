@@ -1,5 +1,31 @@
-@import "@fontsource/cinzel/600.css";
-@import "@fontsource/cinzel/700.css";
+/* Display: Zen Old Mincho.
+   Trocada de Cinzel em 2026-08-01. Dois motivos:
+   1. Cinzel não tem CJK, então 向こう側, 戦, 王, 壱 e 問 caíam num fallback
+      sans-serif do sistema — fora da identidade e diferente em cada máquina.
+   2. Cinzel é capitular: só caixa alta. Mincho é a serifa japonesa real dos
+      sites de mangá e anime, tem caixa alta e baixa, e o traço tem peso de
+      pincel, que é o que a obra pede.
+   O CJK é servido subsetado: só os caracteres que o site usa (150 KB em vez de
+   1,9 MB). Regerar com ferramentas/gerar-fonte-kanji.mjs ao entrar kanji novo. */
+@font-face {
+  font-family: "Zen Old Mincho";
+  src: url("/fontes/zen-old-mincho-latin-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Zen Old Mincho";
+  src: url("/fontes/zen-old-mincho-latin-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Zen Old Mincho";
+  src: url("/fontes/zen-old-mincho-cjk-700.woff2") format("woff2");
+  font-weight: 600 700;
+  unicode-range: U+3000-303F, U+3040-309F, U+30A0-30FF, U+4E00-9FFF, U+FF00-FFEF;
+  font-display: swap;
+}
 @import "@fontsource/barlow-condensed/500.css";
 @import "@fontsource/barlow-condensed/600.css";
 @import "@fontsource/barlow/400.css";
@@ -34,7 +60,7 @@
   --lado: var(--aco);
   --lado-fundo: var(--aco-fundo);
 
-  --fonte-display: "Cinzel", Georgia, serif;
+  --fonte-display: "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
   --fonte-ui: "Barlow Condensed", system-ui, sans-serif;
   --fonte-texto: "Barlow", system-ui, sans-serif;
 
@@ -352,4 +378,129 @@ p:last-child { margin-bottom: 0; }
   .selo-fundo,
   .selo,
   .selo-citacao { animation: none; }
+}
+
+/* ============================================================
+   IDENTIDADE — v2
+   O que separa um site de anime de um site comum não é a fonte: é a moldura
+   ser arte e o ornamento se repetir até virar reconhecível. Referência de
+   estrutura: jujutsukaisen.jp (topo e base sangrando em ilustração, e um
+   "page top" que fecha o ciclo). O vocabulário aqui é o nosso: chanfro,
+   halftone, aço e sangue.
+   ============================================================ */
+
+/* ---------- o losango ----------
+   Marca de seção do projeto: um losango cortado ao meio pelo eixo vertical,
+   que é o "outro lado" reduzido a um sinal. Aparece no cabeçalho de seção, no
+   botão de topo e nas bordas de página. Repetido é o que o torna assinatura. */
+.losango {
+  position: relative;
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  flex: none;
+  transform: rotate(45deg);
+  border: 1px solid var(--lado, var(--aco));
+}
+.losango::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: var(--lado, var(--aco));
+  opacity: .55;
+}
+.losango--sangue { --lado: var(--sangue-vivo); }
+
+/* ---------- borda de página ----------
+   Faixa de arte sangrando no topo e na base do documento. Não é decoração
+   solta: usa o halftone e a cor dos dois lados, então lê como continuação do
+   mundo e não como enfeite de tema. */
+.borda-pagina {
+  position: relative;
+  height: clamp(54px, 7vw, 92px);
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--vazio);
+}
+.borda-pagina::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 46% 150% at 18% 100%, color-mix(in srgb, var(--sangue) 40%, transparent), transparent 70%),
+    radial-gradient(ellipse 42% 140% at 82% 100%, color-mix(in srgb, var(--aco-fundo) 46%, transparent), transparent 72%),
+    linear-gradient(180deg, var(--vazio), color-mix(in srgb, var(--tinta-2) 90%, transparent));
+}
+/* dentes: a silhueta recortada que dá o corte de quadrinho */
+.borda-pagina::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--vazio);
+  -webkit-mask-image: conic-gradient(from 210deg at 50% 0, #000 0 60deg, transparent 60deg);
+          mask-image: conic-gradient(from 210deg at 50% 0, #000 0 60deg, transparent 60deg);
+  -webkit-mask-size: clamp(46px, 6vw, 78px) 100%;
+          mask-size: clamp(46px, 6vw, 78px) 100%;
+  -webkit-mask-repeat: repeat-x;
+          mask-repeat: repeat-x;
+}
+.borda-pagina--topo { transform: scaleY(-1); }
+
+.borda-pagina .grao {
+  position: absolute;
+  inset: 0;
+  color: #000;
+  opacity: .3;
+  background-image: radial-gradient(circle at center, currentColor 1px, transparent 1.6px);
+  background-size: 5px 5px;
+}
+
+/* ---------- botão de topo ----------
+   Ancorado no fim da página, não flutuante. É como a referência faz, e tem uma
+   vantagem prática: não depende de JS, de IntersectionObserver nem de listener
+   de rolagem — coisas que não rodam em aba oculta e que eu não conseguiria
+   verificar de forma honesta. Chega-se ao fim da página e ele está lá. */
+.ao-topo {
+  display: inline-grid;
+  place-items: center;
+  gap: 8px;
+  padding: 20px 26px 16px;
+  border: 1px solid var(--linha-forte);
+  color: var(--cinza);
+  font-family: var(--fonte-ui);
+  font-weight: 600;
+  font-size: .68rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  text-decoration: none;
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  transition: border-color .2s ease, color .2s ease, background .2s ease;
+}
+.ao-topo:hover {
+  color: var(--osso);
+  border-color: var(--sangue-vivo);
+  background: color-mix(in srgb, var(--sangue) 10%, transparent);
+}
+.ao-topo .losango { --lado: var(--sangue-vivo); }
+
+.faixa-ao-topo {
+  display: flex;
+  justify-content: flex-end;
+  padding: clamp(26px, 3.4vw, 44px) var(--gutter) clamp(20px, 2.6vw, 32px);
+  background: var(--vazio);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ao-topo { transition: none; }
+}
+
+/* o cabeçalho de seção ganha o losango antes do rótulo */
+.cabecalho-secao .topo::before {
+  content: "";
+  width: 11px;
+  height: 11px;
+  flex: none;
+  transform: rotate(45deg);
+  border: 1px solid var(--sangue);
+  background: color-mix(in srgb, var(--sangue) 55%, transparent);
 }

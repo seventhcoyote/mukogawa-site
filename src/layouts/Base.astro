@@ -84,10 +84,19 @@ const xDefault = new URL(equivalente(Astro.url.pathname, PADRAO), Astro.site).to
   <body>
     <a class="pular-para-conteudo" href="#conteudo">{t("cta.pular")}</a>
     <Cabecalho />
+    <div class="borda-pagina borda-pagina--topo" aria-hidden="true"><span class="grao"></span></div>
     <main id="conteudo" class={colado ? "" : "respiro"}>
       <slot />
     </main>
+    <div class="borda-pagina" aria-hidden="true"><span class="grao"></span></div>
     <Rodape />
+
+    <div class="faixa-ao-topo">
+      <a class="ao-topo" href="#conteudo">
+        <span class="losango" aria-hidden="true"></span>
+        <span>{t("cta.aoTopo")}</span>
+      </a>
+    </div>
 
     <style>
       .respiro { padding-top: 76px; }

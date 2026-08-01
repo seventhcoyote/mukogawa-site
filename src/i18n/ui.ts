@@ -26,6 +26,7 @@ export const UI = {
     "cta.aviseMe": "Avise-me",
     "cta.pular": "Pular para o conteúdo",
     "cta.idioma": "Idioma",
+    "cta.aoTopo": "Topo",
 
     "rodape.obra": "A obra",
     "rodape.publicacao": "Publicação",
@@ -68,6 +69,7 @@ export const UI = {
     "cta.aviseMe": "Notify me",
     "cta.pular": "Skip to content",
     "cta.idioma": "Language",
+    "cta.aoTopo": "Top",
 
     "rodape.obra": "The work",
     "rodape.publicacao": "Publication",
@@ -110,6 +112,7 @@ export const UI = {
     "cta.aviseMe": "Avísame",
     "cta.pular": "Saltar al contenido",
     "cta.idioma": "Idioma",
+    "cta.aoTopo": "Arriba",
 
     "rodape.obra": "La obra",
     "rodape.publicacao": "Publicación",
@@ -152,6 +155,7 @@ export const UI = {
     "cta.aviseMe": "お知らせを受け取る",
     "cta.pular": "本文へ移動",
     "cta.idioma": "言語",
+    "cta.aoTopo": "上へ",
 
     "rodape.obra": "作品",
     "rodape.publicacao": "刊行",
