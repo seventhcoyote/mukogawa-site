@@ -3,3 +3,7 @@ dist/
 .astro/
 .env
 .DS_Store
+
+# A documentação do projeto (HANDOFF, PENDENCIAS, V1) vive um nível acima, em
+# 01-projetos/mukogawa/. Fica fora do repositório de propósito: este repo é o
+# que vai para deploy, e duplicar os documentos criaria duas fontes de verdade.
