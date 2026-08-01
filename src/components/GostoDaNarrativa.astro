@@ -1,4 +1,7 @@
 ---
+import { INICIO } from "../i18n/conteudo/inicio";
+import { idiomaDaUrl } from "../i18n/idiomas";
+
 import { Image } from "astro:assets";
 import capa from "../assets/video/leitura-dramatizada.jpg";
 
@@ -6,6 +9,8 @@ import capa from "../assets/video/leitura-dramatizada.jpg";
 // custaria mais de 1 MB de script e ainda deixaria a Google rastreando quem
 // nem assistiu. Antes do clique existe só a capa, servida do nosso domínio.
 const VIDEO_ID = "IEQqYgudmh8";
+
+const c = INICIO[idiomaDaUrl(Astro.url.pathname)];
 ---
 
 <section class="gosto secao" id="gosto-da-narrativa">
@@ -13,18 +18,15 @@ const VIDEO_ID = "IEQqYgudmh8";
 
   <div class="envelope">
     <div class="cabecalho-secao">
-      <div class="topo"><p class="rotulo">Leitura dramatizada</p></div>
+      <div class="topo"><p class="rotulo">{c.gostoRotulo}</p></div>
       <div class="linha-titulo">
-        <h2>Um Gosto da Narrativa</h2>
-        <p class="apoio">
-          Um trecho da obra, narrado. É a forma mais rápida de sentir o tom
-          antes do primeiro volume.
-        </p>
+        <h2>{c.gostoTitulo}</h2>
+        <p class="apoio">{c.gostoLead}</p>
       </div>
     </div>
 
     <div class="palco" data-video={VIDEO_ID}>
-      <button class="capa" type="button" aria-label="Assistir à leitura dramatizada de Mukō-Gawa no YouTube">
+      <button class="capa" type="button" aria-label={c.gostoAria}>
         <Image
           src={capa}
           alt=""
@@ -39,7 +41,7 @@ const VIDEO_ID = "IEQqYgudmh8";
             <path d="M8 5.2v13.6L19.5 12z" />
           </svg>
         </span>
-        <span class="dica" aria-hidden="true">Assistir no YouTube</span>
+        <span class="dica" aria-hidden="true">{c.gostoDica}</span>
       </button>
       <span class="cantos" aria-hidden="true"></span>
     </div>

@@ -1,6 +1,12 @@
 ---
 import { Image } from "astro:assets";
 import logo from "../assets/marca/logo-mukogawa.png";
+import { idiomaDaUrl, rota as caminho } from "../i18n/idiomas";
+import { usarUI } from "../i18n/ui";
+
+const idioma = idiomaDaUrl(Astro.url.pathname);
+const t = usarUI(idioma);
+const inicio = caminho("inicio", idioma);
 
 // Redes. X e Facebook já ocupam o lugar mas ficam inertes até os perfis
 // existirem: um link morto é pior que um "em breve" honesto.
@@ -12,18 +18,19 @@ const redes = [
 
 const secoes = [
   {
-    titulo: "A obra",
+    titulo: t("rodape.obra"),
     itens: [
-      { texto: "História", href: "/historia" },
-      { texto: "Personagens", href: "/personagens" },
-      { texto: "Criadores", href: "/criadores" },
+      { texto: t("nav.historia"), href: caminho("historia", idioma) },
+      { texto: t("nav.personagens"), href: caminho("personagens", idioma) },
+      { texto: t("nav.criadores"), href: caminho("criadores", idioma) },
     ],
   },
   {
-    titulo: "Publicação",
+    titulo: t("rodape.publicacao"),
     itens: [
-      { texto: "Loja", href: "/loja" },
-      { texto: "Lista de espera", href: "/#lista-de-espera" },
+      { texto: t("nav.loja"), href: caminho("loja", idioma) },
+      { texto: t("nav.faq"), href: caminho("faq", idioma) },
+      { texto: t("rodape.listaEspera"), href: `${inicio.replace(/\/$/, "")}/#lista-de-espera` },
     ],
   },
 ];
@@ -35,7 +42,7 @@ const secoes = [
       <div class="marca">
         <Image class="logo" src={logo} alt="Mukō-Gawa 向こう側" widths={[260, 520]} sizes="240px" loading="lazy" />
         <p class="frase">
-          Antes da história, uma civilização entrou em guerra pela forma do mundo.
+          {t("rodape.frase")}
         </p>
 
         <ul class="redes">
@@ -67,9 +74,9 @@ const secoes = [
                     {Icone}
                   </a>
                 ) : (
-                  <span class="inerte" title={`${r.nome} — em breve`}>
+                  <span class="inerte" title={`${r.nome} — ${t("rodape.emBreve")}`}>
                     {Icone}
-                    <span class="so-leitor">{r.nome} — em breve</span>
+                    <span class="so-leitor">{r.nome} — {t("rodape.emBreve")}</span>
                   </span>
                 )}
               </li>
@@ -90,18 +97,18 @@ const secoes = [
       ))}
 
       <div class="coluna">
-        <p class="titulo">Contato</p>
+        <p class="titulo">{t("rodape.contato")}</p>
         <ul>
           <li><a href="mailto:contato@mukogawa.com">contato@mukogawa.com</a></li>
-          <li><a href="mailto:imprensa@mukogawa.com">Imprensa</a></li>
+          <li><a href="mailto:imprensa@mukogawa.com">{t("rodape.imprensa")}</a></li>
         </ul>
       </div>
     </div>
 
     <div class="base">
-      <p>© 2026 Mukō-Gawa. Todos os direitos reservados.</p>
+      <p>© 2026 Mukō-Gawa. {t("rodape.direitos")}</p>
       <p class="creditos">
-        Arte de Daniel Bretas e Guilherme Match.
+        {t("rodape.creditos")}
       </p>
     </div>
   </div>

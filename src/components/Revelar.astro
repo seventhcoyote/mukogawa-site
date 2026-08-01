@@ -1,0 +1,142 @@
+---
+/**
+ * Revelação ao rolar.
+ *
+ * CUIDADO QUE MOTIVOU ESTE COMPONENTE: `transform` cria contexto de
+ * empilhamento, exatamente como `z-index`. As artes dos personagens dependem de
+ * `mix-blend-mode: screen` para o preto sumir e a aura vir de trás — e o blend
+ * morre dentro de um contexto de empilhamento. Animar `translateY` direto num
+ * card mataria a aura, que é o defeito que já quebrou duas vezes neste projeto.
+ *
+ * Por isso a animação vive num invólucro externo, nunca no elemento que tem
+ * blend, e o invólucro devolve `transform: none` assim que termina — então nem
+ * o contexto de empilhamento sobra.
+ *
+ * Sem JS a peça aparece normalmente: o estado inicial só é aplicado depois que
+ * o observador confirma que está ativo.
+ */
+interface Props {
+  /** Atraso em cascata, para blocos irmãos entrarem em sequência. */
+  atraso?: number;
+  /** `alto` desloca mais; `fade` não usa transform algum — é o que se usa
+   *  em qualquer bloco que contenha arte com mix-blend-mode. */
+  forca?: "sutil" | "alto" | "fade";
+  classe?: string;
+}
+const { atraso = 0, forca = "sutil", classe = "" } = Astro.props;
+---
+
+<div
+  class:list={["revelar", classe]}
+  data-revelar
+  data-forca={forca}
+  style={atraso ? `--atraso:${atraso}ms` : undefined}
+>
+  <slot />
+</div>
+
+<style>
+  .revelar { --atraso: 0ms; }
+
+  /* O estado inicial só existe quando o JS marca `data-pronto`. Sem script,
+     nada some. */
+  .revelar[data-pronto] {
+    opacity: 0;
+    transform: translate3d(0, var(--sobe, 14px), 0);
+    transition:
+      opacity .62s cubic-bezier(.2, .7, .2, 1) var(--atraso),
+      transform .62s cubic-bezier(.2, .7, .2, 1) var(--atraso);
+    will-change: opacity, transform;
+  }
+  .revelar[data-forca="alto"] { --sobe: 26px; }
+
+  /* Sem transform nenhum: não cria contexto de empilhamento em momento algum,
+     então a aura das artes sobrevive à entrada. */
+  .revelar[data-pronto][data-forca="fade"] {
+    transform: none;
+    transition: opacity .7s ease var(--atraso);
+  }
+  .revelar[data-pronto][data-visivel][data-forca="fade"] { transform: none; }
+
+  .revelar[data-pronto][data-visivel] {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Terminou de entrar: solta o transform para não deixar contexto de
+     empilhamento pendurado sobre o mix-blend-mode das artes. */
+  .revelar[data-fim] {
+    transform: none;
+    will-change: auto;
+    transition: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .revelar[data-pronto] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const alvos = document.querySelectorAll<HTMLElement>("[data-revelar]");
+  const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const revelarTudo = () =>
+    alvos.forEach((el) => {
+      el.setAttribute("data-visivel", "");
+      el.setAttribute("data-fim", "");
+    });
+
+  // Animar só faz sentido para quem está olhando. Numa aba aberta em segundo
+  // plano (ctrl+clique, sessão restaurada) tanto requestAnimationFrame quanto
+  // setTimeout são limitados, e o conteúdo ficava invisível. Aqui a página nem
+  // chega a esconder nada nesse caso.
+  const podeAnimar =
+    alvos.length > 0 &&
+    !semMovimento &&
+    !document.hidden &&
+    "IntersectionObserver" in window;
+
+  if (!podeAnimar) {
+    revelarTudo();
+  } else {
+    alvos.forEach((el) => el.setAttribute("data-pronto", ""));
+
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        for (const entrada of entradas) {
+          if (!entrada.isIntersecting) continue;
+          const el = entrada.target as HTMLElement;
+          el.setAttribute("data-visivel", "");
+          observador.unobserve(el);
+          el.addEventListener(
+            "transitionend",
+            () => el.setAttribute("data-fim", ""),
+            { once: true },
+          );
+        }
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
+    );
+
+    alvos.forEach((el) => observador.observe(el));
+
+    // Quem já está na primeira tela entra sem esperar rolagem.
+    setTimeout(() => {
+      alvos.forEach((el) => {
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.9) {
+          el.setAttribute("data-visivel", "");
+        }
+      });
+    }, 0);
+
+    // Se a aba for escondida no meio da entrada, o resto aparece de uma vez em
+    // vez de ficar preso num estado invisível.
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) revelarTudo();
+    });
+  }
+</script>

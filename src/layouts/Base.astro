@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import Cabecalho from "../components/Cabecalho.astro";
 import Rodape from "../components/Rodape.astro";
+import { IDIOMAS, ATIVOS, PADRAO, idiomaDaUrl, equivalente } from "../i18n/idiomas";
+import { usarUI } from "../i18n/ui";
 
 interface Props {
   titulo: string;
@@ -14,16 +16,38 @@ interface Props {
 
 const { titulo, descricao, og = "/og.jpg", colado = false } = Astro.props;
 
+const idioma = idiomaDaUrl(Astro.url.pathname);
+const t = usarUI(idioma);
+
+// O tagline muda de idioma junto com o resto. O inglês é o título do próprio
+// site antigo, e o português agora é a tradução dele — as duas versões passam
+// a dizer a mesma coisa, o que antes não acontecia.
+const TAGLINE = {
+  pt: "Mukō-Gawa 向こう側 — um conto do outro lado",
+  en: "Mukō-Gawa 向こう側 — a tale from the other side",
+  es: "Mukō-Gawa 向こう側 — un cuento del otro lado",
+} as const;
+
 const tituloCompleto = titulo === "Mukō-Gawa"
-  ? "Mukō-Gawa 向こう側 — uma fantasia sombria em três formas"
+  ? TAGLINE[idioma]
   : `${titulo} — Mukō-Gawa 向こう側`;
 
 const canonica = new URL(Astro.url.pathname, Astro.site);
 const ogAbsoluta = new URL(og, Astro.site);
+
+// hreflang: cada página aponta para si mesma nos outros idiomas. Sem
+// equivalente (uma página de personagem, por exemplo), aponta para a home
+// daquele idioma, que é melhor que anunciar uma URL que não existe.
+const alternativas = ATIVOS.map((outro) => ({
+  idioma: outro,
+  hreflang: IDIOMAS[outro].htmlLang,
+  href: new URL(equivalente(Astro.url.pathname, outro), Astro.site).toString(),
+}));
+const xDefault = new URL(equivalente(Astro.url.pathname, PADRAO), Astro.site).toString();
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang={IDIOMAS[idioma].htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -38,7 +62,7 @@ const ogAbsoluta = new URL(og, Astro.site);
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Mukō-Gawa" />
-    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:locale" content={IDIOMAS[idioma].ogLocale} />
     <meta property="og:title" content={tituloCompleto} />
     <meta property="og:description" content={descricao} />
     <meta property="og:url" content={canonica} />
@@ -51,12 +75,14 @@ const ogAbsoluta = new URL(og, Astro.site);
     <meta name="twitter:description" content={descricao} />
     <meta name="twitter:image" content={ogAbsoluta} />
 
-    <link rel="alternate" hreflang="pt-BR" href={canonica} />
-    <link rel="alternate" hreflang="x-default" href={canonica} />
+    {alternativas.map((a) => (
+      <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={xDefault} />
   </head>
 
   <body>
-    <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <a class="pular-para-conteudo" href="#conteudo">{t("cta.pular")}</a>
     <Cabecalho />
     <main id="conteudo" class={colado ? "" : "respiro"}>
       <slot />

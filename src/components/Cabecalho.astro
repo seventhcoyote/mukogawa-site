@@ -1,21 +1,46 @@
 ---
-const rota = Astro.url.pathname.replace(/\/$/, "") || "/";
+import {
+  IDIOMAS, ATIVOS, idiomaDaUrl, rota as caminho, equivalente,
+} from "../i18n/idiomas";
+import { usarUI } from "../i18n/ui";
 
-const links = [
-  { href: "/", texto: "Início" },
-  { href: "/historia", texto: "História" },
-  { href: "/personagens", texto: "Personagens" },
-  { href: "/criadores", texto: "Criadores" },
-  { href: "/loja", texto: "Loja" },
-];
+const atual = Astro.url.pathname.replace(/\/$/, "") || "/";
+const idioma = idiomaDaUrl(Astro.url.pathname);
+const t = usarUI(idioma);
 
-const ativo = (href: string) =>
-  href === "/" ? rota === "/" : rota.startsWith(href);
+const links = ([
+  ["inicio", "nav.inicio"],
+  ["historia", "nav.historia"],
+  ["personagens", "nav.personagens"],
+  ["criadores", "nav.criadores"],
+  ["loja", "nav.loja"],
+  ["faq", "nav.faqCurto"],
+] as const).map(([chave, rotulo]) => ({
+  href: caminho(chave, idioma),
+  texto: t(rotulo),
+  raiz: chave === "inicio",
+}));
+
+const inicio = caminho("inicio", idioma);
+const espera = `${inicio.replace(/\/$/, "")}/#lista-de-espera`;
+
+const ativo = (href: string, raiz: boolean) => {
+  const alvo = href.replace(/\/$/, "") || "/";
+  return raiz ? atual === alvo : atual.startsWith(alvo);
+};
+
+// Um idioma só não é escolha: o seletor some enquanto EN e ES não existirem.
+const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
+  ...IDIOMAS[outro],
+  codigo: outro,
+  href: equivalente(Astro.url.pathname, outro),
+  atual: outro === idioma,
+})) : [];
 ---
 
 <header class="cabecalho">
   <div class="barra">
-    <a class="marca" href="/" aria-label="Mukō-Gawa — início">
+    <a class="marca" href={inicio} aria-label={t("nav.inicioAria")}>
       <span class="kanji" aria-hidden="true">向こう側</span>
       <span class="romaji">Mukō·Gawa</span>
     </a>
@@ -25,24 +50,43 @@ const ativo = (href: string) =>
       type="button"
       aria-expanded="false"
       aria-controls="menu-principal"
-      aria-label="Abrir menu"
+      aria-label={t("nav.abrirMenu")}
     >
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </button>
 
-    <nav id="menu-principal" class="menu" aria-label="Navegação principal">
+    <nav id="menu-principal" class="menu" aria-label={t("nav.principal")}>
       <ul>
         {links.map((l) => (
           <li>
-            <a href={l.href} aria-current={ativo(l.href) ? "page" : undefined}>
+            <a href={l.href} aria-current={ativo(l.href, l.raiz) ? "page" : undefined}>
               {l.texto}
             </a>
           </li>
         ))}
       </ul>
-      <a class="cta" href="/#lista-de-espera">Avise-me</a>
+
+      {idiomasLink.length > 0 && (
+      <ul class="idiomas" aria-label={t("cta.idioma")}>
+        {idiomasLink.map((i) => (
+          <li>
+            <a
+              href={i.href}
+              hreflang={i.htmlLang}
+              lang={i.htmlLang}
+              aria-current={i.atual ? "true" : undefined}
+            >
+              <span class="so-leitor">{i.rotulo}</span>
+              <span aria-hidden="true">{i.curto}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      )}
+
+      <a class="cta" href={espera}>{t("cta.aviseMe")}</a>
     </nav>
   </div>
 </header>
@@ -130,6 +174,29 @@ const ativo = (href: string) =>
     background: var(--sangue);
   }
 
+  /* Seletor de idioma: três siglas, separadas por filete, mais discretas que
+     os itens de navegação. Não é destino, é ajuste — então não compete. */
+  .menu .idiomas {
+    gap: 0;
+    border-inline: 1px solid var(--linha-forte);
+  }
+  .menu .idiomas li + li { border-left: 1px solid var(--linha-forte); }
+  .menu .idiomas a {
+    padding: 0 11px;
+    font-size: .78rem;
+    letter-spacing: .14em;
+    color: var(--poeira);
+  }
+  .menu .idiomas a:hover { color: var(--osso); }
+  .menu .idiomas a[aria-current="true"] { color: var(--osso); }
+  .menu .idiomas a[aria-current="true"]::after {
+    content: "";
+    position: absolute;
+    left: 11px; right: 11px; bottom: 10px;
+    height: 2px;
+    background: var(--sangue);
+  }
+
   .cta {
     display: inline-flex;
     align-items: center;
@@ -211,6 +278,23 @@ const ativo = (href: string) =>
     }
     .menu a[aria-current="page"]::after { bottom: 16px; width: 22px; right: auto; }
     .cta { margin-top: 22px; justify-content: center; min-height: 54px; }
+
+    /* O seletor de idioma continua em linha: empilhar três siglas viraria
+       três destinos falsos numa lista que já é de destinos. */
+    .menu .idiomas {
+      flex-direction: row;
+      align-self: flex-start;
+      margin-top: 22px;
+      border: 1px solid var(--linha-forte);
+    }
+    .menu .idiomas li { border-bottom: 0; }
+    .menu .idiomas a {
+      min-height: 48px;
+      width: auto;
+      padding: 0 18px;
+      font-size: .85rem;
+    }
+    .menu .idiomas a[aria-current="true"]::after { bottom: 10px; left: 18px; right: 18px; width: auto; }
   }
 
   @media (prefers-reduced-motion: reduce) {

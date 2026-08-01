@@ -12,10 +12,11 @@ export default defineConfig({
   site:
     process.env.SITE_URL ??
     (urlDaVercel ? `https://${urlDaVercel}` : "https://mukogawa.com"),
-  // PT-BR é o idioma raiz. A estrutura já prevê /en/ na próxima rodada.
+  // PT-BR é o idioma raiz e não leva prefixo. EN e ES vivem sob /en/ e /es/.
+  // Os slugs são traduzidos por idioma — o mapa está em src/i18n/idiomas.ts.
   i18n: {
     defaultLocale: "pt",
-    locales: ["pt", "en"],
+    locales: ["pt", "en", "es", "ja"],
     routing: { prefixDefaultLocale: false },
   },
   build: { inlineStylesheets: "auto" },

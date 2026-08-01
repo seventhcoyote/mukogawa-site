@@ -1,0 +1,328 @@
+---
+import Revelar from "../components/Revelar.astro";
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import manga from "../assets/formatos/manga.jpg";
+import livros from "../assets/formatos/livros.jpg";
+import anime from "../assets/formatos/anime.jpg";
+import guerra from "../assets/historia/guerra-pela-humanidade.jpg";
+import Hero from "../components/Hero.astro";
+import Anuncio from "../components/Anuncio.astro";
+import GostoDaNarrativa from "../components/GostoDaNarrativa.astro";
+import GradePersonagens from "../components/GradePersonagens.astro";
+import ListaEspera from "../components/ListaEspera.astro";
+import { INICIO } from "../i18n/conteudo/inicio";
+import { personagensDoIdioma, classesDoIdioma, ROTULOS_PERSONAGENS } from "../i18n/conteudo/personagens";
+import { rota } from "../i18n/idiomas";
+import type { Idioma } from "../i18n/idiomas";
+
+interface Props { idioma: Idioma }
+const { idioma } = Astro.props;
+
+const c = INICIO[idioma];
+const rot = ROTULOS_PERSONAGENS[idioma];
+const personagens = personagensDoIdioma(idioma);
+const CLASSES = classesDoIdioma(idioma);
+// As artes são estruturais e não mudam por idioma; só o texto muda.
+const artesFormato = [manga, livros, anime];
+const formatos = c.formatos.map((f, i) => ({ ...f, img: artesFormato[i] }));
+const hrefHistoria = rota("historia", idioma);
+const hrefPersonagens = rota("personagens", idioma);
+---
+
+<Base titulo="Mukō-Gawa" descricao={c.descricao}
+  colado
+>
+  <Hero />
+  <Anuncio />
+
+  <GostoDaNarrativa />
+
+  <!-- ================= credenciais =================
+       A home não dava nenhum motivo para confiar: prêmios, editora e os sete
+       anos de trabalho viviam só na página de Criadores, a menos visitada. -->
+  <section class="secao secao--curta credenciais">
+    <div class="envelope">
+      <Revelar>
+      <p class="rotulo">{c.credenciaisRotulo}</p>
+      <ul class="marcas">
+        {c.credenciais.map((k) => (
+          <li>
+            <span class="valor">{k.valor}</span>
+            <span class="detalhe">{k.rotulo}</span>
+          </li>
+        ))}
+      </ul>
+      </Revelar>
+    </div>
+  </section>
+
+  <!-- ================= três formas ================= -->
+  <section class="secao">
+    <div class="envelope">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo">{c.narrativaRotulo}</p></div>
+        <h2>{c.narrativaTitulo}</h2>
+      </div>
+
+      <div class="formatos">
+        {formatos.map((f, iF) => (
+          <Revelar atraso={iF * 90}>
+          <article class:list={["formato", { "formato--destaque": f.destaque }]}>
+            <div class="moldura">
+              <Image
+                src={f.img}
+                alt={f.titulo}
+                widths={[420, 780]}
+                sizes="(max-width: 820px) 92vw, 32vw"
+                loading="lazy"
+              />
+              <span class="veu" aria-hidden="true"></span>
+            </div>
+            <p class="rotulo selo">{f.selo}</p>
+            <h3>{f.titulo}</h3>
+            <p class="texto">{f.texto}</p>
+          </article>
+          </Revelar>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= a historia ================= -->
+  <section class="secao narrativa">
+    <div class="envelope duplo">
+      <div class="lado-texto">
+        <div class="cabecalho-secao">
+          <div class="topo"><p class="rotulo">{c.historiaRotulo}</p></div>
+          <h2>{c.historiaTitulo}</h2>
+        </div>
+        <p class="lead">{c.historiaLead}</p>
+        <p class="acao"><a class="link-varre" href={hrefHistoria}>{c.historiaCta}</a></p>
+      </div>
+
+      <div class="lado-arte">
+        <Image
+          src={guerra}
+          alt={c.historiaTitulo}
+          widths={[520, 900]}
+          sizes="(max-width: 900px) 92vw, 46vw"
+          loading="lazy"
+        />
+        <span class="cantos" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="regua" />
+
+  <!-- ================= personagens ================= -->
+  <section class="secao">
+    <div class="envelope">
+      <div class="cabecalho-secao">
+        <div class="topo">
+          <p class="rotulo">{c.elencoRotulo}</p>
+        </div>
+        <div class="linha-titulo">
+          <h2>{c.elencoTitulo}</h2>
+          <a class="link-varre" href={hrefPersonagens}>{c.elencoTodos}</a>
+        </div>
+      </div>
+
+      <Revelar forca="fade"><GradePersonagens lista={personagens} /></Revelar>
+    </div>
+  </section>
+
+  <hr class="regua" />
+
+  <!-- ================= as nove classes ================= -->
+  <section class="secao classes">
+    <div class="envelope">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo">{c.classesRotulo}</p></div>
+        <h2>{c.classesTitulo}</h2>
+        <p class="lead">{c.classesLead}</p>
+      </div>
+
+      <ol class="lista-classes">
+        {CLASSES.map((c) => (
+          <li>
+            <span class="kanji" aria-hidden="true">{c.kanji}</span>
+            <span class="num">{c.num}</span>
+            <span class="nome">{c.nome}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <ListaEspera />
+</Base>
+
+<style>
+  /* ---------- credenciais ---------- */
+  .credenciais { border-block: 1px solid var(--linha); background: var(--tinta-2); }
+  .credenciais .rotulo { margin-bottom: clamp(20px, 3vw, 30px); }
+  .marcas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: clamp(20px, 3vw, 44px);
+  }
+  .marcas li {
+    display: grid;
+    gap: 8px;
+    padding-left: 18px;
+    border-left: 1px solid var(--linha-forte);
+  }
+  .marcas .valor {
+    font-family: var(--fonte-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+    line-height: 1;
+    color: var(--osso);
+  }
+  .marcas .detalhe {
+    font-size: .92rem;
+    color: var(--poeira);
+    text-wrap: pretty;
+  }
+
+  /* ---------- três formas ---------- */
+  .formatos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(20px, 2.6vw, 38px);
+  }
+  /* Os três cards seguem o mesmo ritmo vertical mesmo quando o selo
+     quebra em duas linhas, senão os títulos desalinham. */
+  .formato { display: flex; flex-direction: column; }
+  .formato h3 { margin: 8px 0 12px; }
+  .formato .selo {
+    margin-bottom: 14px;
+    min-height: 2.6em;
+    display: flex;
+    align-items: flex-start;
+  }
+  .formato .texto { color: var(--cinza); font-size: .98rem; }
+  .formato--destaque .selo { color: var(--sangue-vivo); }
+
+  .moldura {
+    position: relative;
+    background: var(--vazio);
+    isolation: isolate;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid var(--linha);
+    clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+  }
+  /* As artes já vêm encaixadas inteiras numa moldura 4:3 de fundo preto,
+     então "cover" não corta nada. O blend faz o fundo sumir. */
+  .moldura :global(img) {
+    width: 100%; height: 100%; object-fit: cover;
+    mix-blend-mode: screen;
+    transition: transform .6s cubic-bezier(.16,.84,.28,1);
+  }
+  .moldura .veu {
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, color-mix(in srgb, var(--tinta) 88%, transparent), transparent 58%);
+  }
+  .formato:hover .moldura :global(img) { transform: scale(1.04); }
+  .formato--destaque .moldura { border-color: color-mix(in srgb, var(--sangue) 55%, transparent); }
+
+  /* ---------- narrativa ---------- */
+  .duplo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 5vw, 76px);
+    align-items: center;
+  }
+  .narrativa h2 { font-size: clamp(1.7rem, 3vw, 2.9rem); }
+  .acao { margin-top: 26px; }
+
+  .lado-arte { position: relative; }
+  .lado-arte :global(img) {
+    width: 100%;
+    filter: grayscale(1) contrast(1.06);
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+  }
+  .lado-arte .cantos {
+    position: absolute; inset: -10px;
+    pointer-events: none;
+    background:
+      linear-gradient(var(--sangue), var(--sangue)) 0 0 / 1px 40px no-repeat,
+      linear-gradient(var(--sangue), var(--sangue)) 0 0 / 40px 1px no-repeat,
+      linear-gradient(var(--sangue), var(--sangue)) 100% 100% / 1px 40px no-repeat,
+      linear-gradient(var(--sangue), var(--sangue)) 100% 100% / 40px 1px no-repeat;
+  }
+
+  .linha-titulo {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* ---------- classes ---------- */
+  /* 3x3 fixo: nove itens sempre fecham a grade, nenhum bloco fica maior. */
+  .lista-classes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--linha);
+    border: 1px solid var(--linha);
+  }
+  .lista-classes li {
+    position: relative;
+    display: grid;
+    gap: 6px;
+    padding: 26px 22px 24px;
+    background: var(--tinta);
+    overflow: hidden;
+    transition: background .3s ease;
+  }
+  .lista-classes li:hover { background: var(--tinta-2); }
+  .lista-classes .kanji {
+    position: absolute;
+    right: -6px;
+    bottom: -22px;
+    font-family: var(--fonte-display);
+    font-weight: 700;
+    font-size: 5.4rem;
+    line-height: 1;
+    color: #fff;
+    opacity: .05;
+    transition: opacity .3s ease, transform .4s cubic-bezier(.16,.84,.28,1);
+  }
+  .lista-classes li:hover .kanji { opacity: .12; transform: translateY(-4px); }
+  .lista-classes .num {
+    font-family: var(--fonte-ui);
+    font-weight: 600;
+    font-size: .72rem;
+    letter-spacing: .3em;
+    color: var(--sangue-vivo);
+  }
+  .lista-classes .nome {
+    font-family: var(--fonte-display);
+    font-weight: 700;
+    font-size: clamp(.95rem, 1.6vw, 1.22rem);
+    color: var(--osso);
+  }
+  @media (max-width: 620px) {
+    .lista-classes li { padding: 18px 12px 16px; }
+    .lista-classes .kanji { font-size: 3.4rem; }
+  }
+
+  @media (max-width: 900px) {
+    .duplo { grid-template-columns: 1fr; }
+    .lado-arte { order: -1; }
+  }
+</style>

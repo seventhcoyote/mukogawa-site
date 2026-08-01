@@ -1,9 +1,9 @@
 ---
 import CardPersonagem from "./CardPersonagem.astro";
-import type { Personagem } from "../data/personagens";
+import type { PersonagemIdioma } from "../i18n/conteudo/personagens";
 
 interface Props {
-  lista: Personagem[];
+  lista: PersonagemIdioma[];
   prioridadeAte?: number;
 }
 const { lista, prioridadeAte = 4 } = Astro.props;

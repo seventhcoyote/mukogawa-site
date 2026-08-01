@@ -271,3 +271,85 @@ p:last-child { margin-bottom: 0; }
 
 /* Blocos largos nunca empurram a página na horizontal */
 .rolagem-x { overflow-x: auto; }
+
+/* ============================================================
+   MOVIMENTO E TEXTURA DE MANGÁ
+   Adicionado em 2026-08-01. Duas regras valem para tudo aqui:
+   1. nada de `transform` em ancestral de arte com mix-blend-mode;
+   2. tudo desliga em prefers-reduced-motion.
+   ============================================================ */
+
+/* ---------- gutter de quadrinho ----------
+   O chanfro já era assinatura em botões e cards. Levado para a régua entre
+   seções, ele passa a ler como a calha entre dois quadros de mangá, em vez de
+   uma linha de formulário. */
+.regua--corte {
+  border: 0;
+  height: 22px;
+  margin: 0;
+  background:
+    linear-gradient(90deg, var(--linha-forte), var(--linha) 42%, transparent 72%) 0 0 / 100% 1px no-repeat,
+    linear-gradient(255deg, var(--tinta) 0 46%, transparent 46%) 0 0 / 100% 100% no-repeat;
+}
+
+/* ---------- linhas de velocidade ----------
+   O halftone já dava metade da assinatura de mangá; as linhas cinéticas são a
+   outra metade. Elas irradiam do centro e morrem antes da borda, para não virar
+   moldura em volta do bloco. */
+.cineticas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: .5;
+  /* As linhas nascem no ponto de impacto e morrem antes da borda. O mask mostra
+     PERTO do foco e some longe — o contrário deixaria o efeito atrás do texto,
+     onde ele só atrapalha a leitura. */
+  -webkit-mask-image: radial-gradient(ellipse 58% 88% at var(--foco, 50% 50%), #000 4%, rgba(0,0,0,.55) 34%, transparent 68%);
+          mask-image: radial-gradient(ellipse 58% 88% at var(--foco, 50% 50%), #000 4%, rgba(0,0,0,.55) 34%, transparent 68%);
+}
+.cineticas::before,
+.cineticas::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: repeating-conic-gradient(
+    from 0deg at var(--foco, 50% 50%),
+    currentColor 0deg .18deg,
+    transparent .18deg 1.5deg
+  );
+  opacity: .5;
+}
+.cineticas::after {
+  background: repeating-conic-gradient(
+    from .7deg at var(--foco, 50% 50%),
+    currentColor 0deg .1deg,
+    transparent .1deg 3.1deg
+  );
+  opacity: .34;
+  animation: deriva-cinetica 26s linear infinite;
+}
+@keyframes deriva-cinetica {
+  to { transform: rotate(1turn); }
+}
+
+/* ---------- o selo entra em cena ----------
+   Os kanji de fundo eram textura parada a 2% de opacidade. Agora acendem.
+   Anima SÓ opacity e filter de propósito: vários selos já usam `transform`
+   para se posicionar (translateY(-50%)), e animar transform aqui os faria
+   saltar de lugar. */
+.selo-fundo,
+.selo,
+.selo-citacao {
+  animation: selo-acende 1.4s cubic-bezier(.16, .8, .24, 1) both;
+}
+@keyframes selo-acende {
+  from { opacity: 0; filter: blur(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cineticas::after { animation: none; }
+  .selo-fundo,
+  .selo,
+  .selo-citacao { animation: none; }
+}

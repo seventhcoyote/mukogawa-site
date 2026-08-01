@@ -1,9 +1,27 @@
 ---
+import { idiomaDaUrl } from "../i18n/idiomas";
+import { usarUI } from "../i18n/ui";
+
 // A loja ainda não existe: enquanto isso, o site converte para lista de espera.
 // O endpoint é plugável (Formspree, Buttondown, Beehiiv, função na Vercel).
 // Sem PUBLIC_WAITLIST_ENDPOINT o formulário se declara inativo em vez de
 // fingir que gravou o e-mail.
 const endpoint = import.meta.env.PUBLIC_WAITLIST_ENDPOINT ?? "";
+
+const idioma = idiomaDaUrl(Astro.url.pathname);
+const t = usarUI(idioma);
+
+// As mensagens do script vivem em data-* porque o <script> do Astro é
+// processado à parte e não enxerga o escopo do frontmatter.
+const recados = {
+  erroEmail: t("espera.erroEmail"),
+  semEndpoint: t("espera.semEndpoint"),
+  enviando: t("espera.enviando"),
+  ok: t("espera.ok"),
+  erroEnvio: t("espera.erroEnvio"),
+};
+
+const REGIOES = ["BR", "US", "JP", "OUTRO"] as const;
 ---
 
 <section class="espera secao" id="lista-de-espera">
@@ -11,46 +29,44 @@ const endpoint = import.meta.env.PUBLIC_WAITLIST_ENDPOINT ?? "";
   <span class="selo" aria-hidden="true">壱</span>
 
   <div class="envelope interno">
-    <p class="rotulo rotulo--lado" data-lado="rebeldes">Volume 01 // Dezembro de 2026</p>
+    <p class="rotulo rotulo--lado" data-lado="rebeldes">{t("espera.rotulo")}</p>
 
-    <h2>O primeiro volume do mangá chega em dezembro de 2026.</h2>
+    <h2>{t("espera.titulo")}</h2>
 
     <p class="apoio">
-      Deixe seu e-mail e você é avisado quando as vendas abrirem na sua região.
-      Sem outros envios.
+      {t("espera.apoio")}
     </p>
 
-    <form class="formulario" data-endpoint={endpoint} novalidate>
+    <form class="formulario" data-endpoint={endpoint} data-recados={JSON.stringify(recados)} novalidate>
       <div class="campos">
         <div class="campo">
-          <label class="so-leitor" for="email-espera">Seu e-mail</label>
+          <label class="so-leitor" for="email-espera">{t("espera.email")}</label>
           <input
             id="email-espera"
             name="email"
             type="email"
             inputmode="email"
             autocomplete="email"
-            placeholder="Seu e-mail"
+            placeholder={t("espera.email")}
             required
           />
         </div>
 
         <div class="campo campo--regiao">
-          <label class="so-leitor" for="regiao-espera">Sua região</label>
+          <label class="so-leitor" for="regiao-espera">{t("espera.regiao")}</label>
           <select id="regiao-espera" name="regiao">
-            <option value="BR">Brasil</option>
-            <option value="US">Estados Unidos</option>
-            <option value="JP">Japão</option>
-            <option value="OUTRO">Outra</option>
+            {REGIOES.map((r) => (
+              <option value={r}>{t(`regiao.${r}` as any)}</option>
+            ))}
           </select>
         </div>
 
-        <button class="botao" type="submit">Quero ser avisado</button>
+        <button class="botao" type="submit">{t("espera.botao")}</button>
       </div>
 
       <!-- armadilha simples contra robô -->
       <div class="ninho" aria-hidden="true">
-        <label for="empresa-espera">Não preencha</label>
+        <label for="empresa-espera">{t("espera.naoPreencha")}</label>
         <input id="empresa-espera" name="empresa" type="text" tabindex="-1" autocomplete="off" />
       </div>
 
@@ -58,8 +74,7 @@ const endpoint = import.meta.env.PUBLIC_WAITLIST_ENDPOINT ?? "";
     </form>
 
     <p class="rodape-nota">
-      Edições, preços e frete são responsabilidade do varejista de cada região.
-      As datas seguem o calendário atual da editora e podem mudar.
+      {t("espera.nota")}
     </p>
   </div>
 </section>
@@ -172,6 +187,7 @@ const endpoint = import.meta.env.PUBLIC_WAITLIST_ENDPOINT ?? "";
     const botao = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
     const armadilha = form.querySelector<HTMLInputElement>('input[name="empresa"]')!;
     const endpoint = form.dataset.endpoint ?? "";
+    const recados = JSON.parse(form.dataset.recados ?? "{}") as Record<string, string>;
 
     const dizer = (texto: string, tom: "ok" | "erro" | "") => {
       recado.textContent = texto;
@@ -186,19 +202,19 @@ const endpoint = import.meta.env.PUBLIC_WAITLIST_ENDPOINT ?? "";
       const valor = email.value.trim();
       if (!valor || !email.checkValidity()) {
         email.setAttribute("aria-invalid", "true");
-        dizer("Confira o e-mail digitado.", "erro");
+        dizer(recados.erroEmail, "erro");
         email.focus();
         return;
       }
       email.removeAttribute("aria-invalid");
 
       if (!endpoint) {
-        dizer("Cadastro ainda não conectado. Falta ligar o provedor de e-mail.", "erro");
+        dizer(recados.semEndpoint, "erro");
         return;
       }
 
       botao.disabled = true;
-      dizer("Enviando...", "");
+      dizer(recados.enviando, "");
 
       try {
         const resposta = await fetch(endpoint, {
@@ -211,10 +227,10 @@ const endpoint = import.meta.env.PUBLIC_WAITLIST_ENDPOINT ?? "";
         });
         if (!resposta.ok) throw new Error(String(resposta.status));
         form.querySelector<HTMLDivElement>(".campos")!.hidden = true;
-        dizer("Pronto. Você será avisado.", "ok");
+        dizer(recados.ok, "ok");
       } catch {
         botao.disabled = false;
-        dizer("Não deu para enviar agora. Tente de novo em instantes.", "erro");
+        dizer(recados.erroEnvio, "erro");
       }
     });
   }
