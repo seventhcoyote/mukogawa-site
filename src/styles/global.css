@@ -1,0 +1,273 @@
+@import "@fontsource/cinzel/600.css";
+@import "@fontsource/cinzel/700.css";
+@import "@fontsource/barlow-condensed/500.css";
+@import "@fontsource/barlow-condensed/600.css";
+@import "@fontsource/barlow/400.css";
+@import "@fontsource/barlow/500.css";
+
+/* ============================================================
+   MUKŌ-GAWA — sistema visual
+   Preto absoluto, traço branco, dois lados: Hoste (aço) e Rebeldes (sangue).
+   Regra de cor: --sangue nunca em texto pequeno. Para texto, --sangue-vivo.
+   ============================================================ */
+
+:root {
+  /* superfícies — quanto mais escuro, mais a arte salta */
+  --vazio: #000000;
+  --tinta: #060608;
+  --tinta-2: #0c0c10;
+  --linha: #1a1a21;
+  --linha-forte: #2c2c36;
+
+  /* texto */
+  --osso: #ececee;   /* 16.4:1 */
+  --cinza: #b4b4bd;  /* 9.5:1  */
+  --poeira: #8b8b96; /*  5.6:1 — piso para texto pequeno */
+
+  /* lados */
+  --sangue: #d21c26;      /* preenchimento, brasa, barra. NUNCA texto pequeno */
+  --sangue-vivo: #ff4d55; /* 5.8:1 — o vermelho que pode virar texto */
+  --aco: #4da3d4;         /* 6.8:1 */
+  --aco-fundo: #1d6d99;
+
+  /* cor do lado, trocada por [data-lado] */
+  --lado: var(--aco);
+  --lado-fundo: var(--aco-fundo);
+
+  --fonte-display: "Cinzel", Georgia, serif;
+  --fonte-ui: "Barlow Condensed", system-ui, sans-serif;
+  --fonte-texto: "Barlow", system-ui, sans-serif;
+
+  --gutter: clamp(20px, 5vw, 72px);
+  --max: 1360px;
+  --chanfro: 14px; /* corte diagonal padrão dos blocos */
+}
+
+[data-lado="rebeldes"] {
+  --lado: var(--sangue-vivo);
+  --lado-fundo: var(--sangue);
+}
+[data-lado="hoste"] {
+  --lado: var(--aco);
+  --lado-fundo: var(--aco-fundo);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--tinta);
+  color: var(--cinza);
+  font-family: var(--fonte-texto);
+  font-size: 17px;
+  font-weight: 400;          /* nunca 300 em fundo escuro */
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, video, svg { display: block; max-width: 100%; }
+
+/* Astro emite width/height nos <img>. Sem isto o atributo height vence o
+   aspect-ratio do CSS e a imagem sai na altura intrínseca. Regras com classe
+   que precisam de altura fixa (cards, molduras) continuam ganhando. */
+img { height: auto; }
+
+a { color: inherit; }
+
+::selection { background: var(--sangue); color: #fff; }
+
+:focus-visible {
+  outline: 2px solid var(--sangue-vivo);
+  outline-offset: 3px;
+}
+
+/* ---------- tipografia ---------- */
+
+h1, h2, h3 {
+  font-family: var(--fonte-display);
+  font-weight: 700;
+  color: var(--osso);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(2.6rem, 7vw, 5.5rem); }
+h2 { font-size: clamp(1.9rem, 4vw, 3.4rem); }
+h3 { font-size: clamp(1.3rem, 2vw, 1.75rem); }
+
+p { margin: 0 0 1.15em; text-wrap: pretty; }
+p:last-child { margin-bottom: 0; }
+
+/* Rótulo com barras duplas — assinatura tipográfica do projeto */
+.rotulo {
+  font-family: var(--fonte-ui);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--poeira);
+  margin: 0;
+}
+.rotulo--lado { color: var(--lado); }
+
+.lead {
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  color: var(--osso);
+  max-width: 62ch;
+}
+
+.corpo { max-width: 68ch; }
+.corpo p + p { margin-top: 0; }
+
+/* ---------- layout ---------- */
+
+.envelope {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.secao { padding-block: clamp(72px, 11vh, 150px); }
+.secao--curta { padding-block: clamp(48px, 7vh, 90px); }
+
+.regua {
+  border: 0;
+  border-top: 1px solid var(--linha);
+  margin: 0;
+}
+
+/* Cabeçalho de seção: rótulo + título + linha */
+.cabecalho-secao {
+  display: grid;
+  gap: 18px;
+  margin-bottom: clamp(32px, 5vw, 60px);
+}
+.cabecalho-secao .topo {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.cabecalho-secao .topo::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--linha-forte), transparent);
+}
+
+/* ---------- botões ---------- */
+
+.botao {
+  --bg: var(--sangue);
+  --fg: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 52px;            /* alvo de toque */
+  padding: 0 30px;
+  font-family: var(--fonte-ui);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--bg);
+  cursor: pointer;
+  position: relative;
+  clip-path: polygon(var(--chanfro) 0, 100% 0, 100% calc(100% - var(--chanfro)), calc(100% - var(--chanfro)) 100%, 0 100%, 0 var(--chanfro));
+  transition: background .18s ease, color .18s ease, transform .18s ease;
+}
+.botao:hover { transform: translateY(-2px); background: #ee2b35; border-color: #ee2b35; }
+.botao:active { transform: translateY(0); }
+
+.botao--fantasma {
+  --bg: transparent;
+  --fg: var(--osso);
+  border-color: var(--linha-forte);
+}
+.botao--fantasma:hover {
+  background: rgba(255, 255, 255, .06);
+  border-color: var(--osso);
+}
+
+/* Link de texto com filete que varre */
+.link-varre {
+  font-family: var(--fonte-ui);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--osso);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 0;
+  position: relative;
+}
+.link-varre::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 8px;
+  height: 1px; width: 100%;
+  background: var(--sangue-vivo);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+.link-varre:hover::after { transform: scaleX(1); }
+
+/* ---------- textura: halftone e grão ---------- */
+
+.halftone {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center, currentColor 1px, transparent 1.6px);
+  background-size: 5px 5px;
+  opacity: .16;
+}
+
+/* ---------- utilidades ---------- */
+
+.so-leitor {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.pular-para-conteudo {
+  position: absolute;
+  left: 12px; top: -60px;
+  z-index: 200;
+  background: var(--sangue);
+  color: #fff;
+  padding: 12px 20px;
+  font-family: var(--fonte-ui);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: top .2s ease;
+}
+.pular-para-conteudo:focus { top: 12px; }
+
+/* Blocos largos nunca empurram a página na horizontal */
+.rolagem-x { overflow-x: auto; }

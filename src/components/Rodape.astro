@@ -1,0 +1,210 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/marca/logo-mukogawa.png";
+
+// Redes. X e Facebook já ocupam o lugar mas ficam inertes até os perfis
+// existirem: um link morto é pior que um "em breve" honesto.
+const redes = [
+  { nome: "Instagram", icone: "instagram", href: "https://www.instagram.com/israelsubira/" },
+  { nome: "X", icone: "x", href: null },
+  { nome: "Facebook", icone: "facebook", href: null },
+];
+
+const secoes = [
+  {
+    titulo: "A obra",
+    itens: [
+      { texto: "História", href: "/historia" },
+      { texto: "Personagens", href: "/personagens" },
+      { texto: "Criadores", href: "/criadores" },
+    ],
+  },
+  {
+    titulo: "Publicação",
+    itens: [
+      { texto: "Loja", href: "/loja" },
+      { texto: "Lista de espera", href: "/#lista-de-espera" },
+    ],
+  },
+];
+---
+
+<footer class="rodape">
+  <div class="envelope">
+    <div class="grade">
+      <div class="marca">
+        <Image class="logo" src={logo} alt="Mukō-Gawa 向こう側" widths={[260, 520]} sizes="240px" loading="lazy" />
+        <p class="frase">
+          Antes da história, uma civilização entrou em guerra pela forma do mundo.
+        </p>
+
+        <ul class="redes">
+          {redes.map((r) => {
+            const Icone = (
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
+                {r.icone === "instagram" && (
+                  <>
+                    <rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4" />
+                    <circle cx="12" cy="12" r="4.2" />
+                    <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none" />
+                  </>
+                )}
+                {r.icone === "x" && (
+                  <path d="M3.2 3h4.4l4.6 6.2L17.5 3h3.3l-6.8 7.9L21.3 21h-4.4l-5-6.7L6 21H2.7l7.2-8.4z"
+                        fill="currentColor" stroke="none" />
+                )}
+                {r.icone === "facebook" && (
+                  <path d="M15.4 8.4h-2v-1.6c0-.7.2-1.1 1.1-1.1h1V3.1c-.4 0-1.1-.1-1.9-.1-2 0-3.4 1.2-3.4 3.5v1.9H8v2.7h2.2V21h3V11.1h2z"
+                        fill="currentColor" stroke="none" />
+                )}
+              </svg>
+            );
+
+            return (
+              <li>
+                {r.href ? (
+                  <a href={r.href} target="_blank" rel="noopener noreferrer" aria-label={`${r.nome} de Mukō-Gawa`}>
+                    {Icone}
+                  </a>
+                ) : (
+                  <span class="inerte" title={`${r.nome} — em breve`}>
+                    {Icone}
+                    <span class="so-leitor">{r.nome} — em breve</span>
+                  </span>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      {secoes.map((s) => (
+        <nav class="coluna" aria-label={s.titulo}>
+          <p class="titulo">{s.titulo}</p>
+          <ul>
+            {s.itens.map((i) => (
+              <li><a href={i.href}>{i.texto}</a></li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+
+      <div class="coluna">
+        <p class="titulo">Contato</p>
+        <ul>
+          <li><a href="mailto:contato@mukogawa.com">contato@mukogawa.com</a></li>
+          <li><a href="mailto:imprensa@mukogawa.com">Imprensa</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="base">
+      <p>© 2026 Mukō-Gawa. Todos os direitos reservados.</p>
+      <p class="creditos">
+        Arte de Daniel Bretas e Guilherme Match.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .rodape {
+    border-top: 1px solid var(--linha);
+    background: var(--vazio);
+    padding-block: clamp(48px, 7vw, 84px) 32px;
+  }
+
+  .grade {
+    display: grid;
+    grid-template-columns: minmax(240px, 1.6fr) repeat(3, minmax(130px, 1fr));
+    gap: clamp(28px, 4vw, 56px);
+  }
+
+  .logo { width: 240px; height: auto; }
+  .frase {
+    margin: 22px 0 0;
+    max-width: 34ch;
+    font-size: .95rem;
+    color: var(--poeira);
+  }
+
+  .redes { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin: 22px 0 0; padding: 0; }
+  /* só o emblema: sem o nome escrito ao lado */
+  .redes a,
+  .redes .inerte {
+    display: inline-grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    border: 1px solid var(--linha-forte);
+    color: var(--cinza);
+    font-family: var(--fonte-ui);
+    font-size: .82rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .redes a:hover { color: var(--osso); border-color: var(--osso); }
+
+  /* lugar reservado: aparece na composição, mas não finge ser um link */
+  .redes .inerte {
+    color: var(--poeira);
+    border-style: dashed;
+    border-color: var(--linha);
+    cursor: default;
+  }
+  .redes .inerte::after {
+    content: "";
+    position: absolute;
+    right: 5px; top: 5px;
+    width: 5px; height: 5px;
+    background: var(--sangue-vivo);
+  }
+  .redes li { position: relative; }
+
+  .titulo {
+    margin: 0 0 14px;
+    font-family: var(--fonte-ui);
+    font-weight: 600;
+    font-size: .74rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--osso);
+  }
+  .coluna ul { list-style: none; margin: 0; padding: 0; }
+  .coluna a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;          /* alvo de toque mínimo */
+    font-size: .95rem;
+    color: var(--poeira);
+    text-decoration: none;
+    transition: color .2s ease;
+  }
+  .coluna a:hover { color: var(--osso); }
+
+  .base {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: clamp(40px, 6vw, 72px);
+    padding-top: 24px;
+    border-top: 1px solid var(--linha);
+  }
+  .base p {
+    margin: 0;
+    font-family: var(--fonte-ui);
+    font-size: .82rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--poeira);
+  }
+
+  @media (max-width: 860px) {
+    .grade { grid-template-columns: repeat(2, 1fr); }
+    .marca { grid-column: 1 / -1; }
+  }
+</style>

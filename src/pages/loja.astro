@@ -1,0 +1,172 @@
+---
+import Base from "../layouts/Base.astro";
+import ListaEspera from "../components/ListaEspera.astro";
+
+// Nenhum link de venda existe ainda. Em vez de botões que levam a "#",
+// cada região mostra o estado real e converte para a lista de espera.
+const regioes = [
+  {
+    codigo: "BR",
+    pais: "Brasil",
+    canal: "Shopify",
+    texto: "Edições em português, vendidas diretamente pela nossa loja e enviadas dentro do país.",
+    quando: "Mangá — dezembro de 2026",
+    destaque: true,
+  },
+  {
+    codigo: "US",
+    pais: "Estados Unidos",
+    canal: "Amazon",
+    texto: "Edições em inglês, impressas e digitais, com entrega pela Amazon.",
+    quando: "Mangá — dezembro de 2026",
+    destaque: false,
+  },
+  {
+    codigo: "JP",
+    pais: "Japão",
+    canal: "Amazon.co.jp",
+    texto: "Edições em japonês, impressas e digitais, com entrega pela Amazon.co.jp.",
+    quando: "Mangá — dezembro de 2026",
+    destaque: false,
+  },
+];
+---
+
+<Base
+  titulo="Loja"
+  descricao="Onde comprar Mukō-Gawa. Edições para Brasil, Estados Unidos e Japão. O primeiro volume do mangá chega em dezembro de 2026."
+>
+  <section class="secao secao--curta">
+    <div class="envelope">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo">Onde comprar</p></div>
+        <h1>Loja</h1>
+        <p class="lead">
+          Edições, preços, frete e disponibilidade são responsabilidade do
+          varejista da sua região.
+        </p>
+      </div>
+
+      <ul class="regioes">
+        {regioes.map((r) => (
+          <li class:list={["regiao", { "regiao--destaque": r.destaque }]}>
+            <div class="topo-cartao">
+              <span class="codigo">{r.codigo}</span>
+              <div>
+                <p class="pais">{r.pais}</p>
+                <p class="canal">{r.canal}</p>
+              </div>
+            </div>
+
+            <p class="texto">{r.texto}</p>
+
+            <p class="quando">{r.quando}</p>
+
+            <p class="estado">
+              <span class="ponto" aria-hidden="true"></span>
+              Link de venda ainda não disponível
+            </p>
+
+            <a class="botao botao--fantasma" href="#lista-de-espera">Avise-me</a>
+          </li>
+        ))}
+      </ul>
+
+      <p class="nota">
+        Os links de venda entram no ar a cada lançamento. As datas seguem o
+        calendário atual da editora e podem mudar.
+      </p>
+    </div>
+  </section>
+
+  <ListaEspera />
+</Base>
+
+<style>
+  h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); }
+
+  .regioes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(18px, 2.4vw, 30px);
+  }
+
+  .regiao {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: clamp(24px, 3vw, 36px);
+    background: var(--tinta-2);
+    border: 1px solid var(--linha);
+    clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+  }
+  .regiao--destaque { border-color: color-mix(in srgb, var(--sangue) 55%, transparent); }
+
+  .topo-cartao { display: flex; align-items: center; gap: 16px; }
+  .codigo {
+    font-family: var(--fonte-display);
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--osso);
+  }
+  .pais {
+    margin: 0;
+    font-family: var(--fonte-ui);
+    font-weight: 600;
+    font-size: .95rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--osso);
+  }
+  .canal {
+    margin: 2px 0 0;
+    font-family: var(--fonte-ui);
+    font-size: .78rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--poeira);
+  }
+
+  .texto { margin: 0; color: var(--cinza); font-size: .96rem; }
+
+  .quando {
+    margin: 0;
+    font-family: var(--fonte-ui);
+    font-weight: 600;
+    font-size: .8rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--sangue-vivo);
+  }
+
+  .estado {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--linha);
+    font-family: var(--fonte-ui);
+    font-size: .78rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--poeira);
+  }
+  .estado .ponto {
+    width: 7px; height: 7px; flex: none;
+    background: var(--poeira);
+  }
+
+  .regiao .botao { margin-top: auto; }
+
+  .nota {
+    margin: clamp(28px, 4vw, 44px) 0 0;
+    max-width: 62ch;
+    color: var(--poeira);
+    font-size: .92rem;
+  }
+</style>

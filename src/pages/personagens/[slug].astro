@@ -1,0 +1,349 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Base from "../../layouts/Base.astro";
+import { personagens } from "../../data/personagens";
+
+export function getStaticPaths() {
+  return personagens.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+
+const { p } = Astro.props;
+
+const arquivos = import.meta.glob<{ default: ImageMetadata }>(
+  "../../assets/personagens/*.jpg",
+  { eager: true },
+);
+const arte = arquivos[`../../assets/personagens/${p.slug}.jpg`]!.default;
+
+// Estudos e artes secundárias de cada personagem. Nada se repete entre páginas:
+// cada arte do acervo aparece em exatamente um lugar do site.
+const ESTUDOS: Record<string, string[]> = {
+  gabriel: ["gabriel-estudos"],
+  amunet: ["amunet-estudo"],
+  miguel: ["miguel-estudos"],
+  satis: ["satis", "satis-busto", "satis-estudo"],
+  celeste: ["celeste-estudos"],
+  ariel: ["ariel-estudos"],
+  tesserion: ["tesserion-estudos"],
+  kharzul: ["kharzul", "kharzul-estudos", "kharzul-manga-estudo", "kharzul-manga"],
+  orthrax: ["orthrax-estudos"],
+  helel: ["helel-estudos"],
+  serafins: ["serafins-estudos"],
+};
+
+const galeriaArquivos = import.meta.glob<{ default: ImageMetadata }>(
+  "../../assets/estudos/*.jpg",
+  { eager: true },
+);
+// Duas naturezas de arte convivem aqui, e elas não podem receber o mesmo
+// tratamento. O traço do Bretas é branco sobre preto: some no fundo e flutua.
+// As páginas do Match são PAINÉIS de mangá, com borda retangular própria —
+// se tentarem flutuar, viram um retângulo colado. Esses ganham moldura de
+// verdade, para a borda existir de propósito. Classificação conferida a olho,
+// arte por arte.
+const PAINEIS = new Set([
+  "amunet-estudo", "kharzul-manga", "kharzul-manga-estudo",
+  "satis-busto", "satis-estudo", "satis",
+]);
+
+const galeria = (ESTUDOS[p.slug] ?? [])
+  .map((n) => ({ arte: galeriaArquivos[`../../assets/estudos/${n}.jpg`]?.default, painel: PAINEIS.has(n) }))
+  .filter((g) => g.arte) as { arte: ImageMetadata; painel: boolean }[];
+
+const i = personagens.findIndex((x) => x.slug === p.slug);
+const anterior = personagens[(i - 1 + personagens.length) % personagens.length];
+const proximo = personagens[(i + 1) % personagens.length];
+
+const ladoTexto = p.lado === "hoste" ? "Hoste" : "Rebeldes";
+---
+
+<Base
+  titulo={p.nome}
+  descricao={`${p.nome}, ${p.epiteto} — Classe ${p.classeNum}, ${p.classe}. ${p.sobrePersonagem[0].slice(0, 130)}...`}
+>
+  <article data-lado={p.lado}>
+    <!-- abertura em splash -->
+    <header class="abertura">
+      <div class="fundo" aria-hidden="true">
+        <span class="aura"></span>
+        <span class="selo">{p.kanji}</span>
+      </div>
+
+      <div class="envelope grade">
+        <div class="retrato">
+          <Image
+            src={arte}
+            alt={`${p.nome} — ${p.epiteto}`}
+            widths={[420, 760, 1050]}
+            sizes="(max-width: 880px) 88vw, 42vw"
+            loading="eager"
+            fetchpriority="high"
+          />
+          <span class="cantos" aria-hidden="true"></span>
+        </div>
+
+        <div class="ficha">
+          <p class="rotulo rotulo--lado">Classe {p.classeNum} // {p.classe}</p>
+          <h1>{p.nome}</h1>
+          <p class="epiteto">{p.epiteto}</p>
+          <p class="faccao"><span class="ponto" aria-hidden="true"></span>{ladoTexto}</p>
+          <p class="credito">{p.credito}</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="secao">
+      <div class="envelope colunas">
+        <div class="bloco">
+          <div class="cabecalho-secao">
+            <div class="topo"><p class="rotulo">A ordem</p></div>
+            <h2>{p.classe}</h2>
+          </div>
+          <div class="corpo"><p>{p.sobreClasse}</p></div>
+        </div>
+
+        <div class="bloco">
+          <div class="cabecalho-secao">
+            <div class="topo"><p class="rotulo">O Eterno</p></div>
+            <h2>{p.nome}</h2>
+          </div>
+          <div class="corpo">
+            {p.sobrePersonagem.map((t) => <p>{t}</p>)}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {galeria.length > 0 && (
+      <section class="secao secao--curta galeria-bloco">
+        <div class="envelope">
+          <div class="cabecalho-secao">
+            <div class="topo"><p class="rotulo">Do caderno</p></div>
+            <h2>Estudos</h2>
+          </div>
+
+          <div class:list={["galeria", { "galeria--unica": galeria.length === 1 }]}>
+            {galeria.map((g, n) => (
+              <figure class:list={{ painel: g.painel }}>
+                <Image
+                  src={g.arte}
+                  alt={`${p.nome} — estudo ${n + 1}`}
+                  widths={[420, 820]}
+                  sizes="(max-width: 760px) 92vw, 44vw"
+                  loading="lazy"
+                />
+              </figure>
+            ))}
+          </div>
+
+          <p class="credito-galeria">{p.credito}</p>
+        </div>
+      </section>
+    )}
+
+    <nav class="passo" aria-label="Outros personagens">
+      <a class="anterior" href={`/personagens/${anterior.slug}`}>
+        <span class="dir">Anterior</span>
+        <span class="nome">{anterior.nome}</span>
+      </a>
+      <a class="todos" href="/personagens">Todos</a>
+      <a class="proximo" href={`/personagens/${proximo.slug}`}>
+        <span class="dir">Próximo</span>
+        <span class="nome">{proximo.nome}</span>
+      </a>
+    </nav>
+  </article>
+</Base>
+
+<style>
+  .abertura {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(40px, 6vw, 80px) clamp(40px, 6vw, 90px);
+    border-bottom: 1px solid var(--linha);
+  }
+  .fundo { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .fundo .aura {
+    position: absolute;
+    left: -14%; top: -34%;
+    width: 76%; height: 168%;
+    background:
+      radial-gradient(ellipse 48% 40% at 50% 50%, var(--lado-fundo), transparent 68%),
+      radial-gradient(ellipse 26% 22% at 50% 52%, var(--lado), transparent 74%);
+    opacity: .55;
+  }
+  .fundo .selo {
+    position: absolute;
+    right: -3%; top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--fonte-display);
+    font-weight: 700;
+    font-size: clamp(14rem, 32vw, 32rem);
+    line-height: 1;
+    color: #fff;
+    opacity: .03;
+    user-select: none;
+  }
+
+  .grade {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 70px);
+    align-items: center;
+  }
+
+  .retrato { position: relative; max-width: 460px; }
+  .retrato :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    background: var(--vazio);
+    mix-blend-mode: screen;
+    clip-path: polygon(22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%, 0 22px);
+  }
+  .retrato .cantos {
+    position: absolute; inset: -12px;
+    pointer-events: none;
+    background:
+      linear-gradient(var(--lado), var(--lado)) 0 0 / 1px 46px no-repeat,
+      linear-gradient(var(--lado), var(--lado)) 0 0 / 46px 1px no-repeat,
+      linear-gradient(var(--lado), var(--lado)) 100% 100% / 1px 46px no-repeat,
+      linear-gradient(var(--lado), var(--lado)) 100% 100% / 46px 1px no-repeat;
+  }
+
+  h1 { font-size: clamp(2.6rem, 6.4vw, 4.8rem); margin: 18px 0 14px; }
+
+  .epiteto {
+    font-family: var(--fonte-ui);
+    font-weight: 600;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--osso);
+    margin-bottom: 22px;
+  }
+
+  .faccao {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 26px;
+    padding: 8px 16px;
+    border: 1px solid var(--linha-forte);
+    font-family: var(--fonte-ui);
+    font-weight: 600;
+    font-size: .8rem;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--lado);
+  }
+  .faccao .ponto { width: 8px; height: 8px; background: var(--lado); }
+
+  .credito {
+    margin: 0;
+    font-family: var(--fonte-ui);
+    font-size: .8rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--poeira);
+  }
+
+  .colunas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: clamp(30px, 5vw, 70px);
+    align-items: start;
+  }
+  .bloco h2 { font-size: clamp(1.5rem, 2.6vw, 2.2rem); }
+
+  /* ---------- estudos ---------- */
+  .galeria-bloco { border-top: 1px solid var(--linha); }
+  .galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(16px, 2.4vw, 30px);
+    align-items: start;
+  }
+  .galeria--unica { grid-template-columns: minmax(0, 780px); }
+  /* traço solto: sem moldura nenhuma, o preto some e a arte flutua na página */
+  .galeria figure {
+    margin: 0;
+    overflow: hidden;
+  }
+  .galeria :global(img) {
+    width: 100%;
+    mix-blend-mode: screen;
+    transition: transform .6s cubic-bezier(.16,.84,.28,1);
+  }
+
+  /* painel de mangá: a borda é inerente à arte, então vira moldura assumida */
+  .galeria figure.painel {
+    background: var(--vazio);
+    border: 1px solid var(--linha-forte);
+    padding: 10px;
+    clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+  }
+  .galeria figure.painel :global(img) { mix-blend-mode: normal; }
+
+  .galeria figure:hover :global(img) { transform: scale(1.03); }
+  .credito-galeria {
+    margin: 22px 0 0;
+    font-family: var(--fonte-ui);
+    font-size: .78rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--poeira);
+  }
+
+  .passo {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    border-top: 1px solid var(--linha);
+  }
+  .passo a {
+    display: grid;
+    gap: 6px;
+    padding: 28px var(--gutter);
+    text-decoration: none;
+    transition: background .25s ease;
+  }
+  .passo a:hover { background: var(--tinta-2); }
+  .passo .dir {
+    font-family: var(--fonte-ui);
+    font-weight: 600;
+    font-size: .72rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--poeira);
+  }
+  .passo .nome {
+    font-family: var(--fonte-display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--osso);
+  }
+  .passo .proximo { text-align: right; }
+  .passo .todos {
+    display: grid;
+    place-items: center;
+    border-inline: 1px solid var(--linha);
+    font-family: var(--fonte-ui);
+    font-weight: 600;
+    font-size: .78rem;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--cinza);
+  }
+
+  @media (max-width: 880px) {
+    .grade { grid-template-columns: 1fr; }
+    .retrato { max-width: 420px; }
+  }
+  @media (max-width: 560px) {
+    .passo { grid-template-columns: 1fr 1fr; }
+    .passo .todos { grid-column: 1 / -1; border-inline: 0; border-top: 1px solid var(--linha); padding-block: 20px; }
+  }
+</style>

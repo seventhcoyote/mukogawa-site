@@ -1,0 +1,361 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import fontes from "../assets/historia/fontes-profanas.jpg";
+import guerra from "../assets/historia/guerra-pela-humanidade.jpg";
+import helelRosto from "../assets/historia/helel-rosto.png";
+
+const series = [
+  {
+    num: "01",
+    nome: "Saga",
+    selo: "Cinco temporadas // Cinco livros // Arco principal do mangá",
+    texto:
+      "Saga é o relato da redenção contada pelo outro lado: uma guerra brutal travada com espada e mente, onde legiões descem sobre seus inimigos, e generais empunham não apenas poder, mas estratégia. Dividida em cinco temporadas, Saga desvela o conflito eterno entre a Hoste e o Rebelde, enquanto o destino da humanidade pende por um fio.",
+  },
+  {
+    num: "02",
+    nome: "Protogenesis",
+    selo: "Prequela // Longa-metragem e livro",
+    texto:
+      "Protogenesis é a origem. Assim como O Silmarillion é para O Senhor dos Anéis, Protogenesis serve como o prelúdio de Saga: uma recontagem mítica dos eventos que antecederam a guerra. Planejado como um longa-metragem, Protogenesis será lançado entre a Segunda e a Terceira Temporada, oferecendo profundidade, contexto e o peso da história antiga.",
+  },
+  {
+    num: "03",
+    nome: "Desvelar",
+    selo: "Epílogo // Longa-metragem e livro",
+    texto:
+      "Desvelar é a luz final. Após o desfecho arrebatador da Quinta Temporada, muitos se perguntarão o que foi feito de seus personagens favoritos. Desvelar é o filme pós-série, criado para trazer resolução, mistério e encerramento: o último ato da jornada de Mukō-Gawa.",
+  },
+];
+
+const influencias = [
+  { obra: "Castlevania", autor: "Warren Ellis" },
+  { obra: "Jujutsu Kaisen", autor: "Gege Akutami" },
+  { obra: "Elden Ring", autor: "Hidetaka Miyazaki" },
+];
+---
+
+<Base
+  titulo="História"
+  descricao="Antes da história, uma civilização entrou em guerra pela forma do mundo. As três séries, as Fontes Profanas e a Guerra pela Humanidade em Mukō-Gawa."
+>
+  <section class="secao abertura">
+    <span class="selo-fundo" aria-hidden="true">戦</span>
+    <div class="envelope">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo">A história</p></div>
+        <h1>Antes da história, uma civilização entrou em guerra pela forma do mundo.</h1>
+      </div>
+
+      <div class="corpo lead-corpo">
+        <p>
+          Como as sagas nórdicas e as epopeias gregas, Mukō-Gawa é uma imersão
+          profunda na mitologia cristã. A narrativa conta a Criação e a Redenção,
+          enquanto uma guerra celestial culmina em paz eterna.
+        </p>
+        <p>
+          Mukō-Gawa acompanha uma guerra civil entre um povo proto-humano que
+          disputa um plano interdimensional — a dobra entre o que é e o que foi
+          prometido. Duas ordens nascem de uma mesma linhagem: a que quer manter
+          o plano fechado e a que quer rompê-lo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="secao">
+    <div class="envelope">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo">A obra</p></div>
+        <h2>Três séries</h2>
+      </div>
+
+      <ol class="series">
+        {series.map((s) => (
+          <li>
+            <span class="num" aria-hidden="true">{s.num}</span>
+            <div class="conteudo">
+              <h3>{s.nome}</h3>
+              <p class="rotulo">{s.selo}</p>
+              <p class="texto">{s.texto}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <hr class="regua" />
+
+  <section class="secao">
+    <div class="envelope duplo">
+      <div class="arte">
+        <Image src={fontes} alt="As Fontes Profanas" widths={[520, 900]} sizes="(max-width: 900px) 92vw, 46vw" loading="lazy" />
+        <span class="cantos" aria-hidden="true"></span>
+      </div>
+      <div>
+        <div class="cabecalho-secao">
+          <div class="topo"><p class="rotulo">O preço</p></div>
+          <h2>As Fontes Profanas</h2>
+        </div>
+        <div class="corpo">
+          <p>Após a Rebelião, os Profanadores descobriram que as Águas Vivas dos Altos Céus já não os acolhiam. O que antes curava, agora queimava. Em desafio, roubaram as águas sagradas e as levaram para o Abismo. Ali, sob o olhar do Rei Serpente, a graça roubada foi distorcida por alquimia proibida, dando origem ao Poço Profanado.</p>
+          <p>O Poço oferece restauração, mas por um preço. Cada mergulho corrói o espírito. As formas se retorcem, a essência apodrece, e alguns são maculados além do reconhecimento, transformando-se em Flageladores: criaturas de tormento, libertas sobre a humanidade para semear confusão e temor.</p>
+          <p>Ainda que o Poço conceda poder sombrio, há reverência entre os caídos por aqueles que mantêm sua forma original. Permanecer incorrupto é raro, e fala de uma força terrível. Pois no Abismo, a corrupção é poder, mas a resistência é glória.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="regua" />
+
+  <section class="secao">
+    <div class="envelope duplo duplo--invertido">
+      <div>
+        <div class="cabecalho-secao">
+          <div class="topo"><p class="rotulo">A ruptura</p></div>
+          <h2>A Guerra pela Humanidade</h2>
+        </div>
+        <div class="corpo">
+          <p>Durante a Era das Estrelas, o Conselho Celestial foi convocado, e o Altíssimo revelou Seu desígnio: trazer à existência um novo mundo, um planeta habitável, onde uma nova espécie se ergueria. Chamá-los-ia humanos. Diferente dos Eternos, não nasceriam em legiões, mas se multiplicariam sobre a terra, moldados do pó, ainda assim carregando a imagem dAquele que os formou. Com o tempo, seriam recebidos na comunhão dos Céus.</p>
+          <p>Mas então veio o grande mistério, aquele que fez o firmamento estremecer e colocou a eternidade em suspense: os Eternos serviriam à humanidade nesta era, e na vindoura, a humanidade julgaria sobre eles. Foi nesse instante que o coração de Helel se tornou pedra.</p>
+          <p>Helel rejeitou o decreto. O que começou como orgulho tornou-se rebelião aberta, e em seu íntimo, cobiçou o próprio Trono. Sem mais disfarces, sua insurgência ergueu-se contra o Altíssimo, e a Guerra Civil irrompeu entre os Eternos. Aos olhos de Helel, a subjugação da humanidade não é apenas estratégia, é autopreservação. Em segredo, ele constrói um paraíso: uma utopia sem Deus, onde o eu é entronizado e o Arquiteto, esquecido.</p>
+          <p>E ainda que os mortais permaneçam, em sua maioria, ignorantes à Guerra Eterna, ela é tão real quanto o ar que respiram. Ela os cerca, move reinos, agita corações, muda o curso da história.</p>
+        </div>
+      </div>
+      <div class="arte">
+        <Image src={guerra} alt="A Guerra pela Humanidade" widths={[520, 900]} sizes="(max-width: 900px) 92vw, 46vw" loading="lazy" />
+        <span class="cantos" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="citacao">
+    <span class="selo-citacao" aria-hidden="true">王</span>
+    <span class="halftone" aria-hidden="true"></span>
+    <figure class="rosto-fundo" aria-hidden="true">
+      <Image src={helelRosto} alt="" widths={[460, 900]} sizes="(max-width: 900px) 76vw, 620px" loading="lazy" />
+    </figure>
+
+    <div class="envelope fala">
+      <blockquote>
+        <p>Servir a essas criaturas menores? Ser julgado por elas? Absurdo.</p>
+        <cite>Helel, Rei dos Rebeldes</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="secao">
+    <div class="envelope duplo duplo--texto">
+      <div>
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo">A base</p></div>
+        <h2>Mitologia cristã</h2>
+      </div>
+      <div class="corpo">
+        <p>Mukō-Gawa é uma obra enraizada na mitologia cristã. Embora permaneça fiel à narrativa bíblica, inspira-se na disciplina do sinergismo bíblico: uma abordagem que honra as Escrituras enquanto dialoga com a história, a tradição e a imaginação, para edificar um mundo que se encaixa nas linhas e entrelinhas daquilo que a Bíblia revela. Ainda que o autor tenha a precisão bíblica em alta estima, Mukō-Gawa é, em essência, uma obra de ficção. Os eventos das Escrituras permanecem intocados, mas o que acontece entre os versículos é moldado pela fantasia. Anjos guerreiam por trás do véu. Poderes se movem no invisível. Escolhas reverberam entre os reinos.</p>
+        <p>É necessário também dizer: há muitas escolas de interpretação bíblica, e escolher um caminho é, inevitavelmente, deixar outros. Mukō-Gawa não busca agradar toda escola de interpretação; busca, antes, contar a maior de todas as histórias: a História da Redenção.</p>
+      </div>
+      </div>
+
+      <div class="coluna-lado">
+
+        <div class="cabecalho-secao">
+          <div class="topo"><p class="rotulo">De onde vem</p></div>
+          <h2>Influências</h2>
+          <p class="lead">Esta obra bebe fortemente de</p>
+        </div>
+
+        <ul class="influencias">
+          {influencias.map((f) => (
+            <li>
+              <span class="obra">{f.obra}</span>
+              <span class="autor">{f.autor}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="secao secao--curta aviso-bloco">
+    <div class="envelope">
+      <p class="rotulo">Aviso</p>
+      <p class="aviso">
+        Mukō-Gawa é uma suposição de fantasia sombria — uma releitura de temas
+        bíblicos tecida em um mundo mítico de guerra invisível e consequência
+        eterna. Contém conteúdo adulto, incluindo violência intensa, elementos
+        temáticos sombrios e narrativa emocionalmente intensa. Recomendado para
+        público adulto.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .abertura { position: relative; overflow: hidden; }
+  .abertura h1 { font-size: clamp(2rem, 5vw, 4rem); max-width: 20ch; }
+  .selo-fundo {
+    position: absolute;
+    right: -2%; top: -10%;
+    font-family: var(--fonte-display);
+    font-weight: 700;
+    font-size: clamp(16rem, 34vw, 34rem);
+    line-height: 1;
+    color: #fff;
+    opacity: .025;
+    pointer-events: none;
+    user-select: none;
+  }
+  .lead-corpo { font-size: clamp(1.02rem, 1.4vw, 1.2rem); color: var(--cinza); }
+
+  .series { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--linha); border: 1px solid var(--linha); }
+  .series li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(20px, 3vw, 46px);
+    padding: clamp(26px, 3.4vw, 46px);
+    background: var(--tinta);
+  }
+  .series .num {
+    font-family: var(--fonte-display);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1;
+    color: #63636f;   /* 3,1:1 no fundo novo: numeral discreto, mas legível */
+  }
+  .series h3 { margin-bottom: 10px; }
+  .series .rotulo { margin-bottom: 16px; color: var(--sangue-vivo); }
+  .series .texto { color: var(--cinza); max-width: 70ch; margin: 0; }
+
+  .duplo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 70px);
+    align-items: start;
+  }
+  .arte { position: relative; }
+  .arte :global(img) {
+    width: 100%;
+    filter: grayscale(1) contrast(1.06);
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+  }
+  /* arte de traço branco: fundo some e a figura flutua */
+  .arte--traco :global(img) {
+    mix-blend-mode: screen;
+    filter: none;
+    clip-path: none;
+  }
+  .arte--traco .cantos { inset: -14px; }
+  .arte .cantos {
+    position: absolute; inset: -10px;
+    pointer-events: none;
+    background:
+      linear-gradient(var(--sangue), var(--sangue)) 0 0 / 1px 40px no-repeat,
+      linear-gradient(var(--sangue), var(--sangue)) 0 0 / 40px 1px no-repeat,
+      linear-gradient(var(--sangue), var(--sangue)) 100% 100% / 1px 40px no-repeat,
+      linear-gradient(var(--sangue), var(--sangue)) 100% 100% / 40px 1px no-repeat;
+  }
+
+  .citacao {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    align-items: center;
+    min-height: clamp(360px, 42vw, 520px);
+    padding-block: clamp(56px, 9vw, 120px);
+    background: var(--tinta-2);
+    border-block: 1px solid var(--linha);
+  }
+  /* O rosto do Helel é FUNDO: entra por trás do texto, com as bordas já
+     dissolvidas no próprio PNG, então não existe aresta nem sensação de
+     imagem colada. */
+  /* dimensionado pela ALTURA da seção: o rosto entra inteiro, sem ser
+     decepado pelo overflow. */
+  .rosto-fundo {
+    position: absolute;
+    right: -2%;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 128%;
+    margin: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .rosto-fundo :global(img) {
+    width: auto;
+    height: 100%;
+    max-width: none;
+    mix-blend-mode: screen;
+    opacity: .68;
+  }
+  .fala { position: relative; }
+
+  @media (max-width: 900px) {
+    .rosto-fundo { height: 86%; right: -12%; }
+    .rosto-fundo :global(img) { opacity: .38; }
+  }
+
+  /* O vermelho fica do lado do TEXTO. Atrás da arte o fundo é chapado, senão
+     o gradiente cria a ilusão de um retângulo em volta da figura. */
+  .citacao { background:
+      radial-gradient(ellipse 46% 120% at 8% 50%, color-mix(in srgb, var(--sangue) 34%, transparent), transparent 70%),
+      var(--tinta-2); }
+  .citacao .halftone { color: var(--sangue); opacity: .1; }
+  .selo-citacao {
+    position: absolute;
+    z-index: 0;
+    left: 30%; top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--fonte-display);
+    font-weight: 700;
+    font-size: clamp(13rem, 30vw, 30rem);
+    line-height: 1;
+    color: #fff;
+    opacity: .05;
+    pointer-events: none;
+    user-select: none;
+  }
+  /* Sem z-index aqui: ele criava contexto de empilhamento e o mix-blend-mode
+     da arte deixava de compor com o fundo da seção. */
+  .citacao .envelope { position: relative; }
+  /* Medida em px, não em ch: o `ch` resolveria na fonte do blockquote
+     (Barlow 17px) e não na Cinzel gigante do parágrafo, espremendo a frase. */
+  blockquote { margin: 0; }
+  blockquote p {
+    font-family: var(--fonte-display);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3.6vw, 2.9rem);
+    line-height: 1.16;
+    text-wrap: balance;
+    color: var(--osso);
+    margin-bottom: 22px;
+  }
+  cite {
+    font-family: var(--fonte-ui);
+    font-style: normal;
+    font-weight: 600;
+    font-size: .84rem;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--sangue-vivo);
+  }
+
+  .duplo--texto { align-items: start; }
+  .influencias { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--linha); border: 1px solid var(--linha); }
+  .influencias li { display: grid; gap: 6px; padding: 22px 24px; background: var(--tinta); }
+  .influencias .obra { font-family: var(--fonte-display); font-weight: 700; font-size: 1.4rem; color: var(--osso); }
+  .influencias .autor { font-family: var(--fonte-ui); font-size: .84rem; letter-spacing: .2em; text-transform: uppercase; color: var(--poeira); }
+
+  .aviso-bloco { border-top: 1px solid var(--linha); }
+  .aviso { max-width: 74ch; color: var(--poeira); margin-top: 14px; }
+
+  @media (max-width: 900px) {
+    .duplo { grid-template-columns: 1fr; }
+    .duplo--invertido .arte { order: -1; }
+    .series li { grid-template-columns: 1fr; gap: 10px; }
+  }
+</style>

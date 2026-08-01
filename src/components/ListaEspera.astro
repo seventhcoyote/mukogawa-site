@@ -1,0 +1,221 @@
+---
+// A loja ainda não existe: enquanto isso, o site converte para lista de espera.
+// O endpoint é plugável (Formspree, Buttondown, Beehiiv, função na Vercel).
+// Sem PUBLIC_WAITLIST_ENDPOINT o formulário se declara inativo em vez de
+// fingir que gravou o e-mail.
+const endpoint = import.meta.env.PUBLIC_WAITLIST_ENDPOINT ?? "";
+---
+
+<section class="espera secao" id="lista-de-espera">
+  <span class="halftone" aria-hidden="true"></span>
+  <span class="selo" aria-hidden="true">壱</span>
+
+  <div class="envelope interno">
+    <p class="rotulo rotulo--lado" data-lado="rebeldes">Volume 01 // Dezembro de 2026</p>
+
+    <h2>O primeiro volume do mangá chega em dezembro de 2026.</h2>
+
+    <p class="apoio">
+      Deixe seu e-mail e você é avisado quando as vendas abrirem na sua região.
+      Sem outros envios.
+    </p>
+
+    <form class="formulario" data-endpoint={endpoint} novalidate>
+      <div class="campos">
+        <div class="campo">
+          <label class="so-leitor" for="email-espera">Seu e-mail</label>
+          <input
+            id="email-espera"
+            name="email"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            placeholder="Seu e-mail"
+            required
+          />
+        </div>
+
+        <div class="campo campo--regiao">
+          <label class="so-leitor" for="regiao-espera">Sua região</label>
+          <select id="regiao-espera" name="regiao">
+            <option value="BR">Brasil</option>
+            <option value="US">Estados Unidos</option>
+            <option value="JP">Japão</option>
+            <option value="OUTRO">Outra</option>
+          </select>
+        </div>
+
+        <button class="botao" type="submit">Quero ser avisado</button>
+      </div>
+
+      <!-- armadilha simples contra robô -->
+      <div class="ninho" aria-hidden="true">
+        <label for="empresa-espera">Não preencha</label>
+        <input id="empresa-espera" name="empresa" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <p class="recado" role="status" aria-live="polite"></p>
+    </form>
+
+    <p class="rodape-nota">
+      Edições, preços e frete são responsabilidade do varejista de cada região.
+      As datas seguem o calendário atual da editora e podem mudar.
+    </p>
+  </div>
+</section>
+
+<style>
+  .espera {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 70% 120% at 12% 100%, color-mix(in srgb, var(--sangue) 26%, transparent), transparent 62%),
+      var(--tinta-2);
+    border-block: 1px solid var(--linha);
+  }
+  .espera .halftone { color: var(--sangue); opacity: .1; }
+
+  .selo {
+    position: absolute;
+    right: -2%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--fonte-display);
+    font-weight: 700;
+    font-size: clamp(12rem, 26vw, 26rem);
+    line-height: 1;
+    color: #fff;
+    opacity: .022;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .interno { position: relative; z-index: 1; max-width: 780px; }
+
+  h2 { margin: 20px 0 18px; }
+  .apoio { color: var(--cinza); max-width: 52ch; margin-bottom: 30px; }
+
+  .campos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .campo { flex: 1 1 240px; min-width: 0; }
+  .campo--regiao { flex: 0 1 190px; }
+
+  input[type="email"],
+  select {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 16px;
+    background: var(--vazio);
+    border: 1px solid var(--linha-forte);
+    color: var(--osso);
+    font-family: var(--fonte-ui);
+    font-size: 1rem;
+    letter-spacing: .04em;
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  }
+  input::placeholder { color: var(--poeira); }
+  input:focus-visible, select:focus-visible { border-color: var(--sangue-vivo); }
+  input[aria-invalid="true"] { border-color: var(--sangue-vivo); }
+
+  select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--poeira) 50%),
+                      linear-gradient(135deg, var(--poeira) 50%, transparent 50%);
+    background-position: calc(100% - 20px) 24px, calc(100% - 14px) 24px;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+  }
+
+  .campos .botao { flex: 0 0 auto; }
+
+  .ninho {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .recado {
+    margin: 16px 0 0;
+    min-height: 1.5em;
+    font-family: var(--fonte-ui);
+    font-size: .92rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--poeira);
+  }
+  .recado[data-tom="erro"] { color: var(--sangue-vivo); }
+  .recado[data-tom="ok"] { color: var(--aco); }
+
+  .rodape-nota {
+    margin: 34px 0 0;
+    font-size: .9rem;
+    color: var(--poeira);
+    max-width: 56ch;
+  }
+
+  @media (max-width: 620px) {
+    .campo, .campo--regiao { flex: 1 1 100%; }
+    .campos .botao { width: 100%; }
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>(".espera .formulario");
+  if (form) {
+    const recado = form.querySelector<HTMLParagraphElement>(".recado")!;
+    const email = form.querySelector<HTMLInputElement>('input[type="email"]')!;
+    const botao = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const armadilha = form.querySelector<HTMLInputElement>('input[name="empresa"]')!;
+    const endpoint = form.dataset.endpoint ?? "";
+
+    const dizer = (texto: string, tom: "ok" | "erro" | "") => {
+      recado.textContent = texto;
+      if (tom) recado.dataset.tom = tom;
+      else delete recado.dataset.tom;
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (armadilha.value) return;
+
+      const valor = email.value.trim();
+      if (!valor || !email.checkValidity()) {
+        email.setAttribute("aria-invalid", "true");
+        dizer("Confira o e-mail digitado.", "erro");
+        email.focus();
+        return;
+      }
+      email.removeAttribute("aria-invalid");
+
+      if (!endpoint) {
+        dizer("Cadastro ainda não conectado. Falta ligar o provedor de e-mail.", "erro");
+        return;
+      }
+
+      botao.disabled = true;
+      dizer("Enviando...", "");
+
+      try {
+        const resposta = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            email: valor,
+            regiao: (form.querySelector<HTMLSelectElement>("select")!).value,
+          }),
+        });
+        if (!resposta.ok) throw new Error(String(resposta.status));
+        form.querySelector<HTMLDivElement>(".campos")!.hidden = true;
+        dizer("Pronto. Você será avisado.", "ok");
+      } catch {
+        botao.disabled = false;
+        dizer("Não deu para enviar agora. Tente de novo em instantes.", "erro");
+      }
+    });
+  }
+</script>
