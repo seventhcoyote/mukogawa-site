@@ -1,0 +1,71 @@
+---
+/**
+ * Política de privacidade.
+ *
+ * Existe porque o site coleta e-mail de pessoas no Brasil e a LGPD exige.
+ * O texto vive em i18n/conteudo/privacidade.ts e descreve o que o site
+ * realmente faz — se entrar analítica, cookie ou qualquer coleta nova, o texto
+ * muda antes de a coisa ir ao ar.
+ */
+import Base from "../layouts/Base.astro";
+import { PRIVACIDADE } from "../i18n/conteudo/privacidade";
+import type { Idioma } from "../i18n/idiomas";
+
+interface Props { idioma: Idioma }
+const { idioma } = Astro.props;
+const c = PRIVACIDADE[idioma];
+---
+
+<Base titulo={c.titulo} descricao={c.descricao}>
+  <section class="secao secao--curta">
+    <div class="envelope estreito">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo">{c.rotulo}</p></div>
+        <h1>{c.titulo}</h1>
+        <p class="lead">{c.lead}</p>
+      </div>
+      <p class="data">{c.atualizado}</p>
+
+      {c.secoes.map((s, i) => (
+        <section class="bloco">
+          <h2><span class="num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>{s.titulo}</h2>
+          {s.paragrafos.map((p) => (<p>{p}</p>))}
+          {s.lista && (<ul>{s.lista.map((l) => (<li>{l}</li>))}</ul>)}
+        </section>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .estreito { max-width: 74ch; }
+
+  .data {
+    margin: 0 0 clamp(36px, 5vw, 56px);
+    font-family: var(--fonte-ui);
+    font-size: .78rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--poeira);
+  }
+
+  .bloco + .bloco { margin-top: clamp(30px, 4vw, 44px); }
+  .bloco h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin: 0 0 14px;
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+  }
+  .bloco .num {
+    font-family: var(--fonte-ui);
+    font-weight: 600;
+    font-size: .72rem;
+    letter-spacing: .24em;
+    color: var(--sangue-vivo);
+  }
+  .bloco p { margin: 0 0 12px; color: var(--cinza); }
+  .bloco p:last-child { margin-bottom: 0; }
+  .bloco ul { margin: 4px 0 0; padding-left: 18px; color: var(--cinza); }
+  .bloco li + li { margin-top: 7px; }
+</style>

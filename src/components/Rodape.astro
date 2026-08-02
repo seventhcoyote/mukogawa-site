@@ -93,7 +93,12 @@ const secoes = [
         <p class="titulo">{t("rodape.contato")}</p>
         <ul>
           <li><a href={`mailto:${EMAILS.contato}`}>{EMAILS.contato}</a></li>
-          <li><a href={`mailto:${EMAILS.imprensa}`}>{t("rodape.imprensa")}</a></li>
+          {/* Imprensa leva à sala de imprensa, não a um mailto: quem escreve
+              sobre a obra precisa primeiro do material, e só depois do e-mail —
+              que está lá dentro. É o único caminho para essa página, por decisão
+              do Bruno: não é público de cabeçalho. */}
+          <li><a href={caminho("imprensa", idioma)}>{t("rodape.imprensa")}</a></li>
+          <li><a href={caminho("privacidade", idioma)}>{t("rodape.privacidade")}</a></li>
         </ul>
       </div>
     </div>

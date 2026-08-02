@@ -40,6 +40,8 @@ export const ROTAS = {
   criadores: { pt: "/criadores", en: "/en/creators", es: "/es/creadores", ja: "/ja/creators" },
   loja: { pt: "/loja", en: "/en/shop", es: "/es/tienda", ja: "/ja/shop" },
   faq: { pt: "/faq", en: "/en/faq", es: "/es/faq", ja: "/ja/faq" },
+  imprensa: { pt: "/imprensa", en: "/en/press", es: "/es/prensa", ja: "/ja/press" },
+  privacidade: { pt: "/privacidade", en: "/en/privacy", es: "/es/privacidad", ja: "/ja/privacy" },
 } as const;
 
 export type ChaveRota = keyof typeof ROTAS;
