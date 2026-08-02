@@ -61,7 +61,7 @@ const galeria = (ESTUDOS[p.slug] ?? []).map((n) => {
     // painel de mangá: fundo claro, sem blend, o pipeline do Astro serve bem
     ? { nome: n, painel, arte: galeriaArquivos[`../assets/estudos/${n}.jpg`]?.default, png: null }
     // traço solto: PNG sem perda, servido cru
-    : { nome: n, painel, arte: null, png: `/estudos/${n}.png` };
+    : { nome: n, painel, arte: null, png: `/estudos/${n}.webp` };
 }).filter((g) => g.arte || g.png);
 
 const i = personagens.findIndex((x) => x.slug === p.slug);
