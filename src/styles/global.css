@@ -296,8 +296,6 @@ p:last-child { margin-bottom: 0; }
 .pular-para-conteudo:focus { top: 12px; }
 
 /* Blocos largos nunca empurram a página na horizontal */
-.rolagem-x { overflow-x: auto; }
-
 /* ============================================================
    MOVIMENTO E TEXTURA DE MANGÁ
    Adicionado em 2026-08-01. Duas regras valem para tudo aqui:
@@ -409,8 +407,6 @@ p:last-child { margin-bottom: 0; }
   background: var(--lado, var(--aco));
   opacity: .55;
 }
-.losango--sangue { --lado: var(--sangue-vivo); }
-
 /* ---------- botão de topo ----------
    Ancorado no fim da página, não flutuante. É como a referência faz, e tem uma
    vantagem prática: não depende de JS, de IntersectionObserver nem de listener
