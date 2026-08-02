@@ -30,13 +30,13 @@ export default defineConfig({
     responsiveStyles: true,
   },
 
-  // O sitemap declara os pares de idioma para o Google, no mesmo par que o
-  // hreflang do Base.astro já anuncia. Só entram PT e EN: ES e JA estão
-  // escritos mas desligados em src/i18n/idiomas.ts, e suas rotas nem são
-  // geradas — anunciá-las seria apontar para páginas que não existem.
+  // O sitemap declara os idiomas para o Google, os mesmos que o hreflang do
+  // Base.astro anuncia. Espanhol fica de fora porque continua desligado em
+  // src/i18n/idiomas.ts e suas rotas não são geradas — anunciá-lo seria apontar
+  // para páginas que não existem. Ao ligar o ES, acrescentar aqui também.
   integrations: [
     sitemap({
-      i18n: { defaultLocale: "pt", locales: { pt: "pt-BR", en: "en" } },
+      i18n: { defaultLocale: "pt", locales: { pt: "pt-BR", en: "en", ja: "ja" } },
     }),
   ],
 });
