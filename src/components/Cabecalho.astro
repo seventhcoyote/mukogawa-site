@@ -69,21 +69,25 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
       </ul>
 
       {idiomasLink.length > 0 && (
-      <ul class="idiomas" aria-label={t("cta.idioma")}>
-        {idiomasLink.map((i) => (
-          <li>
-            <a
-              href={i.href}
-              hreflang={i.htmlLang}
-              lang={i.htmlLang}
-              aria-current={i.atual ? "true" : undefined}
-            >
-              <span class="so-leitor">{i.rotulo}</span>
-              <span aria-hidden="true">{i.curto}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <details class="idiomas">
+        <summary>
+          <span class="so-leitor">{t("cta.idioma")}</span>
+          <span class="atual" aria-hidden="true">{IDIOMAS[idioma].curto}</span>
+          <span class="seta" aria-hidden="true"></span>
+        </summary>
+        <ul>
+          {idiomasLink.map((i) => (
+            <li>
+              <a
+                href={i.href}
+                hreflang={i.htmlLang}
+                lang={i.htmlLang}
+                aria-current={i.atual ? "true" : undefined}
+              >{i.rotulo}</a>
+            </li>
+          ))}
+        </ul>
+      </details>
       )}
 
       <a class="cta" href={espera}>{t("cta.aviseMe")}</a>
@@ -142,7 +146,7 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
     align-items: center;
     gap: clamp(18px, 2.4vw, 40px);
   }
-  .menu ul {
+  .menu > ul {
     display: flex;
     align-items: center;
     gap: clamp(14px, 2vw, 32px);
@@ -176,24 +180,88 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
 
   /* Seletor de idioma: três siglas, separadas por filete, mais discretas que
      os itens de navegação. Não é destino, é ajuste — então não compete. */
+  /* Os três códigos lado a lado custavam 129px fixos do cabeçalho. Medido: a
+     1100px a barra já estourava em 134px, e cada idioma novo piora. Agora é um
+     menu que mostra só o idioma corrente e abre os outros.
+
+     `<details>` de novo, e não um `<select>`: os itens continuam sendo <a> de
+     verdade, então funcionam sem JavaScript, o hreflang segue apontando para
+     páginas reais e o robô de busca continua enxergando os três caminhos. Um
+     select precisaria de script para navegar e não deixaria link nenhum. */
   .menu .idiomas {
-    gap: 0;
+    position: relative;
     border-inline: 1px solid var(--linha-forte);
   }
-  .menu .idiomas li + li { border-left: 1px solid var(--linha-forte); }
-  .menu .idiomas a {
-    padding: 0 11px;
+  .menu .idiomas summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 44px;
+    padding: 0 13px;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--fonte-ui);
+    font-weight: 600;
     font-size: .78rem;
     letter-spacing: .14em;
     color: var(--poeira);
+    transition: color .2s ease;
   }
-  .menu .idiomas a:hover { color: var(--osso); }
-  .menu .idiomas a[aria-current="true"] { color: var(--osso); }
-  .menu .idiomas a[aria-current="true"]::after {
+  .menu .idiomas summary::-webkit-details-marker { display: none; }
+  .menu .idiomas summary:hover,
+  .menu .idiomas[open] summary { color: var(--osso); }
+  .menu .idiomas summary:focus-visible {
+    outline: 2px solid var(--sangue-vivo);
+    outline-offset: -2px;
+  }
+  .menu .idiomas .atual { position: relative; }
+  .menu .idiomas .atual::after {
     content: "";
     position: absolute;
-    left: 11px; right: 11px; bottom: 10px;
+    left: 0; right: 0; bottom: -7px;
     height: 2px;
+    background: var(--sangue);
+  }
+  .menu .idiomas .seta {
+    width: 7px; height: 7px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform .25s ease;
+  }
+  .menu .idiomas[open] .seta { transform: translateY(1px) rotate(-135deg); }
+
+  .menu .idiomas ul {
+    position: absolute;
+    top: calc(100% + 1px);
+    right: -1px;
+    z-index: 10;
+    min-width: 148px;
+    margin: 0;
+    padding: 6px 0;
+    list-style: none;
+    background: var(--tinta);
+    border: 1px solid var(--linha-forte);
+  }
+  .menu .idiomas ul a {
+    display: flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 0 16px;
+    font-family: var(--fonte-ui);
+    font-size: .8rem;
+    letter-spacing: .1em;
+    text-transform: none;
+    color: var(--poeira);
+    white-space: nowrap;
+  }
+  .menu .idiomas ul a:hover { color: var(--osso); background: var(--tinta-2); }
+  .menu .idiomas ul a[aria-current="true"] { color: var(--osso); }
+  .menu .idiomas ul a[aria-current="true"]::before {
+    content: "";
+    width: 5px; height: 5px;
+    margin-right: 9px;
+    margin-left: -14px;
     background: var(--sangue);
   }
 
@@ -269,7 +337,7 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
       visibility: visible;
       transform: translateY(0);
     }
-    .menu ul { flex-direction: column; align-items: stretch; gap: 0; }
+    .menu > ul { flex-direction: column; align-items: stretch; gap: 0; }
     .menu li { border-bottom: 1px solid var(--linha); }
     .menu a {
       min-height: 58px;
@@ -332,5 +400,22 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
     // Se a janela cresce além do breakpoint, o menu volta ao estado de desktop.
     const mq = window.matchMedia("(min-width: 921px)");
     mq.addEventListener("change", (e) => { if (e.matches) definir(false); });
+  }
+
+  // O menu de idiomas é um <details>, então abre e fecha sozinho e funciona sem
+  // isto aqui. O que falta ao elemento nativo é fechar quando se clica fora ou
+  // se aperta Esc — sem isso ele fica aberto para trás enquanto a pessoa navega
+  // a página. É só esse acabamento.
+  const idiomas = document.querySelector<HTMLDetailsElement>(".idiomas");
+  if (idiomas) {
+    document.addEventListener("click", (e) => {
+      if (idiomas.open && !idiomas.contains(e.target as Node)) idiomas.open = false;
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && idiomas.open) {
+        idiomas.open = false;
+        idiomas.querySelector("summary")?.focus();
+      }
+    });
   }
 </script>
