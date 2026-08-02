@@ -124,15 +124,19 @@ const hrefPersonagens = rota("personagens", idioma);
         <p class="lead">{c.classesLead}</p>
       </div>
 
-      <ol class="lista-classes">
+      <div class="lista-classes">
         {CLASSES.map((c) => (
-          <li>
-            <span class="kanji" aria-hidden="true">{c.kanji}</span>
-            <span class="num">{c.num}</span>
-            <span class="nome">{c.nome}</span>
-          </li>
+          <details name="classe">
+            <summary>
+              <span class="kanji" aria-hidden="true">{c.kanji}</span>
+              <span class="num">{c.num}</span>
+              <span class="nome">{c.nome}</span>
+              <span class="sinal" aria-hidden="true"></span>
+            </summary>
+            <div class="descricao"><p>{c.descricao}</p></div>
+          </details>
         ))}
-      </ol>
+      </div>
     </div>
   </section>
 
@@ -261,40 +265,72 @@ const hrefPersonagens = rota("personagens", idioma);
 
   /* ---------- classes ---------- */
   /* 3x3 fixo: nove itens sempre fecham a grade, nenhum bloco fica maior. */
+  /* ---------- as nove classes ----------
+     Eram nove células de grade que só diziam o nome. A descrição de cada classe
+     já existia, mas só aparecia dentro da página de um personagem, em "A ordem"
+     — informação enterrada atrás de dois cliques e de saber que ela estava lá.
+
+     Agora cada classe abre. É `<details name="classe">`: acordeão nativo, um
+     aberto por vez, sem uma linha de JavaScript. O teclado funciona sozinho, o
+     leitor de tela anuncia o estado, e quem chega com JS desligado vê tudo
+     igual. Virou lista em vez de grade porque o texto tem 500 a 800 caracteres:
+     numa célula de um terço da largura ele viraria uma coluna estreita e alta,
+     e ao abrir empurraria as outras duas células da fileira. */
   .lista-classes {
-    list-style: none;
-    margin: 0;
-    padding: 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     gap: 1px;
     background: var(--linha);
     border: 1px solid var(--linha);
   }
-  .lista-classes li {
+
+  .lista-classes details {
     position: relative;
-    display: grid;
-    gap: 6px;
-    padding: 26px 22px 24px;
     background: var(--tinta);
     overflow: hidden;
     transition: background .3s ease;
   }
-  .lista-classes li:hover { background: var(--tinta-2); }
+  .lista-classes details[open] { background: var(--tinta-2); }
+
+  .lista-classes summary {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2vw, 26px);
+    min-height: 64px;              /* alvo de toque com folga */
+    padding: 16px clamp(48px, 6vw, 62px) 16px clamp(16px, 2.4vw, 26px);
+    cursor: pointer;
+    list-style: none;              /* fora o triângulo padrão */
+    transition: background .3s ease;
+  }
+  .lista-classes summary::-webkit-details-marker { display: none; }
+  .lista-classes summary:hover { background: var(--tinta-2); }
+  .lista-classes summary:focus-visible {
+    outline: 2px solid var(--sangue-vivo);
+    outline-offset: -2px;
+  }
+
+  /* O kanji continua sendo a marca da classe, agora ancorado à direita e
+     atrás do sinal de abrir. */
   .lista-classes .kanji {
     position: absolute;
-    right: -6px;
-    bottom: -22px;
+    right: clamp(40px, 5vw, 58px);
+    top: 50%;
+    transform: translateY(-50%);
     font-family: var(--fonte-display);
     font-weight: 700;
-    font-size: 5.4rem;
+    font-size: clamp(3rem, 6vw, 4.6rem);
     line-height: 1;
     color: #fff;
     opacity: .05;
+    pointer-events: none;
     transition: opacity .3s ease, transform .4s cubic-bezier(.16,.84,.28,1);
   }
-  .lista-classes li:hover .kanji { opacity: .12; transform: translateY(-4px); }
+  .lista-classes summary:hover .kanji,
+  .lista-classes details[open] .kanji { opacity: .13; }
+  .lista-classes details[open] .kanji { transform: translateY(-50%) scale(1.04); }
+
   .lista-classes .num {
+    flex: none;
     font-family: var(--fonte-ui);
     font-weight: 600;
     font-size: .72rem;
@@ -304,12 +340,53 @@ const hrefPersonagens = rota("personagens", idioma);
   .lista-classes .nome {
     font-family: var(--fonte-display);
     font-weight: 700;
-    font-size: clamp(.95rem, 1.6vw, 1.22rem);
+    font-size: clamp(1.05rem, 2vw, 1.4rem);
     color: var(--osso);
   }
-  @media (max-width: 620px) {
-    .lista-classes li { padding: 18px 12px 16px; }
-    .lista-classes .kanji { font-size: 3.4rem; }
+
+  /* Cruz que vira menos: diz "abre" sem depender de texto e sem traduzir. */
+  .lista-classes .sinal {
+    position: absolute;
+    right: clamp(16px, 2.4vw, 26px);
+    top: 50%;
+    width: 13px;
+    height: 13px;
+    transform: translateY(-50%);
+    flex: none;
+  }
+  .lista-classes .sinal::before,
+  .lista-classes .sinal::after {
+    content: "";
+    position: absolute;
+    inset: 50% 0 auto;
+    height: 1px;
+    background: var(--cinza);
+    transition: transform .35s cubic-bezier(.16,.84,.28,1), background .3s ease;
+  }
+  .lista-classes .sinal::after { transform: rotate(90deg); }
+  .lista-classes details[open] .sinal::after { transform: rotate(0deg); }
+  .lista-classes summary:hover .sinal::before,
+  .lista-classes summary:hover .sinal::after,
+  .lista-classes details[open] .sinal::before,
+  .lista-classes details[open] .sinal::after { background: var(--sangue-vivo); }
+
+  .lista-classes .descricao {
+    padding: 0 clamp(16px, 2.4vw, 26px) 26px;
+    max-width: 74ch;
+  }
+  .lista-classes .descricao p {
+    margin: 0;
+    color: var(--cinza);
+    font-size: .98rem;
+  }
+
+  /* A abertura desliza; quem pede menos movimento recebe o corte seco. */
+  @media (prefers-reduced-motion: no-preference) {
+    .lista-classes details[open] .descricao { animation: classe-abre .34s ease both; }
+    @keyframes classe-abre {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: none; }
+    }
   }
 
   @media (max-width: 900px) {

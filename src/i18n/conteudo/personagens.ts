@@ -55,10 +55,10 @@ export function personagensDoIdioma(idioma: Idioma): PersonagemIdioma[] {
 export function classesDoIdioma(idioma: Idioma) {
   const traduzidas = idioma === "en" ? CLASSES_EN : idioma === "ja" ? CLASSES_JA : null;
   if (!traduzidas) return CLASSES.map((c) => ({ ...c }));
-  return CLASSES.map((c) => ({
-    ...c,
-    nome: traduzidas.find((e) => e.num === c.num)?.nome ?? c.nome,
-  }));
+  return CLASSES.map((c) => {
+    const t = traduzidas.find((e) => e.num === c.num);
+    return { ...c, nome: t?.nome ?? c.nome, descricao: t?.descricao ?? c.descricao };
+  });
 }
 
 /** Rótulos da página de personagens, na Voz da Casa. */

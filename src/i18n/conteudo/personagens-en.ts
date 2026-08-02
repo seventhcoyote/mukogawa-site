@@ -23,15 +23,24 @@ const CONCEPT = "Concept art — Art: D. Bretas, 2025.";
 const MANGA = "Manga art — Art: Match, 2026.";
 
 export const CLASSES_EN = [
-  { num: "01", nome: "Cohorts" },
-  { num: "02", nome: "Archons" },
-  { num: "03", nome: "Principalities" },
-  { num: "04", nome: "Virtues" },
-  { num: "05", nome: "Powers" },
-  { num: "06", nome: "Dominars" },
-  { num: "07", nome: "Ophanim" },
-  { num: "08", nome: "Cherubim" },
-  { num: "09", nome: "Seraphim" },
+  { num: "01", nome: "Cohorts",
+    descricao: "Cohorts are the foundational workforce of the Host. Formed with willing hearts and bound by duty, they carry out the will of the High Heavens with unwavering resolve. In the Age of Stars, those Eternals who gravitated toward service were appointed to this rank. Bearing a single pair of wings, Cohorts are the backbone of the Host — soldiers, messengers, and whatever is needed in between. They may not wield the might of an Archon or the mystery of a Principality, but their loyalty shapes the outcome of every war." },
+  { num: "02", nome: "Archons",
+    descricao: "Archons are the mightiest warriors among the Host. In the Age Before, they were the Eternals drawn to strength, and strength was given to them in abundance. No other rank matches their raw mettle or resilience, making them decisive figures in times of war. They are the only echelon entrusted with Rift-Tearing weapons — masterworks of Zorphael, the forgemaster of the Host — each forged in flame and consecrated by the Architect's own hand. These weapons can rend the fabric of space itself, opening portals across realms, battlefields, and even the Veil. Archons bear two pairs of wings: one broad and commanding, the other smaller and swift — crafted for violent thrusts and perfect aerial maneuvering." },
+  { num: "03", nome: "Principalities",
+    descricao: "Principalities are the princes of knowledge, those among the Eternals who, in the Age Before, gravitated toward wisdom. Long before the civil war, they were architects of literature, stewards of heavenly order, and weavers of celestial power. Of all the Host, none surpass them in the mastery of arcane forces. Their magic is elegant and exacting, often written in radiant script that coils through the air as it is spoken — each word a key, each symbol a gate." },
+  { num: "04", nome: "Virtues",
+    descricao: "Virtues are formidable beings whose power flows not from arcane knowledge, like the Principalities, but from innate emanation. Their presence shapes not only the battlefield, but entire regions — bringing strength, restoration, and clarity where there was once chaos. They move between realms, often unseen, serving as vessels through which healing and deliverance are poured out upon mankind. Marked by a regal pair of horns that crown their heads — a symbol of Second Echelon authority — Virtues bear a single pair of wings. Though seldom seen in open combat, their influence is undeniable. Before the war, they were the Eternals who longed for beauty: artists, dreamers, and singers of light, who once filled the cosmos with wonder." },
+  { num: "05", nome: "Powers",
+    descricao: "Powers, also called Custodians, are unlike their Ancient and Eternal siblings. While the Ancients bear the mark of the Elders, and the Eternals were summoned in a single breath, the Powers came later — born during the great flourishing of the Age of Stars. As the cosmos expanded and the architecture of creation grew vast, the Eternals cried out for aid. In response, the Custodians were forged: colossal beings shaped by the will of the Most High, with the hands of their elder siblings guiding the work. Monumental in stature, like titans of light and steel, they became the wardens of the Far Heavens — ensuring structure, harmony and balance. Though youngest among the Host, their presence is unmatched. Each Custodian is singular in form; some winged, others not." },
+  { num: "06", nome: "Dominars",
+    descricao: "Dominars stand at the head of the Second Echelon, marked by two sets of wings and regal horns that crown their heads. These are the Eternals who, in the Age Before, gravitated toward both strength and knowledge, and in that union became something distinct. Though not as strong as an Archon, nor as arcane as a Principality, the Dominars excel in both. That balance — of body and mind, blade and spell — makes them dangerous in ways few can anticipate. Strategists and commanding presences, they often serve as the bridge between the Hosts above and below, leading charges where angels fear to tread." },
+  { num: "07", nome: "Ophanim",
+    descricao: "The Ophanim belong to the First Echelon: beings of terrible and radiant beauty, formed of interlocking wheels forged from the oldest metals of creation. Their frames burn with eyes that do not blink or rest. While the Seraphim fix their gaze upon the Almighty, the Ophanim cast their vision outward, to the farthest reaches of the cosmos. They do not speak as others speak, but resonate in Ophanix — a language not vocalized but released. With each turn of their wheels, waves of compressed truth ripple through the realms. Their speech is vibration; their song, revelation. Few can decipher it. Fewer still can answer." },
+  { num: "08", nome: "Cherubim",
+    descricao: "The Cherubim are beings of awe and wonder, immense in beauty and mystery. Formed in the first breath of the Almighty's will, they predate the Eternals and surpass them in power. Their true forms are otherworldly: wings upon wings, bodies of flame and wind, faces that shift like fire. Yet among the Host they often appear as great beasts — majestic, soaring like omens through the expanse. Desiring fellowship with their younger kin, they took on Visages: humanoid forms chosen not by need, but affection." },
+  { num: "09", nome: "Seraphim",
+    descricao: "The Seraphim are the first of the Ancient, eldest among their kind and heads of the First Echelon. Of all the Host, they alone were formed with the gift to comprehend — not merely to know, but to understand, deeply and in full. Their minds move with the breath of the Architect Himself. For this reason, they have never left the Throne Room. Not bound by command or chain, they remain by choice — captivated. For once they beheld the glory of the One upon the Throne, they could not look away." },
 ] as const;
 
 export const PERSONAGENS_EN: Record<string, TextoPersonagem> = {

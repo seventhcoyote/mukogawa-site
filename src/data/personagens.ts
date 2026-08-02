@@ -19,16 +19,33 @@ export interface Personagem {
   credito: string;
 }
 
+/**
+ * As nove classes, com a descrição que a home abre ao clicar.
+ *
+ * O texto é o mesmo que a página do personagem já mostrava em "A ordem" — a
+ * informação existia e estava enterrada atrás de um clique em personagem. Onde
+ * uma classe tem dois personagens, o verbete do segundo traz uma versão
+ * condensada; aqui fica a completa, que é a canônica da classe.
+ */
 export const CLASSES = [
-  { num: "01", nome: "Arautos", kanji: "使" },
-  { num: "02", nome: "Arcontes", kanji: "戦" },
-  { num: "03", nome: "Principados", kanji: "智" },
-  { num: "04", nome: "Virtudes", kanji: "癒" },
-  { num: "05", nome: "Poderes", kanji: "護" },
-  { num: "06", nome: "Domínios", kanji: "統" },
-  { num: "07", nome: "Ofanins", kanji: "眼" },
-  { num: "08", nome: "Querubins", kanji: "王" },
-  { num: "09", nome: "Serafins", kanji: "焔" },
+  { num: "01", nome: "Arautos", kanji: "使",
+    descricao: "Os Arautos são a força fundamental da Hoste. Forjados em corações dispostos e selados pelo dever, cumprem a vontade dos Altos Céus com resolução inabalável. Na Era das Estrelas, os Eternos que se inclinavam ao serviço foram designados a esta ordem. Portadores de um único par de asas, são o alicerce da Hoste: soldados, mensageiros e tudo o que houver entre um e outro. Talvez não empunhem o poder de um Arconte, nem o mistério de um Principado, mas é a lealdade deles que decide o fim de toda guerra." },
+  { num: "02", nome: "Arcontes", kanji: "戦",
+    descricao: "Os Arcontes são os mais poderosos guerreiros da Hoste. Na Era Anterior, eram os Eternos atraídos pela força, e força lhes foi concedida em abundância. Nenhuma outra ordem iguala sua têmpera ou resistência, tornando-os figuras decisivas nos tempos de guerra. São o único escalão digno de empunhar as Lâminas Rasgafenda, obras-primas de Zorphael, o mestre de forja da Hoste, forjadas em chamas e consagradas pela própria mão do Arquiteto. Essas armas podem rasgar o tecido do espaço, abrindo portais entre reinos, campos de batalha e até mesmo através do Véu. Os Arcontes portam duas duplas de asas: uma ampla e imponente, outra menor e veloz, moldadas para o ímpeto violento e a precisão aérea absoluta." },
+  { num: "03", nome: "Principados", kanji: "智",
+    descricao: "Os Principados são os príncipes do conhecimento dentre os Eternos, aqueles que, na Era das Estrelas, se inclinaram à sabedoria. Muito antes da guerra civil, eram arquitetos da literatura, guardiões da ordem celeste e tecelões do poder arcano. De toda a Hoste, nenhum os supera no domínio das forças arcanas. Sua magia é elegante e precisa, escrita em sigilos radiantes que se entrelaçam no ar enquanto são proferidos: cada palavra é uma chave, cada símbolo, um portão." },
+  { num: "04", nome: "Virtudes", kanji: "癒",
+    descricao: "As Virtudes são seres formidáveis, cujo poder não flui do saber arcano, como nos Principados, mas da emanação divina. Sua presença molda não apenas o campo de batalha, mas regiões inteiras, trazendo força, restauração e clareza onde antes reinava o caos. Movem-se entre os reinos, muitas vezes invisíveis, servindo como vasos através dos quais cura e libertação são derramadas sobre a humanidade. Trazem sobre a cabeça um par régio de chifres, símbolo da autoridade do Segundo Escalão, e ostentam um único par de asas. Raramente vistas em combate aberto, sua influência, contudo, é incontestável. Antes da guerra, foram os Eternos que ansiavam pela beleza: artistas, sonhadores e tecedores da luz, e o cosmos ressoava de admiração sob seu toque." },
+  { num: "05", nome: "Poderes", kanji: "護",
+    descricao: "Os Poderes, também chamados de Custódios, diferem de seus irmãos Antigos e Eternos. Enquanto os Antigos trazem o selo dos Anciãos, e os Eternos foram convocados em um só sopro, os Custódios surgiram depois, nascidos durante o grande florescimento da Era das Estrelas. À medida que o cosmo se expandia e a arquitetura da criação se tornava vasta demais para ser mantida, os Eternos clamaram por auxílio. Em resposta, os Custódios foram forjados: seres colossais, moldados pela vontade do Altíssimo, guiados pelas mãos de seus irmãos mais velhos. Titânicos em estatura, como montes de luz e aço, tornaram-se guardiões dos Céus Distantes, zelando pela estrutura, harmonia e equilíbrio. Embora os mais jovens entre a Hoste, sua presença não encontra igual. Cada Custódio é único em forma: alguns alados, outros não." },
+  { num: "06", nome: "Domínios", kanji: "統",
+    descricao: "Os Domínios ocupam o cume do Segundo Escalão, marcados por duas duplas de asas e chifres régios que lhes coroam a fronte. São os Eternos que, na Era de Antes, se inclinaram tanto à força quanto ao conhecimento e, nessa união, tornaram-se algo singular. Embora não possuam o vigor de um Arconte nem o domínio arcano de um Principado, os Domínios excedem em ambos. Esse equilíbrio, entre corpo e mente, lâmina e magia, os torna perigosos de formas que poucos conseguem prever. São estrategistas e comandantes natos, muitas vezes servindo de ponte entre as Hostes superiores e inferiores, liderando investidas por caminhos onde até outros hesitariam em pisar." },
+  { num: "07", nome: "Ofanins", kanji: "眼",
+    descricao: "Os Ofanins pertencem ao Primeiro Escalão: seres de beleza terrível e resplandecente, formados por rodas entrelaçadas, forjadas com os metais mais antigos da criação. Seus corpos ardem em olhos que jamais piscam, jamais dormem. Enquanto os Serafins fixam o olhar no Todo-Poderoso, os Ofanins projetam sua visão para fora, até os confins do cosmo. Eles não falam como os outros falam; ressoam em Ophanix, uma linguagem não vocalizada, mas emanada. A cada rotação de suas rodas, ondas de verdade comprimida se espalham pelos reinos. Sua fala é vibração; seu cântico, revelação. Poucos conseguem decifrá-la. Menos ainda, responder-lhe." },
+  { num: "08", nome: "Querubins", kanji: "王",
+    descricao: "Os Querubins são seres de assombro e maravilha, imensos em beleza e mistério. Feitos no primeiro sopro da vontade do Altíssimo, antecedem os Eternos e os superam em poder. Suas formas verdadeiras são inefáveis: asas sobre asas, corpos de chama e vento, rostos que mudam como o fogo. Ainda assim, entre a Hoste, costumam manifestar-se como grandes criaturas aladas, majestosas, cruzando os céus como presságios. Desejando comunhão com seus irmãos mais jovens, tomaram Rostos: formas humanoides escolhidas não por necessidade, mas por afeição." },
+  { num: "09", nome: "Serafins", kanji: "焔",
+    descricao: "Os Serafins são os primeiros dos Antigos, os mais velhos entre os seus, e os que presidem o Primeiro Escalão. De toda a Hoste, apenas eles foram formados com o dom de compreender: não apenas de saber, mas de entender em profundidade, até o âmago do mistério. Suas mentes se movem com o fôlego do próprio Arquiteto. Por essa razão, jamais deixaram a Sala do Trono. Não estão presos por ordem nem por corrente, permanecem por escolha. Cativos, não pela força, mas pela visão. Pois uma vez que contemplaram a glória dAquele que Se assenta no Trono, não puderam desviar o olhar." },
 ] as const;
 
 export const personagens: Personagem[] = [
