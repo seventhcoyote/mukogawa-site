@@ -8,7 +8,6 @@
 import type { Idioma } from "../idiomas";
 
 interface Formato { selo: string; titulo: string; texto: string }
-interface Credencial { valor: string; rotulo: string }
 
 interface ConteudoInicio {
   descricao: string;
@@ -42,13 +41,11 @@ interface ConteudoInicio {
   classesRotulo: string;
   classesTitulo: string;
   classesLead: string;
-  credenciaisRotulo: string;
-  credenciais: Credencial[];
 }
 
 export const INICIO: Record<Idioma, ConteudoInicio> = {
   pt: {
-    descricao: "Um conto do outro lado. Mangá, livros e o projeto de anime de Mukō-Gawa, uma imersão na mitologia cristã. Primeiro volume em dezembro de 2026.",
+    descricao: "Uma guerra civil entre os Eternos pela fenda entre o que é e o que foi prometido. O mangá chega em dezembro de 2026; a série de livros, em 2027.",
     heroRotulo: "Um conto do outro lado",
     heroLead: "Assim como as antigas sagas nórdicas e os épicos gregos, Mukō-Gawa é uma imersão nas profundezas da mitologia cristã, que revela a história da Criação e da Redenção, enquanto uma Guerra Celestial se consome até que dela nasça a Paz Eterna.",
     heroCta: "Avise-me do volume 1",
@@ -86,17 +83,10 @@ export const INICIO: Record<Idioma, ConteudoInicio> = {
     classesRotulo: "Os Eternos",
     classesTitulo: "As Nove Classes",
     classesLead: "Nove classes ordenam os Eternos — e atravessam os dois lados da guerra.",
-    credenciaisRotulo: "Quem está por trás",
-    credenciais: [
-      { valor: "7 anos", rotulo: "de escrita, com o ciclo de livros concluído" },
-      { valor: "3 prêmios", rotulo: "do artista conceitual: Brasil Manga Awards e dois Troféus HQ Mix" },
-      { valor: "JBC", rotulo: "publicou o artista do mangá, Guilherme Match" },
-      { valor: "Financiado", rotulo: "pelos leitores: a arte conceitual saiu de apoio coletivo" },
-    ],
   },
 
   en: {
-    descricao: "A tale from the other side. The manga, the books and the anime project of Mukō-Gawa, a deep dive into Christian mythology. First volume December 2026.",
+    descricao: "A civil war among the Eternals over the fold between what is and what was promised. The manga arrives in December 2026; the novels, from 2027.",
     heroRotulo: "A tale from the other side",
     heroLead: "Much like the Norse sagas and the Greek epics, Mukō-Gawa is a deep dive into Christian mythology. The supposal fictional narrative shares the tale of Creation and Redemption, as a celestial war culminates in eternal peace.",
     heroCta: "Notify me about volume 1",
@@ -134,18 +124,11 @@ export const INICIO: Record<Idioma, ConteudoInicio> = {
     classesRotulo: "The Eternals",
     classesTitulo: "The Nine Classes",
     classesLead: "Nine classes order the Eternals — and they cross both sides of the war.",
-    credenciaisRotulo: "Who is behind it",
-    credenciais: [
-      { valor: "7 years", rotulo: "of writing, with the novel cycle already complete" },
-      { valor: "3 awards", rotulo: "for the concept artist: Brasil Manga Awards and two Troféu HQ Mix" },
-      { valor: "JBC", rotulo: "has published the manga artist, Guilherme Match" },
-      { valor: "Reader-funded", rotulo: "the original concept art was paid for by backers" },
-    ],
   },
 
   // Traduzido do PT-BR. Pendente de revisão.
   es: {
-    descricao: "Un cuento del otro lado. El manga, los libros y el proyecto de anime de Mukō-Gawa, una inmersión en la mitología cristiana. Primer volumen en diciembre de 2026.",
+    descricao: "Una guerra civil entre los Eternos por la grieta entre lo que es y lo que fue prometido. El manga llega en diciembre de 2026; la serie de libros, en 2027.",
     heroRotulo: "Un cuento del otro lado",
     heroLead: "Como las antiguas sagas nórdicas y las epopeyas griegas, Mukō-Gawa es una inmersión en las profundidades de la mitología cristiana, que revela la historia de la Creación y la Redención, mientras una Guerra Celestial se consume hasta que de ella nace la Paz Eterna.",
     heroCta: "Avísame del volumen 1",
@@ -183,18 +166,11 @@ export const INICIO: Record<Idioma, ConteudoInicio> = {
     classesRotulo: "Los Eternos",
     classesTitulo: "Las Nueve Clases",
     classesLead: "Nueve clases ordenan a los Eternos, y atraviesan ambos lados de la guerra.",
-    credenciaisRotulo: "Quién está detrás",
-    credenciais: [
-      { valor: "7 años", rotulo: "de escritura, con el ciclo de libros concluido" },
-      { valor: "3 premios", rotulo: "del artista conceptual: Brasil Manga Awards y dos Troféu HQ Mix" },
-      { valor: "JBC", rotulo: "ha publicado al artista del manga, Guilherme Match" },
-      { valor: "Financiado", rotulo: "por los lectores: el arte conceptual salió de apoyo colectivo" },
-    ],
   },
 
   // Base: site modelo. Pendente de revisão.
   ja: {
-    descricao: "向こう側からの物語。『向こう側』の漫画、小説、アニメ企画。キリスト教神話への深い潜行。第1巻は2026年12月。",
+    descricao: "現にあるものと約束されたものとの折り目をめぐる、永遠者たちの内戦。漫画は2026年12月、小説シリーズは2027年より。",
     heroRotulo: "向こう側からの物語",
     heroLead: "北欧のサガやギリシアの叙事詩のように、『向こう側』はキリスト教神話の深みへの潜行である。神話と神秘のあいだに織られた想定譜として、創造と贖罪の物語を語り、天上の戦は燃え尽きて永遠の平和を生む。",
     heroCta: "第1巻のお知らせを受け取る",
@@ -232,12 +208,5 @@ export const INICIO: Record<Idioma, ConteudoInicio> = {
     classesRotulo: "永遠者",
     classesTitulo: "九つの階級",
     classesLead: "九つの階級が永遠者を貫く。戦の、いずれの側にも。",
-    credenciaisRotulo: "制作の背景",
-    credenciais: [
-      { valor: "7年", rotulo: "の執筆。小説群はすでに完結している" },
-      { valor: "3つの受賞", rotulo: "コンセプトアート担当：Brasil Manga Awards と Troféu HQ Mix 二部門" },
-      { valor: "JBC", rotulo: "漫画作画のギリェルミ・マッチを刊行" },
-      { valor: "読者出資", rotulo: "オリジナルのコンセプトアートは支援によって実現した" },
-    ],
   },
 };
