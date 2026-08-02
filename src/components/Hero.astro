@@ -22,6 +22,7 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
     <video
       class="filme"
       autoplay
+      loop
       muted
       playsinline
       preload="auto"
@@ -175,21 +176,19 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
 </style>
 
 <script>
+  // O filme rodava uma vez e congelava no último quadro. Agora repete sem fim,
+  // por `loop` no próprio elemento — sem JavaScript, porque `ended` não dispara
+  // em vídeo com loop e um recomeço feito na mão engasgaria a emenda.
+  //
+  // Quem pede menos movimento continua recebendo um quadro parado.
   const video = document.querySelector<HTMLVideoElement>(".hero .filme");
   if (video) {
-    const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    const congelarNoFim = () => {
-      video.pause();
-      video.currentTime = Math.max(0, video.duration - 0.04);
-    };
-
-    if (semMovimento.matches) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       video.removeAttribute("autoplay");
+      video.removeAttribute("loop");
       video.poster = "/video/poster-fim.jpg";
       video.pause();
     } else {
-      video.addEventListener("ended", congelarNoFim);
       video.play().catch(() => { video.poster = "/video/poster-fim.jpg"; });
     }
   }

@@ -21,7 +21,7 @@ export const IDIOMAS = {
   pt: { rotulo: "Português", curto: "PT", htmlLang: "pt-BR", ogLocale: "pt_BR", pronto: true },
   en: { rotulo: "English", curto: "EN", htmlLang: "en", ogLocale: "en_US", pronto: true },
   es: { rotulo: "Español", curto: "ES", htmlLang: "es", ogLocale: "es_ES", pronto: false },
-  ja: { rotulo: "日本語", curto: "JA", htmlLang: "ja", ogLocale: "ja_JP", pronto: false },
+  ja: { rotulo: "日本語", curto: "JA", htmlLang: "ja", ogLocale: "ja_JP", pronto: true },
 } as const;
 
 export type Idioma = keyof typeof IDIOMAS;

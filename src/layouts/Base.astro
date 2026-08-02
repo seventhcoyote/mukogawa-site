@@ -79,6 +79,12 @@ const ehDominioFinal = Astro.site?.hostname === DOMINIO_FINAL;
         são 150 KB que o unicode-range só busca quando há kanji na página. */}
     <link rel="preload" href="/fontes/zen-old-mincho-latin-700.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fontes/zen-old-mincho-latin-600.woff2" as="font" type="font/woff2" crossorigin />
+    {/* A variante CJK são 247 KB e só entra onde há kanji. Nas páginas
+        japonesas ela desenha o texto inteiro, então lá vale a mesma antecipação
+        — nas outras, o unicode-range já evita que ela seja sequer buscada. */}
+    {idioma === "ja" && (
+      <link rel="preload" href="/fontes/zen-old-mincho-cjk-700.woff2" as="font" type="font/woff2" crossorigin />
+    )}
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

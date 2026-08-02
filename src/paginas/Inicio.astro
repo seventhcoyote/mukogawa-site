@@ -38,25 +38,6 @@ const hrefPersonagens = rota("personagens", idioma);
 
   <GostoDaNarrativa />
 
-  <!-- ================= credenciais =================
-       A home não dava nenhum motivo para confiar: prêmios, editora e os sete
-       anos de trabalho viviam só na página de Criadores, a menos visitada. -->
-  <section class="secao secao--curta credenciais">
-    <div class="envelope">
-      <Revelar>
-      <p class="rotulo">{c.credenciaisRotulo}</p>
-      <ul class="marcas">
-        {c.credenciais.map((k) => (
-          <li>
-            <span class="valor">{k.valor}</span>
-            <span class="detalhe">{k.rotulo}</span>
-          </li>
-        ))}
-      </ul>
-      </Revelar>
-    </div>
-  </section>
-
   <!-- ================= três formas ================= -->
   <section class="secao">
     <div class="envelope">
@@ -159,36 +140,6 @@ const hrefPersonagens = rota("personagens", idioma);
 </Base>
 
 <style>
-  /* ---------- credenciais ---------- */
-  .credenciais { border-block: 1px solid var(--linha); background: var(--tinta-2); }
-  .credenciais .rotulo { margin-bottom: clamp(20px, 3vw, 30px); }
-  .marcas {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: clamp(20px, 3vw, 44px);
-  }
-  .marcas li {
-    display: grid;
-    gap: 8px;
-    padding-left: 18px;
-    border-left: 1px solid var(--linha-forte);
-  }
-  .marcas .valor {
-    font-family: var(--fonte-display);
-    font-weight: 700;
-    font-size: clamp(1.5rem, 2.4vw, 2.1rem);
-    line-height: 1;
-    color: var(--osso);
-  }
-  .marcas .detalhe {
-    font-size: .92rem;
-    color: var(--poeira);
-    text-wrap: pretty;
-  }
-
   /* ---------- três formas ---------- */
   /* O gap precisa ser declarado nos dois eixos separadamente. Um `gap` único
      valia também para as QUATRO linhas do subgrid, e cada espaço interno do

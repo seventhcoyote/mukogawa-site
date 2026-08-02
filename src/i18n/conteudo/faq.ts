@@ -52,13 +52,13 @@ const gruposPt: Grupo[] = [
         p: "Mukō-Gawa é uma obra cristã?",
         r: [
           "É ficção, escrita por um autor cristão, e a narrativa bíblica é a espinha dela: o arco central é o da redenção, contado do lado de fora, pelos Eternos. Não é catequese e não pressupõe fé nenhuma do leitor — foi escrita pensando justamente em quem não é cristão.",
-          "Se você procura um paralelo, a linhagem é a de <b>Cartas de um Diabo ao Seu Aprendiz</b>, de C.S. Lewis, e <b>Esse Mundo Tenebroso</b>, de Frank Peretti: o conflito entre anjos e demônios como matéria de ficção, não como sermão.",
+          "Se você procura um paralelo, a linhagem é a de <b>Cartas de um Diabo ao Seu Aprendiz</b>, de C.S. Lewis, e <b>Esse Mundo Tenebroso</b>, de Frank Peretti. Do lado de fora da tradição cristã, a mesma liberdade de tratar o mito como matéria de ficção está em <b>Sandman</b> e <b>Deuses Americanos</b>, de Neil Gaiman: o conflito entre potências invisíveis como narrativa, não como sermão.",
         ],
       },
       {
         p: "Em que ordem devo ler?",
         r: [
-          "Comece por <b>Saga</b>, o arco principal, dividido em cinco temporadas. <b>Protogenesis</b> é a prequela e foi pensada para entrar entre a Segunda e a Terceira Temporada, não antes de tudo. <b>Desvelar</b> é o epílogo e vem depois da Quinta.",
+          "Comece por <b>Saga</b>, o arco principal, dividido em cinco temporadas (ou livros). <b>Protogenesis</b> é a prequela e foi pensada para entrar entre a Segunda e a Terceira Temporada (ou livro), não antes de tudo. <b>Desvelar</b> é o epílogo e vem depois da Quinta.",
           "Ler Protogenesis fora de ordem não estraga a história, mas ela foi escrita para ser lida naquele ponto.",
         ],
       },
@@ -85,7 +85,7 @@ const gruposPt: Grupo[] = [
       {
         p: "Existe uma língua própria na obra?",
         r: [
-          "Sim. A língua dos Eternos tem escrita, fonologia e gramática próprias, desenvolvidas por um linguista para o projeto.",
+          "Sim. A língua dos Eternos tem escrita, fonologia e gramática próprias, desenvolvidas por Israel Subira em conjunto com o linguista Pedro Vizioli.",
           "Ela é feita de muitos sons fricativos, aerados e ingressivos, o que dá ao idioma uma qualidade etérea. A escrita partiu de símbolos de várias tradições místicas e foi desenhada para ser gravada em espadas e em outros objetos usados pelos Eternos.",
         ],
       },
@@ -99,7 +99,7 @@ const gruposPt: Grupo[] = [
       {
         p: "Quantos personagens tem a série?",
         r: [
-          'O site apresenta onze, divididos entre a Hoste e os Rebeldes, cada um com sua classe. <a href="/personagens">A grade completa está aqui</a>. Nem todo o elenco foi revelado.',
+          'A série conta com um elenco de mais de cem personagens. O site apresenta onze deles — os que já ganharam arte própria —, divididos entre a Hoste e os Rebeldes, um por classe. <a href="/personagens">A grade está aqui</a>.',
         ],
       },
     ],
@@ -130,7 +130,7 @@ const gruposPt: Grupo[] = [
       {
         p: "Vai ter versão digital?",
         r: [
-          "Nos Estados Unidos e no Japão, as edições saem impressas e digitais.",
+          "Sim. As edições saem impressas e digitais.",
         ],
       },
       {
@@ -172,7 +172,7 @@ const gruposPt: Grupo[] = [
       {
         p: "Quem escreve e quem desenha?",
         r: [
-          "Israel Subira é o criador e roteirista. Daniel Bretas assina a arte conceitual e Guilherme Match, a arte do mangá.",
+          "Israel Subira é o criador, escritor e roteirista. Daniel Bretas assina a arte conceitual e Guilherme Match, a arte do mangá.",
           '<a href="/criadores">A página dos criadores traz a trajetória de cada um</a>.',
         ],
       },
@@ -192,7 +192,7 @@ const gruposPt: Grupo[] = [
       {
         p: "Há quanto tempo o projeto existe?",
         r: [
-          "Israel começou Mukō-Gawa há cerca de sete anos. Desde então o projeto cresceu para um mangá, um ciclo de livros já concluído e a base para uma adaptação animada.",
+          "Israel começou Mukō-Gawa há cerca de sete anos. Desde então o projeto cresceu para um mangá, um ciclo de livros já escritos e a base para uma adaptação animada. O aviso do lançamento dos livros também sai pela lista de espera.",
         ],
       },
     ],
@@ -230,13 +230,13 @@ const gruposEn: Grupo[] = [
         p: "Is Mukō-Gawa a Christian work?",
         r: [
           "It is fiction, written by a Christian author, and the biblical narrative is its spine: the central arc is redemption, told from the outside, by the Eternals. It is not catechism and it assumes no faith from the reader — it was written with the non-Christian reader in mind.",
-          "If you want a bearing, the lineage is that of <b>The Screwtape Letters</b>, by C.S. Lewis, and <b>This Present Darkness</b>, by Frank Peretti: the conflict between angels and demons as material for fiction, not as a sermon.",
+          "If you want a bearing, the lineage is that of <b>The Screwtape Letters</b>, by C.S. Lewis, and <b>This Present Darkness</b>, by Frank Peretti. From outside the Christian tradition, the same freedom to treat myth as material for fiction runs through <b>The Sandman</b> and <b>American Gods</b>, by Neil Gaiman: the conflict between unseen powers as narrative, not as sermon.",
         ],
       },
       {
         p: "In what order should I read it?",
         r: [
-          "Start with <b>Saga</b>, the main arc, in five seasons. <b>Genesis</b> is the prequel and was meant to land between Season Two and Season Three, not before everything. <b>Unveiled</b> is the epilogue and comes after Season Five.",
+          "Start with <b>Saga</b>, the main arc, in five seasons (or books). <b>Genesis</b> is the prequel and was meant to land between Season Two and Season Three (or book), not before everything. <b>Unveiled</b> is the epilogue and comes after Season Five.",
           "Reading Genesis out of order does not spoil the story, but it was written to be read at that point.",
         ],
       },
@@ -263,7 +263,7 @@ const gruposEn: Grupo[] = [
       {
         p: "Is there a language of its own in the work?",
         r: [
-          "Yes. The language of the Eternals has its own script, phonology and grammar, developed by a linguist for the project.",
+          "Yes. The language of the Eternals has its own script, phonology and grammar, developed by Israel Subira together with the linguist Pedro Vizioli.",
           "It is built from many fricative, aspirated and ingressive sounds, which give the language an ethereal quality. The script started from symbols of various mystical traditions and was designed to be engraved on swords and other objects used by the Eternals.",
         ],
       },
@@ -277,7 +277,7 @@ const gruposEn: Grupo[] = [
       {
         p: "How many characters are there?",
         r: [
-          'The site introduces eleven, split between the Host and the Guest, each with their class. <a href="/en/characters">The full grid is here</a>. Not all of the cast has been revealed.',
+          'The series has a cast of more than a hundred characters. The site introduces eleven of them — the ones that already have art of their own — split between the Host and the Guest, one per class. <a href="/en/characters">The grid is here</a>.',
         ],
       },
     ],
@@ -308,7 +308,7 @@ const gruposEn: Grupo[] = [
       {
         p: "Will there be a digital version?",
         r: [
-          "In the United States and Japan, editions come in print and digital.",
+          "Yes. Editions come in print and digital.",
         ],
       },
       {
@@ -350,7 +350,7 @@ const gruposEn: Grupo[] = [
       {
         p: "Who writes it and who draws it?",
         r: [
-          "Israel Subira is the writer and creator. Daniel Bretas did the concept art and Guilherme Match draws the manga.",
+          "Israel Subira is the creator, writer and scriptwriter. Daniel Bretas did the concept art and Guilherme Match draws the manga.",
           '<a href="/en/creators">The creators page covers each of them</a>.',
         ],
       },
@@ -370,7 +370,194 @@ const gruposEn: Grupo[] = [
       {
         p: "How long has the project existed?",
         r: [
-          "Israel began Mukō-Gawa roughly seven years ago. Since then it has grown into a manga, an already completed novel cycle, and the groundwork for an animated adaptation.",
+          "Israel began Mukō-Gawa roughly seven years ago. Since then it has grown into a manga, an already written novel cycle, and the groundwork for an animated adaptation. Word of the novels also goes out through the waiting list.",
+        ],
+      },
+    ],
+  },
+];
+
+/**
+ * FAQ em japonês.
+ *
+ * ATENÇÃO, e isto não é formalidade: diferente do resto do site japonês, este
+ * bloco NÃO é texto do autor. O site antigo não tinha FAQ, então as 23
+ * perguntas foram traduzidas aqui, do inglês. A terminologia segue o glossário
+ * confirmado em conteudo/JA-SITE-MODELO.md — 天軍, 客人, 永遠者, 汚された井戸,
+ * 帷（ヴェイル）, 星の時代 — mas a redação é nossa.
+ *
+ * PRECISA DE REVISÃO POR FALANTE NATIVO antes de contar como definitivo.
+ * Registro de voz: o FAQ é a Voz da Casa, seca. Nada de registro litúrgico.
+ */
+const gruposJa: Grupo[] = [
+  {
+    rotulo: "作品について",
+    titulo: "『向こう側』とは",
+    perguntas: [
+      {
+        p: "『向こう側』とはどんな作品ですか。",
+        r: [
+          "原人類の同族が、次元の狭間 — 現にあるものと約束されたものとの折り目 — をめぐって争う内戦を描くダークファンタジーです。ひとつの血統から二つの秩序が生まれます。狭間を閉じたままにしようとする者と、引き裂こうとする者です。",
+          '刊行はまず漫画、続いて小説シリーズという順になります。<a href="/ja/story">物語の全体はこちら</a>。',
+        ],
+      },
+      {
+        p: "『向こう側』という題名の意味は。",
+        r: [
+          "向こう側とは<b>反対側</b>のことです。この題は語りの視点を示しています。戦はあちら側から、永遠者たちによって語られ、その存在を知らずに生きる人間の側からは語られません。",
+        ],
+      },
+      {
+        p: "キリスト教神話の知識は必要ですか。",
+        r: [
+          "不要です。『向こう側』は、他の作品が北欧のサガやギリシアの叙事詩を用いるのと同じように、キリスト教神話を物語の素材として扱います。典拠を知る読者には層が増えますが、知らない読者も同じように物語を追えます。",
+        ],
+      },
+      {
+        p: "『向こう側』はキリスト教の作品ですか。",
+        r: [
+          "キリスト教徒の作家が書いた虚構であり、聖書の物語がその背骨です。中心にあるのは贖罪の弧で、それを外側から、永遠者たちが語ります。教理問答ではなく、読者に信仰を前提としません。むしろキリスト教徒でない読者を念頭に書かれています。",
+          "手がかりを求めるなら、系譜としてはC.S.ルイス『悪魔の手紙』、フランク・ペレッティ『この暗黒の世界』に連なります。キリスト教の外側では、ニール・ゲイマン『サンドマン』『アメリカン・ゴッズ』が同じ自由さで神話を虚構の素材として扱っています。見えざる力のあいだの相克を、説教ではなく物語として描くということです。",
+        ],
+      },
+      {
+        p: "どの順番で読めばよいですか。",
+        r: [
+          "主軸である<b>Saga</b>から始めてください。全五シーズン（各巻）です。<b>Genesis</b>は前日譚で、第二シーズンと第三シーズン（巻）のあいだに置かれるよう構想されました。冒頭ではありません。<b>Unveiled</b>は結びで、第五シーズンの後に来ます。",
+          "Genesisを順番どおりに読まなくても物語は損なわれませんが、あの位置で読まれるように書かれています。",
+        ],
+      },
+      {
+        p: "漫画・小説・アニメの違いは。",
+        r: [
+          "同じ物語の三つの形です。漫画は巻ごとに連載します。小説シリーズは2027年に始まり、その全篇はすでに書き上がっています。読む順に一巻ずつ刊行されます。アニメは想定されている映像化です。",
+        ],
+      },
+      {
+        p: "小説は何冊ありますか。",
+        r: [
+          "全七冊です。うち五冊が<b>Saga</b>で各シーズンに対応し、残る二冊が<b>Genesis</b>と<b>Unveiled</b> — 映像化の計画では劇場長編にあたる二作です。",
+          "執筆は完了しています。刊行はまだ一冊もありません。",
+        ],
+      },
+      {
+        p: "物語はひとつですか、複数ですか。",
+        r: [
+          "主となる物語がひとつあり、その傍らを多くの筋が走り、大勢の登場人物がそこで育っていきます。進み方はテーブルトークRPGのキャンペーンに似ていますが、それは偶然ではありません。作者は書き手である前にゲームマスターでした。",
+          "筋は緻密で、戦闘は生々しい描写を伴います。青年漫画の水準で、成人読者に向けて書かれています。",
+        ],
+      },
+      {
+        p: "作中に独自の言語はありますか。",
+        r: [
+          "あります。永遠者の言語には固有の文字・音韻・文法があり、イスラエル・スビラが言語学者ペドロ・ヴィジオリと共に作り上げました。",
+          "摩擦音・気音・吸気音を多く含み、それが言語に幽玄な質を与えています。文字は諸々の神秘主義の伝統の記号を出発点とし、剣をはじめ永遠者の用いる器物に刻まれることを前提に設計されました。",
+        ],
+      },
+      {
+        p: "アニメ化は決定していますか。",
+        r: [
+          "していません。映像化はこの企画の背後にある夢ですが、制作もスタジオも決まっていません。『向こう側』は独立した企画であり、コンセプトアートは日本のスタジオへ提示するためにこそ整えられています。",
+          "構想は五シーズンと二本の劇場作品です。正式な発表があれば、本サイトと事前登録でお知らせします。噂でではありません。",
+        ],
+      },
+      {
+        p: "登場人物は何人いますか。",
+        r: [
+          '本シリーズには百を超える登場人物がいます。本サイトではそのうち十一人 — すでに専用の絵を持つ者たち — を、天軍と客人に分け、階級ごとに一人ずつ紹介しています。<a href="/ja/characters">一覧はこちら</a>。',
+        ],
+      },
+    ],
+  },
+  {
+    rotulo: "発売",
+    titulo: "時期と購入先",
+    perguntas: [
+      {
+        p: "第1巻はいつ発売されますか。",
+        r: [
+          "2026年12月です。正確な日付は未発表です。表示している日程は出版社の現行予定であり、変更の可能性があります。",
+        ],
+      },
+      {
+        p: "どこで購入できますか。",
+        r: [
+          "ブラジルでは自社ストアから国内発送します。アメリカではAmazon、日本ではAmazon.co.jpを通じてお求めいただけます。",
+          '販売リンクはまだありません。<a href="/ja/shop">各地域の状況は購入先ページに記載しています</a>。常に実際の状態を示し、どこにも繋がらないボタンは置きません。',
+        ],
+      },
+      {
+        p: "英語版は出ますか。",
+        r: [
+          "出ます。アメリカ版は英語です。ブラジル版はポルトガル語、日本版は日本語です。",
+        ],
+      },
+      {
+        p: "電子版は出ますか。",
+        r: [
+          "出ます。各版とも紙と電子の両方で刊行されます。",
+        ],
+      },
+      {
+        p: "価格はいくらですか。",
+        r: [
+          "未定です。版・価格・送料・在庫は各地域の販売元が扱うため、ブラジル・アメリカ・日本で金額が異なる場合があります。",
+        ],
+      },
+      {
+        p: "海外発送はありますか。",
+        r: [
+          "ブラジルのストアは国内発送のみです。他地域の読者は、お住まいの地域のAmazonからお求めください。配送はそちらが行います。",
+        ],
+      },
+    ],
+  },
+  {
+    rotulo: "事前登録",
+    titulo: "お知らせの受け取り方",
+    perguntas: [
+      {
+        p: "発売開始をどう知ればよいですか。",
+        r: [
+          '<a href="/ja/#lista-de-espera">事前登録</a>にメールアドレスを残し、地域をお選びください。お住まいの地域で販売が始まった際にお知らせします。',
+        ],
+      },
+      {
+        p: "メールアドレスは何に使われますか。",
+        r: [
+          "それ以外には使いません。お住まいの地域で販売が始まったことをお伝えするためのものです。他の配信もなく、第三者への提供もありません。",
+        ],
+      },
+    ],
+  },
+  {
+    rotulo: "制作",
+    titulo: "作り手について",
+    perguntas: [
+      {
+        p: "誰が書き、誰が描いていますか。",
+        r: [
+          "イスラエル・スビラが原作・執筆・脚本を担います。ダニエル・ブレタスがコンセプトアート、ギリェルメ・マッチが漫画作画です。",
+          '<a href="/ja/creators">制作陣のページで各人を紹介しています</a>。',
+        ],
+      },
+      {
+        p: "なぜ絵師が二人いるのですか。",
+        r: [
+          "別種の仕事だからです。ブレタスは最初のコンセプトアート、人物習作、そしてシリーズの視覚言語を定めた階級の意匠を描きました。マッチは漫画そのものを描き、物語を漫画へ移す上での指導役も務めています。",
+          "本サイトで二種類の絵が同居しながら、同じものとして扱われていないのはそのためです。",
+        ],
+      },
+      {
+        p: "コンセプトアートの費用はどう賄われましたか。",
+        r: [
+          "クラウドファンディングです。最初のコンセプトアート一式は支援者によって賄われました。本サイトも、スタジオへの企画提示も、その絵が支えています。",
+        ],
+      },
+      {
+        p: "企画はいつから続いていますか。",
+        r: [
+          "イスラエルが『向こう側』を書き始めておよそ七年になります。以来この企画は、漫画、すでに書き上がった小説群、そして映像化の土台へと育ちました。小説の刊行についても事前登録でお知らせします。",
         ],
       },
     ],
@@ -433,6 +620,6 @@ export const FAQ: Record<Idioma, ConteudoFaq> = {
       { href: ROTAS.personagens.ja, texto: "登場人物を見る" },
       { href: ROTAS.loja.ja, texto: "購入先" },
     ],
-    grupos: gruposPt,
+    grupos: gruposJa,
   },
 };

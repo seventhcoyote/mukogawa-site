@@ -20,7 +20,7 @@ export interface Rede {
 }
 
 export const REDES: Rede[] = [
-  { nome: "Instagram", icone: "instagram", href: "https://www.instagram.com/israelsubira/" },
+  { nome: "Instagram", icone: "instagram", href: "https://www.instagram.com/mukogawaverse/" },
   { nome: "X",         icone: "x",         href: null },
   { nome: "Facebook",  icone: "facebook",  href: null },
 ];
@@ -30,6 +30,6 @@ export const REDES: Rede[] = [
  * publicação — estão linkadas no rodapé desde a v1. Ver PENDENCIAS.md, seção 3.
  */
 export const EMAILS = {
-  contato: "contato@mukogawa.com",
-  imprensa: "imprensa@mukogawa.com",
+  contato: "contact@mukogawa.com",
+  imprensa: "social@mukogawa.com",
 } as const;
