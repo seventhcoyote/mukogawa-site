@@ -8,11 +8,17 @@ const atual = Astro.url.pathname.replace(/\/$/, "") || "/";
 const idioma = idiomaDaUrl(Astro.url.pathname);
 const t = usarUI(idioma);
 
-// "Início" saiu do menu em 2026-08-03. A marca, no canto esquerdo, já é o link
-// para a home — no desktop e também no topo do menu mobile —, então o item era
-// redundante. Tirá-lo abriu a vaga de "A obra" sem o cabeçalho crescer: continua
-// com seis destinos, e a 1024px o CTA voltou a caber numa linha.
+ // "Início" chegou a sair do menu quando "A obra" entrou, pelo argumento de que a
+// marca já leva à home. O argumento é uma convenção real, mas falhou no teste:
+// aqui a marca é KANJI, sem nenhuma afordância visual de link, e quem conhece o
+// site sentiu falta do item — visitante novo sentiria mais. Voltou.
+//
+// E a vaga que eu tinha "aberto" nem era necessária: medido, sete itens cabem
+// com folga (sobra 251px a 1440, 100px a 1180). O estouro que existia a 1024px
+// acontecia com SEIS itens também — a causa era a largura da janela, não a
+// quantidade de destinos. O hambúrguer resolve essa faixa.
 const links = ([
+  ["inicio", "nav.inicio"],
   ["historia", "nav.historia"],
   ["obra", "nav.obra"],
   ["personagens", "nav.personagens"],
@@ -319,12 +325,16 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
 
   /* ---------- mobile ---------- */
 
-  /* Ponto de virada do hambúrguer: era 920px e subiu para 1060 em 2026-08-03,
-     quando "A obra" entrou no menu. Varrido de 960 a 1180px nos três idiomas: a
-     barra só cabe inteira a partir de ~1060 (a 1024 estourava 21px, a 1000
-     estourava 40, a 960, 72). Abaixo disso o menu vira hambúrguer, que é o
-     mesmo caminho que o hero já toma até 1280. */
-  @media (max-width: 1060px) {
+  /* Ponto de virada do hambúrguer: era 920px e foi para 1180 em 2026-08-03,
+     quando "A obra" entrou no menu e "Início" voltou. Varrido de 960 a 1200px
+     nos três idiomas, com os SETE itens: a 1200 cabe em PT, EN e JA; a 1120
+     estoura 28px em PT e 15px em EN. Daí o corte em 1180.
+
+     Parece alto para um hambúrguer, e é de propósito: o hero já entra em layout
+     empilhado abaixo de 1280, então nessa faixa a página inteira está em modo
+     estreito. Um menu horizontal espremido sobre uma página empilhada seria a
+     incoerência, não o hambúrguer. */
+  @media (max-width: 1180px) {
     .hamburguer { display: block; order: 3; }
 
     .menu {
@@ -436,7 +446,7 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
     });
 
     // Se a janela cresce além do breakpoint, o menu volta ao estado de desktop.
-    const mq = window.matchMedia("(min-width: 1061px)");
+    const mq = window.matchMedia("(min-width: 1181px)");
     mq.addEventListener("change", (e) => { if (e.matches) definir(false); });
   }
 
