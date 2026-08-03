@@ -165,7 +165,12 @@ const series = c.series;
       <ol class="series">
         {series.map((s) => (
           <li>
-            <span class="num" aria-hidden="true">{s.num}</span>
+            {/* Sem numeral aqui desde 2026-08-03. Ele numerava 01 Saga, 02
+                Protogenesis, 03 Desvelar — e a página "A obra" numera as mesmas
+                obras em ordem CRONOLÓGICA, onde Protogenesis é 01 e Desvelar é
+                08. Duas numerações para as mesmas três coisas, e o leitor que
+                passa de uma página para a outra não tem como saber qual vale.
+                Aqui o número era decorativo; lá ele diz a ordem da história. */}
             <div class="conteudo">
               <h3>{s.nome}</h3>
               <p class="rotulo">{s.selo}</p>
@@ -223,18 +228,8 @@ const series = c.series;
 
   .series { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--linha); border: 1px solid var(--linha); }
   .series li {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: clamp(20px, 3vw, 46px);
     padding: clamp(26px, 3.4vw, 46px);
     background: var(--tinta);
-  }
-  .series .num {
-    font-family: var(--fonte-display);
-    font-weight: 700;
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    line-height: 1;
-    color: #63636f;   /* 3,1:1 no fundo novo: numeral discreto, mas legível */
   }
   .series h3 { margin-bottom: 10px; }
   .series .rotulo { margin-bottom: 16px; color: var(--sangue-vivo); }
