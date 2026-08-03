@@ -124,19 +124,32 @@ const hrefPersonagens = rota("personagens", idioma);
         <p class="lead">{c.classesLead}</p>
       </div>
 
-      <div class="lista-classes">
-        {CLASSES.map((c) => (
-          <details name="classe">
-            <summary>
-              <span class="kanji" aria-hidden="true">{c.kanji}</span>
-              <span class="num">{c.num}</span>
-              <span class="nome">{c.nome}</span>
-              <span class="sinal" aria-hidden="true"></span>
-            </summary>
-            <div class="descricao"><p>{c.descricao}</p></div>
-          </details>
-        ))}
-      </div>
+      {/* As nove sempre estiveram numeradas de 01 a 09, e essa numeração JÁ era
+          a hierarquia dos Escalões — do mais baixo ao mais alto, três a três.
+          A lista plana escondia isso, e a ordem parecia arbitrária. Agrupar não
+          acrescenta informação nova: revela a que já estava ali. */}
+      {c.escaloes.map((esc, i) => (
+        <div class="escalao">
+          <div class="escalao-topo">
+            <h3>{esc.nome}</h3>
+            {esc.nota && <p class="escalao-nota">{esc.nota}</p>}
+          </div>
+
+          <div class="lista-classes">
+            {CLASSES.slice(i * 3, i * 3 + 3).map((cl) => (
+              <details name="classe">
+                <summary>
+                  <span class="kanji" aria-hidden="true">{cl.kanji}</span>
+                  <span class="num">{cl.num}</span>
+                  <span class="nome">{cl.nome}</span>
+                  <span class="sinal" aria-hidden="true"></span>
+                </summary>
+                <div class="descricao"><p>{cl.descricao}</p></div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   </section>
 
@@ -276,6 +289,31 @@ const hrefPersonagens = rota("personagens", idioma);
      igual. Virou lista em vez de grade porque o texto tem 500 a 800 caracteres:
      numa célula de um terço da largura ele viraria uma coluna estreita e alta,
      e ao abrir empurraria as outras duas células da fileira. */
+  /* ---------- escalões ---------- */
+  .escalao + .escalao { margin-top: clamp(30px, 3.6vw, 52px); }
+  .escalao-topo {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px clamp(16px, 2vw, 28px);
+    margin-bottom: clamp(12px, 1.4vw, 18px);
+  }
+  .escalao-topo h3 {
+    margin: 0;
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+    white-space: nowrap;
+  }
+  /* Só o Primeiro Escalão tem nota, porque só dele existe informação do autor.
+     Inventar caracterização para os outros dois seria preencher buraco com
+     invenção, e este site não faz isso. */
+  .escalao-nota {
+    margin: 0;
+    flex: 1 1 22ch;
+    max-width: 74ch;
+    font-size: .95rem;
+    color: var(--poeira);
+  }
+
   .lista-classes {
     display: grid;
     gap: 1px;

@@ -4,14 +4,19 @@ import { idiomaDaUrl, rota } from "../i18n/idiomas";
 
 import { Image } from "astro:assets";
 import logo from "../assets/marca/logo-mukogawa.png";
+import arte from "../assets/hero/hero.png";
 
-// O vídeo é um push-in que termina no instante em que a aura acende, cortado
-// em 3,6s: depois disso o enquadramento fecha demais e come a cabeça e as asas.
-// Ele roda uma vez e congela nesse quadro.
+// Houve aqui um vídeo de 6s em loop — um push-in que terminava com a aura
+// acesa. Saiu por decisão do Bruno em 2026-08-02: fica só a arte parada.
 //
-// No desktop a altura do hero acompanha a proporção 16:9 do vídeo, então quase
-// nada é cortado. No celular o vídeo fica em bloco próprio, com a arte 100%
-// visível, e o texto vem abaixo.
+// A arte é o PRIMEIRO quadro daquele vídeo, extraído em 1920×1080, e não o
+// último. O quadro final fechava o enquadramento a ponto de decepar as pontas
+// das asas nas laterais, e este projeto não corta asa. No primeiro quadro a
+// figura está inteira.
+//
+// No desktop a altura do hero acompanha a proporção 16:9 da arte, então quase
+// nada é cortado, e o que sobra sai da BASE (rocha e chão). No celular a arte
+// fica em bloco próprio, 100% visível, e o texto vem abaixo.
 
 const c = INICIO[idiomaDaUrl(Astro.url.pathname)];
 const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
@@ -19,22 +24,15 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
 
 <section class="hero">
   <div class="palco">
-    <video
-      class="filme"
-      autoplay
-      loop
-      muted
-      playsinline
-      preload="auto"
-      disablepictureinpicture
-      controlslist="nodownload nofullscreen noremoteplayback"
-      poster="/video/poster.jpg"
-      aria-hidden="true"
-      tabindex="-1"
-    >
-      <source src="/video/hero-1080.mp4" type="video/mp4" media="(min-width: 900px)" />
-      <source src="/video/hero-720.mp4" type="video/mp4" />
-    </video>
+    <Image
+      class="arte"
+      src={arte}
+      alt=""
+      widths={[900, 1440, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
     <span class="halftone" aria-hidden="true"></span>
     <span class="veu" aria-hidden="true"></span>
   </div>
@@ -61,7 +59,7 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
 
 <style>
   /* Imagem sangrando de lado a lado (cover) e o texto no topo.
-     object-position 50% 0% ancora o vídeo pelo TOPO: quando a tela é mais
+     object-position 50% 0% ancora a arte pelo TOPO: quando a tela é mais
      larga que 16:9, o que sobra é descartado da BASE (rocha e chão), nunca
      da cabeça nem das asas. */
   .hero {
@@ -76,7 +74,18 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
 
   .palco { position: absolute; inset: 77px 0 0 0; z-index: 0; }
 
-  .filme {
+  /* `:global` porque <Image> do Astro emite a <img> fora do escopo do estilo.
+
+     `cover` com `50% 0%` é o enquadramento original e é o melhor: a figura fica
+     à direita e a coluna do texto cai sobre céu, não sobre armadura. O que
+     estava errado não era isto, era o alcance: abaixo de 1280 a arte escalava
+     pela altura e invadia o texto (medido a 1024×900, 30% da largura fora da
+     tela; a 1200, 19%). O layout empilhado agora começa a 1280 e cobre essa
+     faixa, então aqui só entra janela larga, onde o corte lateral é de poucos
+     por cento e sai de nuvem.
+     No eixo vertical a arte é ancorada pelo TOPO, então a sobra sai da BASE
+     (rocha e chão) e nunca da cabeça ou das asas. */
+  .arte, .palco :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -85,11 +94,10 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
 
   .palco .halftone { color: #000; opacity: .12; z-index: 1; }
 
-  /* O vídeo do hero SEMPRE foi colorido: vermelho vivo e aura dourada. Quem
-     apagava a cor era este véu, chapado sobre a imagem inteira. Ele existe por
-     um motivo real — o texto branco precisa de contraste — mas só precisa
-     disso do lado ESQUERDO, onde o texto está. À direita, onde só há arte, ele
-     agora se abre e deixa a cor aparecer.
+  /* A arte do hero é colorida: vermelho vivo. Quem apagava a cor era este véu,
+     chapado sobre a imagem inteira. Ele existe por um motivo real — o texto
+     branco precisa de contraste — mas só precisa disso do lado ESQUERDO, onde o
+     texto está. À direita, onde só há arte, ele se abre e deixa a cor aparecer.
      O gradiente da esquerda continua forte o bastante para o texto: medido em
      16,4:1 no rótulo e 16,4:1 na sinopse, muito acima do piso de AA. */
   .veu {
@@ -149,7 +157,7 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
 
   .descer { display: none; }
 
-  @media (max-height: 800px) and (min-width: 861px) {
+  @media (max-height: 800px) and (min-width: 1281px) {
     .marca { width: min(30vw, 380px); }
     .sinopse { font-size: 1.05rem; margin-bottom: 24px; max-width: 42ch; }
     .rotulo { margin-bottom: 16px; }
@@ -157,8 +165,16 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
     .acoes :global(.botao) { min-height: 54px; padding-inline: 30px; font-size: .98rem; }
   }
 
-  /* celular: vídeo inteiro em cima (sem corte lateral), texto embaixo */
-  @media (max-width: 860px) {
+  /* Arte em bloco próprio, texto abaixo. O ponto de virada era 860px e subiu
+     para 1100 em 2026-08-02: entre 860 e 1100 a janela é estreita demais para o
+     layout sobreposto. Medido a 1024×900, a arte escalava pela altura, entrava
+     823px de altura por 1464 de largura, e a figura invadia a coluna do texto —
+     o botão secundário caía em cima da armadura. Empilhado, a arte aparece
+     inteira e o texto tem fundo limpo.
+
+     Subiu de novo para 1280 depois de medir: a 1200 a asa esquerda ainda passava
+     por baixo do botão secundário. A partir de 1280 sobra folga de verdade. */
+  @media (max-width: 1280px) {
     .hero {
       display: block;
       min-height: 0;
@@ -166,7 +182,7 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
       padding-bottom: clamp(40px, 7vh, 64px);
     }
     .palco { position: relative; inset: auto; aspect-ratio: 16 / 9; }
-    .filme { object-fit: contain; object-position: 50% 50%; }
+    .arte, .palco :global(img) { object-fit: contain; object-position: 50% 50%; }
     .veu { background: linear-gradient(0deg, var(--vazio) 0%, transparent 30%); }
     .conteudo { margin-top: clamp(20px, 5vw, 36px); padding-top: 0; }
     .marca { width: min(80vw, 440px); }
@@ -174,22 +190,3 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
     .acoes :global(.botao) { width: 100%; min-height: 56px; }
   }
 </style>
-
-<script>
-  // O filme rodava uma vez e congelava no último quadro. Agora repete sem fim,
-  // por `loop` no próprio elemento — sem JavaScript, porque `ended` não dispara
-  // em vídeo com loop e um recomeço feito na mão engasgaria a emenda.
-  //
-  // Quem pede menos movimento continua recebendo um quadro parado.
-  const video = document.querySelector<HTMLVideoElement>(".hero .filme");
-  if (video) {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      video.removeAttribute("autoplay");
-      video.removeAttribute("loop");
-      video.poster = "/video/poster-fim.jpg";
-      video.pause();
-    } else {
-      video.play().catch(() => { video.poster = "/video/poster-fim.jpg"; });
-    }
-  }
-</script>

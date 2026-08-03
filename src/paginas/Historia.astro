@@ -12,7 +12,6 @@ const { idioma } = Astro.props;
 const c = HISTORIA[idioma];
 
 const series = c.series;
-const influencias = c.influencias;
 ---
 
 <Base titulo={c.titulo} descricao={c.descricao}>
@@ -35,19 +34,57 @@ const influencias = c.influencias;
   <section class="secao">
     <div class="envelope">
       <div class="cabecalho-secao">
-        <div class="topo"><p class="rotulo">{c.rotuloObra}</p></div>
-        <h2>{c.tituloSeries}</h2>
+        <div class="topo"><p class="rotulo">{c.rotuloEternos}</p></div>
+        <h2>{c.tituloEternos}</h2>
+      </div>
+      <div class="corpo">
+        {c.eternosP.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <hr class="regua" />
+
+  <!-- Aço para a Hoste, sangue para os Rebeldes: a cor carrega a informação,
+       e é a mesma troca que os cards de personagem fazem por [data-lado]. -->
+  <section class="secao">
+    <div class="envelope">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo">{c.rotuloLados}</p></div>
+        <h2>{c.tituloLados}</h2>
       </div>
 
-      <ol class="series">
-        {series.map((s) => (
+      <div class="lados">
+        <div class="lado" data-lado="hoste">
+          <p>{c.ladosP[0]}</p>
+        </div>
+        <div class="lado" data-lado="rebeldes">
+          <p>{c.ladosP[1]}</p>
+        </div>
+      </div>
+
+      <!-- O terceiro parágrafo fica FORA dos dois blocos: ele fala do nome que
+           um lado dá ao outro, então não pertence a nenhum dos dois. Dentro do
+           bloco vermelho ele ainda desequilibrava a coluna da Hoste, que ficava
+           com metade do texto e um vazio embaixo. -->
+      <p class="lados-fecho">{c.ladosP[2]}</p>
+    </div>
+  </section>
+
+  <hr class="regua" />
+
+  <section class="secao">
+    <div class="envelope">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo">{c.rotuloEras}</p></div>
+        <h2>{c.tituloEras}</h2>
+      </div>
+
+      <ol class="eras">
+        {c.eras.map((e) => (
           <li>
-            <span class="num" aria-hidden="true">{s.num}</span>
-            <div class="conteudo">
-              <h3>{s.nome}</h3>
-              <p class="rotulo">{s.selo}</p>
-              <p class="texto">{s.texto}</p>
-            </div>
+            <h3>{e.nome}</h3>
+            <p>{e.texto}</p>
           </li>
         ))}
       </ol>
@@ -110,34 +147,42 @@ const influencias = c.influencias;
     </div>
   </section>
 
+  <!-- "Três séries" desceu para cá em 2026-08-02. A página passou a abrir com o
+       MUNDO (os Eternos, os dois lados, as eras, o Poço, a Guerra) e só depois
+       dizer em que formatos ele chega. Antes o leitor topava com "cinco
+       temporadas e dois longas" antes de saber quem luta contra quem. -->
   <section class="secao">
-    <div class="envelope duplo duplo--texto">
-      <div>
+    <div class="envelope">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo">{c.rotuloObra}</p></div>
+        <h2>{c.tituloSeries}</h2>
+      </div>
+
+      <ol class="series">
+        {series.map((s) => (
+          <li>
+            <span class="num" aria-hidden="true">{s.num}</span>
+            <div class="conteudo">
+              <h3>{s.nome}</h3>
+              <p class="rotulo">{s.selo}</p>
+              <p class="texto">{s.texto}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <hr class="regua" />
+
+  <section class="secao">
+    <div class="envelope">
       <div class="cabecalho-secao">
         <div class="topo"><p class="rotulo">{c.rotuloBase}</p></div>
         <h2>{c.tituloMitologia}</h2>
       </div>
       <div class="corpo">
         {c.mitologiaP.map((p) => <p>{p}</p>)}
-        </div>
-      </div>
-
-      <div class="coluna-lado">
-
-        <div class="cabecalho-secao">
-          <div class="topo"><p class="rotulo">{c.rotuloInfluencias}</p></div>
-          <h2>{c.tituloInfluencias}</h2>
-          <p class="lead">{c.leadInfluencias}</p>
-        </div>
-
-        <ul class="influencias">
-          {influencias.map((f) => (
-            <li>
-              <span class="obra">{f.obra}</span>
-              <span class="autor">{f.autor}</span>
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   </section>
@@ -186,6 +231,54 @@ const influencias = c.influencias;
   .series h3 { margin-bottom: 10px; }
   .series .rotulo { margin-bottom: 16px; color: var(--sangue-vivo); }
   .series .texto { color: var(--cinza); max-width: 70ch; margin: 0; }
+
+  /* ---------- os dois lados ---------- */
+  /* Sem arte, de propósito: não há ilustração para a Hoste e dar uma só aos
+     Rebeldes faria parecer que um lado importa mais. O que separa os blocos é
+     a COR, que neste projeto já carrega essa informação. */
+  .lados {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--linha);
+    border: 1px solid var(--linha);
+  }
+  .lado {
+    padding: clamp(26px, 3.2vw, 44px);
+    background: var(--tinta);
+    border-top: 3px solid var(--lado);
+  }
+  .lado p { color: var(--cinza); max-width: 58ch; margin: 0; }
+  .lados-fecho {
+    margin: clamp(22px, 2.6vw, 32px) 0 0;
+    max-width: 68ch;
+    color: var(--poeira);
+  }
+
+  /* ---------- as eras ---------- */
+  /* Fio vertical com um losango por marco: é a mesma marca de seção do site,
+     reaproveitada como conta de tempo. Puramente tipográfico, então cresce sem
+     pedir arte nova. */
+  .eras { list-style: none; margin: 0; padding: 0 0 0 34px; position: relative; }
+  .eras::before {
+    content: "";
+    position: absolute;
+    left: 5px; top: 10px; bottom: 10px;
+    width: 1px;
+    background: linear-gradient(var(--linha-forte), var(--linha));
+  }
+  .eras li { position: relative; padding-bottom: clamp(26px, 3.4vw, 40px); }
+  .eras li:last-child { padding-bottom: 0; }
+  .eras li::before {
+    content: "";
+    position: absolute;
+    left: -34px; top: 9px;
+    width: 11px; height: 11px;
+    background: var(--sangue);
+    transform: rotate(45deg);
+  }
+  .eras h3 { margin-bottom: 8px; }
+  .eras p { color: var(--cinza); max-width: 66ch; margin: 0; }
 
   .duplo {
     display: grid;
@@ -331,12 +424,6 @@ const influencias = c.influencias;
     text-transform: uppercase;
     color: var(--sangue-vivo);
   }
-
-  .duplo--texto { align-items: start; }
-  .influencias { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--linha); border: 1px solid var(--linha); }
-  .influencias li { display: grid; gap: 6px; padding: 22px 24px; background: var(--tinta); }
-  .influencias .obra { font-family: var(--fonte-display); font-weight: 700; font-size: 1.4rem; color: var(--osso); }
-  .influencias .autor { font-family: var(--fonte-ui); font-size: .84rem; letter-spacing: .2em; text-transform: uppercase; color: var(--poeira); }
 
   .aviso-bloco { border-top: 1px solid var(--linha); }
   .aviso { max-width: 74ch; color: var(--poeira); margin-top: 14px; }

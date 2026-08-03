@@ -347,22 +347,49 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
     .menu a[aria-current="page"]::after { bottom: 16px; width: 22px; right: auto; }
     .cta { margin-top: 22px; justify-content: center; min-height: 54px; }
 
-    /* O seletor de idioma continua em linha: empilhar três siglas viraria
-       três destinos falsos numa lista que já é de destinos. */
+    /* No mobile o painel abre EM FLUXO, não flutuando.
+       Medido a 375px com o menu aberto: herdando o `right: -1px` do desktop, o
+       painel de 148px ficava ancorado pela direita de um seletor de 61,8px
+       encostado na ESQUERDA da coluna, e começava em x = -66,2 — sessenta e seis
+       pixels fora da tela, com "Português" e "English" decepados na borda. Somava
+       a isso um corte de 37px embaixo, do `overflow-y: auto` do próprio menu.
+       Mover a âncora resolveria o vazamento e não o corte, e o painel ainda
+       cobriria o CTA. Em fluxo, ele empurra o que vem abaixo e o menu rola.
+
+       O comentário anterior aqui defendia não empilhar os idiomas. Valia para o
+       desenho antigo, em que as três siglas ficavam sempre visíveis: ali seriam
+       destinos falsos numa lista de destinos. Com <details>, as opções só existem
+       depois que a pessoa abre de propósito. */
     .menu .idiomas {
-      flex-direction: row;
-      align-self: flex-start;
+      align-self: stretch;
       margin-top: 22px;
       border: 1px solid var(--linha-forte);
     }
-    .menu .idiomas li { border-bottom: 0; }
-    .menu .idiomas a {
-      min-height: 48px;
-      width: auto;
+    /* `display: flex`, não o inline-flex do desktop: sem isso o summary encolhe
+       para o tamanho do texto e o `space-between` não empurra a seta. */
+    .menu .idiomas summary {
+      display: flex;
+      justify-content: space-between;
+      min-height: 54px;
       padding: 0 18px;
       font-size: .85rem;
     }
-    .menu .idiomas a[aria-current="true"]::after { bottom: 10px; left: 18px; right: 18px; width: auto; }
+    .menu .idiomas ul {
+      position: static;
+      min-width: 0;
+      padding: 0;
+      border: 0;
+      border-top: 1px solid var(--linha);
+      background: var(--tinta-2);
+    }
+    .menu .idiomas li { border-bottom: 0; }
+    .menu .idiomas ul a {
+      min-height: 54px;
+      width: 100%;
+      padding: 0 18px;
+      font-size: .95rem;
+    }
+    .menu .idiomas ul a[aria-current="true"]::before { margin-left: 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {

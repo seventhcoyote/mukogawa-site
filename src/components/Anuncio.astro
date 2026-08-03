@@ -2,9 +2,11 @@
 import { INICIO } from "../i18n/conteudo/inicio";
 import { idiomaDaUrl } from "../i18n/idiomas";
 
-// O anúncio do volume 1 é a informação mais importante do site.
+// O anúncio do lançamento é a informação mais importante do site. Desde
+// 2026-08-02 o que sai primeiro é o YOMIKIRI (o piloto), não o volume 1.
 // No site antigo era uma tarja de 104px com fundo três níveis acima do fundo
 // da página. Aqui ele é um bloco, com data em display e contagem regressiva.
+// Data confirmada pelo autor em 2026-08-02: 1º de dezembro de 2026.
 const ALVO = "2026-12-01T00:00:00-03:00";
 
 const c = INICIO[idiomaDaUrl(Astro.url.pathname)];

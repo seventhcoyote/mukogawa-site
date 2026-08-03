@@ -52,7 +52,14 @@ const gruposPt: Grupo[] = [
         p: "Mukō-Gawa é uma obra cristã?",
         r: [
           "É ficção, escrita por um autor cristão, e a narrativa bíblica é a espinha dela: o arco central é o da redenção, contado do lado de fora, pelos Eternos. Não é catequese e não pressupõe fé nenhuma do leitor — foi escrita pensando justamente em quem não é cristão.",
-          "Se você procura um paralelo, a linhagem é a de <b>Cartas de um Diabo ao Seu Aprendiz</b>, de C.S. Lewis, e <b>Esse Mundo Tenebroso</b>, de Frank Peretti. Do lado de fora da tradição cristã, a mesma liberdade de tratar o mito como matéria de ficção está em <b>Sandman</b> e <b>Deuses Americanos</b>, de Neil Gaiman: o conflito entre potências invisíveis como narrativa, não como sermão.",
+          "Se você procura um paralelo, a linhagem é a de <b>Cartas de um Diabo ao Seu Aprendiz</b>, de C.S. Lewis, e <b>Esse Mundo Tenebroso</b>, de Frank Peretti: o conflito entre potências invisíveis como narrativa, não como sermão.",
+        ],
+      },
+      {
+        p: "Quais obras influenciaram Mukō-Gawa?",
+        r: [
+          "Cinco, citadas pelo autor: <b>Castlevania</b>, de Warren Ellis, <b>Jujutsu Kaisen</b>, de Gege Akutami, <b>Elden Ring</b>, de Hidetaka Miyazaki, e <b>Sandman</b> e <b>Deuses Americanos</b>, de Neil Gaiman.",
+          "As três primeiras são fantasia sombria para público adulto, com combate de peso e um mundo que não se explica todo de uma vez. As duas de Gaiman tratam o mito como matéria de ficção, com potências invisíveis em conflito conduzindo a narrativa. É desse cruzamento que Mukō-Gawa parte.",
         ],
       },
       {
@@ -60,6 +67,7 @@ const gruposPt: Grupo[] = [
         r: [
           "Comece por <b>Saga</b>, o arco principal, dividido em cinco temporadas (ou livros). <b>Protogenesis</b> é a prequela e foi pensada para entrar entre a Segunda e a Terceira Temporada (ou livro), não antes de tudo. <b>Desvelar</b> é o epílogo e vem depois da Quinta.",
           "Ler Protogenesis fora de ordem não estraga a história, mas ela foi escrita para ser lida naquele ponto.",
+          "O <b>yomikiri</b> se passa entre Protogenesis e a Primeira Temporada. É opcional, e existe para dar o gosto do mundo antes do compromisso com a série.",
         ],
       },
       {
@@ -109,9 +117,17 @@ const gruposPt: Grupo[] = [
     titulo: "Quando e onde comprar",
     perguntas: [
       {
-        p: "Quando sai o primeiro volume?",
+        p: "O que é um yomikiri?",
         r: [
-          "Dezembro de 2026. O dia exato ainda não foi anunciado. As datas seguem o calendário atual da editora e podem mudar.",
+          "É um capítulo avulso, fechado em si mesmo, publicado antes da série regular. Em mangá, ele funciona como piloto: apresenta o mundo, o traço e o tom sem exigir que o leitor tenha acompanhado nada antes.",
+          "O de Mukō-Gawa se chama <b>Por Isso Lutamos</b> e é a primeira publicação da série. O volume 1 do mangá vem depois dele.",
+          "Na cronologia da história ele fica entre <b>Protogenesis</b> e a Primeira Temporada, e é <b>leitura opcional</b>: quem pular não fica com buraco nenhum.",
+        ],
+      },
+      {
+        p: "Quando sai o yomikiri?",
+        r: [
+          "1º de dezembro de 2026. As datas seguem o calendário atual da editora e podem mudar.",
         ],
       },
       {
@@ -201,7 +217,7 @@ const gruposPt: Grupo[] = [
 ;
 
 // Escrito em inglês na mesma voz seca, usando a terminologia do autor:
-// the Guest (não "Rebels"), the Defiled Well, Genesis, Unveiled.
+// the Guest (não "Rebels"), the Defiled Well, Protogenesis, Unveiled.
 const gruposEn: Grupo[] = [
   {
     rotulo: "The work",
@@ -230,14 +246,22 @@ const gruposEn: Grupo[] = [
         p: "Is Mukō-Gawa a Christian work?",
         r: [
           "It is fiction, written by a Christian author, and the biblical narrative is its spine: the central arc is redemption, told from the outside, by the Eternals. It is not catechism and it assumes no faith from the reader — it was written with the non-Christian reader in mind.",
-          "If you want a bearing, the lineage is that of <b>The Screwtape Letters</b>, by C.S. Lewis, and <b>This Present Darkness</b>, by Frank Peretti. From outside the Christian tradition, the same freedom to treat myth as material for fiction runs through <b>The Sandman</b> and <b>American Gods</b>, by Neil Gaiman: the conflict between unseen powers as narrative, not as sermon.",
+          "If you want a bearing, the lineage is that of <b>The Screwtape Letters</b>, by C.S. Lewis, and <b>This Present Darkness</b>, by Frank Peretti: the conflict between unseen powers as narrative, not as sermon.",
+        ],
+      },
+      {
+        p: "Which works influenced Mukō-Gawa?",
+        r: [
+          "Five, named by the author: <b>Castlevania</b>, by Warren Ellis, <b>Jujutsu Kaisen</b>, by Gege Akutami, <b>Elden Ring</b>, by Hidetaka Miyazaki, and <b>The Sandman</b> and <b>American Gods</b>, by Neil Gaiman.",
+          "The first three are dark fantasy for a mature audience, with weight in their combat and a world that does not explain itself all at once. The two Gaiman works treat myth as material for fiction, with unseen powers in conflict driving the narrative. Mukō-Gawa sets out from where those two lines cross.",
         ],
       },
       {
         p: "In what order should I read it?",
         r: [
-          "Start with <b>Saga</b>, the main arc, in five seasons (or books). <b>Genesis</b> is the prequel and was meant to land between Season Two and Season Three (or book), not before everything. <b>Unveiled</b> is the epilogue and comes after Season Five.",
-          "Reading Genesis out of order does not spoil the story, but it was written to be read at that point.",
+          "Start with <b>Saga</b>, the main arc, in five seasons (or books). <b>Protogenesis</b> is the prequel and was meant to land between Season Two and Season Three (or book), not before everything. <b>Unveiled</b> is the epilogue and comes after Season Five.",
+          "Reading Protogenesis out of order does not spoil the story, but it was written to be read at that point.",
+          "The <b>yomikiri</b> sits between Protogenesis and Season One. It is optional, and exists to give a taste of the world before committing to the series.",
         ],
       },
       {
@@ -249,7 +273,7 @@ const gruposEn: Grupo[] = [
       {
         p: "How many books are there?",
         r: [
-          "Seven in total. Five make up <b>Saga</b>, one per season, and the other two are <b>Genesis</b> and <b>Unveiled</b> — the same two that, in the adaptation plan, would be feature films.",
+          "Seven in total. Five make up <b>Saga</b>, one per season, and the other two are <b>Protogenesis</b> and <b>Unveiled</b> — the same two that, in the adaptation plan, would be feature films.",
           "The writing is finished. None of them has been published yet.",
         ],
       },
@@ -287,9 +311,17 @@ const gruposEn: Grupo[] = [
     titulo: "When and where to buy",
     perguntas: [
       {
-        p: "When does the first volume come out?",
+        p: "What is a yomikiri?",
         r: [
-          "December 2026. The exact day has not been announced. Dates shown are current publisher schedule and may change.",
+          "It is a standalone chapter, complete in itself, published ahead of the regular series. In manga it works as a pilot: it introduces the world, the art and the tone without asking the reader to have followed anything before it.",
+          "The Mukō-Gawa one is called <b>This Is Why We Fight</b>, and it is the first publication in the series. Volume 1 of the manga follows it.",
+          "Within the story it sits between <b>Protogenesis</b> and Season One, and it is <b>optional reading</b>: skipping it leaves no gap.",
+        ],
+      },
+      {
+        p: "When does the yomikiri come out?",
+        r: [
+          "1 December 2026. Dates shown are current publisher schedule and may change.",
         ],
       },
       {
@@ -417,14 +449,22 @@ const gruposJa: Grupo[] = [
         p: "『向こう側』はキリスト教の作品ですか。",
         r: [
           "キリスト教徒の作家が書いた虚構であり、聖書の物語がその背骨です。中心にあるのは贖罪の弧で、それを外側から、永遠者たちが語ります。教理問答ではなく、読者に信仰を前提としません。むしろキリスト教徒でない読者を念頭に書かれています。",
-          "手がかりを求めるなら、系譜としてはC.S.ルイス『悪魔の手紙』、フランク・ペレッティ『この暗黒の世界』に連なります。キリスト教の外側では、ニール・ゲイマン『サンドマン』『アメリカン・ゴッズ』が同じ自由さで神話を虚構の素材として扱っています。見えざる力のあいだの相克を、説教ではなく物語として描くということです。",
+          "手がかりを求めるなら、系譜としてはC.S.ルイス『悪魔の手紙』、フランク・ペレッティ『この暗黒の世界』に連なります。見えざる力のあいだの相克を、説教ではなく物語として描くということです。",
+        ],
+      },
+      {
+        p: "『向こう側』が影響を受けた作品は何ですか。",
+        r: [
+          "作者が挙げるのは五作です。ウォーレン・エリス『キャッスルヴァニア』、芥見下々『呪術廻戦』、宮崎英高『エルデンリング』、そしてニール・ゲイマン『サンドマン』『アメリカン・ゴッズ』。",
+          "前の三作は成人向けのダークファンタジーであり、重量のある戦闘と、一度にすべてを説明しない世界を持ちます。ゲイマンの二作は神話を虚構の素材として扱い、見えざる力の相克が物語を動かします。『向こう側』はその二つの線が交わる地点から出発しています。",
         ],
       },
       {
         p: "どの順番で読めばよいですか。",
         r: [
-          "主軸である<b>Saga</b>から始めてください。全五シーズン（各巻）です。<b>Genesis</b>は前日譚で、第二シーズンと第三シーズン（巻）のあいだに置かれるよう構想されました。冒頭ではありません。<b>Unveiled</b>は結びで、第五シーズンの後に来ます。",
-          "Genesisを順番どおりに読まなくても物語は損なわれませんが、あの位置で読まれるように書かれています。",
+          "主軸である<b>Saga</b>から始めてください。全五シーズン（各巻）です。<b>Protogenesis</b>は前日譚で、第二シーズンと第三シーズン（巻）のあいだに置かれるよう構想されました。冒頭ではありません。<b>Unveiled</b>は結びで、第五シーズンの後に来ます。",
+          "Protogenesisを順番どおりに読まなくても物語は損なわれませんが、あの位置で読まれるように書かれています。",
+          "<b>読み切り</b>はProtogenesisと第一シーズンのあいだに位置します。任意の一編で、シリーズに踏み込む前に世界の空気を掴むためのものです。",
         ],
       },
       {
@@ -436,7 +476,7 @@ const gruposJa: Grupo[] = [
       {
         p: "小説は何冊ありますか。",
         r: [
-          "全七冊です。うち五冊が<b>Saga</b>で各シーズンに対応し、残る二冊が<b>Genesis</b>と<b>Unveiled</b> — 映像化の計画では劇場長編にあたる二作です。",
+          "全七冊です。うち五冊が<b>Saga</b>で各シーズンに対応し、残る二冊が<b>Protogenesis</b>と<b>Unveiled</b> — 映像化の計画では劇場長編にあたる二作です。",
           "執筆は完了しています。刊行はまだ一冊もありません。",
         ],
       },
@@ -474,9 +514,17 @@ const gruposJa: Grupo[] = [
     titulo: "時期と購入先",
     perguntas: [
       {
-        p: "第1巻はいつ発売されますか。",
+        p: "読み切りとは何ですか。",
         r: [
-          "2026年12月です。正確な日付は未発表です。表示している日程は出版社の現行予定であり、変更の可能性があります。",
+          "本編の連載に先立って発表される、一話完結の作品です。世界観と絵と語り口を、前提知識なしに読者へ差し出す入口にあたります。",
+          "『向こう側』の読み切りは<b>我らが戦う理由</b>。シリーズ最初の刊行物であり、漫画第1巻はその後に続きます。",
+          "物語の時系列では<b>Protogenesis</b>と第一シーズンのあいだに位置し、<b>読まなくても支障はありません</b>。",
+        ],
+      },
+      {
+        p: "読み切りはいつ発売されますか。",
+        r: [
+          "2026年12月1日です。表示している日程は出版社の現行予定であり、変更の可能性があります。",
         ],
       },
       {
@@ -567,7 +615,7 @@ const gruposJa: Grupo[] = [
 export const FAQ: Record<Idioma, ConteudoFaq> = {
   pt: {
     titulo: "Perguntas frequentes",
-    descricao: "Quando sai o primeiro volume, onde comprar, em que ordem ler e quem faz Mukō-Gawa. As respostas diretas sobre a obra e sobre o lançamento de dezembro de 2026.",
+    descricao: "Quando sai o yomikiri, onde comprar, em que ordem ler e quem faz Mukō-Gawa. As respostas diretas sobre a obra e sobre o lançamento de 1º de dezembro de 2026.",
     rotulo: "FAQ // Dúvidas comuns",
     lead: "O que já está definido, o que ainda não está, e a diferença entre as duas coisas.",
     fechoRotulo: "Não achou aqui",
@@ -581,7 +629,7 @@ export const FAQ: Record<Idioma, ConteudoFaq> = {
   },
   en: {
     titulo: "Frequently asked questions",
-    descricao: "When the first volume arrives, where to buy it, what order to read in, and who makes Mukō-Gawa. Straight answers about the work and about the December 2026 release.",
+    descricao: "When the yomikiri arrives, where to buy it, what order to read in, and who makes Mukō-Gawa. Straight answers about the work and about the 1 December 2026 release.",
     rotulo: "FAQ // Common questions",
     lead: "What is settled, what is not, and the difference between the two.",
     fechoRotulo: "Not here",
@@ -596,7 +644,7 @@ export const FAQ: Record<Idioma, ConteudoFaq> = {
   // ES e JA ainda não escritos: caem no PT até serem traduzidos.
   es: {
     titulo: "Preguntas frecuentes",
-    descricao: "Cuándo sale el primer volumen, dónde comprar, en qué orden leer y quién hace Mukō-Gawa.",
+    descricao: "Cuándo sale el yomikiri, dónde comprar, en qué orden leer y quién hace Mukō-Gawa.",
     rotulo: "FAQ // Dudas comunes",
     lead: "Lo que ya está definido, lo que aún no, y la diferencia entre ambas cosas.",
     fechoRotulo: "No lo encontraste",
@@ -610,7 +658,7 @@ export const FAQ: Record<Idioma, ConteudoFaq> = {
   },
   ja: {
     titulo: "よくある質問",
-    descricao: "第1巻の発売時期、購入先、読む順番、そして『向こう側』の制作陣について。",
+    descricao: "読み切りの発売時期、購入先、読む順番、そして『向こう側』の制作陣について。",
     rotulo: "FAQ // よくある質問",
     lead: "決まっていること、まだ決まっていないこと、そしてその違い。",
     fechoRotulo: "見つからない場合",
