@@ -38,6 +38,13 @@ const tituloCompleto = titulo === "Mukō-Gawa"
   : `${titulo} — Mukō-Gawa 向こう側`;
 
 const canonica = new URL(Astro.url.pathname, Astro.site);
+
+// `Astro.site` e não o domínio final fixo: o `astro.config.mjs` já resolve `site`
+// a partir de VERCEL_PROJECT_PRODUCTION_URL, então no deploy esta URL aponta para
+// o host que realmente serve o arquivo. Só no build LOCAL ela cai em
+// mukogawa.com — que hoje serve o site antigo e devolve 404 no og.jpg.
+// Isso é comportamento local e não afeta o que vai ao ar: conferido no HTML
+// publicado, o og:image aponta para o preview e responde 200.
 const ogAbsoluta = new URL(og, Astro.site);
 
 // hreflang: cada página aponta para si mesma nos outros idiomas. Sem
@@ -97,6 +104,7 @@ const ehDominioFinal = Astro.site?.hostname === DOMINIO_FINAL;
     <meta property="og:description" content={descricao} />
     <meta property="og:url" content={canonica} />
     <meta property="og:image" content={ogAbsoluta} />
+    <meta property="og:image:alt" content={tituloCompleto} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 

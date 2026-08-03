@@ -76,20 +76,44 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
 
   /* `:global` porque <Image> do Astro emite a <img> fora do escopo do estilo.
 
-     `cover` com `50% 0%` é o enquadramento original e é o melhor: a figura fica
-     à direita e a coluna do texto cai sobre céu, não sobre armadura. O que
-     estava errado não era isto, era o alcance: abaixo de 1280 a arte escalava
-     pela altura e invadia o texto (medido a 1024×900, 30% da largura fora da
-     tela; a 1200, 19%). O layout empilhado agora começa a 1280 e cobre essa
-     faixa, então aqui só entra janela larga, onde o corte lateral é de poucos
-     por cento e sai de nuvem.
-     No eixo vertical a arte é ancorada pelo TOPO, então a sobra sai da BASE
-     (rocha e chão) e nunca da cabeça ou das asas. */
+     A arte NÃO ocupa a largura toda: fica em ~78%, encostada à direita. Antes
+     ela sangrava de lado a lado com `cover`, e isso custava duas coisas.
+     Primeiro, `cover` escala pela dimensão limitante e joga o resto fora, então
+     nunca se via a arte inteira. Segundo, e pior: a asa esquerda alcançava a
+     coluna do texto, e o botão secundário caía em cima dela — medido, 25,4% dos
+     pixels atrás de "Ler a história" eram claros, com o texto branco sumindo no
+     branco da pena.
+
+     Encolhendo e ancorando à direita, os dois se resolvem de uma vez: a figura
+     aparece inteira (é o zoom out) e a coluna do texto passa a cair sobre fundo
+     limpo. `contain` garante que nada seja cortado em nenhuma largura. */
+  /* `aspect-ratio` em vez de `height: 100%`: com a caixa mais alta que a arte, o
+     `contain` deixava faixa vazia dentro do próprio elemento, e a máscara — que
+     se aplica à CAIXA, não ao que o object-fit desenhou nela — desbotava esse
+     vazio em vez da arte. A borda dura na base sobrevivia. Com a caixa na
+     proporção exata da arte, os dois coincidem. */
   .arte, .palco :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 0%;
+    width: min(78%, 1500px);
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin-left: auto;
+    object-fit: contain;
+    /* Duas máscaras cruzadas. Sem elas a arte encostada à direita ganha DUAS
+       arestas duras contra o preto — uma vertical à esquerda e uma horizontal na
+       base — e vira o retângulo colado que este projeto recusa. A da esquerda
+       dissolve a entrada da arte; a de baixo dissolve a rocha, que é clara.
+       `intersect` porque as duas precisam valer ao mesmo tempo: sobrepostas sem
+       compor, a segunda simplesmente anularia a primeira.
+       Sem z-index nem filter de propósito — os dois criam contexto de
+       empilhamento, e isso já matou blend quatro vezes neste projeto. */
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, #000 18%),
+      linear-gradient(to bottom, #000 82%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, #000 18%),
+      linear-gradient(to bottom, #000 82%, transparent 100%);
+    mask-composite: intersect;
   }
 
   .palco .halftone { color: #000; opacity: .12; z-index: 1; }
@@ -153,6 +177,23 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
     padding-inline: 38px;
     font-size: 1.04rem;
     letter-spacing: .22em;
+  }
+
+  /* O botão secundário é o único elemento do site que fica SOBRE a arte com
+     fundo transparente, e a arte tem nuvem branca e rocha clara justamente na
+     altura dele: medido, até 38,9% dos pixels atrás dele são claros, e o texto
+     branco sumia no branco da pena. Ganha fundo próprio, pelo mesmo motivo que
+     a tarja da data tem fundo na imagem de compartilhamento — é informação e
+     precisa ser legível, não pode depender do que estiver por baixo.
+     Cor sólida e não `backdrop-filter`: o filtro criaria contexto de
+     empilhamento, e isso já quebrou blend quatro vezes neste projeto. */
+  .acoes :global(.botao--fantasma) {
+    background: color-mix(in srgb, var(--vazio) 82%, transparent);
+    border-color: color-mix(in srgb, var(--osso) 46%, transparent);
+  }
+  .acoes :global(.botao--fantasma:hover) {
+    background: color-mix(in srgb, var(--vazio) 92%, transparent);
+    border-color: var(--osso);
   }
 
   .descer { display: none; }
