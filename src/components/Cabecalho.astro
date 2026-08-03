@@ -8,9 +8,13 @@ const atual = Astro.url.pathname.replace(/\/$/, "") || "/";
 const idioma = idiomaDaUrl(Astro.url.pathname);
 const t = usarUI(idioma);
 
+// "Início" saiu do menu em 2026-08-03. A marca, no canto esquerdo, já é o link
+// para a home — no desktop e também no topo do menu mobile —, então o item era
+// redundante. Tirá-lo abriu a vaga de "A obra" sem o cabeçalho crescer: continua
+// com seis destinos, e a 1024px o CTA voltou a caber numa linha.
 const links = ([
-  ["inicio", "nav.inicio"],
   ["historia", "nav.historia"],
+  ["obra", "nav.obra"],
   ["personagens", "nav.personagens"],
   ["criadores", "nav.criadores"],
   ["loja", "nav.loja"],
@@ -166,6 +170,7 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
     text-decoration: none;
     color: var(--cinza);
     position: relative;
+    white-space: nowrap;   /* "A obra" quebrava em "A" / "obra" a 1024px */
     transition: color .18s ease;
   }
   .menu a:hover { color: var(--osso); }
@@ -278,6 +283,7 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
     letter-spacing: .18em;
     text-transform: uppercase;
     text-decoration: none;
+    white-space: nowrap;   /* "AVISE-ME" quebrava em "AVISE-" / "ME" a 1024px */
     clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
     transition: background .18s ease;
   }
@@ -313,7 +319,12 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
 
   /* ---------- mobile ---------- */
 
-  @media (max-width: 920px) {
+  /* Ponto de virada do hambúrguer: era 920px e subiu para 1060 em 2026-08-03,
+     quando "A obra" entrou no menu. Varrido de 960 a 1180px nos três idiomas: a
+     barra só cabe inteira a partir de ~1060 (a 1024 estourava 21px, a 1000
+     estourava 40, a 960, 72). Abaixo disso o menu vira hambúrguer, que é o
+     mesmo caminho que o hero já toma até 1280. */
+  @media (max-width: 1060px) {
     .hamburguer { display: block; order: 3; }
 
     .menu {
@@ -425,7 +436,7 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
     });
 
     // Se a janela cresce além do breakpoint, o menu volta ao estado de desktop.
-    const mq = window.matchMedia("(min-width: 921px)");
+    const mq = window.matchMedia("(min-width: 1061px)");
     mq.addEventListener("change", (e) => { if (e.matches) definir(false); });
   }
 

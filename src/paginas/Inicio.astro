@@ -12,6 +12,7 @@ import GostoDaNarrativa from "../components/GostoDaNarrativa.astro";
 import GradePersonagens from "../components/GradePersonagens.astro";
 import ListaEspera from "../components/ListaEspera.astro";
 import { INICIO } from "../i18n/conteudo/inicio";
+import { OBRA } from "../i18n/conteudo/obra";
 import { personagensDoIdioma, classesDoIdioma, ROTULOS_PERSONAGENS } from "../i18n/conteudo/personagens";
 import { rota } from "../i18n/idiomas";
 import type { Idioma } from "../i18n/idiomas";
@@ -28,6 +29,11 @@ const artesFormato = [manga, livros, anime];
 const formatos = c.formatos.map((f, i) => ({ ...f, img: artesFormato[i] }));
 const hrefHistoria = rota("historia", idioma);
 const hrefPersonagens = rota("personagens", idioma);
+const hrefObra = rota("obra", idioma);
+// O yomikiri é o que sai em 1º de dezembro, e até aqui a home anunciava a data
+// sem dizer o que a pessoa vai ler. Entram só os DOIS primeiros parágrafos da
+// sinopse; o fecho fica na página da obra, senão não há motivo para clicar.
+const yomikiri = OBRA[idioma].obras[1];
 ---
 
 <Base titulo="Mukō-Gawa" descricao={c.descricao}
@@ -35,6 +41,25 @@ const hrefPersonagens = rota("personagens", idioma);
 >
   <Hero />
   <Anuncio />
+
+  <!-- ================= o que sai primeiro ================= -->
+  <section class="secao secao--curta primeiro">
+    <div class="envelope">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo">{c.primeiroRotulo}</p></div>
+        <h2>{yomikiri.nome}</h2>
+        <p class="rotulo selo-obra">{yomikiri.selo}</p>
+      </div>
+
+      <div class="corpo">
+        {yomikiri.sinopse.slice(0, 2).map((p) => <p>{p}</p>)}
+      </div>
+
+      <p class="acao"><a class="link-varre" href={hrefObra}>{c.primeiroCta}</a></p>
+    </div>
+  </section>
+
+  <hr class="regua" />
 
   <GostoDaNarrativa />
 
@@ -157,6 +182,11 @@ const hrefPersonagens = rota("personagens", idioma);
 </Base>
 
 <style>
+  /* ---------- o que sai primeiro ---------- */
+  .primeiro .selo-obra { margin-top: 14px; color: var(--sangue-vivo); }
+  .primeiro .corpo { margin-top: clamp(20px, 2.4vw, 30px); }
+  .primeiro .acao { margin-top: clamp(20px, 2.4vw, 30px); }
+
   /* ---------- três formas ---------- */
   /* O gap precisa ser declarado nos dois eixos separadamente. Um `gap` único
      valia também para as QUATRO linhas do subgrid, e cada espaço interno do

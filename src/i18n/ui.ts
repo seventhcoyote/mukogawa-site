@@ -14,6 +14,7 @@ export const UI = {
   pt: {
     "nav.inicio": "Início",
     "nav.historia": "História",
+    "nav.obra": "A obra",
     "nav.personagens": "Personagens",
     "nav.criadores": "Criadores",
     "nav.loja": "Loja",
@@ -62,6 +63,7 @@ export const UI = {
   en: {
     "nav.inicio": "Home",
     "nav.historia": "Story",
+    "nav.obra": "The work",
     "nav.personagens": "Characters",
     "nav.criadores": "Creators",
     "nav.loja": "Shop",
@@ -110,6 +112,7 @@ export const UI = {
   es: {
     "nav.inicio": "Inicio",
     "nav.historia": "Historia",
+    "nav.obra": "La obra",
     "nav.personagens": "Personajes",
     "nav.criadores": "Creadores",
     "nav.loja": "Tienda",
@@ -158,6 +161,7 @@ export const UI = {
   ja: {
     "nav.inicio": "ホーム",
     "nav.historia": "物語",
+    "nav.obra": "作品",
     "nav.personagens": "登場人物",
     "nav.criadores": "制作",
     "nav.loja": "ショップ",

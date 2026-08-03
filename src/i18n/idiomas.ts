@@ -36,6 +36,7 @@ export const ATIVOS = TODOS.filter((i) => IDIOMAS[i].pronto);
 export const ROTAS = {
   inicio: { pt: "/", en: "/en/", es: "/es/", ja: "/ja/" },
   historia: { pt: "/historia", en: "/en/story", es: "/es/historia", ja: "/ja/story" },
+  obra: { pt: "/obra", en: "/en/work", es: "/es/obra", ja: "/ja/work" },
   personagens: { pt: "/personagens", en: "/en/characters", es: "/es/personajes", ja: "/ja/characters" },
   criadores: { pt: "/criadores", en: "/en/creators", es: "/es/creadores", ja: "/ja/creators" },
   loja: { pt: "/loja", en: "/en/shop", es: "/es/tienda", ja: "/ja/shop" },

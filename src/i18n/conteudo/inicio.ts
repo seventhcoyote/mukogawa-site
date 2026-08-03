@@ -39,6 +39,8 @@ interface ConteudoInicio {
   elencoRotulo: string;
   elencoTitulo: string;
   elencoTodos: string;
+  primeiroRotulo: string;
+  primeiroCta: string;
   classesRotulo: string;
   classesTitulo: string;
   classesLead: string;
@@ -84,6 +86,8 @@ export const INICIO: Record<Idioma, ConteudoInicio> = {
     elencoRotulo: "O elenco",
     elencoTitulo: "Personagens",
     elencoTodos: "Todos os personagens",
+    primeiroRotulo: "O que sai primeiro",
+    primeiroCta: "As oito obras",
     classesRotulo: "Os Eternos",
     classesTitulo: "As Nove Classes",
     classesLead: "Nove classes ordenam os Eternos, repartidas em três Escalões — e atravessam os dois lados da guerra.",
@@ -130,6 +134,8 @@ export const INICIO: Record<Idioma, ConteudoInicio> = {
     elencoRotulo: "The cast",
     elencoTitulo: "Characters",
     elencoTodos: "All characters",
+    primeiroRotulo: "What comes first",
+    primeiroCta: "All eight works",
     classesRotulo: "The Eternals",
     classesTitulo: "The Nine Classes",
     classesLead: "Nine classes order the Eternals, set into three Echelons — and they cross both sides of the war.",
@@ -177,6 +183,8 @@ export const INICIO: Record<Idioma, ConteudoInicio> = {
     elencoRotulo: "El reparto",
     elencoTitulo: "Personajes",
     elencoTodos: "Todos los personajes",
+    primeiroRotulo: "Lo que sale primero",
+    primeiroCta: "Las ocho obras",
     classesRotulo: "Los Eternos",
     classesTitulo: "Las Nueve Clases",
     classesLead: "Nueve clases ordenan a los Eternos, repartidas en tres Escalones, y atraviesan ambos lados de la guerra.",
@@ -224,6 +232,8 @@ export const INICIO: Record<Idioma, ConteudoInicio> = {
     elencoRotulo: "登場人物",
     elencoTitulo: "登場人物",
     elencoTodos: "登場人物一覧",
+    primeiroRotulo: "最初に出るもの",
+    primeiroCta: "八つの作品",
     classesRotulo: "永遠者",
     classesTitulo: "九つの階級",
     classesLead: "九つの階級が永遠者を貫き、三つの階梯に分かれる。戦の、いずれの側にも。",
