@@ -35,7 +35,7 @@ export const UI = {
     "rodape.emBreve": "em breve",
     "rodape.direitos": "Todos os direitos reservados.",
     "rodape.frase":
-      "Antes da história, uma civilização entrou em guerra pela forma do mundo.",
+      "Antes da humanidade, uma civilização entrou em guerra pela forma da realidade.",
     "rodape.contato": "Contato",
     "rodape.imprensa": "Imprensa",
     "rodape.privacidade": "Privacidade",
@@ -84,7 +84,7 @@ export const UI = {
     "rodape.emBreve": "soon",
     "rodape.direitos": "All rights reserved.",
     "rodape.frase":
-      "Before history, a civilization went to war over the shape of the world.",
+      "Before humanity, a civilization went to war over the shape of reality.",
     "rodape.contato": "Contact",
     "rodape.imprensa": "Press",
     "rodape.privacidade": "Privacy",
@@ -133,7 +133,7 @@ export const UI = {
     "rodape.emBreve": "pronto",
     "rodape.direitos": "Todos los derechos reservados.",
     "rodape.frase":
-      "Antes de la historia, una civilización entró en guerra por la forma del mundo.",
+      "Antes de la humanidad, una civilización entró en guerra por la forma de la realidad.",
     "rodape.contato": "Contacto",
     "rodape.imprensa": "Prensa",
     "rodape.privacidade": "Privacidad",
@@ -182,7 +182,7 @@ export const UI = {
     "rodape.emBreve": "準備中",
     "rodape.direitos": "無断転載を禁じます。",
     "rodape.frase":
-      "歴史の前に、ひとつの文明が世界の形をめぐって戦った。",
+      "人類より前に、ひとつの文明が現実の形をめぐって戦った。",
     "rodape.contato": "お問い合わせ",
     "rodape.imprensa": "メディア",
     "rodape.privacidade": "プライバシー",

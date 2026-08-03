@@ -71,8 +71,7 @@ export const OBRA: Record<Idioma, ConteudoObra> = {
         selo: "Piloto // Primeiro a ser publicado // 1º de dezembro de 2026",
         sinopse: [
           "Logo além do que o olho humano alcança, trava-se uma guerra que o mundo não sabe que existe.",
-          "O yomikiri é uma fresta aberta sobre esse campo de batalha: guerreiros que defendem um mundo sem ideia de estar sendo defendido, contra um inimigo já convencido de que venceu. Exaustos e em menor número, começam a duvidar que o que fazem aqui embaixo importe. E, num quarto silencioso ali perto, alguém está prestes a testar essa dúvida do modo mais miúdo e menos vistoso que se possa imaginar.",
-          "Um gosto da saga maior, o yomikiri é sobre a distância entre a guerra dos Céus e a dor calada de uma casa. E sobre o que seria preciso para fechá-la.",
+          "O yomikiri é uma fresta aberta sobre esse campo de batalha: guerreiros que defendem um mundo sem ideia de estar sendo defendido, contra um inimigo já convencido de que venceu. Exausto e em desvantagem na batalha em jogo, um soldado começa a duvidar que o que fazem aqui embaixo importe. E, num quarto silencioso ali perto, alguém está prestes a testar essa dúvida do modo mais miúdo que se possa imaginar.",
         ],
       },
       {
@@ -162,8 +161,7 @@ export const OBRA: Record<Idioma, ConteudoObra> = {
         selo: "Pilot // First to be published // 1 December 2026",
         sinopse: [
           "Just beyond what human eyes can reach, a war is being fought that the world does not know exists.",
-          "The yomikiri is a glimpse into that hidden battlefield: warriors defending a world that has no idea it is being defended, against an enemy already convinced it has won. Exhausted and outnumbered, they begin to doubt that anything they do down here matters. And in a quiet room nearby, someone is about to test that doubt in the smallest, least assuming way imaginable.",
-          "A taste of the larger saga, the yomikiri is about the distance between heaven's war and one household's quiet, unresolved pain. And about what it would take to close it.",
+          "The yomikiri is a glimpse into that hidden battlefield: warriors defending a world that has no idea it is being defended, against an enemy already convinced it has won. Exhausted and outnumbered in the battle at stake, a soldier begins to doubt that anything they do down here matters. And in a quiet room nearby, someone is about to test that doubt in the smallest way imaginable.",
         ],
       },
       {
@@ -254,8 +252,7 @@ export const OBRA: Record<Idioma, ConteudoObra> = {
         selo: "Piloto // Primero en publicarse // 1 de diciembre de 2026",
         sinopse: [
           "Justo más allá de lo que el ojo humano alcanza, se libra una guerra que el mundo no sabe que existe.",
-          "El yomikiri es una rendija abierta sobre ese campo de batalla: guerreros que defienden un mundo sin idea de estar siendo defendido, contra un enemigo ya convencido de que venció. Exhaustos y en inferioridad, empiezan a dudar de que lo que hacen aquí abajo importe. Y, en un cuarto silencioso allí cerca, alguien está a punto de poner a prueba esa duda del modo más menudo y menos vistoso que quepa imaginar.",
-          "Un anticipo de la saga mayor, el yomikiri trata de la distancia entre la guerra de los Cielos y el dolor callado de una casa. Y de lo que haría falta para cerrarla.",
+          "El yomikiri es una rendija abierta sobre ese campo de batalla: guerreros que defienden un mundo sin idea de estar siendo defendido, contra un enemigo ya convencido de que venció. Exhausto y en inferioridad en la batalla en juego, un soldado empieza a dudar de que lo que hacen aquí abajo importe. Y, en un cuarto silencioso allí cerca, alguien está a punto de poner a prueba esa duda del modo más menudo que quepa imaginar.",
         ],
       },
       {
@@ -346,8 +343,7 @@ export const OBRA: Record<Idioma, ConteudoObra> = {
         selo: "パイロット // 最初の刊行 // 2026年12月1日",
         sinopse: [
           "人の目の届くすぐ先で、世界がその存在を知らぬ戦が行われている。",
-          "読み切りは、その隠された戦場を覗く一条の隙間である。守られていることを知らぬ世界を守る戦士たち。すでに勝ったと信じ切った敵。疲れ果て、数でも劣り、彼らはこの下で自分たちのすることに意味があるのかを疑いはじめる。そして、すぐ近くの静かな部屋で、誰かがその疑いを、考えうるかぎり最も小さく目立たぬやり方で試そうとしている。",
-          "大きな物語の一片として、読み切りは天の戦と、ひとつの家の言わぬ痛みとの隔たりを描く。そして、その隔たりを閉じるのに何が要るのかを。",
+          "読み切りは、その隠された戦場を覗く一条の隙間である。守られていることを知らぬ世界を守る戦士たち。すでに勝ったと信じ切った敵。渦中の戦に疲れ果て、数でも劣り、ひとりの兵が、この下で自分たちのすることに意味があるのかを疑いはじめる。そして、すぐ近くの静かな部屋で、誰かがその疑いを、考えうるかぎり最も小さなやり方で試そうとしている。",
         ],
       },
       {

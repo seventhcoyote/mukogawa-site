@@ -29,6 +29,7 @@ interface ConteudoHistoria {
   ladosP: string[];
   rotuloEras: string;
   tituloEras: string;
+  leadEras: string;
   eras: Era[];
   rotuloObra: string;
   tituloSeries: string;
@@ -51,9 +52,9 @@ interface ConteudoHistoria {
 export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
   pt: {
     titulo: "História",
-    descricao: "Antes da história, uma civilização entrou em guerra pela forma do mundo. As três séries, as Fontes Profanas e a Guerra pela Humanidade em Mukō-Gawa.",
+    descricao: "Antes da humanidade, uma civilização entrou em guerra pela forma da realidade. As três séries, as Fontes Profanas e a Guerra pela Humanidade em Mukō-Gawa.",
     rotuloAbertura: "A história",
-    h1: "Antes da história, uma civilização entrou em guerra pela forma do mundo.",
+    h1: "Antes da humanidade, uma civilização entrou em guerra pela forma da realidade.",
     aberturaP1: "Como as sagas nórdicas e as epopeias gregas, Mukō-Gawa é uma imersão profunda na mitologia cristã. A narrativa conta a Criação e a Redenção, enquanto uma guerra celestial culmina em paz eterna.",
     aberturaP2: "Mukō-Gawa acompanha uma guerra civil entre um povo proto-humano que disputa um plano interdimensional — a dobra entre o que é e o que foi prometido. Duas ordens nascem de uma mesma linhagem: a que quer manter o plano fechado e a que quer rompê-lo.",
     rotuloEternos: "Os Eternos",
@@ -73,11 +74,12 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     ],
     rotuloEras: "As eras",
     tituloEras: "O tempo desta história",
+    leadEras: "A narrativa vai do surgimento dos Antigos, que precedem a humanidade, ao desfecho escatológico — belo e assombroso na mesma medida. Protogenesis cobre da Era das Estrelas até a era dos homens.",
     eras: [
       { nome: "A Era das Estrelas", texto: "A era mais antiga. Os Eternos percorrem o cosmos, cartografam-no e o cultivam, e é neste tempo que cada um encontra o próprio chamado." },
-      { nome: "O Cisma", texto: "A recusa de Helel parte a Hoste em duas e acende a Guerra Celestial. Tudo o que Protogenesis narra acontece aqui." },
-      { nome: "A queda no jardim", texto: "O homem é criado, e cai. Com ele termina a era da inocência." },
+      { nome: "O Cisma", texto: "A recusa de Helel parte a Hoste em duas e acende a Guerra Celestial." },
       { nome: "A era dos homens", texto: "A história dos homens corre na superfície e a guerra corre por baixo dela, invisível. É nesta era que o yomikiri e a Saga se passam." },
+      { nome: "O Ajuste de Contas", texto: "Ainda que muitos o ignorem, deveria ser temido por todos, pois ninguém lhe escapa. A colisão do reino eterno sobre o reino dos mortais é inevitável. E o fim também." },
     ],
     rotuloObra: "A obra",
     tituloSeries: "Três séries",
@@ -118,9 +120,9 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
 
   en: {
     titulo: "Story",
-    descricao: "Before history, a civilization went to war over the shape of the world. The three series, the Defiled Well and the War for Mankind in Mukō-Gawa.",
+    descricao: "Before humanity, a civilization went to war over the shape of reality. The three series, the Defiled Well and the War for Mankind in Mukō-Gawa.",
     rotuloAbertura: "The story",
-    h1: "Before history, a civilization went to war over the shape of the world.",
+    h1: "Before humanity, a civilization went to war over the shape of reality.",
     aberturaP1: "Much like the Norse sagas and the Greek epics, Mukō-Gawa is a deep dive into Christian mythology. The narrative tells of Creation and Redemption, as a celestial war culminates in eternal peace.",
     aberturaP2: "Mukō-Gawa follows a civil war among a proto-human people who contend on an interdimensional plane — the fold between what is and what was promised. Two orders emerge from one bloodline: those who would hold the plane closed, and those who would tear it open.",
     rotuloEternos: "The Eternals",
@@ -140,11 +142,12 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     ],
     rotuloEras: "The ages",
     tituloEras: "The time this story runs through",
+    leadEras: "The narrative spans from the surge of the Ancient beings who predate mankind to an eschatological closure that is both beautiful and haunting. Protogenesis tells of the Age of Stars until the age of man.",
     eras: [
       { nome: "The Age of Stars", texto: "The earliest age. The Eternals range across the cosmos, chart it and cultivate it, and it is in this time that each one finds his calling." },
-      { nome: "The Sundering", texto: "Helel's refusal splits the Host in two and kindles the Celestial War. Everything Protogenesis tells happens here." },
-      { nome: "The fall in the garden", texto: "Man is made, and falls. The age of innocence ends with him." },
+      { nome: "The Sundering", texto: "Helel's refusal splits the Host in two and kindles the Celestial War." },
       { nome: "The age of man", texto: "The history of men runs on the surface and the war runs beneath it, unseen. The yomikiri and the Saga are set in this age." },
+      { nome: "The Reckoning", texto: "Though the reckoning is ignored by some, it ought to be feared by all, for none can escape it. The collision of the eternal realm onto the realm of mortals is unavoidable. And so is the end." },
     ],
     rotuloObra: "The work",
     tituloSeries: "Three series",
@@ -186,9 +189,9 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
   // Traduzido do PT-BR. Pendente de revisão.
   es: {
     titulo: "Historia",
-    descricao: "Antes de la historia, una civilización entró en guerra por la forma del mundo. Las tres series, las Fuentes Profanas y la Guerra por la Humanidad en Mukō-Gawa.",
+    descricao: "Antes de la humanidad, una civilización entró en guerra por la forma de la realidad. Las tres series, las Fuentes Profanas y la Guerra por la Humanidad en Mukō-Gawa.",
     rotuloAbertura: "La historia",
-    h1: "Antes de la historia, una civilización entró en guerra por la forma del mundo.",
+    h1: "Antes de la humanidad, una civilización entró en guerra por la forma de la realidad.",
     aberturaP1: "Como las sagas nórdicas y las epopeyas griegas, Mukō-Gawa es una inmersión profunda en la mitología cristiana. La narrativa cuenta la Creación y la Redención, mientras una guerra celestial culmina en paz eterna.",
     aberturaP2: "Mukō-Gawa sigue una guerra civil entre un pueblo protohumano que disputa un plano interdimensional: el pliegue entre lo que es y lo que fue prometido. Dos órdenes nacen de un mismo linaje: la que quiere mantener el plano cerrado y la que quiere romperlo.",
     rotuloEternos: "Los Eternos",
@@ -208,11 +211,12 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     ],
     rotuloEras: "Las eras",
     tituloEras: "El tiempo de esta historia",
+    leadEras: "La narrativa va del surgimiento de los Antiguos, que preceden a la humanidad, al desenlace escatológico: bello y sobrecogedor en igual medida. Protogenesis cubre de la Era de las Estrellas hasta la era de los hombres.",
     eras: [
       { nome: "La Era de las Estrellas", texto: "La era más antigua. Los Eternos recorren el cosmos, lo cartografían y lo cultivan, y es en este tiempo cuando cada uno encuentra su llamado." },
-      { nome: "El Cisma", texto: "La negativa de Helel parte la Hueste en dos y enciende la Guerra Celestial. Todo lo que narra Protogenesis ocurre aquí." },
-      { nome: "La caída en el jardín", texto: "El hombre es creado, y cae. Con él termina la era de la inocencia." },
+      { nome: "El Cisma", texto: "La negativa de Helel parte la Hueste en dos y enciende la Guerra Celestial." },
       { nome: "La era de los hombres", texto: "La historia de los hombres corre en la superficie y la guerra corre por debajo, invisible. En esta era transcurren el yomikiri y la Saga." },
+      { nome: "El Ajuste de Cuentas", texto: "Aunque muchos lo ignoren, debería ser temido por todos, pues nadie escapa de él. La colisión del reino eterno sobre el reino de los mortales es inevitable. Y el fin también." },
     ],
     rotuloObra: "La obra",
     tituloSeries: "Tres series",
@@ -254,9 +258,9 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
   // Base: site modelo. Pendente de revisão.
   ja: {
     titulo: "物語",
-    descricao: "歴史の前に、ひとつの文明が世界の形をめぐって戦った。『向こう側』の三つのシリーズ、汚された井戸、そして人のための戦。",
+    descricao: "人類より前に、ひとつの文明が現実の形をめぐって戦った。『向こう側』の三つのシリーズ、汚された井戸、そして人のための戦。",
     rotuloAbertura: "物語",
-    h1: "歴史の前に、ひとつの文明が世界の形をめぐって戦った。",
+    h1: "人類より前に、ひとつの文明が現実の形をめぐって戦った。",
     aberturaP1: "北欧のサガやギリシアの叙事詩のように、『向こう側』はキリスト教神話への深い潜行である。創造と贖罪の物語を語り、天上の戦は永遠の平和へと至る。",
     aberturaP2: "『向こう側』は、次元の狭間 — 現にあるものと約束されたものとの折り目 — を争う原人類の内戦を描く。ひとつの血統から二つの秩序が生まれる。狭間を閉じたままにする者と、引き裂こうとする者。",
     rotuloEternos: "永遠者",
@@ -276,11 +280,12 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     ],
     rotuloEras: "時代",
     tituloEras: "この物語が渡る時",
+    leadEras: "物語は、人類に先立つ古き者たちの興りから、美しくも慄然たる終末の結びまでを渡る。『Protogenesis』が語るのは、星の時代から人の時代までである。",
     eras: [
       { nome: "星の時代", texto: "最も古い時代。永遠者は宇宙を巡り、図に写し、育てた。おのおのが自らの召しを見いだすのも、この時である。" },
-      { nome: "断絶", texto: "ヘレルの拒みが天軍を二つに割り、天上の戦に火を点ける。『Protogenesis』が語るのは、すべてここで起きたことである。" },
-      { nome: "園における堕落", texto: "人が造られ、そして堕ちる。無垢の時代は人とともに終わる。" },
+      { nome: "断絶", texto: "ヘレルの拒みが天軍を二つに割り、天上の戦に火を点ける。" },
       { nome: "人の時代", texto: "人の歴史が表を流れ、戦はその下を、見えぬまま流れる。読み切りと『Saga』は、この時代に置かれている。" },
+      { nome: "清算", texto: "軽んじる者もあるが、本来はすべての者が恐れるべきものである。何者も逃れ得ぬからだ。永遠の界が死すべき者の界へ落ちかかることは避けられない。終わりもまた同じである。" },
     ],
     rotuloObra: "作品",
     tituloSeries: "三つのシリーズ",

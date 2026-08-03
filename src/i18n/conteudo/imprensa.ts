@@ -86,7 +86,7 @@ export const IMPRENSA: Record<Idioma, ConteudoImprensa> = {
     sinopseNota: "Três tamanhos, para caber em qualquer espaço. Todos podem ser publicados como estão.",
     sinopses: [
       { rotulo: "Uma linha",
-        texto: "Antes da história, uma civilização entrou em guerra pela forma do mundo." },
+        texto: "Antes da humanidade, uma civilização entrou em guerra pela forma da realidade." },
       { rotulo: "Um parágrafo",
         texto: "Mukō-Gawa é uma dark fantasy sobre a guerra civil de um povo proto-humano que disputa o plano interdimensional entre o que é e o que foi prometido. De uma só linhagem nascem duas ordens: a que quer manter a fenda fechada e a que quer rasgá-la. A narrativa sai primeiro como mangá, aberta pelo yomikiri — o capítulo piloto — em 1º de dezembro de 2026, e depois como série de livros." },
       { rotulo: "Três parágrafos", texto: "" },
@@ -158,7 +158,7 @@ export const IMPRENSA: Record<Idioma, ConteudoImprensa> = {
     sinopseNota: "Three lengths, to fit any space. All of them may be published as they are.",
     sinopses: [
       { rotulo: "One line",
-        texto: "Before history, a civilisation went to war over the shape of the world." },
+        texto: "Before humanity, a civilization went to war over the shape of reality." },
       { rotulo: "One paragraph",
         texto: "Mukō-Gawa is a dark fantasy about the civil war of a proto-human people who contend on the interdimensional plane between what is and what was promised. Two orders emerge from one bloodline: those who would hold the fold closed and those who would tear it open. It comes first as a manga, opened by the yomikiri — the pilot chapter — on 1 December 2026, and then as a series of novels." },
       { rotulo: "Three paragraphs", texto: "" },
@@ -230,7 +230,7 @@ export const IMPRENSA: Record<Idioma, ConteudoImprensa> = {
     sinopseNota: "Tres tamaños, para caber en cualquier espacio. Todos pueden publicarse tal como están.",
     sinopses: [
       { rotulo: "Una línea",
-        texto: "Antes de la historia, una civilización fue a la guerra por la forma del mundo." },
+        texto: "Antes de la humanidad, una civilización entró en guerra por la forma de la realidad." },
       { rotulo: "Un párrafo",
         texto: "Mukō-Gawa es una dark fantasy sobre la guerra civil de un pueblo protohumano que disputa el plano interdimensional entre lo que es y lo que fue prometido. De un solo linaje nacen dos órdenes: la que quiere mantener cerrada la grieta y la que quiere rasgarla. La narrativa sale primero como manga, abierta por el yomikiri — el capítulo piloto — el 1 de diciembre de 2026, y después como serie de libros." },
       { rotulo: "Tres párrafos", texto: "" },
@@ -302,7 +302,7 @@ export const IMPRENSA: Record<Idioma, ConteudoImprensa> = {
     sinopseNota: "掲載枠に合わせて三つの長さをご用意しました。いずれもそのまま掲載いただけます。",
     sinopses: [
       { rotulo: "一行",
-        texto: "歴史の前に、ひとつの文明が世界の形をめぐって戦った。" },
+        texto: "人類より前に、ひとつの文明が現実の形をめぐって戦った。" },
       { rotulo: "一段落",
         texto: "『向こう側』は、原人類の同族が、現にあるものと約束されたものとの折り目である次元の狭間をめぐって争う内戦を描くダークファンタジーである。ひとつの血統から二つの秩序が生まれる。狭間を閉じたままにしようとする者と、引き裂こうとする者。刊行はまず漫画として、読み切りが2026年12月1日に。続いて小説シリーズとなる。" },
       { rotulo: "三段落", texto: "" },
