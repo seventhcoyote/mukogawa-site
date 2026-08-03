@@ -5,6 +5,7 @@ import Rodape from "../components/Rodape.astro";
 import Intro from "../components/Intro.astro";
 import { IDIOMAS, ATIVOS, PADRAO, idiomaDaUrl, equivalente, rota } from "../i18n/idiomas";
 import { usarUI } from "../i18n/ui";
+import { podeIndexar } from "../config/indexacao";
 
 interface Props {
   titulo: string;
@@ -57,14 +58,13 @@ const alternativas = ATIVOS.map((outro) => ({
 }));
 const xDefault = new URL(equivalente(Astro.url.pathname, PADRAO), Astro.site).toString();
 
-// Só o domínio definitivo é indexável. Enquanto o site vive numa URL de preview,
-// ele pede noindex — senão o Google indexa o `.vercel.app` antes de o Israel
-// aprovar, e depois esse endereço briga com mukogawa.com por conteúdo duplicado.
-// A URL de PRODUÇÃO da Vercel não recebe `X-Robots-Tag` automático; só as de
-// branch recebem. Verificado nesta publicação: nenhum header desse tipo veio.
-// Quando o domínio for migrado, a marcação some sozinha — não há o que lembrar.
-const DOMINIO_FINAL = "mukogawa.com";
-const ehDominioFinal = Astro.site?.hostname === DOMINIO_FINAL;
+// Quem decide é `config/indexacao.ts`: domínio definitivo E liberação explícita
+// no ambiente. Fora disso o site pede noindex — senão o Google indexa o
+// `.vercel.app`, que depois brigaria com mukogawa.com por conteúdo duplicado, e
+// hoje também indexaria o domínio final antes de o site estar pronto como
+// produto. A URL de PRODUÇÃO da Vercel não recebe `X-Robots-Tag` automático; só
+// as de branch recebem. Verificado nesta publicação: nenhum header desse tipo veio.
+const indexavel = podeIndexar(Astro.site);
 ---
 
 <!doctype html>
@@ -76,7 +76,7 @@ const ehDominioFinal = Astro.site?.hostname === DOMINIO_FINAL;
     <title>{tituloCompleto}</title>
     <meta name="description" content={descricao} />
     <link rel="canonical" href={canonica} />
-    {!ehDominioFinal && <meta name="robots" content="noindex, nofollow" />}
+    {!indexavel && <meta name="robots" content="noindex, nofollow" />}
 
     {/* A fonte de display só era descoberta depois do CSS baixar e ser
         processado: medido, o CSS começava em 56ms e a fonte em 101ms, em
