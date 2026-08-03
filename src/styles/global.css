@@ -245,7 +245,21 @@ p:last-child { margin-bottom: 0; }
   padding: 10px 0;
   position: relative;
 }
+/* O filete FICA, e só troca de cor no hover. Antes ele nascia em `scaleX(0)` e
+   só existia sob o cursor: em repouso o link era texto em caixa alta, sem
+   sublinhado, sem borda e sem seta — visualmente idêntico a um rótulo. No
+   celular, onde não há hover, ele nunca aparecia, e o link não se anunciava
+   como clicável em nenhum momento. A varredura continua sendo o efeito; o que
+   mudou é que agora ela varre por cima de algo que já estava lá. */
 .link-varre::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 8px;
+  height: 1px; width: 100%;
+  background: var(--linha-forte);
+  transition: background .3s ease;
+}
+.link-varre::before {
   content: "";
   position: absolute;
   left: 0; bottom: 8px;
@@ -254,8 +268,13 @@ p:last-child { margin-bottom: 0; }
   transform: scaleX(0);
   transform-origin: left;
   transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+  z-index: 1;
 }
-.link-varre:hover::after { transform: scaleX(1); }
+.link-varre:hover::before { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .link-varre::before { transition: none; }
+}
 
 /* ---------- textura: halftone e grão ---------- */
 

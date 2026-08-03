@@ -55,7 +55,7 @@ const yomikiri = OBRA[idioma].obras[1];
         {yomikiri.sinopse.slice(0, 2).map((p) => <p>{p}</p>)}
       </div>
 
-      <p class="acao"><a class="link-varre" href={hrefObra}>{c.primeiroCta}</a></p>
+      <p class="acao"><a class="botao botao--fantasma" href={hrefObra}>{c.primeiroCta}</a></p>
     </div>
   </section>
 
@@ -103,7 +103,7 @@ const yomikiri = OBRA[idioma].obras[1];
           <h2>{c.historiaTitulo}</h2>
         </div>
         <p class="lead">{c.historiaLead}</p>
-        <p class="acao"><a class="link-varre" href={hrefHistoria}>{c.historiaCta}</a></p>
+        <p class="acao"><a class="botao botao--fantasma" href={hrefHistoria}>{c.historiaCta}</a></p>
       </div>
 
       <div class="lado-arte">
@@ -128,13 +128,15 @@ const yomikiri = OBRA[idioma].obras[1];
         <div class="topo">
           <p class="rotulo">{c.elencoRotulo}</p>
         </div>
-        <div class="linha-titulo">
-          <h2>{c.elencoTitulo}</h2>
-          <a class="link-varre" href={hrefPersonagens}>{c.elencoTodos}</a>
-        </div>
+        <h2>{c.elencoTitulo}</h2>
       </div>
 
       <Revelar forca="fade"><GradePersonagens lista={personagens} /></Revelar>
+
+      {/* Estava ao lado do título, ANTES da grade — pedia "ver todos" a quem
+          ainda não tinha visto nenhum. Desceu para depois dos onze, que é onde
+          a vontade de ver o resto aparece, e virou botão junto com os outros. */}
+      <p class="acao"><a class="botao botao--fantasma" href={hrefPersonagens}>{c.elencoTodos}</a></p>
     </div>
   </section>
 
@@ -186,6 +188,7 @@ const yomikiri = OBRA[idioma].obras[1];
   .primeiro .selo-obra { margin-top: 14px; color: var(--sangue-vivo); }
   .primeiro .corpo { margin-top: clamp(20px, 2.4vw, 30px); }
   .primeiro .acao { margin-top: clamp(20px, 2.4vw, 30px); }
+  .acao { margin-top: clamp(24px, 2.8vw, 36px); }
 
   /* ---------- três formas ---------- */
   /* O gap precisa ser declarado nos dois eixos separadamente. Um `gap` único
@@ -296,14 +299,6 @@ const yomikiri = OBRA[idioma].obras[1];
       linear-gradient(var(--sangue), var(--sangue)) 0 0 / 40px 1px no-repeat,
       linear-gradient(var(--sangue), var(--sangue)) 100% 100% / 1px 40px no-repeat,
       linear-gradient(var(--sangue), var(--sangue)) 100% 100% / 40px 1px no-repeat;
-  }
-
-  .linha-titulo {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
   }
 
   /* ---------- classes ---------- */
