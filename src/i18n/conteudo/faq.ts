@@ -107,7 +107,7 @@ const gruposPt: Grupo[] = [
       {
         p: "Quantos personagens tem a série?",
         r: [
-          'A série conta com um elenco de mais de cem personagens. O site apresenta onze deles — os que já ganharam arte própria —, divididos entre a Hoste e os Rebeldes, um por classe. <a href="/personagens">A grade está aqui</a>.',
+          'A série conta com um elenco de mais de cem personagens. O site apresenta onze deles — os que já ganharam arte própria —, divididos entre a Hoste e os Rebeldes. Entre eles as nove classes aparecem todas, mas cada classe tem muitos outros. <a href="/personagens">A grade está aqui</a>.',
         ],
       },
     ],
@@ -301,7 +301,7 @@ const gruposEn: Grupo[] = [
       {
         p: "How many characters are there?",
         r: [
-          'The series has a cast of more than a hundred characters. The site introduces eleven of them — the ones that already have art of their own — split between the Host and the Guest, one per class. <a href="/en/characters">The grid is here</a>.',
+          'The series has a cast of more than a hundred characters. The site introduces eleven of them — the ones that already have art of their own — split between the Host and the Guest. All nine classes appear among them, though each class has many more. <a href="/en/characters">The grid is here</a>.',
         ],
       },
     ],
@@ -504,7 +504,7 @@ const gruposJa: Grupo[] = [
       {
         p: "登場人物は何人いますか。",
         r: [
-          '本シリーズには百を超える登場人物がいます。本サイトではそのうち十一人 — すでに専用の絵を持つ者たち — を、天軍と客人に分け、階級ごとに一人ずつ紹介しています。<a href="/ja/characters">一覧はこちら</a>。',
+          '本シリーズには百を超える登場人物がいます。本サイトではそのうち十一人 — すでに専用の絵を持つ者たち — を、天軍と客人に分けて紹介しています。九つの階級はいずれもこの中に現れますが、各階級にはさらに多くの者がいます。<a href="/ja/characters">一覧はこちら</a>。',
         ],
       },
     ],
