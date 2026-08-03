@@ -223,7 +223,23 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
       padding-bottom: clamp(40px, 7vh, 64px);
     }
     .palco { position: relative; inset: auto; aspect-ratio: 16 / 9; }
-    .arte, .palco :global(img) { object-fit: contain; object-position: 50% 50%; }
+
+    /* Aqui a arte volta a ocupar a LARGURA TODA, sem margem e sem máscara.
+       O recuo de 78% à direita existe no desktop para tirar a figura de cima da
+       coluna de texto — e no empilhado não há coluna de texto ao lado, o texto
+       vem abaixo. Mantê-lo aqui só produzia defeito: medido a 375px, a arte
+       ficava com 293px e sobravam 83px de faixa preta à esquerda, com a máscara
+       desbotando a entrada por cima. Era o "borrão preto no canto esquerdo".
+       Como o palco e a arte têm a mesma proporção 16/9, ela preenche exato e
+       não sobra aresta para dissolver. */
+    .arte, .palco :global(img) {
+      width: 100%;
+      margin-left: 0;
+      object-fit: contain;
+      object-position: 50% 50%;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
     .veu { background: linear-gradient(0deg, var(--vazio) 0%, transparent 30%); }
     .conteudo { margin-top: clamp(20px, 5vw, 36px); padding-top: 0; }
     .marca { width: min(80vw, 440px); }
