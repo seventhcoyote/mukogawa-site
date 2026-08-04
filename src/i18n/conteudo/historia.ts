@@ -56,7 +56,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloAbertura: "A história",
     h1: "Antes da humanidade, uma civilização entrou em guerra pela forma da realidade.",
     aberturaP1: "Como as sagas nórdicas e as epopeias gregas, Mukō-Gawa é uma imersão profunda na mitologia cristã. A narrativa conta a Criação e a Redenção, enquanto uma guerra celestial culmina em paz eterna.",
-    aberturaP2: "Mukō-Gawa acompanha uma guerra civil entre um povo proto-humano que disputa um plano interdimensional — a dobra entre o que é e o que foi prometido. Duas ordens nascem de uma mesma linhagem: a que quer manter o plano fechado e a que quer rompê-lo.",
+    aberturaP2: "Mukō-Gawa acompanha uma guerra civil entre um povo proto-humano que disputa um plano interdimensional — a dobra entre o que é e o que foi prometido. Duas ordens erguem-se de uma mesma feitura: a que quer manter o plano fechado e a que quer rompê-lo.",
     rotuloEternos: "Os Eternos",
     tituloEternos: "Quem são os Eternos",
     eternosP: [
@@ -124,7 +124,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloAbertura: "The story",
     h1: "Before humanity, a civilization went to war over the shape of reality.",
     aberturaP1: "Much like the Norse sagas and the Greek epics, Mukō-Gawa is a deep dive into Christian mythology. The narrative tells of Creation and Redemption, as a celestial war culminates in eternal peace.",
-    aberturaP2: "Mukō-Gawa follows a civil war among a proto-human people who contend on an interdimensional plane — the fold between what is and what was promised. Two orders emerge from one bloodline: those who would hold the plane closed, and those who would tear it open.",
+    aberturaP2: "Mukō-Gawa follows a civil war among a proto-human people who contend on an interdimensional plane — the fold between what is and what was promised. Two orders rise from one making: those who would hold the plane closed, and those who would tear it open.",
     rotuloEternos: "The Eternals",
     tituloEternos: "Who the Eternals are",
     eternosP: [
@@ -193,7 +193,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloAbertura: "La historia",
     h1: "Antes de la humanidad, una civilización entró en guerra por la forma de la realidad.",
     aberturaP1: "Como las sagas nórdicas y las epopeyas griegas, Mukō-Gawa es una inmersión profunda en la mitología cristiana. La narrativa cuenta la Creación y la Redención, mientras una guerra celestial culmina en paz eterna.",
-    aberturaP2: "Mukō-Gawa sigue una guerra civil entre un pueblo protohumano que disputa un plano interdimensional: el pliegue entre lo que es y lo que fue prometido. Dos órdenes nacen de un mismo linaje: la que quiere mantener el plano cerrado y la que quiere romperlo.",
+    aberturaP2: "Mukō-Gawa sigue una guerra civil entre un pueblo protohumano que disputa un plano interdimensional: el pliegue entre lo que es y lo que fue prometido. Dos órdenes se alzan de una misma hechura: la que quiere mantener el plano cerrado y la que quiere romperlo.",
     rotuloEternos: "Los Eternos",
     tituloEternos: "Quiénes son los Eternos",
     eternosP: [
@@ -262,7 +262,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloAbertura: "物語",
     h1: "人類より前に、ひとつの文明が現実の形をめぐって戦った。",
     aberturaP1: "北欧のサガやギリシアの叙事詩のように、『向こう側』はキリスト教神話への深い潜行である。創造と贖罪の物語を語り、天上の戦は永遠の平和へと至る。",
-    aberturaP2: "『向こう側』は、次元の狭間 — 現にあるものと約束されたものとの折り目 — を争う原人類の内戦を描く。ひとつの血統から二つの秩序が生まれる。狭間を閉じたままにする者と、引き裂こうとする者。",
+    aberturaP2: "『向こう側』は、次元の狭間 — 現にあるものと約束されたものとの折り目 — を争う原人類の内戦を描く。ひとつの創造から二つの秩序が立ち上がる。狭間を閉じたままにする者と、引き裂こうとする者。",
     rotuloEternos: "永遠者",
     tituloEternos: "永遠者とは何者か",
     eternosP: [

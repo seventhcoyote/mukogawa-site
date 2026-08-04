@@ -32,7 +32,7 @@ const gruposPt: Grupo[] = [
       {
         p: "O que é Mukō-Gawa?",
         r: [
-          "Uma fantasia sombria sobre uma guerra civil entre um povo proto-humano que disputa um plano interdimensional: a dobra entre o que é e o que foi prometido. Duas ordens nascem de uma mesma linhagem, a que quer manter o plano fechado e a que quer rompê-lo.",
+          "Uma fantasia sombria sobre uma guerra civil entre um povo proto-humano que disputa um plano interdimensional: a dobra entre o que é e o que foi prometido. Duas ordens erguem-se de uma mesma feitura, a que quer manter o plano fechado e a que quer rompê-lo.",
           'A narrativa sai primeiro como mangá, depois como série de livros. <a href="/historia">A história inteira está aqui</a>.',
         ],
       },
@@ -226,7 +226,7 @@ const gruposEn: Grupo[] = [
       {
         p: "What is Mukō-Gawa?",
         r: [
-          "A dark fantasy about a civil war among a proto-human people who contend on an interdimensional plane: the fold between what is and what was promised. Two orders emerge from one bloodline, those who would hold the plane closed and those who would tear it open.",
+          "A dark fantasy about a civil war among a proto-human people who contend on an interdimensional plane: the fold between what is and what was promised. Two orders rise from one making, those who would hold the plane closed and those who would tear it open.",
           'It comes first as a manga, then as a series of novels. <a href="/en/story">The whole story is here</a>.',
         ],
       },
@@ -429,7 +429,7 @@ const gruposJa: Grupo[] = [
       {
         p: "『向こう側』とはどんな作品ですか。",
         r: [
-          "原人類の同族が、次元の狭間 — 現にあるものと約束されたものとの折り目 — をめぐって争う内戦を描くダークファンタジーです。ひとつの血統から二つの秩序が生まれます。狭間を閉じたままにしようとする者と、引き裂こうとする者です。",
+          "原人類の同族が、次元の狭間 — 現にあるものと約束されたものとの折り目 — をめぐって争う内戦を描くダークファンタジーです。ひとつの創造から二つの秩序が立ち上がります。狭間を閉じたままにしようとする者と、引き裂こうとする者です。",
           '刊行はまず漫画、続いて小説シリーズという順になります。<a href="/ja/story">物語の全体はこちら</a>。',
         ],
       },
