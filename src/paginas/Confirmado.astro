@@ -12,9 +12,21 @@
  * script curto reencaminha quem tem navegador em inglês ou japonês. Sem
  * JavaScript a pessoa fica no português e a página funciona inteira: é o mesmo
  * contrato do resto do site.
+ *
+ * POR QUE A CAPA ESTÁ AQUI. A primeira versão era só texto, e ficava oca:
+ * medido a 1440px, o h1 quebrava em três linhas e sobrava metade da tela vazia
+ * à direita, com o rodapé subindo para preencher. Uma página de confirmação é
+ * um momento de recompensa — a pessoa acabou de fazer o que foi pedido — e
+ * recompensa precisa de peso visual, não de mais espaço em branco. A capa é a
+ * única imagem do produto que existe, e é a mesma peça que a seção da lista de
+ * espera usa quando pede o e-mail: quem confirmou vê de novo o que ficou de
+ * esperar. Abaixo de 900px ela desce para depois dos botões, porque no celular
+ * o que importa primeiro é a confirmação.
  */
 import Base from "../layouts/Base.astro";
+import CapaVolume from "../components/CapaVolume.astro";
 import { CONFIRMADO } from "../i18n/conteudo/confirmado";
+import { LOJA } from "../i18n/conteudo/loja";
 import { rota } from "../i18n/idiomas";
 import type { Idioma } from "../i18n/idiomas";
 
@@ -29,23 +41,29 @@ const c = CONFIRMADO[idioma];
 
 <Base titulo={c.titulo} descricao={c.descricao} semIndice>
   <section class="secao secao--curta">
-    <div class="envelope estreito">
-      <div class="cabecalho-secao">
-        <div class="topo"><p class="rotulo rotulo--lado" data-lado="rebeldes">{c.rotulo}</p></div>
-        <h1>{c.h1}</h1>
-        <p class="lead">{c.lead}</p>
+    <div class="envelope interno">
+      <div class="coluna-texto">
+        <div class="cabecalho-secao">
+          <div class="topo"><p class="rotulo rotulo--lado" data-lado="rebeldes">{c.rotulo}</p></div>
+          <h1>{c.h1}</h1>
+          <p class="lead">{c.lead}</p>
+        </div>
+
+        <ul class="espera-lista">
+          {c.espera.map((linha) => (<li>{linha}</li>))}
+        </ul>
+
+        <div class="acoes">
+          <a class="botao" href={rota("historia", idioma)}>{c.ctaHistoria}</a>
+          <a class="botao botao--fantasma" href={rota("personagens", idioma)}>{c.ctaPersonagens}</a>
+        </div>
+
+        <p class="nota">{c.nota}</p>
       </div>
 
-      <ul class="espera-lista">
-        {c.espera.map((linha) => (<li>{linha}</li>))}
-      </ul>
-
-      <div class="acoes">
-        <a class="botao" href={rota("historia", idioma)}>{c.ctaHistoria}</a>
-        <a class="botao botao--fantasma" href={rota("personagens", idioma)}>{c.ctaPersonagens}</a>
+      <div class="capa">
+        <CapaVolume alt={LOJA[idioma].capaAlt} giro={0} />
       </div>
-
-      <p class="nota">{c.nota}</p>
     </div>
   </section>
 </Base>
@@ -65,36 +83,78 @@ const c = CONFIRMADO[idioma];
 )}
 
 <style>
-  .estreito { max-width: 62ch; }
+  /* Duas colunas, mesma proporção da seção da lista de espera: o texto manda e
+     a capa acompanha. `align-items: center` porque as duas alturas são muito
+     diferentes e alinhar pelo topo deixaria a capa boiando. */
+  .interno {
+    max-width: 1040px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 260px);
+    align-items: center;
+    gap: clamp(32px, 6vw, 76px);
+  }
+  .coluna-texto { min-width: 0; }
 
-  /* Lista sem marcador: são duas afirmações, não itens de enumeração. O filete
-     à esquerda faz o papel que o marcador faria, na linguagem do site. */
+  /* O h1 desta página é MENOR que o das páginas de conteúdo, de propósito.
+     No tamanho padrão, "Pronto. Você está na lista." ocupava três linhas e
+     quase metade da altura da tela — peso de manchete para uma frase que só
+     precisa confirmar. Aqui ele informa, não anuncia. */
+  h1 {
+    font-size: clamp(2.1rem, 4.2vw, 3.1rem);
+    line-height: 1.12;
+    margin-bottom: 18px;
+  }
+  .lead { margin-bottom: 0; }
+
+  /* O filete era cinza e sumia no fundo. Foi para aço e voltou: neste site a
+     cor carrega informação narrativa — aço é a Hoste, sangue são os Rebeldes —
+     e o rótulo desta página já é vermelho. Um filete azul ao lado de um losango
+     vermelho põe os dois lados na mesma página de interface, o que aqui não
+     significa nada e só faz ruído. Sangue como preenchimento é permitido; o que
+     a regra proíbe é `--sangue` em texto pequeno. */
   .espera-lista {
     list-style: none;
-    margin: 0 0 clamp(34px, 5vw, 48px);
-    padding: 0;
-    border-left: 1px solid var(--linha-forte);
+    margin: clamp(28px, 4vw, 38px) 0 clamp(30px, 4vw, 40px);
+    padding: 0 0 0 clamp(18px, 2vw, 26px);
+    border-left: 2px solid var(--sangue);
   }
   .espera-lista li {
-    padding: 0 0 0 clamp(16px, 2vw, 24px);
-    color: var(--cinza);
+    color: var(--osso);
     font-size: 1.06rem;
-    line-height: 1.62;
+    line-height: 1.6;
   }
-  .espera-lista li + li { margin-top: 12px; }
+  .espera-lista li + li { margin-top: 10px; color: var(--cinza); }
 
   .acoes {
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
-    margin-bottom: clamp(34px, 5vw, 48px);
+    margin-bottom: clamp(30px, 4vw, 42px);
   }
 
   .nota {
     margin: 0;
     font-size: .9rem;
+    line-height: 1.6;
     color: var(--poeira);
-    max-width: 56ch;
+    max-width: 52ch;
+  }
+
+  .capa { margin: 0; }
+
+  /* No celular a capa vai para DEPOIS dos botões: quem chega aqui quer primeiro
+     a confirmação, e a capa acima empurraria a mensagem para fora da primeira
+     tela — o mesmo raciocínio da seção da lista de espera, com o desfecho
+     oposto, porque aqui não há formulário competindo por espaço. */
+  @media (max-width: 900px) {
+    .interno {
+      display: block;
+      max-width: 640px;
+    }
+    .capa {
+      margin-top: clamp(38px, 7vw, 52px);
+      max-width: 240px;
+    }
   }
 
   @media (max-width: 620px) {
