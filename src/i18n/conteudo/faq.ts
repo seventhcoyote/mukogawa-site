@@ -152,7 +152,7 @@ const gruposPt: Grupo[] = [
       {
         p: "Quanto vai custar?",
         r: [
-          "O preço ainda não foi definido. Edições, preços, frete e disponibilidade são responsabilidade do varejista de cada região, então o valor pode ser diferente entre Brasil, Estados Unidos e Japão.",
+          "O preço não fica neste site. Edições, preços, frete e disponibilidade são do varejista de cada região, e é na página dele que você encontra o valor — que pode ser diferente entre Brasil, Estados Unidos e Japão. A nossa loja leva você até lá.",
         ],
       },
       {
@@ -346,7 +346,7 @@ const gruposEn: Grupo[] = [
       {
         p: "How much will it cost?",
         r: [
-          "Pricing has not been set. Editions, pricing, shipping and availability are handled by the retailer for each region, so the figure may differ between Brazil, the United States and Japan.",
+          "Pricing does not live on this site. Editions, pricing, shipping and availability are handled by the retailer for each region, and it is on their page that you will find the figure — which may differ between Brazil, the United States and Japan. Our shop takes you there.",
         ],
       },
       {
@@ -549,7 +549,7 @@ const gruposJa: Grupo[] = [
       {
         p: "価格はいくらですか。",
         r: [
-          "未定です。版・価格・送料・在庫は各地域の販売元が扱うため、ブラジル・アメリカ・日本で金額が異なる場合があります。",
+          "価格は本サイトには掲載しません。版・価格・送料・在庫は各地域の販売元が扱い、金額は販売元のページでご確認いただけます。ブラジル・アメリカ・日本で異なる場合があります。当サイトのストアは、そこへご案内します。",
         ],
       },
       {

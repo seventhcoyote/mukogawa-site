@@ -16,11 +16,26 @@ import arteHaven from "../assets/historia/lugares/haven-gravura.jpg";
 import arteDeserto from "../assets/historia/lugares/deserto-gravura.jpg";
 import arteVeilstrand from "../assets/historia/lugares/veilstrand-gravura.jpg";
 
+// As mesmas quatro em cor, para o hover. Ficaram no repositório desde que o
+// tratamento em traço entrou, justamente para poder voltar atrás — agora servem
+// para as duas coisas.
+import corAltosCeus from "../assets/historia/lugares/altos-ceus.jpg";
+import corHaven from "../assets/historia/lugares/haven.jpg";
+import corDeserto from "../assets/historia/lugares/deserto.jpg";
+import corVeilstrand from "../assets/historia/lugares/veilstrand.jpg";
+
 const ARTE_LUGAR = {
   "altos-ceus": arteAltosCeus,
   haven: arteHaven,
   deserto: arteDeserto,
   veilstrand: arteVeilstrand,
+} as const;
+
+const COR_LUGAR = {
+  "altos-ceus": corAltosCeus,
+  haven: corHaven,
+  deserto: corDeserto,
+  veilstrand: corVeilstrand,
 } as const;
 import { HISTORIA } from "../i18n/conteudo/historia";
 import { ROTULOS_PERSONAGENS } from "../i18n/conteudo/personagens";
@@ -140,6 +155,12 @@ const series = c.series;
           <div class:list={["lugar", { "lugar--neutro": !l.lado }]} data-lado={l.lado}>
             <div class="arte arte--lugar">
               <Image src={ARTE_LUGAR[l.id]} alt={l.nome} widths={[520, 900, 1320]}
+                     sizes="(max-width: 759px) 92vw, 46vw" loading="lazy" />
+              {/* A mesma arte em cor, revelada no hover. `alt` vazio porque
+                  descreve a mesma coisa que a de cima: para quem usa leitor de
+                  tela seria a mesma informação lida duas vezes. */}
+              <Image class="cor" src={COR_LUGAR[l.id]} alt="" aria-hidden="true"
+                     widths={[520, 900, 1320]}
                      sizes="(max-width: 759px) 92vw, 46vw" loading="lazy" />
               <span class="cantos" aria-hidden="true"></span>
             </div>
@@ -400,6 +421,38 @@ const series = c.series;
      recolhida para a borda da própria arte. */
   .arte--lugar {
     margin-bottom: clamp(20px, 2.4vw, 28px);
+    position: relative;
+  }
+
+  /* A COR NO HOVER. Mesma ideia dos retratos em Criadores — repouso em cinza,
+     cor para quem se aproxima —, mas aqui não dá para fazer com `filter`: o
+     traço destas quatro está GRAVADO no arquivo (equalização local, janela
+     tonal estreita, e inversão nas duas cenas claras). Nenhum filtro CSS
+     desfaz isso. Então são duas imagens empilhadas, e o que se anima é a
+     opacidade da de cima.
+
+     `display: none` fora do media query não é detalhe de estilo: com ele mais
+     `loading="lazy"`, o navegador de celular NÃO BAIXA a segunda imagem. Sem
+     isso, quem abre no telefone pagaria por uma arte que nunca vai ver, já que
+     não há hover ali. */
+  .arte--lugar :global(.cor) { display: none; }
+
+  @media (hover: hover) and (pointer: fine) {
+    .arte--lugar :global(.cor) {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity .45s ease;
+    }
+    .lugar:hover .arte--lugar :global(.cor) { opacity: 1; }
+  }
+
+  /* Quem pede menos movimento recebe a troca sem transição, não sem cor. */
+  @media (prefers-reduced-motion: reduce) {
+    .arte--lugar :global(.cor) { transition: none; }
   }
   /* As quatro são panorâmicas (2000x838). Ficam inteiras, sem corte: a regra do
      projeto vale aqui como em toda parte, e cortar uma paisagem pela metade
