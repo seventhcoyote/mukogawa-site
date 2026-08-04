@@ -434,11 +434,23 @@ const series = c.series;
      `display: none` fora do media query não é detalhe de estilo: com ele mais
      `loading="lazy"`, o navegador de celular NÃO BAIXA a segunda imagem. Sem
      isso, quem abre no telefone pagaria por uma arte que nunca vai ver, já que
-     não há hover ali. */
-  .arte--lugar :global(.cor) { display: none; }
+     não há hover ali.
+
+     O PREFIXO `.lugar` NÃO É ENFEITE — é o que faz estas regras existirem.
+     Sem ele, `.arte--lugar .cor` pesa 0,2,0 e perde para
+     `.lugar .arte--lugar img` (0,2,1), lá embaixo, que aplica `display: block`.
+     O `display: none` nunca valeu no celular: as duas artes apareciam
+     empilhadas, uma sob a outra, e o telefone ainda baixava a colorida —
+     exatamente o contrário do que este bloco existe para fazer. Achado em
+     2026-08-04, numa foto do Bruno.
+
+     É a terceira vez que a ordem/especificidade do CSS scoped morde este
+     projeto. Não basta ler a regra e achar que ela vale: meça o `display`
+     computado a 375px depois de mexer aqui. */
+  .lugar .arte--lugar :global(.cor) { display: none; }
 
   @media (hover: hover) and (pointer: fine) {
-    .arte--lugar :global(.cor) {
+    .lugar .arte--lugar :global(.cor) {
       display: block;
       position: absolute;
       inset: 0;
