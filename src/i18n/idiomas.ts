@@ -43,6 +43,9 @@ export const ROTAS = {
   faq: { pt: "/faq", en: "/en/faq", es: "/es/faq", ja: "/ja/faq" },
   imprensa: { pt: "/imprensa", en: "/en/press", es: "/es/prensa", ja: "/ja/press" },
   privacidade: { pt: "/privacidade", en: "/en/privacy", es: "/es/privacidad", ja: "/ja/privacy" },
+  /** Destino do "confirmar" no e-mail da lista. Fora do sitemap e com noindex:
+   *  só faz sentido no meio do fluxo, e nunca é linkada dentro do site. */
+  confirmado: { pt: "/confirmado", en: "/en/confirmed", es: "/es/confirmado", ja: "/ja/confirmed" },
 } as const;
 
 export type ChaveRota = keyof typeof ROTAS;

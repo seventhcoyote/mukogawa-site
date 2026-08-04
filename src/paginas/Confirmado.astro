@@ -1,0 +1,103 @@
+---
+/**
+ * "Pronto, você está na lista." — o fecho do double opt-in.
+ *
+ * É o destino do `Opt-in Redirect URL` no painel do Beehiiv. Fora do e-mail,
+ * ninguém chega aqui: a página não é linkada em lugar nenhum e pede `noindex`,
+ * porque uma página de confirmação em resultado de busca não confirma nada e
+ * ainda concorre com as páginas reais.
+ *
+ * O BEEHIIV NÃO PASSA O IDIOMA no redirect — o campo `idioma` que o formulário
+ * grava vive no assinante, não na URL. Então a versão PT é o destino único e um
+ * script curto reencaminha quem tem navegador em inglês ou japonês. Sem
+ * JavaScript a pessoa fica no português e a página funciona inteira: é o mesmo
+ * contrato do resto do site.
+ */
+import Base from "../layouts/Base.astro";
+import { CONFIRMADO } from "../i18n/conteudo/confirmado";
+import { rota } from "../i18n/idiomas";
+import type { Idioma } from "../i18n/idiomas";
+
+interface Props {
+  idioma: Idioma;
+  /** Só a versão PT reencaminha: as outras JÁ são o destino do reencaminho. */
+  reencaminha?: boolean;
+}
+const { idioma, reencaminha = false } = Astro.props;
+const c = CONFIRMADO[idioma];
+---
+
+<Base titulo={c.titulo} descricao={c.descricao} semIndice>
+  <section class="secao secao--curta">
+    <div class="envelope estreito">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo rotulo--lado" data-lado="rebeldes">{c.rotulo}</p></div>
+        <h1>{c.h1}</h1>
+        <p class="lead">{c.lead}</p>
+      </div>
+
+      <ul class="espera-lista">
+        {c.espera.map((linha) => (<li>{linha}</li>))}
+      </ul>
+
+      <div class="acoes">
+        <a class="botao" href={rota("historia", idioma)}>{c.ctaHistoria}</a>
+        <a class="botao botao--fantasma" href={rota("personagens", idioma)}>{c.ctaPersonagens}</a>
+      </div>
+
+      <p class="nota">{c.nota}</p>
+    </div>
+  </section>
+</Base>
+
+{reencaminha && (
+  <script is:inline>
+    // Reencaminha para a versão do idioma do navegador. `replace` para o botão
+    // "voltar" não trazer a pessoa de volta para cá num laço.
+    (() => {
+      const lingua = (navigator.language || "").toLowerCase();
+      const destino = lingua.startsWith("ja") ? "/ja/confirmed"
+                    : lingua.startsWith("en") ? "/en/confirmed"
+                    : null;
+      if (destino) location.replace(destino);
+    })();
+  </script>
+)}
+
+<style>
+  .estreito { max-width: 62ch; }
+
+  /* Lista sem marcador: são duas afirmações, não itens de enumeração. O filete
+     à esquerda faz o papel que o marcador faria, na linguagem do site. */
+  .espera-lista {
+    list-style: none;
+    margin: 0 0 clamp(34px, 5vw, 48px);
+    padding: 0;
+    border-left: 1px solid var(--linha-forte);
+  }
+  .espera-lista li {
+    padding: 0 0 0 clamp(16px, 2vw, 24px);
+    color: var(--cinza);
+    font-size: 1.06rem;
+    line-height: 1.62;
+  }
+  .espera-lista li + li { margin-top: 12px; }
+
+  .acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: clamp(34px, 5vw, 48px);
+  }
+
+  .nota {
+    margin: 0;
+    font-size: .9rem;
+    color: var(--poeira);
+    max-width: 56ch;
+  }
+
+  @media (max-width: 620px) {
+    .acoes :global(.botao) { width: 100%; }
+  }
+</style>

@@ -36,6 +36,10 @@ export default defineConfig({
   // para páginas que não existem. Ao ligar o ES, acrescentar aqui também.
   integrations: [
     sitemap({
+      // A página de confirmação da lista fica de fora: ela pede `noindex` no
+      // HTML, e anunciar no sitemap uma URL que manda o robô embora é dizer
+      // duas coisas contrárias na mesma publicação.
+      filter: (pagina) => !/\/(confirmado|confirmed)\/?$/.test(pagina),
       i18n: { defaultLocale: "pt", locales: { pt: "pt-BR", en: "en", ja: "ja" } },
     }),
   ],

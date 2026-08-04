@@ -14,9 +14,16 @@ interface Props {
   og?: string;
   /** Remove o respiro do topo quando a página abre com um hero sangrado. */
   colado?: boolean;
+  /**
+   * Pede `noindex` nesta página mesmo com o site liberado para busca. É para
+   * página que só faz sentido no meio de um fluxo — a de confirmação da lista,
+   * por exemplo: em resultado de busca ela não confirma nada e ainda concorre
+   * com as páginas reais. Sai do sitemap junto, no `astro.config.mjs`.
+   */
+  semIndice?: boolean;
 }
 
-const { titulo, descricao, og = "/og.jpg", colado = false } = Astro.props;
+const { titulo, descricao, og = "/og.jpg", colado = false, semIndice = false } = Astro.props;
 
 const idioma = idiomaDaUrl(Astro.url.pathname);
 const t = usarUI(idioma);
@@ -64,7 +71,7 @@ const xDefault = new URL(equivalente(Astro.url.pathname, PADRAO), Astro.site).to
 // hoje também indexaria o domínio final antes de o site estar pronto como
 // produto. A URL de PRODUÇÃO da Vercel não recebe `X-Robots-Tag` automático; só
 // as de branch recebem. Verificado nesta publicação: nenhum header desse tipo veio.
-const indexavel = podeIndexar(Astro.site);
+const indexavel = podeIndexar(Astro.site) && !semIndice;
 ---
 
 <!doctype html>
