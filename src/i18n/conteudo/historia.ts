@@ -14,6 +14,14 @@ interface Serie { nome: string; selo: string; texto: string }
 
 interface Era { nome: string; texto: string }
 
+/**
+ * Um lugar do mundo. `lado` existe porque a cor carrega informação narrativa
+ * neste site: os Altos Céus são da Hoste, Haven é dos Rebeldes, e o Deserto e o
+ * Veilstrand não são de ninguém — os dois primeiros levam cor, os dois últimos
+ * não. Pintar tudo igual jogaria fora um dado que o leitor já sabe ler.
+ */
+interface Lugar { nome: string; texto: string; lado?: "hoste" | "rebeldes" }
+
 interface ConteudoHistoria {
   titulo: string;
   descricao: string;
@@ -55,6 +63,19 @@ interface ConteudoHistoria {
    * editora: a Voz do Mundo nunca conversa com o leitor (ver conteudo/VOZ.md).
    * Por isso "ainda não tem nome dito", e nunca "será revelado em breve".
    */
+  /**
+   * Os quatro lugares, texto do autor (2026-08-03). Entram depois das eras: a
+   * página passa a dizer QUANDO e só então ONDE.
+   *
+   * O verbete do Veilstrand é o mais importante dos quatro e o motivo de a
+   * seção existir — é a única vez que o site explica de onde vem o próprio
+   * nome da obra. 向こう側 é "o outro lado", e até aqui o leitor não tinha
+   * como saber disso. Se um dia esta seção for cortada, essa ligação precisa
+   * ir para outro lugar antes.
+   */
+  rotuloLugares: string;
+  tituloLugares: string;
+  lugares: Lugar[];
   rotuloDois: string;
   tituloDois: string;
   doisP: string[];
@@ -124,6 +145,18 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     ],
     falaHelel: "Servir a essas criaturas menores? Ser julgado por elas? Absurdo.",
     citaHelel: "Helel, Rei dos Rebeldes",
+    rotuloLugares: "Os lugares",
+    tituloLugares: "Onde a guerra se trava",
+    lugares: [
+      { nome: "Os Altos Céus", lado: "hoste",
+        texto: "A sede da própria Divindade, mais antiga que o tempo e mais radiante que tudo o mais nesta cosmologia. É ali que se ergue o Trono. Ali os quatro Serafins ardem em adoração perpétua, ali Querubins e Ofanins mantêm a vigília antiga, e ali as fileiras incontáveis da Hoste servem, treinam e são forjadas para a guerra. A luz e o cântico não cessam. A adoração não é apenas ato: é combustível, a própria força que move a Hoste à batalha. Tudo naquele lugar irradia ordem, glória e devoção inquebrada ao Altíssimo." },
+      { nome: "Haven", lado: "rebeldes",
+        texto: "Cidade oculta e ferozmente guardada, erguida nas profundezas do mundo inferior e suspensa por correntes sobre um lago ácido. Onde os Altos Céus são abertos, Haven é segredo, escondida até do olhar distraído: reduto da facção que move rebelião contra a ordem do Céu. Em função, espelha os Altos Céus. Em natureza, é o avesso deles." },
+      { nome: "O Deserto da Mesopotâmia",
+        texto: "O palco no mundo dos homens para boa parte da história antiga da saga: o Oriente Próximo de Abraão e de José, do Egito, da Suméria, da Babilônia e da Assíria. É o campo de batalha mortal sob o Veilstrand, onde a história visível de patriarcas e impérios se desenrola enquanto a guerra invisível arde logo atrás dela." },
+      { nome: "Veilstrand (o Véu)",
+        texto: "O tecido da própria realidade na cosmologia de Mukō-Gawa. Um plano de quatro dimensões, reativo à emoção e ao peso espiritual, onde o Reino Eterno se sobrepõe ao mundo mortal. Distância e escala não são fixas ali como são aqui: uma batalha pode ocupar uma cidade ou caber num grão de poeira, conforme o quanto ela importa. É este o outro lado que dá nome à série — a camada não vista que corre ao lado da história humana, e onde a guerra verdadeira é travada." },
+    ],
     rotuloDois: "Os dois",
     tituloDois: "Quem atravessa a Saga",
     doisP: [
@@ -199,6 +232,18 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     ],
     falaHelel: "To serve these lesser creatures? To be judged by them? Absurd.",
     citaHelel: "Helel, King of the Guest",
+    rotuloLugares: "The places",
+    tituloLugares: "Where the war is fought",
+    lugares: [
+      { nome: "The High Heavens", lado: "hoste",
+        texto: "The seat of the Godhead itself, older than time and more radiant than anything else in the cosmology. This is where the Throne stands. Where the four Seraphim burn eternally in worship, where Cherubim and Ophanim keep their ancient watch, and where the countless ranks of the Host serve, train, and are forged for war. Light and song never stop here. Worship isn't just an act: it is fuel, the very power that moves the Host to battle. Everything about the place radiates order, glory, and unbroken devotion to the Almighty." },
+      { nome: "Haven", lado: "rebeldes",
+        texto: "A hidden city, fiercely guarded, built deep in the underworld and suspended by chains over an acidic lake. Where the High Heavens are open, Haven is secret, concealed even from casual notice: a stronghold for a faction waging rebellion against Heaven's order. It mirrors the High Heavens in function. In nature, it is their opposite." },
+      { nome: "The Mesopotamian Desert",
+        texto: "The real-world stage for much of the saga's early history, the ancient Near East where Abraham, Joseph, Egypt, Sumer, Babylon and Assyria all play out. This is the mortal battleground layered beneath Veilstrand, where the visible history of patriarchs and empires unfolds while the invisible war rages just behind it." },
+      { nome: "Veilstrand (the Veil)",
+        texto: "The fabric of reality itself in Mukō-Gawa's cosmology. A four-dimensional plane, reactive to emotion and spiritual significance, where the Eternal Realm overlaps with the mortal world. Distance and scale aren't fixed here the way they are for us: a battle can span a city or fit on a dust mote, depending on how much it matters. This is the other side the series takes its name from — the unseen layer running alongside human history, where the real war is fought." },
+    ],
     rotuloDois: "The two",
     tituloDois: "Who crosses the Saga",
     doisP: [
@@ -275,6 +320,18 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     ],
     falaHelel: "¿Servir a esas criaturas menores? ¿Ser juzgado por ellas? Absurdo.",
     citaHelel: "Helel, Rey de los Rebeldes",
+    rotuloLugares: "Los lugares",
+    tituloLugares: "Dónde se libra la guerra",
+    lugares: [
+      { nome: "Los Altos Cielos", lado: "hoste",
+        texto: "La sede de la propia Divinidad, más antigua que el tiempo y más radiante que todo lo demás en esta cosmología. Allí se alza el Trono. Allí los cuatro Serafines arden en adoración perpetua, allí Querubines y Ofanines mantienen su vigilia antigua, y allí las filas incontables de la Hueste sirven, se entrenan y son forjadas para la guerra. La luz y el canto no cesan. La adoración no es solo acto: es combustible, la fuerza misma que mueve a la Hueste a la batalla. Todo en aquel lugar irradia orden, gloria y devoción inquebrantada al Altísimo." },
+      { nome: "Haven", lado: "rebeldes",
+        texto: "Ciudad oculta y ferozmente guardada, levantada en lo profundo del mundo inferior y suspendida por cadenas sobre un lago ácido. Donde los Altos Cielos son abiertos, Haven es secreto, escondida incluso de la mirada distraída: bastión de la facción que mueve rebelión contra el orden del Cielo. En función, espeja a los Altos Cielos. En naturaleza, es su reverso." },
+      { nome: "El Desierto de Mesopotamia",
+        texto: "El escenario en el mundo de los hombres para buena parte de la historia antigua de la saga: el Próximo Oriente de Abraham y de José, de Egipto, Sumeria, Babilonia y Asiria. Es el campo de batalla mortal bajo el Veilstrand, donde la historia visible de patriarcas e imperios se despliega mientras la guerra invisible arde justo detrás." },
+      { nome: "Veilstrand (el Velo)",
+        texto: "El tejido de la realidad misma en la cosmología de Mukō-Gawa. Un plano de cuatro dimensiones, reactivo a la emoción y al peso espiritual, donde el Reino Eterno se superpone al mundo mortal. Distancia y escala no son fijas allí como lo son aquí: una batalla puede ocupar una ciudad o caber en una mota de polvo, según cuánto importe. Este es el otro lado que da nombre a la serie — la capa no vista que corre junto a la historia humana, y donde se libra la guerra verdadera." },
+    ],
     rotuloDois: "Los dos",
     tituloDois: "Quién atraviesa la Saga",
     doisP: [
@@ -351,6 +408,18 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     ],
     falaHelel: "この劣った者どもに仕えよと? その者らに裁かれよと? 不条理だ。",
     citaHelel: "ヘレル、客人の王",
+    rotuloLugares: "場所",
+    tituloLugares: "戦いの舞台",
+    lugares: [
+      { nome: "高き天", lado: "hoste",
+        texto: "神性そのものの座であり、時よりも古く、この世界観のいかなるものよりも輝かしい。玉座が立つのはここである。四人のセラフィムが絶えず礼拝に燃え、ケルビムとオファニムが古き見張りを守り、数えきれぬ天軍の列が仕え、鍛えられ、戦のために形づくられる場所。光と歌が絶えることはない。礼拝はただの行いではない。それは燃料であり、天軍を戦へと動かす力そのものである。その場所のすべてが、秩序と栄光と、至高者への揺るぎなき献身を放っている。" },
+      { nome: "ヘイヴン", lado: "rebeldes",
+        texto: "厳重に守られた隠れた都市。地下世界の深くに築かれ、酸の湖の上に鎖で吊られている。高き天が開かれているのに対し、ヘイヴンは秘されている。何気ない目からも隠され、天の秩序に叛乱を挑む一派の拠点である。機能において高き天を映す。本性において、その裏返しである。" },
+      { nome: "メソポタミアの砂漠",
+        texto: "サーガの古き歴史の多くが演じられる、人の世の舞台。アブラハムとヨセフの、エジプトとシュメールとバビロンとアッシリアの古代近東である。ここは帷（ヴェイル）の下に重なる死すべき者の戦場であり、族長と帝国の目に見える歴史が繰り広げられる一方で、見えざる戦がそのすぐ背後で荒れ狂う。" },
+      { nome: "ヴェイルストランド（帷）",
+        texto: "『向こう側』の世界観における、現実そのものの織り目。感情と霊的な重みに反応する四次元の平面であり、永遠の界が死すべき者の世界と重なる場所である。距離も尺度も、ここでは我々の世界のようには定まっていない。ひとつの戦が都市を覆うことも、塵の一粒に収まることもある。どれほどの重みを持つかによって変わるのだ。これこそが、このシリーズの名の由来である向こう側 — 人の歴史のかたわらを走る、見えざる層であり、真の戦が交わされる場所である。" },
+    ],
     rotuloDois: "二人",
     tituloDois: "サーガを貫く者",
     doisP: [

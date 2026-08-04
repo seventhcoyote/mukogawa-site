@@ -96,6 +96,32 @@ const series = c.series;
     </div>
   </section>
 
+  <hr class="regua" />
+
+  {/* Depois das eras de propósito: a página diz QUANDO e só então ONDE.
+
+      A cor segue carregando informação, como em "Os dois lados": os Altos Céus
+      são da Hoste e levam aço, Haven é dos Rebeldes e leva sangue. O Deserto e
+      o Veilstrand não pertencem a lado nenhum — são o chão onde os dois se
+      encontram — e por isso ficam sem filete colorido. */}
+  <section class="secao">
+    <div class="envelope">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo">{c.rotuloLugares}</p></div>
+        <h2>{c.tituloLugares}</h2>
+      </div>
+
+      <div class="lugares">
+        {c.lugares.map((l) => (
+          <div class:list={["lugar", { "lugar--neutro": !l.lado }]} data-lado={l.lado}>
+            <h3>{l.nome}</h3>
+            <p>{l.texto}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <hr class="regua regua--corte" />
 
   <section class="secao">
@@ -288,6 +314,41 @@ const series = c.series;
     max-width: 68ch;
     color: var(--poeira);
   }
+
+  /* ---------- os lugares ---------- */
+  /* Quatro blocos, sem arte: não existe ilustração de nenhum dos quatro, e o
+     texto do Veilstrand é justamente sobre algo que não se vê.
+
+     Duas colunas em vez de quatro: os verbetes são longos e uma coluna de 4
+     apertaria a linha para bem abaixo do confortável. Em duas, a medida fica
+     na mesma faixa do resto da página. */
+  /* DUAS colunas fixas, e não `auto-fit`. Com auto-fit a 1440px cabiam TRÊS, e
+     o quarto lugar caía sozinho na linha de baixo com dois terços de faixa
+     vazia ao lado — medido na captura. São quatro itens: 2x2 fecha o retângulo
+     em qualquer largura de desktop, e a quantidade não vai mudar. */
+  .lugares {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--linha);
+    border: 1px solid var(--linha);
+  }
+  @media (min-width: 760px) {
+    .lugares { grid-template-columns: 1fr 1fr; }
+  }
+  .lugar {
+    padding: clamp(26px, 3.2vw, 44px);
+    background: var(--tinta);
+    border-top: 3px solid var(--lado);
+  }
+  /* Deserto e Veilstrand não são de lado nenhum. O filete continua existindo,
+     em cinza: `--linha-forte` (#2c2c36) sumia contra o fundo e o bloco parecia
+     ter perdido a borda, o que lê como defeito e não como informação. Com
+     `--poeira` o filete se vê, e o que distingue passa a ser a ausência de COR,
+     que é o dado — e não a ausência de filete. */
+  .lugar--neutro { border-top-color: var(--poeira); }
+  .lugar h3 { margin-bottom: 12px; }
+  .lugar p { color: var(--cinza); max-width: 58ch; margin: 0; }
 
   /* ---------- os dois que atravessam a Saga ---------- */
   /* Mesmo sistema de "Os dois lados": sem arte, dois blocos, e a cor no topo
