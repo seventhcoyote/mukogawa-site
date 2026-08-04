@@ -93,8 +93,8 @@ export const personagens: Personagem[] = [
     sobreClasse:
       "Os Arautos são a força fundamental da Hoste. Forjados em corações dispostos e selados pelo dever, cumprem a vontade dos Altos Céus com resolução inabalável. Na Era das Estrelas, os Eternos que se inclinavam ao serviço foram designados a esta ordem. Portadores de um único par de asas, são o alicerce da Hoste: soldados, mensageiros e tudo o que houver entre um e outro. Talvez não empunhem o poder de um Arconte, nem o mistério de um Principado, mas é a lealdade deles que decide o fim de toda guerra.",
     sobrePersonagem: [
-      "Amunet é um dos personagens visualmente mais marcantes da série, e sua aparência é uma ilustração direta do que a Fonte Profana faz com o tempo. Sua pele tornou-se um couro escuro e escamado. Suas feições são grossas e pesadas, evocando os antigos crocodilos do delta do Nilo.",
-      "Sua característica mais definidora: o braço direito — ou o que um dia foi seu braço direito — tornou-se um aglomerado grotesco de membros fundidos, cada um com suas próprias mãos e dedos, entrelaçados e contorcendo-se como um nó de serpentes. As mãos se flexionam involuntariamente. A massa tem vida própria.",
+      "Outrora Arauto da Hoste, Amunet voltou-se para os Rebeldes por razões que os registros já não guardam. O que restou dele é o que a Fonte deixou. Sua pele endureceu num couro escuro e escamado, grosso e pesado, parente próximo dos crocodilos que um dia assombraram as águas mais escuras do Nilo.",
+      "O braço direito — ou o que um dia foi seu braço direito — não existe mais: em seu lugar há um nó grotesco de membros fundidos, cada um com a própria mão, os próprios dedos, retorcendo-se como um ninho de serpentes que jamais dorme. As mãos flexionam-se por conta própria. Amunet já não comanda a massa. Ela comanda a si mesma. Uma ruína que não cai. Um aviso que os Rebeldes carregam de propósito.",
     ],
     credito: "Arte do mangá — Arte: Match, 2026.",
   },
@@ -124,8 +124,8 @@ export const personagens: Personagem[] = [
     sobreClasse:
       "Os Arcontes são os mais poderosos guerreiros da Hoste. Na Era das Estrelas, eram os Eternos atraídos pela força, e força lhes foi concedida em abundância. Nenhuma outra ordem iguala sua têmpera ou resistência, tornando-os figuras decisivas nos tempos de guerra. São o único escalão digno de empunhar as Lâminas Rasgafenda, obras-primas de Zorphael, o mestre de forja da Hoste, forjadas em chamas e consagradas pela própria mão do Arquiteto. Essas armas podem rasgar o tecido do espaço, abrindo portais entre reinos, campos de batalha e até mesmo através do Véu. Os Arcontes portam duas duplas de asas: uma ampla e imponente, outra menor e veloz, moldadas para o ímpeto violento e a precisão aérea absoluta.",
     sobrePersonagem: [
-      "Satis impressiona: uma Eterna de elegância contida, cuja postura resiste até ao dano progressivo da Fonte. Seus cabelos são brancos e reluzentes, com um brilho sereno que parece contradizer o mundo que habita. Uma armadura escura, ornada de sigilos desbotados, envolve-lhe o corpo — as gravuras quase apagadas pelo tempo e pela batalha. Carrega o Estilhaço de Ônix às costas, cuja ponta partida a torna, de algum modo, mais perigosa, e não menos.",
-      "Marcas arcanas serpenteiam por seus braços e pernas, com formas esticadas um pouco além das proporções naturais. A corrupção da Fonte avança lentamente sobre ela.",
+      "Outrora Arconte da Hoste, Satis ainda se porta com a compostura daquela ordem, ainda que a compostura seja quase tudo o que a Fonte lhe deixou. Os cabelos seguem brancos e reluzentes, um brilho sereno e estranho para um soldado dos Rebeldes. Sob a armadura escura, gasta pela batalha, sigilos desbotados marcam um serviço a que ela já não responde. Às costas carrega o Estilhaço de Ônix, cuja ponta se partiu no dia em que Kharzul a usou para abrir o próprio caminho até Miguel — e de algum modo a fratura só tornou a lâmina mais perigosa.",
+      "Marcas arcanas rastejam agora por seus braços e pernas, esticadas além do que corpo algum deveria suportar: prova de uma Fonte que já a tomou uma vez e nunca a devolveu por inteiro. Satis não fala do preço. Apenas aprendeu a carregá-lo. Traída uma vez. Marcada para sempre.",
     ],
     credito: "Arte do mangá — Arte: Match, 2026.",
   },

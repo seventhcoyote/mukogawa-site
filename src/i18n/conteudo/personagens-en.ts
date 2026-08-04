@@ -63,8 +63,8 @@ export const PERSONAGENS_EN: Record<string, TextoPersonagem> = {
     sobreClasse:
       "Cohorts are the foundational workforce of the Host. Formed with willing hearts and bound by duty, they carry out the will of the High Heavens with unwavering resolve. In the Age of Stars, those Eternals who gravitated toward service were appointed to this rank. Bearing a single pair of wings, Cohorts are the backbone of the Host — soldiers, messengers, and whatever is needed in between. They may not wield the might of an Archon or the mystery of a Principality, but their loyalty shapes the outcome of every war.",
     sobrePersonagem: [
-      "Amunet is one of the series' most visually distinctive characters, and his appearance is a direct illustration of what the Defiled Well does over time. His skin has become dark, scaled hide. His features are thick and heavy, suggesting the ancient crocodiles of the Nile delta.",
-      "His most defining feature: his right arm — or what was once his right arm — has become a grotesque cluster of fused limbs, each with its own hands and fingers, intertwined and writhing like a knot of serpents. The individual hands flex involuntarily. The mass has a life of its own.",
+      "Once a Cohort of the Host, Amunet turned toward the Guest for reasons the records no longer preserve. What remains is what the Well left behind. His skin has hardened into dark, scaled hide, thick and heavy, close kin to the crocodiles that once haunted the Nile's darker waters.",
+      "His right arm — or what was once his right arm — is gone, replaced by a grotesque knot of fused limbs, each bearing its own hand, its own fingers, twisting like a nest of serpents that never sleeps. The hands flex on their own now. Amunet no longer commands the mass. It commands itself. A ruin that will not fall. A warning the Guest wear on purpose.",
     ],
     credito: MANGA,
   },
@@ -88,8 +88,8 @@ export const PERSONAGENS_EN: Record<string, TextoPersonagem> = {
     sobreClasse:
       "Archons are the mightiest warriors among the Host. In the Age of Stars, they were the Eternals drawn to strength, and strength was given to them in abundance. No other rank matches their raw mettle or resilience, making them decisive figures in times of war. They are the only echelon entrusted with Rift-Tearing weapons — masterworks of Zorphael, the forgemaster of the Host — each forged in flame and consecrated by the Architect's own hand. These weapons can rend the fabric of space itself, opening portals across realms, battlefields, and even the Veil. Archons bear two pairs of wings: one broad and commanding, the other smaller and swift — crafted for violent thrusts and perfect aerial maneuvering.",
     sobrePersonagem: [
-      "Satis is striking: an Eternal of measured elegance whose poise survives even the progressive damage of the Well. Her hair is white and gleaming, with a quiet luster that seems at odds with the world she inhabits. Dark armour adorned with faded sigils encases her form — the engravings nearly worn away by time and battle. She carries the Onyx Shard across her back, its shattered tip somehow making it more dangerous rather than less.",
-      "Eldritch markings twist along her arms and legs, their form stretched just beyond natural proportions. The Well's corruption is spreading slowly across her.",
+      "Once an Archon of the Host, Satis still carries herself with the poise of that rank, though poise is nearly all the Well has left her. Her hair remains white and gleaming, a quiet luster strange for a soldier of the Guest. Beneath dark armour worn thin with battle, faded sigils mark a service she no longer answers to. Across her back she carries the Onyx Shard, its tip broken the day Kharzul used her to clear his own path to Michael, and somehow the break has only made the blade more dangerous.",
+      "Eldritch markings now creep along her arms and legs, stretched past what any body should bear — proof of a Well that took her once already and never fully gave her back. Satis does not speak of the cost. She has simply learned to carry it. Betrayed once. Marked forever.",
     ],
     credito: MANGA,
   },
