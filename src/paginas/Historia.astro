@@ -152,6 +152,35 @@ const series = c.series;
     </div>
   </section>
 
+  <hr class="regua regua--corte" />
+
+  {/* Vem logo depois da fala de Helel de propósito: ali o leitor acabou de
+      conhecer o inimigo da guerra, e a pergunta seguinte é quem a atravessa.
+      Era a lacuna da página — antagonista com rosto e voz, e nenhuma
+      contraparte.
+
+      Kharzul leva `data-lado="rebeldes"` e portanto o vermelho. O SEGUNDO BLOCO
+      NÃO LEVA `data-lado`, e isso é decisão, não esquecimento: a cor carrega
+      informação narrativa neste site, e de que lado o rival está é justamente o
+      que não se sabe. Pintá-lo de aço afirmaria que é da Hoste. Sem cor, a
+      ausência do dado fica visível — que é o efeito desejado. */}
+  <section class="secao">
+    <div class="envelope">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo">{c.rotuloDois}</p></div>
+        <h2>{c.tituloDois}</h2>
+      </div>
+
+      <div class="corpo dois">
+        <p class="lead">{c.doisP[0]}</p>
+        <div class="par">
+          <div class="quem" data-lado="rebeldes"><p>{c.doisP[1]}</p></div>
+          <div class="quem quem--sem-nome"><p>{c.doisP[2]}</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- "Três séries" desceu para cá em 2026-08-02. A página passou a abrir com o
        MUNDO (os Eternos, os dois lados, as eras, o Poço, a Guerra) e só depois
        dizer em que formatos ele chega. Antes o leitor topava com "cinco
@@ -258,6 +287,35 @@ const series = c.series;
     margin: clamp(22px, 2.6vw, 32px) 0 0;
     max-width: 68ch;
     color: var(--poeira);
+  }
+
+  /* ---------- os dois que atravessam a Saga ---------- */
+  /* Mesmo sistema de "Os dois lados": sem arte, dois blocos, e a cor no topo
+     como única distinção. Também não há arte a dar aqui — Kharzul tem, o rival
+     não, e ilustrar só um repetiria o desequilíbrio que aquela seção evita.
+
+     A diferença está no segundo bloco. O filete de Kharzul é o vermelho dos
+     Rebeldes; o do rival é TRACEJADO e em cinza, porque não se sabe de que lado
+     ele está. O tracejado não é enfeite: é a mesma linguagem que o rodapé usa
+     para o perfil social que ainda não existe (ver config/site.ts). Lugar
+     reservado, marcado como tal, sem fingir um dado que não temos. */
+  .dois .lead { max-width: 68ch; margin: 0 0 clamp(22px, 2.6vw, 32px); }
+  .par {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--linha);
+    border: 1px solid var(--linha);
+  }
+  .quem {
+    padding: clamp(26px, 3.2vw, 44px);
+    background: var(--tinta);
+    border-top: 3px solid var(--lado);
+  }
+  .quem p { color: var(--cinza); max-width: 58ch; margin: 0; }
+  .quem--sem-nome {
+    border-top-style: dashed;
+    border-top-color: var(--linha-forte);
   }
 
   /* ---------- as eras ---------- */

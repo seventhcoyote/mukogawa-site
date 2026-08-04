@@ -42,6 +42,22 @@ interface ConteudoHistoria {
   guerraP: string[];
   falaHelel: string;
   citaHelel: string;
+  /**
+   * Os dois que atravessam a Saga. O segundo NÃO TEM NOME de propósito — é
+   * surpresa guardada pelo autor, decidida em 2026-08-03.
+   *
+   * A seção existe porque o site tinha um antagonista com rosto e fala (Helel)
+   * e nenhuma contraparte, e leitor de mangá escolhe série por personagem. Sair
+   * sabendo que há um segundo protagonista e que o nome está guardado é muito
+   * mais forte do que sair sem saber que ele existe.
+   *
+   * O texto trata o ocultamento como fato do mundo, e não como aviso de
+   * editora: a Voz do Mundo nunca conversa com o leitor (ver conteudo/VOZ.md).
+   * Por isso "ainda não tem nome dito", e nunca "será revelado em breve".
+   */
+  rotuloDois: string;
+  tituloDois: string;
+  doisP: string[];
   rotuloBase: string;
   tituloMitologia: string;
   mitologiaP: string[];
@@ -108,6 +124,13 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     ],
     falaHelel: "Servir a essas criaturas menores? Ser julgado por elas? Absurdo.",
     citaHelel: "Helel, Rei dos Rebeldes",
+    rotuloDois: "Os dois",
+    tituloDois: "Quem atravessa a Saga",
+    doisP: [
+      "Saga não se conta por um. Dois a atravessam de ponta a ponta, e a linha da guerra passa entre eles.",
+      "Um é Kharzul. Foi príncipe do Segundo Escalão e trocou a Luz pela promessa da subida. Miguel o derrotou, e com a derrota veio o que fere mais fundo: a patente tirada, o nome desonrado, o posto de batedor. É do fundo que ele vê a guerra, e é de lá que a conta.",
+      "O outro ainda não tem nome dito. Move-se do lado oposto da linha e conhece Kharzul como só um adversário antigo conhece. Onde um avança, o outro já esteve. Onde um recua, o outro aguarda. O nome virá no tempo dele.",
+    ],
     rotuloBase: "A base",
     tituloMitologia: "Mitologia cristã",
     mitologiaP: [
@@ -176,6 +199,13 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     ],
     falaHelel: "To serve these lesser creatures? To be judged by them? Absurd.",
     citaHelel: "Helel, King of the Guest",
+    rotuloDois: "The two",
+    tituloDois: "Who crosses the Saga",
+    doisP: [
+      "Saga is not told by one. Two cross it from end to end, and the line of the war runs between them.",
+      "One is Kharzul. He was a prince of the Second Echelon, and he traded the Light for the promise of ascent. Michael defeated him, and with the defeat came what cuts deeper: the rank stripped, the name disgraced, the post of a scout. He sees the war from below, and it is from there that he tells it.",
+      "The other has no name yet spoken. He moves on the far side of the line and knows Kharzul as only an old adversary can. Where one advances, the other has already been. Where one withdraws, the other waits. The name will come in its own time.",
+    ],
     rotuloBase: "The foundation",
     tituloMitologia: "Christian mythology",
     mitologiaP: [
@@ -245,6 +275,13 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     ],
     falaHelel: "¿Servir a esas criaturas menores? ¿Ser juzgado por ellas? Absurdo.",
     citaHelel: "Helel, Rey de los Rebeldes",
+    rotuloDois: "Los dos",
+    tituloDois: "Quién atraviesa la Saga",
+    doisP: [
+      "Saga no se cuenta por uno. Dos la atraviesan de punta a punta, y la línea de la guerra pasa entre ellos.",
+      "Uno es Kharzul. Fue príncipe del Segundo Escalón y cambió la Luz por la promesa del ascenso. Miguel lo derrotó, y con la derrota vino lo que hiere más hondo: el rango arrebatado, el nombre deshonrado, el puesto de explorador. Ve la guerra desde el fondo, y es desde allí que la cuenta.",
+      "El otro aún no tiene nombre dicho. Se mueve al otro lado de la línea y conoce a Kharzul como solo un adversario antiguo conoce. Donde uno avanza, el otro ya estuvo. Donde uno retrocede, el otro aguarda. El nombre vendrá a su tiempo.",
+    ],
     rotuloBase: "La base",
     tituloMitologia: "Mitología cristiana",
     mitologiaP: [
@@ -314,6 +351,13 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     ],
     falaHelel: "この劣った者どもに仕えよと? その者らに裁かれよと? 不条理だ。",
     citaHelel: "ヘレル、客人の王",
+    rotuloDois: "二人",
+    tituloDois: "サーガを貫く者",
+    doisP: [
+      "サーガは一人では語られない。二人が端から端まで貫き、戦の線は二人のあいだを走る。",
+      "一人はカルズル。第二階梯の君侯であったが、光を捨てて上昇の約束と引き換えた。ミカエルに敗れ、その敗北とともに、より深く抉るものが来た。位を剥がれ、名を辱められ、斥候の任に落とされた。彼は戦を底から見る。そして底から語る。",
+      "もう一人の名は、まだ言われていない。線の向こう側を動き、古き敵のみが知りうるかたちでカルズルを知る。一方が進んだ場所に、他方はすでにいた。一方が退く場所で、他方は待つ。名はその時が来れば言われる。",
+    ],
     rotuloBase: "土台",
     tituloMitologia: "キリスト教神話",
     mitologiaP: [
