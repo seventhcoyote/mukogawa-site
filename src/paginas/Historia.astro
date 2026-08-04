@@ -11,10 +11,10 @@ import helelRosto from "../assets/historia/helel-rosto.png";
 // CUIDADO com o nome do arquivo original: o que chegou como "heaven" é HAVEN, a
 // cidade oculta dos Rebeldes no submundo, e não os Altos Céus. Conferido pela
 // imagem (caverna com cidade suspensa sobre água), não pelo nome do arquivo.
-import arteAltosCeus from "../assets/historia/lugares/altos-ceus.jpg";
-import arteHaven from "../assets/historia/lugares/haven.jpg";
-import arteDeserto from "../assets/historia/lugares/deserto.jpg";
-import arteVeilstrand from "../assets/historia/lugares/veilstrand.jpg";
+import arteAltosCeus from "../assets/historia/lugares/altos-ceus-gravura.jpg";
+import arteHaven from "../assets/historia/lugares/haven-gravura.jpg";
+import arteDeserto from "../assets/historia/lugares/deserto-gravura.jpg";
+import arteVeilstrand from "../assets/historia/lugares/veilstrand-gravura.jpg";
 
 const ARTE_LUGAR = {
   "altos-ceus": arteAltosCeus,
@@ -404,7 +404,15 @@ const series = c.series;
   /* As quatro são panorâmicas (2000x838). Ficam inteiras, sem corte: a regra do
      projeto vale aqui como em toda parte, e cortar uma paisagem pela metade
      tiraria justamente o que ela tem — a extensão do lugar. */
-  .lugar .arte--lugar :global(img) { display: block; height: auto; filter: none; }
+  /* TESTE 2026-08-03: alto contraste, na pegada das artes de estudo do Bretas.
+     Feito por FILTRO e não reprocessando o arquivo — os JPEG continuam
+     coloridos no repositório, e voltar atrás é trocar esta linha por
+     `filter: none`. */
+  .lugar .arte--lugar :global(img) {
+    display: block;
+    height: auto;
+    filter: none;
+  }
 
   /* ---------- os dois que atravessam a Saga ---------- */
   /* Mesmo sistema de "Os dois lados": sem arte, dois blocos, e a cor no topo
