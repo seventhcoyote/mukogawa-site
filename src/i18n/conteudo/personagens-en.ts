@@ -51,7 +51,7 @@ export const PERSONAGENS_EN: Record<string, TextoPersonagem> = {
     sobreClasse:
       "Cohorts are the foundational workforce of the Host. Formed with willing hearts and bound by duty, they carry out the will of the High Heavens with unwavering resolve. In the Age of Stars, those Eternals who gravitated toward service were appointed to this rank. Bearing a single pair of wings, Cohorts are the backbone of the Host — soldiers, messengers, and whatever is needed in between. They may not wield the might of an Archon or the mystery of a Principality, but their loyalty shapes the outcome of every war.",
     sobrePersonagem: [
-      "Among them, Gabriel is renowned. A herald of the Most High, he is rarely seen with a weapon. Though a formidable warrior, Gabriel avoids combat — not out of fear for the battle, but fear of what his hands might do. Instead, he walks into the fray unarmed, bearing not steel, but the weight of the Word. His voice has silenced wars and stirred kings to repentance. In him, the calling of a Cohort is fully seen — not to dominate, but to serve with power, purpose, and peace.",
+      "Among them, Gabriel is renowned. A herald of the Most High, he is rarely seen with a weapon. Though a formidable warrior, Gabriel avoids combat — not out of fear of the battle, but fear of what his hands might do. Instead, he walks into the fray unarmed, bearing not steel, but the weight of the Word. His voice has silenced wars and stirred kings to repentance. In him, the calling of a Cohort is fully seen — not to dominate, but to serve with power, purpose, and peace.",
     ],
     credito: CONCEPT,
   },
@@ -61,9 +61,9 @@ export const PERSONAGENS_EN: Record<string, TextoPersonagem> = {
     epiteto: "Defiled",
     classe: "Cohorts",
     sobreClasse:
-      "Cohorts are the foundational workforce of the Host. Formed with willing hearts and bound by duty, they carry out the will of the High Heavens with unwavering resolve. Bearing a single pair of wings, Cohorts are the backbone of the Host — soldiers, messengers, and whatever is needed in between.",
+      "Cohorts are the foundational workforce of the Host. Formed with willing hearts and bound by duty, they carry out the will of the High Heavens with unwavering resolve. In the Age of Stars, those Eternals who gravitated toward service were appointed to this rank. Bearing a single pair of wings, Cohorts are the backbone of the Host — soldiers, messengers, and whatever is needed in between. They may not wield the might of an Archon or the mystery of a Principality, but their loyalty shapes the outcome of every war.",
     sobrePersonagem: [
-      "Amunet is one of the series' most visually distinctive characters, and his appearance is a direct illustration of what the Defiled Well does over time. His skin is dark, scaled hide. His features are thick and heavy, suggesting the ancient crocodiles of the Nile delta.",
+      "Amunet is one of the series' most visually distinctive characters, and his appearance is a direct illustration of what the Defiled Well does over time. His skin has become dark, scaled hide. His features are thick and heavy, suggesting the ancient crocodiles of the Nile delta.",
       "His most defining feature: his right arm — or what was once his right arm — has become a grotesque cluster of fused limbs, each with its own hands and fingers, intertwined and writhing like a knot of serpents. The individual hands flex involuntarily. The mass has a life of its own.",
     ],
     credito: MANGA,

@@ -60,7 +60,7 @@ export const personagens: Personagem[] = [
     sobreClasse:
       "Os Arautos são a força fundamental da Hoste. Forjados em corações dispostos e selados pelo dever, cumprem a vontade dos Altos Céus com resolução inabalável. Na Era das Estrelas, os Eternos que se inclinavam ao serviço foram designados a esta ordem. Portadores de um único par de asas, são o alicerce da Hoste: soldados, mensageiros e tudo o que houver entre um e outro. Talvez não empunhem o poder de um Arconte, nem o mistério de um Principado, mas é a lealdade deles que decide o fim de toda guerra.",
     sobrePersonagem: [
-      "Entre os Arautos, Gabriel é lendário. Arauto do Altíssimo, raramente é visto empunhando uma arma. Embora seja um guerreiro temível, evita o combate — não por medo da batalha, mas por temor de sucumbir à ira. Em vez disso, entra nas frentes de guerra desarmado, levando não o aço, mas o peso da Palavra. Sua voz já silenciou guerras e moveu reis ao arrependimento. Nele, o chamado de um Arauto se revela por completo: não dominar, mas servir com poder, propósito e paz.",
+      "Entre os Arautos, Gabriel é lendário. Arauto do Altíssimo, raramente é visto empunhando uma arma. Embora seja um guerreiro temível, evita o combate — não por medo da batalha, mas por temor do que suas próprias mãos poderiam fazer. Em vez disso, entra nas frentes de guerra desarmado, levando não o aço, mas o peso da Palavra. Sua voz já silenciou guerras e moveu reis ao arrependimento. Nele, o chamado de um Arauto se revela por completo: não dominar, mas servir com poder, propósito e paz.",
     ],
     credito: "Concept art — Arte: D. Bretas, 2025.",
   },
@@ -73,9 +73,9 @@ export const personagens: Personagem[] = [
     kanji: "使",
     lado: "rebeldes",
     sobreClasse:
-      "Os Arautos são a força fundamental da Hoste. Forjados em corações dispostos e selados pelo dever, cumprem a vontade dos Altos Céus com resolução inabalável. Portadores de um único par de asas, são o alicerce da Hoste: soldados, mensageiros e tudo o que houver entre um e outro.",
+      "Os Arautos são a força fundamental da Hoste. Forjados em corações dispostos e selados pelo dever, cumprem a vontade dos Altos Céus com resolução inabalável. Na Era das Estrelas, os Eternos que se inclinavam ao serviço foram designados a esta ordem. Portadores de um único par de asas, são o alicerce da Hoste: soldados, mensageiros e tudo o que houver entre um e outro. Talvez não empunhem o poder de um Arconte, nem o mistério de um Principado, mas é a lealdade deles que decide o fim de toda guerra.",
     sobrePersonagem: [
-      "Amunet é um dos personagens visualmente mais marcantes da série, e sua aparência é uma ilustração direta do que a Fonte Profana faz com o tempo. Sua pele é um couro escuro e escamado. Suas feições são grossas e pesadas, evocando os antigos crocodilos do delta do Nilo.",
+      "Amunet é um dos personagens visualmente mais marcantes da série, e sua aparência é uma ilustração direta do que a Fonte Profana faz com o tempo. Sua pele tornou-se um couro escuro e escamado. Suas feições são grossas e pesadas, evocando os antigos crocodilos do delta do Nilo.",
       "Sua característica mais definidora: o braço direito — ou o que um dia foi seu braço direito — tornou-se um aglomerado grotesco de membros fundidos, cada um com suas próprias mãos e dedos, entrelaçados e contorcendo-se como um nó de serpentes. As mãos se flexionam involuntariamente. A massa tem vida própria.",
     ],
     credito: "Arte do mangá — Arte: Match, 2026.",
