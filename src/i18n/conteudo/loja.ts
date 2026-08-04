@@ -35,7 +35,7 @@ interface ConteudoLoja {
 export const LOJA: Record<Idioma, ConteudoLoja> = {
   pt: {
     capaRotulo: "Yomikiri // Capa",
-    capaTitulo: "Por Isso Lutamos",
+    capaTitulo: "Mukō-Gawa: Por isso Lutamos",
     capaTexto: "A capa do yomikiri, com arte de Guilherme Match. É por ela que a obra chega às mãos de quem ainda não conhece o mundo.",
     capaAlt: "Capa do yomikiri de Mukō-Gawa: um guerreiro alado de armadura, empunhando uma lâmina, sobre fundo vermelho",
     titulo: "Loja",
@@ -61,7 +61,7 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
 
   en: {
     capaRotulo: "Yomikiri // Cover",
-    capaTitulo: "This Is Why We Fight",
+    capaTitulo: "Mukō-Gawa: Why We Fight",
     capaTexto: "The cover of the yomikiri, with art by Guilherme Match. It is how the work reaches the hands of someone who does not yet know this world.",
     capaAlt: "Cover of the Mukō-Gawa yomikiri: a winged warrior in armour, blade drawn, against a red field",
     titulo: "Shop",
@@ -88,7 +88,7 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
   // Traduzido do PT-BR. Pendente de revisão por falante nativo.
   es: {
     capaRotulo: "Yomikiri // Portada",
-    capaTitulo: "Por Eso Luchamos",
+    capaTitulo: "Mukō-Gawa: Por Eso Luchamos",
     capaTexto: "La portada del yomikiri, con arte de Guilherme Match. Es por ella que la obra llega a las manos de quien aún no conoce este mundo.",
     capaAlt: "Portada del yomikiri de Mukō-Gawa: un guerrero alado con armadura, espada en mano, sobre fondo rojo",
     titulo: "Tienda",
@@ -115,7 +115,7 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
   // Base: site modelo. Pendente de revisão.
   ja: {
     capaRotulo: "読み切り // 表紙",
-    capaTitulo: "我らが戦う理由",
+    capaTitulo: "Mukō-Gawa: Tatakau Riyū",
     capaTexto: "読み切りの表紙。作画はギリェルミ・マッチ。まだこの世界を知らない読者の手に、作品が最初に届く姿である。",
     capaAlt: "『向こう側』読み切りの表紙：赤を背に、刃を携えた翼ある鎧の戦士",
     titulo: "ショップ",

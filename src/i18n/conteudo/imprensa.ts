@@ -69,7 +69,7 @@ export const IMPRENSA: Record<Idioma, ConteudoImprensa> = {
     fichaTitulo: "Ficha técnica",
     ficha: [
       { rotulo: "Título", valor: "Mukō-Gawa (向こう側)" },
-      { rotulo: "Yomikiri", valor: "Por Isso Lutamos" },
+      { rotulo: "Yomikiri", valor: "Mukō-Gawa: Por isso Lutamos" },
       { rotulo: "Criador e roteirista", valor: "Israel Subira" },
       { rotulo: "Arte conceitual", valor: "Daniel Bretas" },
       { rotulo: "Arte do mangá", valor: "Guilherme Match" },
@@ -125,7 +125,7 @@ export const IMPRENSA: Record<Idioma, ConteudoImprensa> = {
 
     creditoTitulo: "Como creditar",
     creditoLead: "Linha pronta para copiar:",
-    creditoLinha: 'MUKŌ-GAWA (向こう側) "Por Isso Lutamos", de Israel Subira e Guilherme Match. © 2026 Israel Subira. Todos os direitos reservados.',
+    creditoLinha: 'MUKŌ-GAWA (向こう側) "Por isso Lutamos", de Israel Subira e Guilherme Match. © 2026 Israel Subira. Todos os direitos reservados.',
 
     contatoTitulo: "Falar com a assessoria",
     contatoTexto: "Entrevistas, exemplares para resenha, material que não está aqui ou qualquer outra coisa: escreva e nós respondemos.",
@@ -141,7 +141,7 @@ export const IMPRENSA: Record<Idioma, ConteudoImprensa> = {
     fichaTitulo: "Fact sheet",
     ficha: [
       { rotulo: "Title", valor: "Mukō-Gawa (向こう側)" },
-      { rotulo: "Yomikiri", valor: "This Is Why We Fight" },
+      { rotulo: "Yomikiri", valor: "Mukō-Gawa: Why We Fight" },
       { rotulo: "Creator and writer", valor: "Israel Subira" },
       { rotulo: "Concept art", valor: "Daniel Bretas" },
       { rotulo: "Manga art", valor: "Guilherme Match" },
@@ -197,7 +197,7 @@ export const IMPRENSA: Record<Idioma, ConteudoImprensa> = {
 
     creditoTitulo: "How to credit",
     creditoLead: "Ready to copy:",
-    creditoLinha: 'MUKŌ-GAWA (向こう側) "This Is Why We Fight" by Israel Subira & Guilherme Match. © 2026 Israel Subira. All rights reserved.',
+    creditoLinha: 'MUKŌ-GAWA (向こう側) "Why We Fight" by Israel Subira & Guilherme Match. © 2026 Israel Subira. All rights reserved.',
 
     contatoTitulo: "Contact press",
     contatoTexto: "Interviews, review copies, material that is not here, or anything else: write to us and we will answer.",
@@ -213,7 +213,7 @@ export const IMPRENSA: Record<Idioma, ConteudoImprensa> = {
     fichaTitulo: "Ficha técnica",
     ficha: [
       { rotulo: "Título", valor: "Mukō-Gawa (向こう側)" },
-      { rotulo: "Yomikiri", valor: "Por Eso Luchamos" },
+      { rotulo: "Yomikiri", valor: "Mukō-Gawa: Por Eso Luchamos" },
       { rotulo: "Creador y guionista", valor: "Israel Subira" },
       { rotulo: "Arte conceptual", valor: "Daniel Bretas" },
       { rotulo: "Arte del manga", valor: "Guilherme Match" },
@@ -285,7 +285,7 @@ export const IMPRENSA: Record<Idioma, ConteudoImprensa> = {
     fichaTitulo: "作品情報",
     ficha: [
       { rotulo: "題名", valor: "『向こう側』" },
-      { rotulo: "読み切り", valor: "我らが戦う理由" },
+      { rotulo: "読み切り", valor: "Mukō-Gawa: Tatakau Riyū" },
       { rotulo: "原作・脚本", valor: "イスラエル・スビラ" },
       { rotulo: "コンセプトアート", valor: "ダニエル・ブレタス" },
       { rotulo: "漫画作画", valor: "ギリェルメ・マッチ" },
@@ -341,7 +341,7 @@ export const IMPRENSA: Record<Idioma, ConteudoImprensa> = {
 
     creditoTitulo: "クレジット表記",
     creditoLead: "そのままお使いいただけます：",
-    creditoLinha: 'MUKŌ-GAWA（向こう側）「我らが戦う理由」イスラエル・スビラ、ギリェルメ・マッチ © 2026 Israel Subira. All rights reserved.',
+    creditoLinha: 'MUKŌ-GAWA（向こう側）「Tatakau Riyū」イスラエル・スビラ、ギリェルメ・マッチ © 2026 Israel Subira. All rights reserved.',
 
     contatoTitulo: "お問い合わせ",
     contatoTexto: "取材、献本、ここにない資料など、どのようなご用件でもご連絡ください。",

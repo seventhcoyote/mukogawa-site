@@ -120,7 +120,7 @@ const gruposPt: Grupo[] = [
         p: "O que é um yomikiri?",
         r: [
           "É um capítulo avulso, fechado em si mesmo, publicado antes da série regular. Em mangá, ele funciona como piloto: apresenta o mundo, o traço e o tom sem exigir que o leitor tenha acompanhado nada antes.",
-          "O de Mukō-Gawa se chama <b>Por Isso Lutamos</b> e é a primeira publicação da série. O volume 1 do mangá vem depois dele.",
+          "O nosso se chama <b>Mukō-Gawa: Por isso Lutamos</b> e é a primeira publicação da série. O volume 1 do mangá vem depois dele.",
           "Na cronologia da história ele fica entre <b>Protogenesis</b> e a Primeira Temporada, e é <b>leitura opcional</b>: quem pular não fica com buraco nenhum.",
         ],
       },
@@ -314,7 +314,7 @@ const gruposEn: Grupo[] = [
         p: "What is a yomikiri?",
         r: [
           "It is a standalone chapter, complete in itself, published ahead of the regular series. In manga it works as a pilot: it introduces the world, the art and the tone without asking the reader to have followed anything before it.",
-          "The Mukō-Gawa one is called <b>This Is Why We Fight</b>, and it is the first publication in the series. Volume 1 of the manga follows it.",
+          "Ours is called <b>Mukō-Gawa: Why We Fight</b>, and it is the first publication in the series. Volume 1 of the manga follows it.",
           "Within the story it sits between <b>Protogenesis</b> and Season One, and it is <b>optional reading</b>: skipping it leaves no gap.",
         ],
       },
@@ -517,7 +517,7 @@ const gruposJa: Grupo[] = [
         p: "読み切りとは何ですか。",
         r: [
           "本編の連載に先立って発表される、一話完結の作品です。世界観と絵と語り口を、前提知識なしに読者へ差し出す入口にあたります。",
-          "『向こう側』の読み切りは<b>我らが戦う理由</b>。シリーズ最初の刊行物であり、漫画第1巻はその後に続きます。",
+          "本作の読み切りは<b>Mukō-Gawa: Tatakau Riyū</b>。シリーズ最初の刊行物であり、漫画第1巻はその後に続きます。",
           "物語の時系列では<b>Protogenesis</b>と第一シーズンのあいだに位置し、<b>読まなくても支障はありません</b>。",
         ],
       },
