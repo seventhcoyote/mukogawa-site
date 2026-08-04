@@ -13,9 +13,18 @@
  * identifica ninguém. **Se qualquer uma dessas coisas mudar — e a analítica
  * está em discussão —, este texto muda junto.**
  *
- * PENDENTE: o controlador precisa de identificação jurídica real (nome
- * completo ou razão social, CNPJ se houver, endereço). Está marcado no texto e
- * em PENDENCIAS.md. Uma política sem controlador identificável não cumpre a lei.
+ * O controlador foi identificado em 2026-08-03: é pessoa jurídica, não o autor.
+ * A LGPD pede que o titular saiba a quem cobrar, e "Israel Subira" sozinho não
+ * dava isso — não há como notificar juridicamente um nome sem qualificação. Por
+ * isso a identificação traz razão social, CNPJ e endereço, e o nome do autor
+ * continua no texto como ponte: quem chega aqui conhece "Israel Subira", não
+ * conhece a empresa, e precisa entender que são a mesma origem.
+ *
+ * CONFERIR NO CARTÃO CNPJ antes de considerar fechado: se a razão social
+ * registrada tem sufixo societário (LTDA, ME, EIRELI) e como a grafia aparece
+ * lá. O que chegou veio digitado à mão, sem acento e sem sufixo. Numa política
+ * de privacidade a razão social deve bater com o registro, senão a
+ * identificação é aproximada — e aproximada é o que ela não pode ser.
  */
 import type { Idioma } from "../idiomas";
 
@@ -34,8 +43,20 @@ export interface ConteudoPrivacidade {
   secoes: Secao[];
 }
 
-/** Trocar quando o controlador for definido. Ver PENDENCIAS.md. */
-const CONTROLADOR = "Israel Subira";
+/**
+ * O controlador, num lugar só, porque aparece nos quatro idiomas e um dia vai
+ * mudar junto. `AUTOR` fica separado de propósito: a empresa é quem responde
+ * pela lei, mas é o nome do autor que o leitor reconhece.
+ */
+const CONTROLADOR = {
+  razaoSocial: "Boanerges Produções",
+  cnpj: "53.326.867/0001-06",
+  endereco: "Rua Almirante Gonçalves, 2740 — Curitiba/PR, CEP 80250-150",
+  /** Sem o país: cada idioma acrescenta o nome do país na própria língua. */
+  enderecoInternacional: "Rua Almirante Gonçalves 2740, Curitiba, PR 80250-150",
+} as const;
+
+const AUTOR = "Israel Subira";
 
 export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
   pt: {
@@ -43,12 +64,12 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
     descricao: "Que dados o site de Mukō-Gawa coleta, para quê, por quanto tempo e como pedir a exclusão.",
     rotulo: "Privacidade",
     lead: "Este site coleta uma coisa só: o e-mail de quem pede para ser avisado do lançamento. Esta página explica o que acontece com ele.",
-    atualizado: "Atualizada em 2 de agosto de 2026.",
+    atualizado: "Atualizada em 3 de agosto de 2026.",
     secoes: [
       {
         titulo: "Quem é responsável",
         paragrafos: [
-          `O responsável pelo tratamento dos dados (o "controlador", na Lei Geral de Proteção de Dados) é ${CONTROLADOR}, criador de Mukō-Gawa.`,
+          `O responsável pelo tratamento dos dados (o "controlador", na Lei Geral de Proteção de Dados) é ${CONTROLADOR.razaoSocial}, inscrita no CNPJ sob o nº ${CONTROLADOR.cnpj}, com sede na ${CONTROLADOR.endereco}. É a empresa de ${AUTOR}, criador de Mukō-Gawa.`,
           "Para qualquer assunto relativo a dados pessoais, incluindo os pedidos descritos abaixo, o contato é contact@mukogawa.com.",
         ],
       },
@@ -141,12 +162,12 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
     descricao: "What the Mukō-Gawa site collects, what for, for how long, and how to ask for deletion.",
     rotulo: "Privacy",
     lead: "This site collects one thing: the email address of readers who ask to be notified about the release. This page explains what happens to it.",
-    atualizado: "Last updated 2 August 2026.",
+    atualizado: "Last updated 3 August 2026.",
     secoes: [
       {
         titulo: "Who is responsible",
         paragrafos: [
-          `The data controller is ${CONTROLADOR}, creator of Mukō-Gawa.`,
+          `The data controller is ${CONTROLADOR.razaoSocial}, a Brazilian company registered under CNPJ ${CONTROLADOR.cnpj}, at ${CONTROLADOR.enderecoInternacional}, Brazil. It is the company of ${AUTOR}, creator of Mukō-Gawa.`,
           "For anything concerning personal data, including the requests described below, write to contact@mukogawa.com.",
         ],
       },
@@ -235,12 +256,12 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
     descricao: "Qué datos recoge el sitio de Mukō-Gawa, para qué, por cuánto tiempo y cómo pedir su eliminación.",
     rotulo: "Privacidad",
     lead: "Este sitio recoge una sola cosa: el correo de quien pide aviso del lanzamiento. Esta página explica qué ocurre con él.",
-    atualizado: "Actualizada el 2 de agosto de 2026.",
+    atualizado: "Actualizada el 3 de agosto de 2026.",
     secoes: [
       {
         titulo: "Quién es responsable",
         paragrafos: [
-          `El responsable del tratamiento es ${CONTROLADOR}, creador de Mukō-Gawa.`,
+          `El responsable del tratamiento es ${CONTROLADOR.razaoSocial}, empresa brasileña inscrita en el CNPJ n.º ${CONTROLADOR.cnpj}, con domicilio en ${CONTROLADOR.enderecoInternacional}, Brasil. Es la empresa de ${AUTOR}, creador de Mukō-Gawa.`,
           "Para cualquier asunto relativo a datos personales, incluidas las solicitudes descritas abajo, escribe a contact@mukogawa.com.",
         ],
       },
@@ -329,12 +350,12 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
     descricao: "『向こう側』のサイトが取得する情報、その目的、保存期間、削除の求め方について。",
     rotulo: "プライバシー",
     lead: "本サイトが取得するのは、発売のお知らせをご希望の方のメールアドレスのみです。その取り扱いについてご説明します。",
-    atualizado: "2026年8月2日 改定。",
+    atualizado: "2026年8月3日 改定。",
     secoes: [
       {
         titulo: "管理者",
         paragrafos: [
-          `個人情報の管理者は、『向こう側』の作者 ${CONTROLADOR} です。`,
+          `個人情報の管理者は、ブラジル法人 ${CONTROLADOR.razaoSocial}（CNPJ ${CONTROLADOR.cnpj}、所在地：${CONTROLADOR.enderecoInternacional}, Brazil）です。『向こう側』の作者 ${AUTOR} の法人にあたります。`,
           "個人情報に関するお問い合わせ、および下記のご請求は contact@mukogawa.com までお願いいたします。",
         ],
       },
