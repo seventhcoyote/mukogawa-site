@@ -29,7 +29,7 @@ export const UI = {
     "cta.idioma": "Idioma",
     "cta.aoTopo": "Topo",
 
-    "rodape.obra": "A obra",
+    "rodape.obra": "Sobre",
     "rodape.publicacao": "Publicação",
     "rodape.listaEspera": "Lista de espera",
     "rodape.emBreve": "em breve",
@@ -78,7 +78,7 @@ export const UI = {
     "cta.idioma": "Language",
     "cta.aoTopo": "Top",
 
-    "rodape.obra": "The work",
+    "rodape.obra": "About",
     "rodape.publicacao": "Publication",
     "rodape.listaEspera": "Waitlist",
     "rodape.emBreve": "soon",
@@ -127,7 +127,7 @@ export const UI = {
     "cta.idioma": "Idioma",
     "cta.aoTopo": "Arriba",
 
-    "rodape.obra": "La obra",
+    "rodape.obra": "Acerca",
     "rodape.publicacao": "Publicación",
     "rodape.listaEspera": "Lista de espera",
     "rodape.emBreve": "pronto",
@@ -176,7 +176,7 @@ export const UI = {
     "cta.idioma": "言語",
     "cta.aoTopo": "上へ",
 
-    "rodape.obra": "作品",
+    "rodape.obra": "概要",
     "rodape.publicacao": "刊行",
     "rodape.listaEspera": "お知らせリスト",
     "rodape.emBreve": "準備中",

@@ -20,7 +20,13 @@ interface Era { nome: string; texto: string }
  * Veilstrand não são de ninguém — os dois primeiros levam cor, os dois últimos
  * não. Pintar tudo igual jogaria fora um dado que o leitor já sabe ler.
  */
-interface Lugar { nome: string; texto: string; lado?: "hoste" | "rebeldes" }
+interface Lugar {
+  /** Chave estável, igual nos quatro idiomas: é ela que liga o lugar à arte. */
+  id: "altos-ceus" | "haven" | "deserto" | "veilstrand";
+  nome: string;
+  texto: string;
+  lado?: "hoste" | "rebeldes";
+}
 
 interface ConteudoHistoria {
   titulo: string;
@@ -122,7 +128,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     tituloSeries: "Três séries",
     series: [
       { nome: "Saga", selo: "Cinco temporadas // Cinco livros // Arco principal do mangá",
-        texto: "Saga é o relato da redenção contada pelo outro lado: uma guerra brutal travada com espada e mente, onde legiões descem sobre seus inimigos, e generais empunham não apenas poder, mas estratégia. Dividida em cinco temporadas, Saga desvela o conflito eterno entre a Hoste e o Rebelde, enquanto o destino da humanidade pende por um fio." },
+        texto: "Saga é o relato da redenção contada pelo outro lado: uma guerra brutal travada com espada e mente, onde legiões descem sobre seus inimigos, e generais empunham não apenas poder, mas estratégia. Dividida em cinco partes, Saga desvela o conflito eterno entre a Hoste e o Rebelde, enquanto o destino da humanidade pende por um fio." },
       { nome: "Protogenesis", selo: "Prequela // Longa-metragem e livro",
         texto: "Protogenesis é a origem. Assim como O Silmarillion é para O Senhor dos Anéis, Protogenesis serve como o prelúdio de Saga: uma recontagem mítica dos eventos que antecederam a guerra. Planejado como um longa-metragem, Protogenesis será lançado entre a Segunda e a Terceira Temporada, oferecendo profundidade, contexto e o peso da história antiga." },
       { nome: "Desvelar", selo: "Epílogo // Longa-metragem e livro",
@@ -148,13 +154,13 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloLugares: "Os lugares",
     tituloLugares: "Onde a guerra se trava",
     lugares: [
-      { nome: "Os Altos Céus", lado: "hoste",
+      { id: "altos-ceus", nome: "Os Altos Céus", lado: "hoste",
         texto: "A sede da própria Divindade, mais antiga que o tempo e mais radiante que tudo o mais nesta cosmologia. É ali que se ergue o Trono. Ali os quatro Serafins ardem em adoração perpétua, ali Querubins e Ofanins mantêm a vigília antiga, e ali as fileiras incontáveis da Hoste servem, treinam e são forjadas para a guerra. A luz e o cântico não cessam. A adoração não é apenas ato: é combustível, a própria força que move a Hoste à batalha. Tudo naquele lugar irradia ordem, glória e devoção inquebrada ao Altíssimo." },
-      { nome: "Haven", lado: "rebeldes",
+      { id: "haven", nome: "Haven", lado: "rebeldes",
         texto: "Cidade oculta e ferozmente guardada, erguida nas profundezas do mundo inferior e suspensa por correntes sobre um lago ácido. Onde os Altos Céus são abertos, Haven é segredo, escondida até do olhar distraído: reduto da facção que move rebelião contra a ordem do Céu. Em função, espelha os Altos Céus. Em natureza, é o avesso deles." },
-      { nome: "O Deserto da Mesopotâmia",
+      { id: "deserto", nome: "O Deserto da Mesopotâmia",
         texto: "O palco no mundo dos homens para boa parte da história antiga da saga: o Oriente Próximo de Abraão e de José, do Egito, da Suméria, da Babilônia e da Assíria. É o campo de batalha mortal sob o Veilstrand, onde a história visível de patriarcas e impérios se desenrola enquanto a guerra invisível arde logo atrás dela." },
-      { nome: "Veilstrand (o Véu)",
+      { id: "veilstrand", nome: "Veilstrand (o Véu)",
         texto: "O tecido da própria realidade na cosmologia de Mukō-Gawa. Um plano de quatro dimensões, reativo à emoção e ao peso espiritual, onde o Reino Eterno se sobrepõe ao mundo mortal. Distância e escala não são fixas ali como são aqui: uma batalha pode ocupar uma cidade ou caber num grão de poeira, conforme o quanto ela importa. É este o outro lado que dá nome à série — a camada não vista que corre ao lado da história humana, e onde a guerra verdadeira é travada." },
     ],
     rotuloDois: "Os dois",
@@ -162,7 +168,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     doisP: [
       "Saga não se conta por um. Dois a atravessam de ponta a ponta, e a linha da guerra passa entre eles.",
       "Um é Kharzul. Foi príncipe do Segundo Escalão e trocou a Luz pela promessa da subida. Miguel o derrotou, e com a derrota veio o que fere mais fundo: a patente tirada, o nome desonrado, o posto de batedor. É do fundo que ele vê a guerra, e é de lá que a conta.",
-      "O outro ainda não tem nome dito. Move-se do lado oposto da linha e conhece Kharzul como só um adversário antigo conhece. Onde um avança, o outro já esteve. Onde um recua, o outro aguarda. O nome virá no tempo dele.",
+      "O outro é uma surpresa ao leitor. Move-se do lado oposto da linha e conhece Kharzul como só um adversário antigo conhece. Onde um avança, o outro já esteve. Onde um recua, o outro aguarda. O nome virá no tempo dele.",
     ],
     rotuloBase: "A base",
     tituloMitologia: "Mitologia cristã",
@@ -209,7 +215,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     tituloSeries: "Three series",
     series: [
       { nome: "Saga", selo: "Five seasons // Five books // Main manga arc",
-        texto: "Saga is the tale of redemption told from the other side. A brutal war fought through sword and mind, where legions descend upon their foes and generals wield not only power, but strategy. Divided into five seasons, Saga unfolds the eternal conflict between the Host and the Guest, as the fate of mankind hangs in the balance." },
+        texto: "Saga is the tale of redemption told from the other side. A brutal war fought through sword and mind, where legions descend upon their foes and generals wield not only power, but strategy. Divided into five parts, Saga unfolds the eternal conflict between the Host and the Guest, as the fate of mankind hangs in the balance." },
       { nome: "Protogenesis", selo: "Prequel // Feature film & book",
         texto: "Protogenesis is the origin: a mythic retelling of what transpired before the war began, standing to Saga as The Silmarillion stands to The Lord of the Rings. Planned as a feature film, Protogenesis will be released between Seasons Two and Three, offering depth, context, and ancient history." },
       { nome: "Unveiled", selo: "Epilogue // Feature film & book",
@@ -235,13 +241,13 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloLugares: "The places",
     tituloLugares: "Where the war is fought",
     lugares: [
-      { nome: "The High Heavens", lado: "hoste",
+      { id: "altos-ceus", nome: "The High Heavens", lado: "hoste",
         texto: "The seat of the Godhead itself, older than time and more radiant than anything else in the cosmology. This is where the Throne stands. Where the four Seraphim burn eternally in worship, where Cherubim and Ophanim keep their ancient watch, and where the countless ranks of the Host serve, train, and are forged for war. Light and song never stop here. Worship isn't just an act: it is fuel, the very power that moves the Host to battle. Everything about the place radiates order, glory, and unbroken devotion to the Almighty." },
-      { nome: "Haven", lado: "rebeldes",
+      { id: "haven", nome: "Haven", lado: "rebeldes",
         texto: "A hidden city, fiercely guarded, built deep in the underworld and suspended by chains over an acidic lake. Where the High Heavens are open, Haven is secret, concealed even from casual notice: a stronghold for a faction waging rebellion against Heaven's order. It mirrors the High Heavens in function. In nature, it is their opposite." },
-      { nome: "The Mesopotamian Desert",
+      { id: "deserto", nome: "The Mesopotamian Desert",
         texto: "The real-world stage for much of the saga's early history, the ancient Near East where Abraham, Joseph, Egypt, Sumer, Babylon and Assyria all play out. This is the mortal battleground layered beneath Veilstrand, where the visible history of patriarchs and empires unfolds while the invisible war rages just behind it." },
-      { nome: "Veilstrand (the Veil)",
+      { id: "veilstrand", nome: "Veilstrand (the Veil)",
         texto: "The fabric of reality itself in Mukō-Gawa's cosmology. A four-dimensional plane, reactive to emotion and spiritual significance, where the Eternal Realm overlaps with the mortal world. Distance and scale aren't fixed here the way they are for us: a battle can span a city or fit on a dust mote, depending on how much it matters. This is the other side the series takes its name from — the unseen layer running alongside human history, where the real war is fought." },
     ],
     rotuloDois: "The two",
@@ -249,7 +255,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     doisP: [
       "Saga is not told by one. Two cross it from end to end, and the line of the war runs between them.",
       "One is Kharzul. He was a prince of the Second Echelon, and he traded the Light for the promise of ascent. Michael defeated him, and with the defeat came what cuts deeper: the rank stripped, the name disgraced, the post of a scout. He sees the war from below, and it is from there that he tells it.",
-      "The other has no name yet spoken. He moves on the far side of the line and knows Kharzul as only an old adversary can. Where one advances, the other has already been. Where one withdraws, the other waits. The name will come in its own time.",
+      "The other is a surprise kept from the reader. He moves on the far side of the line and knows Kharzul as only an old adversary can. Where one advances, the other has already been. Where one withdraws, the other waits. The name will come in its own time.",
     ],
     rotuloBase: "The foundation",
     tituloMitologia: "Christian mythology",
@@ -297,7 +303,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     tituloSeries: "Tres series",
     series: [
       { nome: "Saga", selo: "Cinco temporadas // Cinco libros // Arco principal del manga",
-        texto: "Saga es el relato de la redención contado desde el otro lado: una guerra brutal librada con espada y mente, donde legiones descienden sobre sus enemigos y los generales empuñan no solo poder, sino estrategia. Dividida en cinco temporadas, Saga desvela el conflicto eterno entre la Hueste y el Rebelde, mientras el destino de la humanidad pende de un hilo." },
+        texto: "Saga es el relato de la redención contado desde el otro lado: una guerra brutal librada con espada y mente, donde legiones descienden sobre sus enemigos y los generales empuñan no solo poder, sino estrategia. Dividida en cinco partes, Saga desvela el conflicto eterno entre la Hueste y el Rebelde, mientras el destino de la humanidad pende de un hilo." },
       { nome: "Protogenesis", selo: "Precuela // Largometraje y libro",
         texto: "Protogenesis es el origen. Así como El Silmarillion es a El Señor de los Anillos, Protogenesis sirve de preludio a Saga: un recuento mítico de los acontecimientos que precedieron a la guerra. Planeado como largometraje, se estrenará entre la Segunda y la Tercera Temporada, ofreciendo profundidad, contexto y el peso de la historia antigua." },
       { nome: "Desvelar", selo: "Epílogo // Largometraje y libro",
@@ -323,13 +329,13 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloLugares: "Los lugares",
     tituloLugares: "Dónde se libra la guerra",
     lugares: [
-      { nome: "Los Altos Cielos", lado: "hoste",
+      { id: "altos-ceus", nome: "Los Altos Cielos", lado: "hoste",
         texto: "La sede de la propia Divinidad, más antigua que el tiempo y más radiante que todo lo demás en esta cosmología. Allí se alza el Trono. Allí los cuatro Serafines arden en adoración perpetua, allí Querubines y Ofanines mantienen su vigilia antigua, y allí las filas incontables de la Hueste sirven, se entrenan y son forjadas para la guerra. La luz y el canto no cesan. La adoración no es solo acto: es combustible, la fuerza misma que mueve a la Hueste a la batalla. Todo en aquel lugar irradia orden, gloria y devoción inquebrantada al Altísimo." },
-      { nome: "Haven", lado: "rebeldes",
+      { id: "haven", nome: "Haven", lado: "rebeldes",
         texto: "Ciudad oculta y ferozmente guardada, levantada en lo profundo del mundo inferior y suspendida por cadenas sobre un lago ácido. Donde los Altos Cielos son abiertos, Haven es secreto, escondida incluso de la mirada distraída: bastión de la facción que mueve rebelión contra el orden del Cielo. En función, espeja a los Altos Cielos. En naturaleza, es su reverso." },
-      { nome: "El Desierto de Mesopotamia",
+      { id: "deserto", nome: "El Desierto de Mesopotamia",
         texto: "El escenario en el mundo de los hombres para buena parte de la historia antigua de la saga: el Próximo Oriente de Abraham y de José, de Egipto, Sumeria, Babilonia y Asiria. Es el campo de batalla mortal bajo el Veilstrand, donde la historia visible de patriarcas e imperios se despliega mientras la guerra invisible arde justo detrás." },
-      { nome: "Veilstrand (el Velo)",
+      { id: "veilstrand", nome: "Veilstrand (el Velo)",
         texto: "El tejido de la realidad misma en la cosmología de Mukō-Gawa. Un plano de cuatro dimensiones, reactivo a la emoción y al peso espiritual, donde el Reino Eterno se superpone al mundo mortal. Distancia y escala no son fijas allí como lo son aquí: una batalla puede ocupar una ciudad o caber en una mota de polvo, según cuánto importe. Este es el otro lado que da nombre a la serie — la capa no vista que corre junto a la historia humana, y donde se libra la guerra verdadera." },
     ],
     rotuloDois: "Los dos",
@@ -337,7 +343,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     doisP: [
       "Saga no se cuenta por uno. Dos la atraviesan de punta a punta, y la línea de la guerra pasa entre ellos.",
       "Uno es Kharzul. Fue príncipe del Segundo Escalón y cambió la Luz por la promesa del ascenso. Miguel lo derrotó, y con la derrota vino lo que hiere más hondo: el rango arrebatado, el nombre deshonrado, el puesto de explorador. Ve la guerra desde el fondo, y es desde allí que la cuenta.",
-      "El otro aún no tiene nombre dicho. Se mueve al otro lado de la línea y conoce a Kharzul como solo un adversario antiguo conoce. Donde uno avanza, el otro ya estuvo. Donde uno retrocede, el otro aguarda. El nombre vendrá a su tiempo.",
+      "El otro es una sorpresa para el lector. Se mueve al otro lado de la línea y conoce a Kharzul como solo un adversario antiguo conoce. Donde uno avanza, el otro ya estuvo. Donde uno retrocede, el otro aguarda. El nombre vendrá a su tiempo.",
     ],
     rotuloBase: "La base",
     tituloMitologia: "Mitología cristiana",
@@ -385,7 +391,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     tituloSeries: "三つのシリーズ",
     series: [
       { nome: "Saga", selo: "全五シーズン // 全五巻 // 漫画本編",
-        texto: "『Saga』は向こう側から語られる贖罪の物語。剣と知略で戦われる過酷な戦であり、軍団が敵に降り、将は力のみならず戦略を振るう。全五シーズンにわたり、天軍と客人の永遠の相克を、人の運命を天秤に載せながら描く。" },
+        texto: "『Saga』は向こう側から語られる贖罪の物語。剣と知略で戦われる過酷な戦であり、軍団が敵に降り、将は力のみならず戦略を振るう。全五部にわたり、天軍と客人の永遠の相克を、人の運命を天秤に載せながら描く。" },
       { nome: "Protogenesis", selo: "前史 // 劇場長編・書籍",
         texto: "『Protogenesis』は起源である。『指輪物語』に対する『シルマリルの物語』のように、『Saga』の前史として、戦の始まる前に何が起きたかを神話として語り直す。劇場長編として企画され、第二シーズンと第三シーズンの間に公開予定。深みと文脈、そして古き歴史を届ける。" },
       { nome: "Unveiled", selo: "終章 // 劇場長編・書籍",
@@ -411,13 +417,13 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloLugares: "場所",
     tituloLugares: "戦いの舞台",
     lugares: [
-      { nome: "高き天", lado: "hoste",
+      { id: "altos-ceus", nome: "高き天", lado: "hoste",
         texto: "神性そのものの座であり、時よりも古く、この世界観のいかなるものよりも輝かしい。玉座が立つのはここである。四人のセラフィムが絶えず礼拝に燃え、ケルビムとオファニムが古き見張りを守り、数えきれぬ天軍の列が仕え、鍛えられ、戦のために形づくられる場所。光と歌が絶えることはない。礼拝はただの行いではない。それは燃料であり、天軍を戦へと動かす力そのものである。その場所のすべてが、秩序と栄光と、至高者への揺るぎなき献身を放っている。" },
-      { nome: "ヘイヴン", lado: "rebeldes",
+      { id: "haven", nome: "ヘイヴン", lado: "rebeldes",
         texto: "厳重に守られた隠れた都市。地下世界の深くに築かれ、酸の湖の上に鎖で吊られている。高き天が開かれているのに対し、ヘイヴンは秘されている。何気ない目からも隠され、天の秩序に叛乱を挑む一派の拠点である。機能において高き天を映す。本性において、その裏返しである。" },
-      { nome: "メソポタミアの砂漠",
+      { id: "deserto", nome: "メソポタミアの砂漠",
         texto: "サーガの古き歴史の多くが演じられる、人の世の舞台。アブラハムとヨセフの、エジプトとシュメールとバビロンとアッシリアの古代近東である。ここは帷（ヴェイル）の下に重なる死すべき者の戦場であり、族長と帝国の目に見える歴史が繰り広げられる一方で、見えざる戦がそのすぐ背後で荒れ狂う。" },
-      { nome: "ヴェイルストランド（帷）",
+      { id: "veilstrand", nome: "ヴェイルストランド（帷）",
         texto: "『向こう側』の世界観における、現実そのものの織り目。感情と霊的な重みに反応する四次元の平面であり、永遠の界が死すべき者の世界と重なる場所である。距離も尺度も、ここでは我々の世界のようには定まっていない。ひとつの戦が都市を覆うことも、塵の一粒に収まることもある。どれほどの重みを持つかによって変わるのだ。これこそが、このシリーズの名の由来である向こう側 — 人の歴史のかたわらを走る、見えざる層であり、真の戦が交わされる場所である。" },
     ],
     rotuloDois: "二人",
@@ -425,7 +431,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     doisP: [
       "サーガは一人では語られない。二人が端から端まで貫き、戦の線は二人のあいだを走る。",
       "一人はカルズル。第二階梯の君侯であったが、光を捨てて上昇の約束と引き換えた。ミカエルに敗れ、その敗北とともに、より深く抉るものが来た。位を剥がれ、名を辱められ、斥候の任に落とされた。彼は戦を底から見る。そして底から語る。",
-      "もう一人の名は、まだ言われていない。線の向こう側を動き、古き敵のみが知りうるかたちでカルズルを知る。一方が進んだ場所に、他方はすでにいた。一方が退く場所で、他方は待つ。名はその時が来れば言われる。",
+      "もう一人は読者への驚きとして伏せられている。線の向こう側を動き、古き敵のみが知りうるかたちでカルズルを知る。一方が進んだ場所に、他方はすでにいた。一方が退く場所で、他方は待つ。名はその時が来れば言われる。",
     ],
     rotuloBase: "土台",
     tituloMitologia: "キリスト教神話",

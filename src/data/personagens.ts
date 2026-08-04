@@ -101,7 +101,7 @@ export const personagens: Personagem[] = [
   {
     slug: "miguel",
     nome: "Miguel",
-    epiteto: "O Portador da Guerra",
+    epiteto: "O Belicista",
     classe: "Arcontes",
     classeNum: "02",
     kanji: "戦",
@@ -109,7 +109,7 @@ export const personagens: Personagem[] = [
     sobreClasse:
       "Os Arcontes são os mais poderosos guerreiros da Hoste. Na Era das Estrelas, eram os Eternos atraídos pela força, e força lhes foi concedida em abundância. Nenhuma outra ordem iguala sua têmpera ou resistência, tornando-os figuras decisivas nos tempos de guerra. São o único escalão digno de empunhar as Lâminas Rasgafenda, obras-primas de Zorphael, o mestre de forja da Hoste, forjadas em chamas e consagradas pela própria mão do Arquiteto. Essas armas podem rasgar o tecido do espaço, abrindo portais entre reinos, campos de batalha e até mesmo através do Véu. Os Arcontes portam duas duplas de asas: uma ampla e imponente, outra menor e veloz, moldadas para o ímpeto violento e a precisão aérea absoluta.",
     sobrePersonagem: [
-      "Entre eles, nenhum se ergue mais alto que Miguel, o Portador da Guerra. Inquebrável. Invicto. Sua presença, por si só, lança terror no coração dos inimigos dos céus. Sua lança, Veritas, foi a primeira arma retirada da forja de Zorphael quando a guerra teve início, e nenhuma mão, exceto a de Miguel, jamais a empunhou.",
+      "Entre eles, nenhum se ergue mais alto que Miguel, o Belicista. Inquebrável. Invicto. Sua presença, por si só, lança terror no coração dos inimigos dos céus. Sua lança, Veritas, foi a primeira arma retirada da forja de Zorphael quando a guerra teve início, e nenhuma mão, exceto a de Miguel, jamais a empunhou.",
     ],
     credito: "Concept art — Arte: D. Bretas, 2025.",
   },

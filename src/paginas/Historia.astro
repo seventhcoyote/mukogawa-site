@@ -4,7 +4,26 @@ import Base from "../layouts/Base.astro";
 import fontes from "../assets/historia/fontes-profanas.jpg";
 import guerra from "../assets/historia/guerra-pela-humanidade.jpg";
 import helelRosto from "../assets/historia/helel-rosto.png";
+
+// As artes dos quatro lugares, ligadas pelo `id` do lugar e não pela posição no
+// array — o texto muda de idioma, o id não.
+//
+// CUIDADO com o nome do arquivo original: o que chegou como "heaven" é HAVEN, a
+// cidade oculta dos Rebeldes no submundo, e não os Altos Céus. Conferido pela
+// imagem (caverna com cidade suspensa sobre água), não pelo nome do arquivo.
+import arteAltosCeus from "../assets/historia/lugares/altos-ceus.jpg";
+import arteHaven from "../assets/historia/lugares/haven.jpg";
+import arteDeserto from "../assets/historia/lugares/deserto.jpg";
+import arteVeilstrand from "../assets/historia/lugares/veilstrand.jpg";
+
+const ARTE_LUGAR = {
+  "altos-ceus": arteAltosCeus,
+  haven: arteHaven,
+  deserto: arteDeserto,
+  veilstrand: arteVeilstrand,
+} as const;
 import { HISTORIA } from "../i18n/conteudo/historia";
+import { ROTULOS_PERSONAGENS } from "../i18n/conteudo/personagens";
 import { OBRA } from "../i18n/conteudo/obra";
 import { rota } from "../i18n/idiomas";
 import type { Idioma } from "../i18n/idiomas";
@@ -14,6 +33,11 @@ const { idioma } = Astro.props;
 const c = HISTORIA[idioma];
 const hrefObra = rota("obra", idioma);
 const rotuloObra = OBRA[idioma].h1;
+const hrefPersonagens = rota("personagens", idioma);
+// Reaproveita o rótulo que a home já usa para o mesmo destino: "Todos os
+// personagens". Já está traduzido nos quatro idiomas, e dizer a mesma coisa
+// para o mesmo lugar é o que faz o leitor reconhecer o caminho.
+const rotuloPersonagens = ROTULOS_PERSONAGENS[idioma].todos;
 
 const series = c.series;
 ---
@@ -114,6 +138,11 @@ const series = c.series;
       <div class="lugares">
         {c.lugares.map((l) => (
           <div class:list={["lugar", { "lugar--neutro": !l.lado }]} data-lado={l.lado}>
+            <div class="arte arte--lugar">
+              <Image src={ARTE_LUGAR[l.id]} alt={l.nome} widths={[520, 900, 1320]}
+                     sizes="(max-width: 759px) 92vw, 46vw" loading="lazy" />
+              <span class="cantos" aria-hidden="true"></span>
+            </div>
             <h3>{l.nome}</h3>
             <p>{l.texto}</p>
           </div>
@@ -203,6 +232,17 @@ const series = c.series;
           <div class="quem" data-lado="rebeldes"><p>{c.doisP[1]}</p></div>
           <div class="quem quem--sem-nome"><p>{c.doisP[2]}</p></div>
         </div>
+
+        {/* O caminho para os personagens sai DAQUI, e não do fim da página: é
+            aqui que a pergunta nasce. O leitor acabou de conhecer dois nomes e
+            quer saber quem mais existe — no fim da página ele já passou pelas
+            séries e pela mitologia, e a pergunta esfriou.
+
+            Botão, e não link de texto, pela regra firmada em 2026-08-03: ir para
+            outra página é botão. Link sem filete não aparece no celular. */}
+        <p class="acao-dois">
+          <a class="botao botao--fantasma" href={hrefPersonagens}>{rotuloPersonagens}</a>
+        </p>
       </div>
     </div>
   </section>
@@ -350,6 +390,22 @@ const series = c.series;
   .lugar h3 { margin-bottom: 12px; }
   .lugar p { color: var(--cinza); max-width: 58ch; margin: 0; }
 
+  /* A arte herda de `.arte` o tratamento da página inteira: cinza, contraste
+     levemente puxado, cantos cortados na diagonal e a moldura de cantos. É o
+     que mantém estas quatro no mesmo mundo visual das artes das Fontes e da
+     Guerra, logo abaixo.
+
+     A moldura de cantos vive em `inset: -10px`, ou seja, PARA FORA da imagem.
+     Dentro de um card com padding ela encostaria no texto, então aqui ela é
+     recolhida para a borda da própria arte. */
+  .arte--lugar {
+    margin-bottom: clamp(20px, 2.4vw, 28px);
+  }
+  /* As quatro são panorâmicas (2000x838). Ficam inteiras, sem corte: a regra do
+     projeto vale aqui como em toda parte, e cortar uma paisagem pela metade
+     tiraria justamente o que ela tem — a extensão do lugar. */
+  .lugar .arte--lugar :global(img) { display: block; height: auto; filter: none; }
+
   /* ---------- os dois que atravessam a Saga ---------- */
   /* Mesmo sistema de "Os dois lados": sem arte, dois blocos, e a cor no topo
      como única distinção. Também não há arte a dar aqui — Kharzul tem, o rival
@@ -360,6 +416,7 @@ const series = c.series;
      ele está. O tracejado não é enfeite: é a mesma linguagem que o rodapé usa
      para o perfil social que ainda não existe (ver config/site.ts). Lugar
      reservado, marcado como tal, sem fingir um dado que não temos. */
+  .acao-dois { margin: clamp(24px, 3vw, 34px) 0 0; }
   .dois .lead { max-width: 68ch; margin: 0 0 clamp(22px, 2.6vw, 32px); }
   .par {
     display: grid;
