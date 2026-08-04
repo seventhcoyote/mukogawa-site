@@ -47,8 +47,8 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
     nota: "Os links de venda entram no ar a cada lançamento. As datas seguem o calendário atual da editora e podem mudar.",
     duvidas: "Dúvidas sobre preço, idioma e envio",
     regioes: [
-      { codigo: "BR", pais: "Brasil", canal: "Shopify", destaque: true,
-        texto: "Edições em português, vendidas diretamente pela nossa loja e enviadas dentro do país.",
+      { codigo: "BR", pais: "Brasil", canal: "Loja própria e Amazon", destaque: true,
+        texto: "Edições em português, na nossa própria loja com envio dentro do país, e também pela Amazon.",
         quando: "Yomikiri — 1º de dezembro de 2026" },
       { codigo: "US", pais: "Estados Unidos", canal: "Amazon", destaque: false,
         texto: "Edições em inglês, impressas e digitais, com entrega pela Amazon.",
@@ -73,8 +73,8 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
     nota: "Retail links go live with each release. Dates shown are current publisher schedule and may change.",
     duvidas: "Questions about pricing, language and shipping",
     regioes: [
-      { codigo: "BR", pais: "Brazil", canal: "Shopify", destaque: true,
-        texto: "Portuguese editions, sold direct from our own store and shipped domestically.",
+      { codigo: "BR", pais: "Brazil", canal: "Own store and Amazon", destaque: true,
+        texto: "Portuguese editions, from our own store with domestic shipping, and also through Amazon.",
         quando: "Yomikiri — 1 December 2026" },
       { codigo: "US", pais: "United States", canal: "Amazon", destaque: false,
         texto: "English editions in print and digital, fulfilled by Amazon.",
@@ -100,8 +100,8 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
     nota: "Los enlaces de venta se activan con cada lanzamiento. Las fechas siguen el calendario actual de la editorial y pueden cambiar.",
     duvidas: "Dudas sobre precio, idioma y envío",
     regioes: [
-      { codigo: "BR", pais: "Brasil", canal: "Shopify", destaque: true,
-        texto: "Ediciones en portugués, vendidas directamente por nuestra tienda y enviadas dentro del país.",
+      { codigo: "BR", pais: "Brasil", canal: "Tienda propia y Amazon", destaque: true,
+        texto: "Ediciones en portugués, en nuestra propia tienda con envío dentro del país, y también por Amazon.",
         quando: "Yomikiri — 1 de diciembre de 2026" },
       { codigo: "US", pais: "Estados Unidos", canal: "Amazon", destaque: false,
         texto: "Ediciones en inglés, impresas y digitales, con entrega por Amazon.",
@@ -127,8 +127,8 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
     nota: "販売リンクは各刊行に合わせて公開されます。日程は現行の刊行予定であり、変更される場合があります。",
     duvidas: "価格・言語・配送についてのご質問",
     regioes: [
-      { codigo: "BR", pais: "ブラジル", canal: "Shopify", destaque: true,
-        texto: "ポルトガル語版。自社ストアより直接販売し、国内へ発送します。",
+      { codigo: "BR", pais: "ブラジル", canal: "自社ストアとAmazon", destaque: true,
+        texto: "ポルトガル語版。自社ストアより直接販売して国内へ発送するほか、Amazonでもお求めいただけます。",
         quando: "読み切り — 2026年12月1日" },
       { codigo: "US", pais: "アメリカ合衆国", canal: "Amazon", destaque: false,
         texto: "英語版。紙・電子ともにAmazonが取り扱います。",

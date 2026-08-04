@@ -133,7 +133,7 @@ const gruposPt: Grupo[] = [
       {
         p: "Onde vou poder comprar?",
         r: [
-          "No Brasil, pela nossa própria loja, com envio dentro do país. Nos Estados Unidos, pela Amazon. No Japão, pela Amazon.co.jp.",
+          "No Brasil, pela nossa própria loja, com envio dentro do país, e também pela Amazon. Nos Estados Unidos, pela Amazon. No Japão, pela Amazon.co.jp.",
           'Nenhum link de venda existe ainda. <a href="/loja">A situação de cada região está na loja</a>, sempre com o estado real, nunca com um botão que não leva a lugar nenhum.',
         ],
       },
@@ -327,7 +327,7 @@ const gruposEn: Grupo[] = [
       {
         p: "Where will I be able to buy it?",
         r: [
-          "In Brazil, from our own store, shipped domestically. In the United States, through Amazon. In Japan, through Amazon.co.jp.",
+          "In Brazil, from our own store with domestic shipping, and also through Amazon. In the United States, through Amazon. In Japan, through Amazon.co.jp.",
           'No retail link exists yet. <a href="/en/shop">The status of each region is on the shop page</a>, always showing the real state, never a button that leads nowhere.',
         ],
       },
@@ -530,7 +530,7 @@ const gruposJa: Grupo[] = [
       {
         p: "どこで購入できますか。",
         r: [
-          "ブラジルでは自社ストアから国内発送します。アメリカではAmazon、日本ではAmazon.co.jpを通じてお求めいただけます。",
+          "ブラジルでは自社ストアから国内発送し、Amazonでもお求めいただけます。アメリカではAmazon、日本ではAmazon.co.jpを通じてお求めいただけます。",
           '販売リンクはまだありません。<a href="/ja/shop">各地域の状況は購入先ページに記載しています</a>。常に実際の状態を示し、どこにも繋がらないボタンは置きません。',
         ],
       },
