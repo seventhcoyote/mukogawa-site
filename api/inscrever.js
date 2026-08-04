@@ -54,10 +54,18 @@ function rajada(ip) {
   return marcas.length > MAX_POR_JANELA;
 }
 
+/** Sobe a cada mudança de comportamento desta função. Existe para responder, do
+ *  lado de fora, "o deploy já chegou?" — sem precisar criar um assinante de
+ *  teste a cada tentativa, que foi o que atrapalhou a verificação em
+ *  2026-08-04. Aparece no header de toda resposta e no GET, que não grava nada. */
+const VERSAO = 2;
+
 export default async function handler(req, res) {
+  res.setHeader("X-Inscrever-Versao", String(VERSAO));
+
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
-    return res.status(405).json({ erro: "metodo" });
+    return res.status(405).json({ erro: "metodo", versao: VERSAO });
   }
 
   const chave = process.env.BEEHIIV_API_KEY;
