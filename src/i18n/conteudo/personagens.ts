@@ -78,6 +78,8 @@ export const ROTULOS_PERSONAGENS: Record<Idioma, {
   ordem: string;
   /** rótulo da seção que descreve o personagem em si */
   oEterno: string;
+  /** Primeiro Escalão: Ofanins, Querubins e Serafins são Antigos, não Eternos. */
+  oAntigo: string;
   /** rótulo da galeria de estudos */
   doCaderno: string;
   anterior: string;
@@ -100,6 +102,7 @@ export const ROTULOS_PERSONAGENS: Record<Idioma, {
     estudos: "Estudos",
     ordem: "A ordem",
     oEterno: "O Eterno",
+    oAntigo: "O Antigo",
     doCaderno: "Do caderno",
     anterior: "Anterior",
     proximo: "Próximo",
@@ -121,6 +124,7 @@ export const ROTULOS_PERSONAGENS: Record<Idioma, {
     estudos: "Studies",
     ordem: "The order",
     oEterno: "The Eternal",
+    oAntigo: "The Ancient",
     doCaderno: "From the sketchbook",
     anterior: "Previous",
     proximo: "Next",
@@ -142,6 +146,7 @@ export const ROTULOS_PERSONAGENS: Record<Idioma, {
     estudos: "Estudios",
     ordem: "El orden",
     oEterno: "El Eterno",
+    oAntigo: "El Antiguo",
     doCaderno: "Del cuaderno",
     anterior: "Anterior",
     proximo: "Siguiente",
@@ -163,6 +168,7 @@ export const ROTULOS_PERSONAGENS: Record<Idioma, {
     estudos: "習作",
     ordem: "階級",
     oEterno: "永遠者",
+    oAntigo: "古き者",
     doCaderno: "手帳より",
     anterior: "前へ",
     proximo: "次へ",

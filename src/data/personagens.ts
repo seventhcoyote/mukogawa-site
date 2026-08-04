@@ -27,11 +27,29 @@ export interface Personagem {
  * uma classe tem dois personagens, o verbete do segundo traz uma versão
  * condensada; aqui fica a completa, que é a canônica da classe.
  */
+/**
+ * As três classes do Primeiro Escalão são os ANTIGOS, e não Eternos.
+ *
+ * Não é sinônimo nem preciosismo de rótulo: o próprio site distingue as
+ * naturezas — o verbete dos Poderes diz que os Antigos "trazem a marca dos
+ * Anciãos" enquanto os Eternos "foram convocados num só sopro". Chamar Orthrax,
+ * Helel ou um Serafim de Eterno é errado dentro do mundo.
+ *
+ * Está por NÚMERO DE CLASSE, e não por posição na lista de personagens, porque
+ * quem decide é o escalão. Um personagem novo de Ofanim, Querubim ou Serafim
+ * pega o rótulo certo sozinho.
+ */
+export const CLASSES_ANTIGAS = ["07", "08", "09"] as const;
+
+export function ehAntigo(classeNum: string): boolean {
+  return (CLASSES_ANTIGAS as readonly string[]).includes(classeNum);
+}
+
 export const CLASSES = [
   { num: "01", nome: "Arautos", kanji: "使",
     descricao: "Os Arautos são a força fundamental da Hoste. Forjados em corações dispostos e selados pelo dever, cumprem a vontade dos Altos Céus com resolução inabalável. Na Era das Estrelas, os Eternos que se inclinavam ao serviço foram designados a esta ordem. Portadores de um único par de asas, são o alicerce da Hoste: soldados, mensageiros e tudo o que houver entre um e outro. Talvez não empunhem o poder de um Arconte, nem o mistério de um Principado, mas é a lealdade deles que decide o fim de toda guerra." },
   { num: "02", nome: "Arcontes", kanji: "戦",
-    descricao: "Os Arcontes são os mais poderosos guerreiros da Hoste. Na Era Anterior, eram os Eternos atraídos pela força, e força lhes foi concedida em abundância. Nenhuma outra ordem iguala sua têmpera ou resistência, tornando-os figuras decisivas nos tempos de guerra. São o único escalão digno de empunhar as Lâminas Rasgafenda, obras-primas de Zorphael, o mestre de forja da Hoste, forjadas em chamas e consagradas pela própria mão do Arquiteto. Essas armas podem rasgar o tecido do espaço, abrindo portais entre reinos, campos de batalha e até mesmo através do Véu. Os Arcontes portam duas duplas de asas: uma ampla e imponente, outra menor e veloz, moldadas para o ímpeto violento e a precisão aérea absoluta." },
+    descricao: "Os Arcontes são os mais poderosos guerreiros da Hoste. Na Era das Estrelas, eram os Eternos atraídos pela força, e força lhes foi concedida em abundância. Nenhuma outra ordem iguala sua têmpera ou resistência, tornando-os figuras decisivas nos tempos de guerra. São o único escalão digno de empunhar as Lâminas Rasgafenda, obras-primas de Zorphael, o mestre de forja da Hoste, forjadas em chamas e consagradas pela própria mão do Arquiteto. Essas armas podem rasgar o tecido do espaço, abrindo portais entre reinos, campos de batalha e até mesmo através do Véu. Os Arcontes portam duas duplas de asas: uma ampla e imponente, outra menor e veloz, moldadas para o ímpeto violento e a precisão aérea absoluta." },
   { num: "03", nome: "Principados", kanji: "智",
     descricao: "Os Principados são os príncipes do conhecimento dentre os Eternos, aqueles que, na Era das Estrelas, se inclinaram à sabedoria. Muito antes da guerra civil, eram arquitetos da literatura, guardiões da ordem celeste e tecelões do poder arcano. De toda a Hoste, nenhum os supera no domínio das forças arcanas. Sua magia é elegante e precisa, escrita em sigilos radiantes que se entrelaçam no ar enquanto são proferidos: cada palavra é uma chave, cada símbolo, um portão." },
   { num: "04", nome: "Virtudes", kanji: "癒",
@@ -39,7 +57,7 @@ export const CLASSES = [
   { num: "05", nome: "Poderes", kanji: "護",
     descricao: "Os Poderes, também chamados de Custódios, diferem de seus irmãos Antigos e Eternos. Enquanto os Antigos trazem o selo dos Anciãos, e os Eternos foram convocados em um só sopro, os Custódios surgiram depois, nascidos durante o grande florescimento da Era das Estrelas. À medida que o cosmo se expandia e a arquitetura da criação se tornava vasta demais para ser mantida, os Eternos clamaram por auxílio. Em resposta, os Custódios foram forjados: seres colossais, moldados pela vontade do Altíssimo, guiados pelas mãos de seus irmãos mais velhos. Titânicos em estatura, como montes de luz e aço, tornaram-se guardiões dos Céus Distantes, zelando pela estrutura, harmonia e equilíbrio. Embora os mais jovens entre a Hoste, sua presença não encontra igual. Cada Custódio é único em forma: alguns alados, outros não." },
   { num: "06", nome: "Domínios", kanji: "統",
-    descricao: "Os Domínios ocupam o cume do Segundo Escalão, marcados por duas duplas de asas e chifres régios que lhes coroam a fronte. São os Eternos que, na Era de Antes, se inclinaram tanto à força quanto ao conhecimento e, nessa união, tornaram-se algo singular. Embora não possuam o vigor de um Arconte nem o domínio arcano de um Principado, os Domínios excedem em ambos. Esse equilíbrio, entre corpo e mente, lâmina e magia, os torna perigosos de formas que poucos conseguem prever. São estrategistas e comandantes natos, muitas vezes servindo de ponte entre as Hostes superiores e inferiores, liderando investidas por caminhos onde até outros hesitariam em pisar." },
+    descricao: "Os Domínios ocupam o cume do Segundo Escalão, marcados por duas duplas de asas e chifres régios que lhes coroam a fronte. São os Eternos que, na Era das Estrelas, se inclinaram tanto à força quanto ao conhecimento e, nessa união, tornaram-se algo singular. Embora não possuam o vigor de um Arconte nem o domínio arcano de um Principado, os Domínios excedem em ambos. Esse equilíbrio, entre corpo e mente, lâmina e magia, os torna perigosos de formas que poucos conseguem prever. São estrategistas e comandantes natos, muitas vezes servindo de ponte entre as Hostes superiores e inferiores, liderando investidas por caminhos onde até outros hesitariam em pisar." },
   { num: "07", nome: "Ofanins", kanji: "眼",
     descricao: "Os Ofanins pertencem ao Primeiro Escalão: seres de beleza terrível e resplandecente, formados por rodas entrelaçadas, forjadas com os metais mais antigos da criação. Seus corpos ardem em olhos que jamais piscam, jamais dormem. Enquanto os Serafins fixam o olhar no Todo-Poderoso, os Ofanins projetam sua visão para fora, até os confins do cosmo. Eles não falam como os outros falam; ressoam em Ophanix, uma linguagem não vocalizada, mas emanada. A cada rotação de suas rodas, ondas de verdade comprimida se espalham pelos reinos. Sua fala é vibração; seu cântico, revelação. Poucos conseguem decifrá-la. Menos ainda, responder-lhe." },
   { num: "08", nome: "Querubins", kanji: "王",
@@ -89,7 +107,7 @@ export const personagens: Personagem[] = [
     kanji: "戦",
     lado: "hoste",
     sobreClasse:
-      "Os Arcontes são os mais poderosos guerreiros da Hoste. Na Era Anterior, eram os Eternos atraídos pela força, e força lhes foi concedida em abundância. Nenhuma outra ordem iguala sua têmpera ou resistência, tornando-os figuras decisivas nos tempos de guerra. São o único escalão digno de empunhar as Lâminas Rasgafenda, obras-primas de Zorphael, o mestre de forja da Hoste, forjadas em chamas e consagradas pela própria mão do Arquiteto. Essas armas podem rasgar o tecido do espaço, abrindo portais entre reinos, campos de batalha e até mesmo através do Véu. Os Arcontes portam duas duplas de asas: uma ampla e imponente, outra menor e veloz, moldadas para o ímpeto violento e a precisão aérea absoluta.",
+      "Os Arcontes são os mais poderosos guerreiros da Hoste. Na Era das Estrelas, eram os Eternos atraídos pela força, e força lhes foi concedida em abundância. Nenhuma outra ordem iguala sua têmpera ou resistência, tornando-os figuras decisivas nos tempos de guerra. São o único escalão digno de empunhar as Lâminas Rasgafenda, obras-primas de Zorphael, o mestre de forja da Hoste, forjadas em chamas e consagradas pela própria mão do Arquiteto. Essas armas podem rasgar o tecido do espaço, abrindo portais entre reinos, campos de batalha e até mesmo através do Véu. Os Arcontes portam duas duplas de asas: uma ampla e imponente, outra menor e veloz, moldadas para o ímpeto violento e a precisão aérea absoluta.",
     sobrePersonagem: [
       "Entre eles, nenhum se ergue mais alto que Miguel, o Portador da Guerra. Inquebrável. Invicto. Sua presença, por si só, lança terror no coração dos inimigos dos céus. Sua lança, Veritas, foi a primeira arma retirada da forja de Zorphael quando a guerra teve início, e nenhuma mão, exceto a de Miguel, jamais a empunhou.",
     ],
@@ -104,10 +122,10 @@ export const personagens: Personagem[] = [
     kanji: "戦",
     lado: "rebeldes",
     sobreClasse:
-      "Os Arcontes são os mais poderosos guerreiros da Hoste. Nenhuma outra ordem iguala sua têmpera ou resistência, tornando-os figuras decisivas nos tempos de guerra. Os Arcontes portam duas duplas de asas: uma ampla e imponente, outra menor e veloz.",
+      "Os Arcontes são os mais poderosos guerreiros da Hoste. Na Era das Estrelas, eram os Eternos atraídos pela força, e força lhes foi concedida em abundância. Nenhuma outra ordem iguala sua têmpera ou resistência, tornando-os figuras decisivas nos tempos de guerra. São o único escalão digno de empunhar as Lâminas Rasgafenda, obras-primas de Zorphael, o mestre de forja da Hoste, forjadas em chamas e consagradas pela própria mão do Arquiteto. Essas armas podem rasgar o tecido do espaço, abrindo portais entre reinos, campos de batalha e até mesmo através do Véu. Os Arcontes portam duas duplas de asas: uma ampla e imponente, outra menor e veloz, moldadas para o ímpeto violento e a precisão aérea absoluta.",
     sobrePersonagem: [
-      "Satis impressiona: uma Eterna de elegância contida, cuja postura resiste até ao dano progressivo da Fonte. Seus cabelos são brancos e reluzentes, com um brilho sereno que parece contradizer o ambiente que habita. Uma armadura escura, ornada de sigilos desbotados, envolve-lhe o corpo — as gravuras quase apagadas pelo tempo e pela batalha. Carrega o Estilhaço de Ônix às costas, cuja ponta partida a torna, de algum modo, mais perigosa, e não menos.",
-      "Marcas arcanas serpenteiam por seus braços e pernas, com formas esticadas um pouco além das proporções naturais — a corrupção da Fonte avançando lentamente sobre ela.",
+      "Satis impressiona: uma Eterna de elegância contida, cuja postura resiste até ao dano progressivo da Fonte. Seus cabelos são brancos e reluzentes, com um brilho sereno que parece contradizer o mundo que habita. Uma armadura escura, ornada de sigilos desbotados, envolve-lhe o corpo — as gravuras quase apagadas pelo tempo e pela batalha. Carrega o Estilhaço de Ônix às costas, cuja ponta partida a torna, de algum modo, mais perigosa, e não menos.",
+      "Marcas arcanas serpenteiam por seus braços e pernas, com formas esticadas um pouco além das proporções naturais. A corrupção da Fonte avança lentamente sobre ela.",
     ],
     credito: "Arte do mangá — Arte: Match, 2026.",
   },
@@ -165,7 +183,7 @@ export const personagens: Personagem[] = [
     kanji: "統",
     lado: "rebeldes",
     sobreClasse:
-      "Os Domínios ocupam o cume do Segundo Escalão, marcados por duas duplas de asas e chifres régios que lhes coroam a fronte. São os Eternos que, na Era de Antes, se inclinaram tanto à força quanto ao conhecimento e, nessa união, tornaram-se algo singular. Embora não possuam o vigor de um Arconte nem o domínio arcano de um Principado, os Domínios excedem em ambos. Esse equilíbrio, entre corpo e mente, lâmina e magia, os torna perigosos de formas que poucos conseguem prever. São estrategistas e comandantes natos, muitas vezes servindo de ponte entre as Hostes superiores e inferiores, liderando investidas por caminhos onde até outros hesitariam em pisar.",
+      "Os Domínios ocupam o cume do Segundo Escalão, marcados por duas duplas de asas e chifres régios que lhes coroam a fronte. São os Eternos que, na Era das Estrelas, se inclinaram tanto à força quanto ao conhecimento e, nessa união, tornaram-se algo singular. Embora não possuam o vigor de um Arconte nem o domínio arcano de um Principado, os Domínios excedem em ambos. Esse equilíbrio, entre corpo e mente, lâmina e magia, os torna perigosos de formas que poucos conseguem prever. São estrategistas e comandantes natos, muitas vezes servindo de ponte entre as Hostes superiores e inferiores, liderando investidas por caminhos onde até outros hesitariam em pisar.",
     sobrePersonagem: [
       "Entre eles, Kharzul um dia se ergueu em glória. Mas foi seduzido pela ambição e se alinhou aos Profanadores, abandonando a Luz em troca da promessa de ascensão. Sua mais recente derrota veio pelas mãos de Miguel: não apenas uma derrota, mas uma humilhação. Seus chifres tornaram-se irregulares, sua pele tomou uma pigmentação ainda mais roxa; seu nome, desonrado. Destituído de sua patente e rejeitado pelo Príncipe da Babilônia, foi rebaixado à condição de mero batedor. Ainda assim, Kharzul perdura: astuto, paciente, vigilante. Um estrategista ainda. Uma sombra que não se calou.",
     ],
