@@ -42,7 +42,11 @@ export const UI = {
     "rodape.creditos": "Arte de Daniel Bretas e Guilherme Match.",
     "espera.rotulo": "Yomikiri // 1º de dezembro de 2026",
     "espera.titulo": "O yomikiri (piloto) do mangá chega em 1º de dezembro de 2026.",
-    "espera.apoio": "Deixe seu e-mail e você é avisado quando as vendas abrirem na sua região. Sem outros envios.",
+    // ATENÇÃO ao mexer aqui: esta linha é lida no momento em que a pessoa
+    // consente, e por isso vale tanto quanto a política de privacidade. Ela
+    // prometia "sem outros envios" até 2026-08-04; se a lista voltar a ter uma
+    // finalidade só, o texto encolhe de novo — e a política encolhe junto.
+    "espera.apoio": "Deixe seu e-mail e você é avisado quando as vendas abrirem na sua região. Depois, novidades da obra. Para sair, basta um clique.",
     "espera.email": "Seu e-mail",
     "espera.regiao": "Sua região",
     "espera.botao": "Quero ser avisado",
@@ -51,6 +55,10 @@ export const UI = {
     "espera.semEndpoint": "Cadastro ainda não conectado. Falta ligar o provedor de e-mail.",
     "espera.enviando": "Enviando...",
     "espera.ok": "Pronto. Você será avisado.",
+    // Usada quando o provedor pede confirmação por e-mail (double opt-in). Quem
+    // escolhe entre as duas é a resposta da função, não o build: sem isso, ligar
+    // a confirmação no painel deixaria o site prometendo o que não aconteceu.
+    "espera.okPendente": "Quase lá: confirme no e-mail que enviamos.",
     "espera.erroEnvio": "Não deu para enviar agora. Tente de novo em instantes.",
     "espera.nota": "Edições, preços e frete são responsabilidade do varejista de cada região. As datas seguem o calendário atual da editora e podem mudar.",
     "regiao.BR": "Brasil", "regiao.US": "Estados Unidos", "regiao.JP": "Japão", "regiao.OUTRO": "Outra",
@@ -91,7 +99,7 @@ export const UI = {
     "rodape.creditos": "Art by Daniel Bretas and Guilherme Match.",
     "espera.rotulo": "Yomikiri // 1 December 2026",
     "espera.titulo": "The manga's yomikiri (pilot) arrives 1 December 2026.",
-    "espera.apoio": "Leave your email and we will let you know when sales open in your region. Nothing else.",
+    "espera.apoio": "Leave your email and we will let you know when sales open in your region. After that, news about the work. One click to leave.",
     "espera.email": "Your email",
     "espera.regiao": "Your region",
     "espera.botao": "Notify me",
@@ -100,6 +108,7 @@ export const UI = {
     "espera.semEndpoint": "Signup not connected yet. The email provider still has to be wired up.",
     "espera.enviando": "Sending...",
     "espera.ok": "Done. You will be notified.",
+    "espera.okPendente": "Almost there: confirm in the email we have just sent.",
     "espera.erroEnvio": "Could not send just now. Try again in a moment.",
     "espera.nota": "Editions, pricing and shipping are handled by the retailer for each region. Dates shown are current publisher schedule and may change.",
     "regiao.BR": "Brazil", "regiao.US": "United States", "regiao.JP": "Japan", "regiao.OUTRO": "Other",
@@ -140,7 +149,7 @@ export const UI = {
     "rodape.creditos": "Arte de Daniel Bretas y Guilherme Match.",
     "espera.rotulo": "Yomikiri // 1 de diciembre de 2026",
     "espera.titulo": "El yomikiri (piloto) del manga llega el 1 de diciembre de 2026.",
-    "espera.apoio": "Deja tu correo y te avisamos cuando abran las ventas en tu región. Nada más.",
+    "espera.apoio": "Deja tu correo y te avisamos cuando abran las ventas en tu región. Después, novedades de la obra. Para salir, un clic.",
     "espera.email": "Tu correo",
     "espera.regiao": "Tu región",
     "espera.botao": "Avísame",
@@ -149,6 +158,7 @@ export const UI = {
     "espera.semEndpoint": "El registro aún no está conectado. Falta enlazar el proveedor de correo.",
     "espera.enviando": "Enviando...",
     "espera.ok": "Listo. Te avisaremos.",
+    "espera.okPendente": "Casi listo: confirma en el correo que te enviamos.",
     "espera.erroEnvio": "No se pudo enviar ahora. Inténtalo de nuevo en un momento.",
     "espera.nota": "Ediciones, precios y envío son responsabilidad del minorista de cada región. Las fechas siguen el calendario actual de la editorial y pueden cambiar.",
     "regiao.BR": "Brasil", "regiao.US": "Estados Unidos", "regiao.JP": "Japón", "regiao.OUTRO": "Otra",
@@ -189,7 +199,7 @@ export const UI = {
     "rodape.creditos": "アート: ダニエル・ブレタス、ギリェルミ・マッチ。",
     "espera.rotulo": "読み切り // 2026年12月1日",
     "espera.titulo": "漫画の読み切りは2026年12月1日発売。",
-    "espera.apoio": "メールアドレスをご登録いただくと、お住まいの地域で販売が開始された際にお知らせします。他の配信はありません。",
+    "espera.apoio": "メールアドレスをご登録いただくと、お住まいの地域で販売が開始された際にお知らせします。その後は作品の最新情報をお届けします。配信停止はいつでも可能です。",
     "espera.email": "メールアドレス",
     "espera.regiao": "地域",
     "espera.botao": "お知らせを受け取る",
@@ -198,6 +208,7 @@ export const UI = {
     "espera.semEndpoint": "登録機能は未接続です。メール配信サービスの設定が必要です。",
     "espera.enviando": "送信中...",
     "espera.ok": "完了しました。お知らせします。",
+    "espera.okPendente": "あと一歩です。お送りしたメールでご確認ください。",
     "espera.erroEnvio": "現在送信できませんでした。しばらくして再度お試しください。",
     "espera.nota": "版・価格・配送は各地域の販売元が取り扱います。日程は現行の刊行予定であり、変更される場合があります。",
     "regiao.BR": "ブラジル", "regiao.US": "アメリカ合衆国", "regiao.JP": "日本", "regiao.OUTRO": "その他",

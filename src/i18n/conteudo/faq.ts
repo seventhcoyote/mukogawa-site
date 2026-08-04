@@ -176,7 +176,7 @@ const gruposPt: Grupo[] = [
       {
         p: "O que vocês fazem com meu e-mail?",
         r: [
-          "Nada além disso. O e-mail serve para avisar da abertura das vendas na sua região. Sem outros envios, sem repasse para terceiros.",
+          "Serve para avisar da abertura das vendas na sua região e para mandar novidades da obra: bastidores, material inédito e promoções das edições. Sem repasse para terceiros, e todo envio traz um link para sair da lista.",
         ],
       },
     ],
@@ -370,7 +370,7 @@ const gruposEn: Grupo[] = [
       {
         p: "What do you do with my email?",
         r: [
-          "Nothing beyond that. The email is there to tell you when sales open in your region. No other mailings, no passing it to third parties.",
+          "It is there to tell you when sales open in your region, and to send news about the work: material from behind the scenes, unpublished art and offers on the editions. It is never passed to third parties, and every mailing carries a link to leave the list.",
         ],
       },
     ],
@@ -573,7 +573,7 @@ const gruposJa: Grupo[] = [
       {
         p: "メールアドレスは何に使われますか。",
         r: [
-          "それ以外には使いません。お住まいの地域で販売が始まったことをお伝えするためのものです。他の配信もなく、第三者への提供もありません。",
+          "お住まいの地域で販売が始まったことをお伝えするほか、作品の最新情報（制作の裏側、未公開の資料、各版のご案内）の配信に使用します。第三者への提供はありません。すべての配信に配信停止の導線を設けています。",
         ],
       },
     ],

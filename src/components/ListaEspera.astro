@@ -28,6 +28,7 @@ const recados = {
   semEndpoint: t("espera.semEndpoint"),
   enviando: t("espera.enviando"),
   ok: t("espera.ok"),
+  okPendente: t("espera.okPendente"),
   erroEnvio: t("espera.erroEnvio"),
 };
 
@@ -53,7 +54,13 @@ const REGIOES = ["BR", "US", "JP", "OUTRO"] as const;
       {t("espera.apoio")}
     </p>
 
-    <form class="formulario" data-endpoint={endpoint} data-recados={JSON.stringify(recados)} novalidate>
+    <form
+      class="formulario"
+      data-endpoint={endpoint}
+      data-idioma={idioma}
+      data-recados={JSON.stringify(recados)}
+      novalidate
+    >
       <div class="campos">
         <div class="campo">
           <label class="so-leitor" for="email-espera">{t("espera.email")}</label>
@@ -286,11 +293,21 @@ const REGIOES = ["BR", "US", "JP", "OUTRO"] as const;
           body: JSON.stringify({
             email: valor,
             regiao: (form.querySelector<HTMLSelectElement>("select")!).value,
+            // A língua da página em que a pessoa se cadastrou. É o que permite
+            // mandar o aviso de lançamento no idioma certo — o provedor não tem
+            // como adivinhar isso sozinho.
+            idioma: form.dataset.idioma ?? "",
           }),
         });
         if (!resposta.ok) throw new Error(String(resposta.status));
+
+        // Quem decide entre "pronto" e "confirme no e-mail" é a resposta da
+        // função, não um texto fixo: assim ligar ou desligar o double opt-in no
+        // painel do provedor não deixa a mensagem do site mentindo. Endpoint que
+        // não devolva `pendente` (o Formspree não devolvia) cai no "pronto".
+        const dados = await resposta.json().catch(() => ({}));
         form.querySelector<HTMLDivElement>(".campos")!.hidden = true;
-        dizer(recados.ok, "ok");
+        dizer(dados?.pendente ? recados.okPendente : recados.ok, "ok");
       } catch {
         botao.disabled = false;
         dizer(recados.erroEnvio, "erro");

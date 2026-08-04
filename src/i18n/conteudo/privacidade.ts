@@ -23,6 +23,18 @@
  * O sufixo societário foi confirmado pelo Bruno em 2026-08-04: LTDA. A razão
  * social numa política de privacidade precisa bater com o registro, senão a
  * identificação é aproximada — e aproximada é o que ela não pode ser.
+ *
+ * A FINALIDADE FOI AMPLIADA EM 2026-08-04, junto com a migração da lista para um
+ * provedor que também dispara e-mail. Até então o texto prometia avisar do
+ * lançamento e dos livros e dizia "nada além disso"; agora declara também as
+ * novidades da obra. Sob a LGPD é a finalidade DECLARADA que limita o uso, não a
+ * intenção de quem coleta — mandar novidades sob a redação antiga seria uso além
+ * do consentido.
+ *
+ * A mesma promessa vivia em `espera.apoio` (src/i18n/ui.ts), lida no instante do
+ * consentimento e por isso tão determinante quanto esta página. As duas foram
+ * corrigidas juntas, e é assim que devem andar daqui em diante: mudou uma, muda
+ * a outra, nos quatro idiomas.
  */
 import type { Idioma } from "../idiomas";
 
@@ -91,8 +103,9 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       {
         titulo: "Para que serve",
         paragrafos: [
-          "O e-mail serve para avisar você quando as vendas abrirem na sua região, e para avisar sobre o lançamento dos livros. Nada além disso.",
-          "Você não receberá outros envios, e o endereço não é vendido, alugado nem cedido a terceiros.",
+          "O e-mail serve para avisar você quando as vendas abrirem na sua região e para anunciar cada lançamento: o yomikiri, os volumes do mangá e os livros.",
+          "Serve também para enviar novidades sobre a obra — bastidores da produção, material inédito e promoções das edições. Nada fora do universo de Mukō-Gawa.",
+          "O endereço não é vendido, alugado nem cedido a terceiros. Todo envio traz um link para sair da lista, e sair vale a partir do próprio pedido.",
         ],
       },
       {
@@ -111,7 +124,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       {
         titulo: "Por quanto tempo",
         paragrafos: [
-          "O e-mail fica guardado até o lançamento ser comunicado ou até você pedir a exclusão, o que vier primeiro. Encerrado o projeto de lançamento, a lista é apagada.",
+          "O e-mail fica guardado enquanto você quiser receber. Ao sair da lista, os envios param; fica apenas o registro de que você saiu, justamente para garantir que nada mais chegue. Se preferir a exclusão completa, é só pedir. Encerrado o projeto, a lista é apagada.",
         ],
       },
       {
@@ -187,8 +200,9 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       {
         titulo: "What it is for",
         paragrafos: [
-          "The email is used to tell you when sales open in your region, and to announce the release of the novels. Nothing else.",
-          "You will receive no other mailings, and the address is never sold, rented or passed to third parties.",
+          "The email is used to tell you when sales open in your region, and to announce each release: the yomikiri, the manga volumes and the novels.",
+          "It is also used to send news about the work — material from behind the scenes, previously unpublished art and offers on the editions. Nothing outside the world of Mukō-Gawa.",
+          "The address is never sold, rented or passed to third parties. Every mailing carries a link to leave the list, and leaving takes effect from the request itself.",
         ],
       },
       {
@@ -207,7 +221,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       {
         titulo: "For how long",
         paragrafos: [
-          "The address is kept until the release has been announced or until you ask for it to be deleted, whichever comes first. Once the launch is over, the list is erased.",
+          "The address is kept for as long as you wish to hear from us. When you leave the list, mailings stop; all that remains is the record that you left, precisely so that nothing further reaches you. If you would rather be erased altogether, just ask. Once the project is over, the list is erased.",
         ],
       },
       {
@@ -281,8 +295,9 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       {
         titulo: "Para qué sirve",
         paragrafos: [
-          "El correo sirve para avisarte cuando se abran las ventas en tu región y para anunciar el lanzamiento de los libros. Nada más.",
-          "No recibirás otros envíos, y la dirección no se vende, alquila ni cede a terceros.",
+          "El correo sirve para avisarte cuando se abran las ventas en tu región y para anunciar cada lanzamiento: el yomikiri, los volúmenes del manga y los libros.",
+          "También sirve para enviarte novedades sobre la obra — material de los bastidores, arte inédito y promociones de las ediciones. Nada ajeno al universo de Mukō-Gawa.",
+          "La dirección no se vende, alquila ni cede a terceros. Cada envío incluye un enlace para salir de la lista, y salir surte efecto desde la propia solicitud.",
         ],
       },
       {
@@ -301,7 +316,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       {
         titulo: "Por cuánto tiempo",
         paragrafos: [
-          "La dirección se conserva hasta que se comunique el lanzamiento o hasta que pidas su eliminación, lo que ocurra primero. Terminado el lanzamiento, la lista se borra.",
+          "La dirección se conserva mientras quieras recibirnos. Al salir de la lista, los envíos se detienen; solo queda el registro de que saliste, precisamente para garantizar que no te llegue nada más. Si prefieres la eliminación completa, basta con pedirla. Terminado el proyecto, la lista se borra.",
         ],
       },
       {
@@ -375,8 +390,9 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       {
         titulo: "利用目的",
         paragrafos: [
-          "お住まいの地域で販売が始まった際のご連絡、および小説の刊行のお知らせに使用します。それ以外には使用しません。",
-          "他の配信を行うことはなく、アドレスの販売・貸与・第三者への提供も行いません。",
+          "お住まいの地域で販売が始まった際のご連絡、および読み切り・単行本・小説それぞれの刊行のお知らせに使用します。",
+          "あわせて、作品に関する最新情報（制作の裏側、未公開の資料、各版のご案内）の配信にも使用します。『向こう側』に関わる内容に限ります。",
+          "アドレスの販売・貸与・第三者への提供は行いません。すべての配信に配信停止の導線を設けており、停止はお申し出の時点から有効です。",
         ],
       },
       {
@@ -395,7 +411,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       {
         titulo: "保存期間",
         paragrafos: [
-          "発売のご連絡が完了するまで、または削除のご請求をいただくまでのいずれか早い時点まで保存します。刊行の企画が終了した時点でリストは削除します。",
+          "配信をご希望いただいている間、保存します。配信を停止された場合、送信はその時点で止まります。以後お届けしないことを確実にするため、停止された記録のみを保持します。完全な削除をご希望の場合はお申し付けください。企画が終了した時点でリストは削除します。",
         ],
       },
       {
