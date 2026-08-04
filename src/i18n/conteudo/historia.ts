@@ -95,7 +95,7 @@ interface ConteudoHistoria {
 export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
   pt: {
     titulo: "História",
-    descricao: "Antes da humanidade, uma civilização entrou em guerra pela forma da realidade. As três séries, as Fontes Profanas e a Guerra pela Humanidade em Mukō-Gawa.",
+    descricao: "Antes da humanidade, uma civilização entrou em guerra pela forma da realidade. As três séries, a Fonte Profana e a Guerra pela Humanidade em Mukō-Gawa.",
     rotuloAbertura: "A história",
     h1: "Antes da humanidade, uma civilização entrou em guerra pela forma da realidade.",
     aberturaP1: "Como as sagas nórdicas e as epopeias gregas, Mukō-Gawa é uma imersão profunda na mitologia cristã. A narrativa conta a Criação e a Redenção, enquanto uma guerra celestial culmina em paz eterna.",
@@ -103,7 +103,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloEternos: "Os Eternos",
     tituloEternos: "Quem são os Eternos",
     eternosP: [
-      "Os Eternos são a raça angélica, os filhos do céu, chamados à existência para percorrer a criação, guardá-la e cultivá-la. Não se multiplicam como os homens: são convocados em legiões, e o tempo não os gasta.",
+      "Os Eternos são o povo proto-humano desta guerra: a raça angélica, os filhos do céu, chamados à existência para percorrer a criação, guardá-la e cultivá-la. Não se multiplicam como os homens: são convocados em legiões, e o tempo não os gasta.",
       "Duas naturezas separam o Eterno do homem. O Eterno é espírito, e apenas espírito. O homem é espírito e alma, os dois abrigados num corpo. É essa dupla natureza, e não a força, que faz dele o centro da guerra.",
       "Cada Eterno descobre em si um chamado, uma inclinação que o move antes de qualquer ordem: ao serviço, à sabedoria, à beleza, à força. Com o tempo o chamado endurece e vira posto. É daí que nascem as nove classes.",
       "E nada disso é visto. O Eterno atravessa o mundo dos homens sem ser percebido. A guerra que decide o destino deles passa ao lado deles, e eles não a enxergam.",
@@ -135,11 +135,11 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
         texto: "Desvelar é a luz final. Após o desfecho arrebatador da Quinta Temporada, muitos se perguntarão o que foi feito de seus personagens favoritos. Desvelar é o filme pós-série, criado para trazer resolução, mistério e encerramento: o último ato da jornada de Mukō-Gawa." },
     ],
     rotuloPreco: "O preço",
-    tituloPoco: "As Fontes Profanas",
+    tituloPoco: "A Fonte Profana",
     pocoP: [
-      "Após a Rebelião, os Profanadores descobriram que as Águas Vivas dos Altos Céus já não os acolhiam. O que antes curava, agora queimava. Em desafio, roubaram as águas sagradas e as levaram para o Abismo. Ali, sob o olhar do Rei Serpente, a graça roubada foi distorcida por alquimia proibida, dando origem ao Poço Profanado.",
-      "O Poço oferece restauração, mas por um preço. Cada mergulho corrói o espírito. As formas se retorcem, a essência apodrece, e alguns são maculados além do reconhecimento, transformando-se em Flageladores: criaturas de tormento, libertas sobre a humanidade para semear confusão e temor.",
-      "Ainda que o Poço conceda poder sombrio, há reverência entre os caídos por aqueles que mantêm sua forma original. Permanecer incorrupto é raro, e fala de uma força terrível. Pois no Abismo, a corrupção é poder, mas a resistência é glória.",
+      "Após a Rebelião, os Profanadores descobriram que as Águas Vivas dos Altos Céus já não os acolhiam. O que antes curava, agora queimava. Em desafio, roubaram as águas sagradas e as levaram para o Abismo. Ali, sob o olhar do Rei Serpente, a graça roubada foi distorcida por alquimia proibida, dando origem à Fonte Profana. Entre os Rebeldes ela não leva esse nome: dizem apenas a Fonte.",
+      "A Fonte oferece restauração, mas por um preço. Cada mergulho corrói o espírito. As formas se retorcem, a essência apodrece, e alguns são maculados além do reconhecimento, transformando-se em Flageladores: criaturas de tormento, libertas sobre a humanidade para semear confusão e temor.",
+      "Ainda que a Fonte conceda poder sombrio, há reverência entre os caídos por aqueles que mantêm sua forma original. Permanecer incorrupto é raro, e fala de uma força terrível. Pois no Abismo, a corrupção é poder, mas a resistência é glória.",
     ],
     rotuloRuptura: "A ruptura",
     tituloGuerra: "A Guerra pela Humanidade",
@@ -190,7 +190,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloEternos: "The Eternals",
     tituloEternos: "Who the Eternals are",
     eternosP: [
-      "The Eternals are the angelic race, the children of the sky, called into being to range across creation, to steward it and to cultivate it. They do not multiply as men do: they are summoned in hosts, and time does not wear them down.",
+      "The Eternals are the proto-human people of this war: the angelic race, the children of the sky, called into being to range across creation, to steward it and to cultivate it. They do not multiply as men do: they are summoned in hosts, and time does not wear them down.",
       "Two natures separate the Eternal from the man. The Eternal is spirit, and spirit alone. Man is spirit and soul, both sheltered in a body. It is that double nature, and not strength, that makes him the centre of the war.",
       "Every Eternal finds a calling within himself, an inclination that moves him before any order is given: toward service, toward wisdom, toward beauty, toward strength. In time the calling hardens into rank. The nine classes are born from it.",
       "And none of this is seen. The Eternal crosses the world of men unperceived. The war that decides their fate passes beside them, and they do not see it.",
@@ -224,7 +224,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloPreco: "The price",
     tituloPoco: "The Defiled Well",
     pocoP: [
-      "After the Rebellion, the Defilers discovered that the Living Waters of the High Heavens no longer welcomed them. What once healed now burned. In defiance, they stole the sacred waters and brought them into the Abyss. There, under the gaze of King Snake, the stolen grace was twisted through forbidden alchemy, giving rise to the Defiled Well.",
+      "After the Rebellion, the Defilers discovered that the Living Waters of the High Heavens no longer welcomed them. What once healed now burned. In defiance, they stole the sacred waters and brought them into the Abyss. There, under the gaze of King Snake, the stolen grace was twisted through forbidden alchemy, giving rise to the Defiled Well. Among the Guest it does not carry that name: they say only the Well.",
       "The Well offers restoration, but at a price. Each visit corrodes the soul. Forms twist, essence decays, and some are defiled beyond recognition, becoming Tormentors — wretches unleashed upon mankind to sow confusion and dread.",
       "Though the Well grants dark power, there is still reverence for those who retain their original form. To remain uncorrupted is rare among the fallen, and it speaks of a terrifying strength. For in the Abyss, corruption is power, but endurance is glory.",
     ],
@@ -270,7 +270,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
   // Traduzido do PT-BR. Pendente de revisão.
   es: {
     titulo: "Historia",
-    descricao: "Antes de la humanidad, una civilización entró en guerra por la forma de la realidad. Las tres series, las Fuentes Profanas y la Guerra por la Humanidad en Mukō-Gawa.",
+    descricao: "Antes de la humanidad, una civilización entró en guerra por la forma de la realidad. Las tres series, la Fuente Profana y la Guerra por la Humanidad en Mukō-Gawa.",
     rotuloAbertura: "La historia",
     h1: "Antes de la humanidad, una civilización entró en guerra por la forma de la realidad.",
     aberturaP1: "Como las sagas nórdicas y las epopeyas griegas, Mukō-Gawa es una inmersión profunda en la mitología cristiana. La narrativa cuenta la Creación y la Redención, mientras una guerra celestial culmina en paz eterna.",
@@ -278,7 +278,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloEternos: "Los Eternos",
     tituloEternos: "Quiénes son los Eternos",
     eternosP: [
-      "Los Eternos son la raza angélica, los hijos del cielo, llamados a existir para recorrer la creación, guardarla y cultivarla. No se multiplican como los hombres: son convocados en legiones, y el tiempo no los desgasta.",
+      "Los Eternos son el pueblo proto-humano de esta guerra: la raza angélica, los hijos del cielo, llamados a existir para recorrer la creación, guardarla y cultivarla. No se multiplican como los hombres: son convocados en legiones, y el tiempo no los desgasta.",
       "Dos naturalezas separan al Eterno del hombre. El Eterno es espíritu, y solo espíritu. El hombre es espíritu y alma, ambos albergados en un cuerpo. Es esa doble naturaleza, y no la fuerza, la que lo vuelve el centro de la guerra.",
       "Cada Eterno descubre en sí un llamado, una inclinación que lo mueve antes de cualquier orden: al servicio, a la sabiduría, a la belleza, a la fuerza. Con el tiempo el llamado se endurece y se vuelve rango. De ahí nacen las nueve clases.",
       "Y nada de esto se ve. El Eterno atraviesa el mundo de los hombres sin ser percibido. La guerra que decide su destino pasa a su lado, y ellos no la ven.",
@@ -310,9 +310,9 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
         texto: "Desvelar es la luz final. Tras el desenlace arrollador de la Quinta Temporada, muchos se preguntarán qué fue de sus personajes favoritos. Desvelar es la película posterior a la serie, creada para traer resolución, misterio y cierre: el último acto del viaje de Mukō-Gawa." },
     ],
     rotuloPreco: "El precio",
-    tituloPoco: "Las Fuentes Profanas",
+    tituloPoco: "La Fuente Profana",
     pocoP: [
-      "Tras la Rebelión, los Profanadores descubrieron que las Aguas Vivas de los Altos Cielos ya no los acogían. Lo que antes curaba, ahora quemaba. En desafío, robaron las aguas sagradas y las llevaron al Abismo. Allí, bajo la mirada del Rey Serpiente, la gracia robada fue distorsionada por alquimia prohibida, dando origen al Pozo Profanado.",
+      "Tras la Rebelión, los Profanadores descubrieron que las Aguas Vivas de los Altos Cielos ya no los acogían. Lo que antes curaba, ahora quemaba. En desafío, robaron las aguas sagradas y las llevaron al Abismo. Allí, bajo la mirada del Rey Serpiente, la gracia robada fue distorsionada por alquimia prohibida, dando origen a la Fuente Profana. Entre los Rebeldes no lleva ese nombre: dicen solo la Fuente.",
       "El Pozo ofrece restauración, pero a un precio. Cada inmersión corroe el espíritu. Las formas se retuercen, la esencia se pudre, y algunos quedan mancillados más allá del reconocimiento, transformándose en Flageladores: criaturas de tormento, liberadas sobre la humanidad para sembrar confusión y temor.",
       "Aunque el Pozo conceda poder sombrío, hay reverencia entre los caídos por aquellos que mantienen su forma original. Permanecer incorrupto es raro, y habla de una fuerza terrible. Pues en el Abismo, la corrupción es poder, pero la resistencia es gloria.",
     ],
@@ -366,7 +366,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloEternos: "永遠者",
     tituloEternos: "永遠者とは何者か",
     eternosP: [
-      "永遠者は天使の種族であり、天の子らである。創造を巡り、守り、育てるために呼び出された。人のように殖えることはない。群として召され、時に磨り減ることもない。",
+      "永遠者はこの戦における原人類である。すなわち天使の種族であり、天の子らである。創造を巡り、守り、育てるために呼び出された。人のように殖えることはない。群として召され、時に磨り減ることもない。",
       "永遠者と人を分かつのは二つの本性である。永遠者は霊であり、霊のみである。人は霊と魂の双方を、体に宿して持つ。人を戦の中心に据えるのは力ではなく、この二重の本性である。",
       "永遠者はおのおの自らのうちに召しを見いだす。命じられる前から己を動かす傾きである。奉仕へ、知恵へ、美へ、力へ。時とともに召しは固まり、位となる。九つの階級はそこから生まれた。",
       "そしてそのいずれも見られることはない。永遠者は人の世を、気づかれぬまま渡る。彼らの運命を決める戦は、すぐ傍らを過ぎてゆく。人はそれを見ない。",
@@ -400,7 +400,7 @@ export const HISTORIA: Record<Idioma, ConteudoHistoria> = {
     rotuloPreco: "代価",
     tituloPoco: "汚された井戸",
     pocoP: [
-      "叛乱の後、汚す者たちは高き天の生ける水がもはや自分たちを受け入れぬことを知った。かつて癒したものが、いまは焼いた。彼らは抗って聖なる水を奪い、深淵へ持ち込んだ。そこで蛇の王の眼差しのもと、盗まれた恵みは禁じられた錬成によって歪められ、汚された井戸が生じた。",
+      "叛乱の後、汚す者たちは高き天の生ける水がもはや自分たちを受け入れぬことを知った。かつて癒したものが、いまは焼いた。彼らは抗って聖なる水を奪い、深淵へ持ち込んだ。そこで蛇の王の眼差しのもと、盗まれた恵みは禁じられた錬成によって歪められ、汚された井戸が生じた。客人のあいだでその名は用いられない。ただ〈井戸〉と呼ぶ。",
       "井戸は回復を与えるが、代価を取る。訪れるたびに魂が蝕まれる。形は捩れ、本質は朽ち、見分けもつかぬまでに汚された者は責め苦の者となり、人の世に放たれて混乱と恐れを撒く。",
       "井戸が闇の力を授けるとはいえ、元の形を保つ者にはなお畏敬が向けられる。堕ちた者のうちで汚れずにいることは稀であり、それは恐るべき強さの証である。深淵において腐敗は力であり、耐えることは栄光なのだ。",
     ],

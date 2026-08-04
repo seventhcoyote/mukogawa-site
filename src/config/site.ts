@@ -14,7 +14,7 @@
 export interface Rede {
   nome: string;
   /** chave do desenho do emblema no Rodape */
-  icone: "instagram" | "x" | "facebook";
+  icone: "instagram" | "x" | "facebook" | "discord";
   /** null = ainda não existe. Preencher acende o link sozinho. */
   href: string | null;
 }
@@ -23,6 +23,8 @@ export const REDES: Rede[] = [
   { nome: "Instagram", icone: "instagram", href: "https://www.instagram.com/mukogawaverse/" },
   { nome: "X",         icone: "x",         href: null },
   { nome: "Facebook",  icone: "facebook",  href: null },
+  // Convite permanente: sem limite de usos e sem data de expiração.
+  { nome: "Discord",   icone: "discord",   href: "https://discord.gg/HmtB2ubPe2" },
 ];
 
 /**

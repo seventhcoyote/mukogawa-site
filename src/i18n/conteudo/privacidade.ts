@@ -20,10 +20,8 @@
  * continua no texto como ponte: quem chega aqui conhece "Israel Subira", não
  * conhece a empresa, e precisa entender que são a mesma origem.
  *
- * CONFERIR NO CARTÃO CNPJ antes de considerar fechado: se a razão social
- * registrada tem sufixo societário (LTDA, ME, EIRELI) e como a grafia aparece
- * lá. O que chegou veio digitado à mão, sem acento e sem sufixo. Numa política
- * de privacidade a razão social deve bater com o registro, senão a
+ * O sufixo societário foi confirmado pelo Bruno em 2026-08-04: LTDA. A razão
+ * social numa política de privacidade precisa bater com o registro, senão a
  * identificação é aproximada — e aproximada é o que ela não pode ser.
  */
 import type { Idioma } from "../idiomas";
@@ -49,7 +47,7 @@ export interface ConteudoPrivacidade {
  * pela lei, mas é o nome do autor que o leitor reconhece.
  */
 const CONTROLADOR = {
-  razaoSocial: "Boanerges Produções",
+  razaoSocial: "Boanerges Produções LTDA",
   cnpj: "53.326.867/0001-06",
   endereco: "Rua Almirante Gonçalves, 2740 — Curitiba/PR, CEP 80250-150",
   /** Sem o país: cada idioma acrescenta o nome do país na própria língua. */
@@ -64,7 +62,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
     descricao: "Que dados o site de Mukō-Gawa coleta, para quê, por quanto tempo e como pedir a exclusão.",
     rotulo: "Privacidade",
     lead: "Este site coleta uma coisa só: o e-mail de quem pede para ser avisado do lançamento. Esta página explica o que acontece com ele.",
-    atualizado: "Atualizada em 3 de agosto de 2026.",
+    atualizado: "Atualizada em 4 de agosto de 2026.",
     secoes: [
       {
         titulo: "Quem é responsável",
@@ -162,7 +160,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
     descricao: "What the Mukō-Gawa site collects, what for, for how long, and how to ask for deletion.",
     rotulo: "Privacy",
     lead: "This site collects one thing: the email address of readers who ask to be notified about the release. This page explains what happens to it.",
-    atualizado: "Last updated 3 August 2026.",
+    atualizado: "Last updated 4 August 2026.",
     secoes: [
       {
         titulo: "Who is responsible",
@@ -256,7 +254,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
     descricao: "Qué datos recoge el sitio de Mukō-Gawa, para qué, por cuánto tiempo y cómo pedir su eliminación.",
     rotulo: "Privacidad",
     lead: "Este sitio recoge una sola cosa: el correo de quien pide aviso del lanzamiento. Esta página explica qué ocurre con él.",
-    atualizado: "Actualizada el 3 de agosto de 2026.",
+    atualizado: "Actualizada el 4 de agosto de 2026.",
     secoes: [
       {
         titulo: "Quién es responsable",
@@ -350,7 +348,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
     descricao: "『向こう側』のサイトが取得する情報、その目的、保存期間、削除の求め方について。",
     rotulo: "プライバシー",
     lead: "本サイトが取得するのは、発売のお知らせをご希望の方のメールアドレスのみです。その取り扱いについてご説明します。",
-    atualizado: "2026年8月3日 改定。",
+    atualizado: "2026年8月4日 改定。",
     secoes: [
       {
         titulo: "管理者",
