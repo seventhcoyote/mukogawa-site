@@ -117,9 +117,21 @@ export default async function handler(req, res) {
           // por nossa conta.
           reactivate_existing: true,
           send_welcome_email: true,
-          // Quem manda no double opt-in é o painel do Beehiiv, não este código.
-          // Assim ligar ou desligar não exige publicar o site de novo.
-          double_opt_override: "not_set",
+          // A CONFIRMAÇÃO É DECLARADA AQUI, e não deixada a cargo do painel.
+          //
+          // Era "not_set" até 2026-08-04, para o painel mandar sem exigir novo
+          // deploy. Medido em produção, isso não funcionava: com a confirmação
+          // ligada no Beehiiv, a criação devolve "validating" — não "pending" —
+          // e só depois o assinante migra para pendente. O site, lendo a
+          // resposta imediata, dizia "Pronto. Você será avisado." para quem
+          // ainda precisava confirmar. Exatamente a mentira que esta lógica
+          // existe para impedir.
+          //
+          // Declarando "on", o par fica determinístico: o Beehiiv sempre pede
+          // confirmação e o site sempre pode dizer que ela foi pedida.
+          // EM TROCA: desligar a confirmação no painel deixou de bastar — quem
+          // decide é esta linha, e mudá-la exige publicar o site.
+          double_opt_override: "on",
           utm_source: "mukogawa.com",
           utm_medium: "lista-de-espera",
           referring_site: "https://mukogawa.com",
@@ -144,14 +156,16 @@ export default async function handler(req, res) {
     // errado, isso é erro de e-mail, não falha do site.
     if (situacao === "invalid") return res.status(400).json({ erro: "email" });
 
-    // AQUI ESTÁ O PONTO: "pending" é confirmação de double opt-in esperando a
-    // pessoa. Devolver isso deixa o site escolher entre "Pronto, você será
-    // avisado" e "Quase lá: confirme no e-mail" SOZINHO — ligar ou desligar o
-    // double opt-in no painel não exige mexer em texto nenhum.
+    // "pending" E "validating" contam como pendência do leitor. Medido em
+    // produção com a confirmação ligada: a criação devolve "validating" e o
+    // assinante só aparece como Pending no painel um instante depois. Tratar
+    // "validating" como resolvido fazia o site prometer o que não tinha
+    // acontecido — era o defeito, não um detalhe de nomenclatura.
     //
-    // "validating" é outra coisa e não é pendência dela: é o Beehiiv conferindo
-    // o endereço por conta própria. Não pedir confirmação nesse caso.
-    return res.status(200).json({ ok: true, pendente: situacao === "pending" });
+    // "active" só volta para quem já estava na lista e se reinscreveu; aí não
+    // há o que confirmar, e a mensagem curta é a verdadeira.
+    const pendente = situacao === "pending" || situacao === "validating";
+    return res.status(200).json({ ok: true, pendente });
   } catch (erro) {
     console.error("inscrever: falha na chamada", erro);
     return res.status(502).json({ erro: "provedor" });
