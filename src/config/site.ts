@@ -24,7 +24,7 @@ export const REDES: Rede[] = [
   { nome: "X",         icone: "x",         href: "https://x.com/mukogawaverse" },
   { nome: "Facebook",  icone: "facebook",  href: "https://facebook.com/mukogawaverse" },
   // Convite permanente: sem limite de usos e sem data de expiração.
-  { nome: "Discord",   icone: "discord",   href: "https://discord.gg/HmtB2ubPe2" },
+  { nome: "Discord",   icone: "discord",   href: "https://discord.gg/xjXtrfGPZx" },
 ];
 
 /**
