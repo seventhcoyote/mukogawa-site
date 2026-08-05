@@ -72,7 +72,30 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
     overflow: hidden;
   }
 
-  .palco { position: absolute; inset: 77px 0 0 0; z-index: 0; }
+  /* O PALCO TRAVA E CENTRALIZA EM TELA LARGA.
+     Ele é absoluto colado nas bordas da JANELA, e a arte dentro dele usa
+     `margin-left: auto` para encostar à direita. Em tela comum isso funciona,
+     porque o conteúdo ocupa quase toda a largura. Numa ultrawide, não: medido a
+     3440px, o conteúdo terminava em 2400 e a arte ia até 3440 — a figura
+     flutuava a mil pixels do texto, sozinha no vazio. O desvio do centro crescia
+     com a tela: 158px a 1440, 530px a 2560, 970px a 3440.
+
+     `max-width` + `margin-inline: auto` num elemento absoluto com `left` e
+     `right` definidos centraliza sem `transform` — e transform aqui está fora de
+     cogitação, porque cria contexto de empilhamento, que é o que já matou o
+     blend quatro vezes neste projeto.
+
+     1800px e não 1360px (a largura do conteúdo) de propósito: a arte deve passar
+     um pouco além da coluna de texto, senão perde a sensação de sangria que o
+     hero tem. Abaixo de 1800 nada muda — o comportamento aprovado em 1440 e
+     1920 fica intacto. */
+  .palco {
+    position: absolute;
+    inset: 77px 0 0 0;
+    z-index: 0;
+    max-width: 1800px;
+    margin-inline: auto;
+  }
 
   /* `:global` porque <Image> do Astro emite a <img> fora do escopo do estilo.
 
@@ -114,6 +137,28 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
       linear-gradient(to right, transparent 0%, #000 18%),
       linear-gradient(to bottom, #000 82%, transparent 100%);
     mask-composite: intersect;
+  }
+
+  /* A BORDA DIREITA SÓ EXISTE DEPOIS QUE O PALCO TRAVA.
+     Enquanto o palco ia até a borda da janela, a direita da arte ficava fora da
+     tela e não havia aresta para dissolver — por isso a máscara original só
+     cuidava da esquerda e da base. Com o palco preso em 1800px, essa borda passa
+     a cair DENTRO da tela, e a arte vira o retângulo colado que este projeto
+     recusa em toda parte.
+
+     A máscara ganha a ponta direita apenas acima de 1800px, onde o problema
+     nasce: abaixo disso a arte continua sangrando na borda da janela, exatamente
+     como foi aprovado. Um gradiente horizontal com as duas pontas transparentes
+     resolve sem precisar de uma terceira camada de máscara. */
+  @media (min-width: 1801px) {
+    .arte, .palco :global(img) {
+      -webkit-mask-image:
+        linear-gradient(to right, transparent 0%, #000 16%, #000 86%, transparent 100%),
+        linear-gradient(to bottom, #000 82%, transparent 100%);
+      mask-image:
+        linear-gradient(to right, transparent 0%, #000 16%, #000 86%, transparent 100%),
+        linear-gradient(to bottom, #000 82%, transparent 100%);
+    }
   }
 
   .palco .halftone { color: #000; opacity: .12; z-index: 1; }
