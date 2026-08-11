@@ -33,6 +33,14 @@ export interface ItemVenda {
   rotulo: string;
   titulo: string;
   texto: string;
+  /**
+   * A ficha do item. É o que dá peso de coleção sem precisar de adjetivo:
+   * colecionador reconhece objeto catalogado — ano, natureza, tiragem —, não
+   * quem se anuncia como raro. Cada campo aqui é verificável: o ano está
+   * impresso na própria peça, a tiragem foi confirmada pelo Bruno, o idioma
+   * está na página do varejista.
+   */
+  ficha: string[];
   /** Idioma e alcance do envio: quem lê em inglês ou japonês precisa saber. */
   nota: string;
   cta: string;
@@ -71,9 +79,10 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
     nota: "Os links de venda entram no ar a cada lançamento. As datas seguem o calendário atual da editora e podem mudar.",
     duvidas: "Dúvidas sobre preço, idioma e envio",
     disponivel: {
-      rotulo: "À venda agora",
+      rotulo: "Item de coleção // À venda agora",
       titulo: "Apostila conceitual",
-      texto: "A apresentação do conceito, do enredo e dos personagens de Mukō-Gawa, em traço e estudo — o material que veio antes da obra publicada. Tiragem limitada.",
+      texto: "Antes de existir como obra publicada, Mukō-Gawa foi um caderno de apresentação: o conceito, o enredo e os personagens em traço e estudo. É esse documento de 2025 que está impresso aqui — o material que fica nos bastidores e quase nunca chega ao leitor. Quem tem esta apostila chegou antes do primeiro capítulo.",
+      ficha: ["2025", "Tiragem limitada", "Documento de origem"],
       nota: "Edição em português, com envio dentro do Brasil, pela Orvalho.",
       cta: "Comprar na Orvalho",
       alt: "Página da apostila conceitual de Mukō-Gawa: estudo em traço de uma personagem com chifres segurando uma maçã, com o título em vermelho sobreposto",
@@ -105,9 +114,10 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
     nota: "Retail links go live with each release. Dates shown are current publisher schedule and may change.",
     duvidas: "Questions about pricing, language and shipping",
     disponivel: {
-      rotulo: "On sale now",
+      rotulo: "Collector's item // On sale now",
       titulo: "Concept booklet",
-      texto: "The concept, the plot and the characters of Mukō-Gawa, presented in sketch and study — the material that came before the published work. Limited print run.",
+      texto: "Before it existed as a published work, Mukō-Gawa was a presentation notebook: the concept, the plot and the characters in sketch and study. It is that 2025 document printed here — the material that stays backstage and almost never reaches the reader. Whoever holds this booklet arrived before the first chapter.",
+      ficha: ["2025", "Limited print run", "The origin document"],
       nota: "Portuguese edition, shipped within Brazil by Orvalho.",
       cta: "Buy from Orvalho",
       alt: "A page from the Mukō-Gawa concept booklet: a line study of a horned character holding an apple, with the title in red across it",
@@ -140,9 +150,10 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
     nota: "Los enlaces de venta se activan con cada lanzamiento. Las fechas siguen el calendario actual de la editorial y pueden cambiar.",
     duvidas: "Dudas sobre precio, idioma y envío",
     disponivel: {
-      rotulo: "A la venta ahora",
+      rotulo: "Pieza de colección // A la venta ahora",
       titulo: "Cuadernillo conceptual",
-      texto: "La presentación del concepto, la trama y los personajes de Mukō-Gawa, en trazo y estudio — el material que vino antes de la obra publicada. Tirada limitada.",
+      texto: "Antes de existir como obra publicada, Mukō-Gawa fue un cuaderno de presentación: el concepto, la trama y los personajes en trazo y estudio. Es ese documento de 2025 el que está impreso aquí — el material que queda entre bastidores y casi nunca llega al lector. Quien tiene este cuadernillo llegó antes del primer capítulo.",
+      ficha: ["2025", "Tirada limitada", "Documento de origen"],
       nota: "Edición en portugués, con envío dentro de Brasil, por Orvalho.",
       cta: "Comprar en Orvalho",
       alt: "Página del cuadernillo conceptual de Mukō-Gawa: estudio a trazo de un personaje con cuernos sosteniendo una manzana, con el título en rojo superpuesto",
@@ -175,9 +186,10 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
     nota: "販売リンクは各刊行に合わせて公開されます。日程は現行の刊行予定であり、変更される場合があります。",
     duvidas: "価格・言語・配送についてのご質問",
     disponivel: {
-      rotulo: "発売中",
+      rotulo: "コレクターズアイテム // 発売中",
       titulo: "設定資料集",
-      texto: "『向こう側』の構想・物語・登場人物を、線画と習作で紹介する一冊。刊行された作品より前に生まれた資料です。限定部数。",
+      texto: "『向こう側』は、刊行される作品となる前に、一冊の企画書でした。構想・物語・登場人物を、線画と習作で示したもの。ここに印刷されているのは、その2025年の資料です。読者の目に触れることの少ない、舞台裏の一冊。この本を手にした方は、第一話より前に辿り着いたことになります。",
+      ficha: ["2025年", "限定部数", "原点の資料"],
       nota: "ポルトガル語版。Orvalho によるブラジル国内発送のみとなります。",
       cta: "Orvalho で購入する",
       alt: "『向こう側』設定資料集の一頁：林檎を持つ角のある人物の線画に、赤の題字が重なる",

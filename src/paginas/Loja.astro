@@ -41,6 +41,14 @@ const hrefFaq = rota("faq", idioma);
           <p class="rotulo rotulo--lado" data-lado="rebeldes">{c.disponivel.rotulo}</p>
           <h2 id="titulo-disponivel">{c.disponivel.titulo}</h2>
           <p class="texto-disponivel">{c.disponivel.texto}</p>
+
+          {/* A ficha faz o trabalho que adjetivo não faz: colecionador reconhece
+              objeto CATALOGADO — ano, natureza, tiragem —, não peça que se
+              anuncia como rara. Cada campo aqui é verificável. */}
+          <ul class="ficha">
+            {c.disponivel.ficha.map((item) => (<li>{item}</li>))}
+          </ul>
+
           <a class="botao" href={VENDAS.apostila} target="_blank" rel="noopener noreferrer">
             {c.disponivel.cta}
           </a>
@@ -140,7 +148,48 @@ const hrefFaq = rota("faq", idioma);
   .texto-disponivel {
     color: var(--cinza);
     max-width: 46ch;
-    margin: 0 0 26px;
+    margin: 0 0 22px;
+  }
+
+  /* Ficha do item: linguagem de catálogo, não de anúncio. Caixa alta, espacejada
+     e separada por filete — a mesma gramática dos rótulos com `//` do site. O
+     filete some no primeiro item para a lista não abrir com um traço solto. */
+  .ficha {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 14px;
+    margin: 0 0 28px;
+    padding: 0;
+    font-family: var(--fonte-ui);
+    font-size: .74rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--poeira);
+  }
+  .ficha li { display: flex; align-items: center; gap: 14px; }
+  .ficha li::before {
+    content: "";
+    width: 1px;
+    height: 11px;
+    background: var(--linha-forte);
+  }
+  .ficha li:first-child::before { display: none; }
+  /* A tiragem é o que diferencia esta peça: ela sai do cinza. */
+  .ficha li:nth-child(2) { color: var(--sangue-vivo); }
+
+  /* O FILETE SÓ FUNCIONA ENQUANTO A FICHA CABE NUMA LINHA.
+     `:first-child` remove o traço do primeiro item da LISTA, não do primeiro de
+     cada linha — então, quando a ficha quebrava, a segunda linha abria com um
+     filete solto pendurado no nada. Foi o que a captura mostrou. Onde ela não
+     cabe, a ficha vira coluna e o separador sai de cena: em pilha, cada campo já
+     se separa sozinho. */
+  @media (max-width: 620px) {
+    .ficha {
+      display: grid;
+      gap: 7px;
+    }
+    .ficha li::before { display: none; }
   }
   .nota-envio {
     margin: 18px 0 0;
