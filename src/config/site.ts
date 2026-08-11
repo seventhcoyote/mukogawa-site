@@ -35,3 +35,22 @@ export const EMAILS = {
   contato: "contact@mukogawa.com",
   imprensa: "social@mukogawa.com",
 } as const;
+
+/**
+ * Onde se compra, quando já dá para comprar.
+ *
+ * Mesma regra do `href: null` acima: enquanto o link não existe, o lugar aparece
+ * marcado como em espera e não finge ser link.
+ *
+ * A APOSTILA É O PRIMEIRO ITEM COMPRÁVEL DO PROJETO (2026-08-04). Todo o resto
+ * do site fala no futuro — "chega em 1º de dezembro" — e ela é a única coisa que
+ * o leitor pode ter hoje. É por isso que ganhou bloco próprio na Loja em vez de
+ * entrar como mais uma linha entre cartões que dizem "aguarde".
+ *
+ * Vendida pela Orvalho, em português, com envio dentro do Brasil. O preço vive
+ * lá e não entra no site — decisão do Bruno, reafirmada em 2026-08-04: a obra
+ * não se mistura com monetização, e o FAQ diz isso com todas as letras.
+ */
+export const VENDAS = {
+  apostila: "https://loja.orvalho.com/livros/muko-gawa-apostila-conceitual-israel-subira",
+} as const;

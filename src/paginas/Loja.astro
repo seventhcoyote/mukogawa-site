@@ -1,10 +1,13 @@
 ---
+import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import CapaVolume from "../components/CapaVolume.astro";
 import ListaEspera from "../components/ListaEspera.astro";
 import { LOJA } from "../i18n/conteudo/loja";
+import { VENDAS } from "../config/site";
 import { rota } from "../i18n/idiomas";
 import type { Idioma } from "../i18n/idiomas";
+import apostila from "../assets/loja/apostila-conceitual.jpg";
 
 interface Props { idioma: Idioma }
 const { idioma } = Astro.props;
@@ -23,6 +26,29 @@ const hrefFaq = rota("faq", idioma);
         <h1>{c.titulo}</h1>
         <p class="lead">{c.lead}</p>
       </div>
+
+      {/* Vem ANTES da vitrine de propósito: é a única coisa da página que o
+          leitor pode comprar hoje. Abaixo dela tudo fala no futuro, e um item
+          disponível colocado depois de três avisos de "aguarde" não seria
+          encontrado por quem chegou para comprar. */}
+      <section class="disponivel" aria-labelledby="titulo-disponivel">
+        <div class="peca">
+          <Image src={apostila} alt={c.disponivel.alt} widths={[520, 900, 1400]}
+                 sizes="(max-width: 860px) 92vw, 52vw" loading="eager" />
+        </div>
+
+        <div class="sobre">
+          <p class="rotulo rotulo--lado" data-lado="rebeldes">{c.disponivel.rotulo}</p>
+          <h2 id="titulo-disponivel">{c.disponivel.titulo}</h2>
+          <p class="texto-disponivel">{c.disponivel.texto}</p>
+          <a class="botao" href={VENDAS.apostila} target="_blank" rel="noopener noreferrer">
+            {c.disponivel.cta}
+          </a>
+          <p class="nota-envio">{c.disponivel.nota}</p>
+        </div>
+      </section>
+
+      <hr class="regua regua--corte" />
 
       <div class="vitrine">
         <div class="coluna-capa">
@@ -75,6 +101,67 @@ const hrefFaq = rota("faq", idioma);
 
 <style>
   h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); }
+
+  /* ---------- à venda agora ---------- */
+
+  .disponivel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(28px, 4.5vw, 60px);
+    margin-bottom: clamp(34px, 5vw, 56px);
+  }
+
+  /* A PEÇA É TRATADA COMO OBJETO, e não como ilustração colada.
+     A apostila tem FUNDO BRANCO — ao contrário das artes de estudo do site, que
+     têm fundo preto e por isso podem sangrar. Um retângulo branco chapado sobre
+     a seção preta é exatamente a "imagem colada" que este projeto recusa desde a
+     v1. A saída é a mesma da capa do volume: sombra funda por baixo e um fio de
+     luz no topo, que lêem como papel apoiado sobre a página em vez de recorte
+     grudado. */
+  .peca {
+    position: relative;
+    line-height: 0;
+  }
+  .peca :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, .06),
+      0 30px 52px -26px rgba(0, 0, 0, 1),
+      0 0 80px -30px color-mix(in srgb, var(--sangue) 60%, transparent);
+  }
+
+  .sobre h2 {
+    margin: 18px 0 16px;
+    font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+  }
+  .texto-disponivel {
+    color: var(--cinza);
+    max-width: 46ch;
+    margin: 0 0 26px;
+  }
+  .nota-envio {
+    margin: 18px 0 0;
+    font-size: .88rem;
+    color: var(--poeira);
+    max-width: 44ch;
+  }
+
+  /* 860px e não 900: abaixo disso a peça em paisagem fica estreita demais para
+     o traço de estudo ser lido, e o texto ao lado cai para duas palavras por
+     linha. Empilhado, a arte ocupa a largura toda e volta a se ler. */
+  @media (max-width: 860px) {
+    .disponivel {
+      display: block;
+    }
+    .sobre { margin-top: clamp(24px, 5vw, 34px); }
+  }
+
+  @media (max-width: 620px) {
+    .sobre :global(.botao) { width: 100%; }
+  }
 
   /* A vitrine tinha capa alta de um lado e um texto curto do outro, e sobrava
      quase meia tela de vazio à direita. Os cartões de região subiram para essa

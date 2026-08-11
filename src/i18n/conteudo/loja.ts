@@ -16,6 +16,29 @@ export interface Regiao {
   destaque: boolean;
 }
 
+/**
+ * O que já se compra hoje, em oposição aos cartões de região, que ainda dizem
+ * "aguarde". Bloco próprio e no topo por isso: a Loja inteira fala no futuro, e
+ * um item comprável perdido no meio de três avisos de espera não seria visto.
+ *
+ * SEM PREÇO, como em todo o resto do site. O valor vive no varejista e o FAQ
+ * diz isso com todas as letras.
+ *
+ * A palavra "anime" NÃO entra aqui, embora a página do varejista use. O site
+ * afirma, na Obra e no FAQ, que o anime é o horizonte do projeto e ainda não
+ * tem produção — repetir o termo numa página de venda contradiria isso e
+ * prometeria ao leitor uma coisa que não existe.
+ */
+export interface ItemVenda {
+  rotulo: string;
+  titulo: string;
+  texto: string;
+  /** Idioma e alcance do envio: quem lê em inglês ou japonês precisa saber. */
+  nota: string;
+  cta: string;
+  alt: string;
+}
+
 interface ConteudoLoja {
   capaRotulo: string;
   capaTitulo: string;
@@ -29,6 +52,7 @@ interface ConteudoLoja {
   aviseMe: string;
   nota: string;
   duvidas: string;
+  disponivel: ItemVenda;
   regioes: Regiao[];
 }
 
@@ -46,6 +70,14 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
     aviseMe: "Avise-me",
     nota: "Os links de venda entram no ar a cada lançamento. As datas seguem o calendário atual da editora e podem mudar.",
     duvidas: "Dúvidas sobre preço, idioma e envio",
+    disponivel: {
+      rotulo: "À venda agora",
+      titulo: "Apostila conceitual",
+      texto: "A apresentação do conceito, do enredo e dos personagens de Mukō-Gawa, em traço e estudo — o material que veio antes da obra publicada. Tiragem limitada.",
+      nota: "Edição em português, com envio dentro do Brasil, pela Orvalho.",
+      cta: "Comprar na Orvalho",
+      alt: "Página da apostila conceitual de Mukō-Gawa: estudo em traço de uma personagem com chifres segurando uma maçã, com o título em vermelho sobreposto",
+    },
     regioes: [
       { codigo: "BR", pais: "Brasil", canal: "Loja própria e Amazon", destaque: true,
         texto: "Edições em português, na nossa própria loja com envio dentro do país, e também pela Amazon.",
@@ -72,6 +104,14 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
     aviseMe: "Notify me",
     nota: "Retail links go live with each release. Dates shown are current publisher schedule and may change.",
     duvidas: "Questions about pricing, language and shipping",
+    disponivel: {
+      rotulo: "On sale now",
+      titulo: "Concept booklet",
+      texto: "The concept, the plot and the characters of Mukō-Gawa, presented in sketch and study — the material that came before the published work. Limited print run.",
+      nota: "Portuguese edition, shipped within Brazil by Orvalho.",
+      cta: "Buy from Orvalho",
+      alt: "A page from the Mukō-Gawa concept booklet: a line study of a horned character holding an apple, with the title in red across it",
+    },
     regioes: [
       { codigo: "BR", pais: "Brazil", canal: "Own store and Amazon", destaque: true,
         texto: "Portuguese editions, from our own store with domestic shipping, and also through Amazon.",
@@ -99,6 +139,14 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
     aviseMe: "Avísame",
     nota: "Los enlaces de venta se activan con cada lanzamiento. Las fechas siguen el calendario actual de la editorial y pueden cambiar.",
     duvidas: "Dudas sobre precio, idioma y envío",
+    disponivel: {
+      rotulo: "A la venta ahora",
+      titulo: "Cuadernillo conceptual",
+      texto: "La presentación del concepto, la trama y los personajes de Mukō-Gawa, en trazo y estudio — el material que vino antes de la obra publicada. Tirada limitada.",
+      nota: "Edición en portugués, con envío dentro de Brasil, por Orvalho.",
+      cta: "Comprar en Orvalho",
+      alt: "Página del cuadernillo conceptual de Mukō-Gawa: estudio a trazo de un personaje con cuernos sosteniendo una manzana, con el título en rojo superpuesto",
+    },
     regioes: [
       { codigo: "BR", pais: "Brasil", canal: "Tienda propia y Amazon", destaque: true,
         texto: "Ediciones en portugués, en nuestra propia tienda con envío dentro del país, y también por Amazon.",
@@ -126,6 +174,14 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
     aviseMe: "お知らせを受け取る",
     nota: "販売リンクは各刊行に合わせて公開されます。日程は現行の刊行予定であり、変更される場合があります。",
     duvidas: "価格・言語・配送についてのご質問",
+    disponivel: {
+      rotulo: "発売中",
+      titulo: "設定資料集",
+      texto: "『向こう側』の構想・物語・登場人物を、線画と習作で紹介する一冊。刊行された作品より前に生まれた資料です。限定部数。",
+      nota: "ポルトガル語版。Orvalho によるブラジル国内発送のみとなります。",
+      cta: "Orvalho で購入する",
+      alt: "『向こう側』設定資料集の一頁：林檎を持つ角のある人物の線画に、赤の題字が重なる",
+    },
     regioes: [
       { codigo: "BR", pais: "ブラジル", canal: "自社ストアとAmazon", destaque: true,
         texto: "ポルトガル語版。自社ストアより直接販売して国内へ発送するほか、Amazonでもお求めいただけます。",
