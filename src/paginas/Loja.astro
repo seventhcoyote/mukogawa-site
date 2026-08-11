@@ -7,7 +7,7 @@ import { LOJA } from "../i18n/conteudo/loja";
 import { VENDAS } from "../config/site";
 import { rota } from "../i18n/idiomas";
 import type { Idioma } from "../i18n/idiomas";
-import apostila from "../assets/loja/apostila-conceitual.jpg";
+import apostila from "../assets/loja/kit-apostila.jpg";
 
 interface Props { idioma: Idioma }
 const { idioma } = Astro.props;
@@ -33,8 +33,8 @@ const hrefFaq = rota("faq", idioma);
           encontrado por quem chegou para comprar. */}
       <section class="disponivel" aria-labelledby="titulo-disponivel">
         <div class="peca">
-          <Image src={apostila} alt={c.disponivel.alt} widths={[520, 900, 1400]}
-                 sizes="(max-width: 860px) 92vw, 52vw" loading="eager" />
+          <Image src={apostila} alt={c.disponivel.alt} widths={[420, 700, 1000]}
+                 sizes="(max-width: 860px) 320px, 38vw" loading="eager" />
         </div>
 
         <div class="sobre">
@@ -112,21 +112,25 @@ const hrefFaq = rota("faq", idioma);
 
   /* ---------- à venda agora ---------- */
 
+  /* A foto do kit é RETRATO — a arte anterior era paisagem. Numa coluna larga
+     ela ficaria altíssima e empurraria o texto para baixo. Coluna estreita, na
+     mesma medida da capa da vitrine logo abaixo, e as duas peças da página
+     passam a se alinhar em vez de competir. */
   .disponivel {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
     align-items: center;
     gap: clamp(28px, 4.5vw, 60px);
     margin-bottom: clamp(34px, 5vw, 56px);
   }
 
-  /* A PEÇA É TRATADA COMO OBJETO, e não como ilustração colada.
-     A apostila tem FUNDO BRANCO — ao contrário das artes de estudo do site, que
-     têm fundo preto e por isso podem sangrar. Um retângulo branco chapado sobre
-     a seção preta é exatamente a "imagem colada" que este projeto recusa desde a
-     v1. A saída é a mesma da capa do volume: sombra funda por baixo e um fio de
-     luz no topo, que lêem como papel apoiado sobre a página em vez de recorte
-     grudado. */
+  /* A PEÇA É UMA FOTOGRAFIA REAL, e é o único lugar do site onde isso acontece.
+     Entrou a pedido do autor em 2026-08-11, e a escolha se justifica: para um
+     item de coleção, foto do objeto na mão prova que ele existe de um jeito que
+     nenhuma arte tratada prova. O custo é que ela traz luz de ambiente e fundo
+     claro para uma página preta.
+     A sombra funda e o fio de luz no topo continuam pelo mesmo motivo de antes:
+     sem eles a foto vira o retângulo colado que este projeto recusa desde a v1. */
   .peca {
     position: relative;
     line-height: 0;
@@ -198,13 +202,17 @@ const hrefFaq = rota("faq", idioma);
     max-width: 44ch;
   }
 
-  /* 860px e não 900: abaixo disso a peça em paisagem fica estreita demais para
-     o traço de estudo ser lido, e o texto ao lado cai para duas palavras por
-     linha. Empilhado, a arte ocupa a largura toda e volta a se ler. */
+  /* Empilhado abaixo de 860px, porque lado a lado o texto cairia para duas
+     palavras por linha.
+     A FOTO GANHA TETO DE LARGURA AQUI. Ela é retrato: solta em largura cheia num
+     celular de 375px, passaria de 400px de altura e empurraria título, ficha e
+     botão para fora da primeira tela — quem abrisse a Loja veria uma foto e nada
+     mais. Presa em 320px continua legível e o bloco inteiro cabe. */
   @media (max-width: 860px) {
     .disponivel {
       display: block;
     }
+    .peca { max-width: 320px; }
     .sobre { margin-top: clamp(24px, 5vw, 34px); }
   }
 
