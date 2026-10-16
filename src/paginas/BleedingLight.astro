@@ -32,7 +32,8 @@ import fotoLapis from "../assets/mukogawa/bl-foto-lapis.jpg";
 import fotoSpecs from "../assets/mukogawa/bl-specs.jpg";
 import fotoSketch from "../assets/mukogawa/bl-foto-sketch.jpg";
 import fotoJapao from "../assets/mukogawa/bl-foto-japao.jpg";
-import fotoImpressao from "../assets/mukogawa/bl-foto-impressao.jpg";
+// Recortada sem a moldura branca, para assentar direto sobre as nuvens. 2026-10-16.
+import fotoImpressao from "../assets/mukogawa/bl-foto-impressao-recortada.png";
 
 // Os banners mudam de arquivo por idioma; o conteúdo guarda só a chave.
 import bSinopse from "../assets/mukogawa/bl-sinopse.jpg";
@@ -137,14 +138,14 @@ const descricao = c.lede;
         <Image class="figura" src={fotoImpressao} alt={c.altPrint}
                widths={[540, 1080, 1800]} sizes="(max-width: 1120px) 92vw, 1080px" loading="lazy" />
 
-        <p class="fecho">{c.jFim}</p>
+        <p class="fecho" set:html={c.jFim.replace("Mukō-Gawa", '<span style="white-space:nowrap">Mukō-Gawa</span>')} />
       </section>
 
       <div class="acoes-fim">
         <a class="botao-bl botao-bl--contorno" href={hrefAutores}>{c.ctaAutores}</a>
         {ehPt ? (
           <a class="botao-bl" href={VENDAS.catarse} target="_blank" rel="noopener noreferrer">
-            {t("catarse.seguir")}
+            {t("cta.apoiar")}
           </a>
         ) : (
           <span class="botao-bl botao-bl--mudo" aria-disabled="true">{c.emBreve}</span>
@@ -163,8 +164,10 @@ const descricao = c.lede;
     position: relative;
     overflow: hidden;
     background: #fff;
-    /* as rochas ocupam a base; sem este respiro elas cobririam o texto */
-    padding-bottom: 22vw;
+    /* as rochas ocupam a base; sem este respiro elas cobririam o texto.
+       32vw (era 22vw), igual à Criadores: a 22vw a rocha mais alta cobria
+       o botão final. 2026-10-16. */
+    padding-bottom: 32vw;
   }
 
   /* ---------- hero ---------- */
@@ -251,24 +254,28 @@ const descricao = c.lede;
     color: #0d0d0f;
     margin-top: clamp(22px, 3vw, 34px);
     margin-bottom: 14px;
+    text-align: center;
     font-size: clamp(1.4rem, 2.2vw, 1.9rem);
   }
   .specs { list-style: none; margin-top: 0; margin-bottom: 12px; padding: 0; }
+  /* Especificações centralizadas, com o traço vermelho colado a cada item. */
   .specs li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 11px;
     color: #2b2927;
     font-size: 1.04rem;
     line-height: 1.7;
-    padding-left: 18px;
-    position: relative;
+    text-align: center;
   }
   .specs li::before {
     content: "";
-    position: absolute;
-    left: 0; top: .72em;
+    flex: none;
     width: 7px; height: 1px;
     background: #c23a2c;
   }
-  .specs-nota { font-size: .88rem; color: #6b6560; }
+  .specs-nota { font-size: .88rem; color: #6b6560; text-align: center; }
 
   /* A fala do editor da Shueisha: centralizada entre filetes, como na
      referência. É a única citação da página e carrega o momento da história. */
@@ -285,19 +292,27 @@ const descricao = c.lede;
     color: #0d0d0f;
   }
 
-  .fecho {
+  /* Maior e centralizado: é o fecho da página. 2026-10-16. */
+  .bloco .fecho {
     font-family: var(--fonte-display);
-    font-size: clamp(1.2rem, 2vw, 1.6rem);
-    line-height: 1.45;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    line-height: 1.3;
     color: #0d0d0f !important;
-    margin-top: clamp(26px, 4vw, 40px);
+    text-align: center;
+    text-wrap: balance;
+    max-width: 30ch;
+    margin-top: clamp(32px, 5vw, 56px);
+    /* "Mukō-Gawa" não pode quebrar no hífen */
+    hyphens: manual;
   }
 
   /* ---------- botões ---------- */
-  .acao { margin: clamp(22px, 3vw, 32px) auto 0; }
+  .acao { margin: clamp(22px, 3vw, 32px) auto 0; text-align: center; }
   .acoes-fim {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 14px;
     max-width: 68ch;
     margin: clamp(40px, 6vw, 70px) auto 0;
@@ -341,7 +356,9 @@ const descricao = c.lede;
     pointer-events: none;
     line-height: 0;
   }
-  .nuvens { z-index: 0; }
+  /* .15, como na Criadores: em opacidade cheia as nuvens atrapalhavam a
+     leitura do texto. 2026-10-16. */
+  .nuvens { z-index: 0; opacity: .15; }
   .rochas { z-index: 2; }
   .nuvens :global(img), .rochas :global(img) {
     width: 100%;
