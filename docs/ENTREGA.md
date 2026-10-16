@@ -1,150 +1,191 @@
-# Entrega do projeto — o que transferir, e em que ordem
+# 2. Contas e acessos — do zero
 
-Checklist para passar o site de Mukō-Gawa para o Israel operar da máquina dele.
-São **seis contas** e um repositório. Nada aqui tem pressa, mas a ordem importa:
-o domínio é o passo mais delicado e vem por último.
+Este é o único documento que precisa ser feito **junto com o Bruno**, porque
+metade dos passos é dele e metade é sua. Reserve uma hora.
 
-**Quem transfere:** Bruno. **Quem recebe:** Israel.
+**A ordem importa.** O domínio vem por último de propósito: ele só pode estar
+num projeto da Vercel por vez, e é o único passo em que o site pode sair do ar
+por alguns minutos.
 
 ---
 
-## 1. O repositório — github.com/h96b/mukogawa-site
+## Antes de começar
 
-Hoje é **privado** e pertence à conta `h96b`.
-
-**Duas formas, e a escolha muda o resto:**
-
-| | O que acontece | Quando escolher |
+| O que é | Hoje está com | Vai para |
 |---|---|---|
-| **Transferir a propriedade** | o repositório passa para a conta do Israel; o Bruno sai, ou fica como colaborador | o projeto é dele daqui em diante |
-| **Adicionar como colaborador** | o Bruno continua dono; o Israel ganha acesso de escrita | os dois vão trabalhar juntos por um tempo |
-
-Transferir: **Settings → General → Danger Zone → Transfer ownership**. O Israel
-precisa aceitar o convite.
-
-**Se transferir, a Vercel precisa ser reconectada** ao repositório no novo dono —
-a integração não acompanha a mudança sozinha.
-
-**Tudo que o projeto precisa já está dentro do repositório** (feito em
-16/10/2026): documentação, ferramentas, artes originais e o `CLAUDE.md` que
-ensina o Claude Code a trabalhar aqui. Clonar é suficiente para continuar.
-
-Não está no repositório, por serem grandes e dispensáveis: a pasta `versoes/`
-(467 MB de snapshots) e `capturas/`. Se quiser entregar, mande por outro meio.
+| Repositório (o código) | GitHub do Bruno (`h96b`) | sua conta do GitHub |
+| Hospedagem | Vercel do Bruno | sua conta da Vercel |
+| Domínio `mukogawa.com` | GoDaddy, acesso delegado | resolver com o Bruno |
+| Newsletter | Beehiiv | sua conta |
 
 ---
 
-## 2. A Vercel — hospedagem
+# PARTE 1 — Suas contas (você sozinho, ~15 min)
 
-O projeto `mukogawa-site`. É aqui que o site é publicado a cada `git push`.
+## 1.1 GitHub
 
-**Transferir:** Vercel → Project Settings → **Transfer Project**, para a conta ou
-time do Israel. As variáveis de ambiente **não vão junto** — precisam ser
-recriadas à mão.
+Crie em **github.com**. Use um e-mail que você vá manter — se possível
+`contact@mukogawa.com`, porque a conta é do projeto, não sua pessoa.
 
-### As variáveis (recriar todas)
+Ative a **verificação em duas etapas** quando ele pedir. O GitHub exige, e sem
+isso você perde o acesso depois.
 
-| Variável | Valor | Observação |
-|---|---|---|
-| `INDEXAVEL` | `1` | sem ela, as páginas pedem `noindex` e o site sai do Google |
-| `PUBLIC_WAITLIST_ENDPOINT` | `/api/inscrever` | lida no BUILD: mudar exige republicar |
-| `BEEHIIV_API_KEY` | a chave do Beehiiv | marcar **Sensitive** |
-| `BEEHIIV_PUBLICATION_ID` | `pub_…` | |
+**Me mande seu nome de usuário** — o Bruno precisa dele para transferir.
 
-**A chave do Beehiiv não deve ser copiada de um lado para o outro por mensagem.**
-O certo é o Israel gerar uma nova no painel do Beehiiv e colar direto na Vercel.
-Uma chave já foi trocada neste projeto por ter passado por conversa.
+## 1.2 Vercel
 
-### Duas coisas para o Israel saber
+Crie em **vercel.com** e escolha **"Continue with GitHub"**. Logar com o GitHub
+evita ter duas contas para lembrar e já conecta as duas coisas.
 
-**O plano Hobby tem termos de uso não comercial.** O projeto está nele hoje. A
-Vercel raramente age nisso, mas se agir, o site sai do ar — e um site que vende
-está no limite do que o plano permite. Avaliar o plano pago.
+Escolha o plano **Hobby** (gratuito) por enquanto. Leia a observação sobre plano
+no fim deste documento antes de decidir se fica nele.
 
-**O root directory do projeto é a raiz do repositório** e o build é
-`npm run build`. Não mexer sem necessidade.
+## 1.3 Beehiiv
+
+Se o Bruno for passar a conta existente, você não cria nada — ele te convida
+como Owner. Se preferir começar do zero, o passo a passo está em
+`docs/SETUP-BEEHIIV.md`, dentro do projeto.
 
 ---
 
-## 3. O Beehiiv — newsletter
+# PARTE 2 — Receber o código (Bruno + você, ~10 min)
 
-Conta criada em agosto de 2026, publicação **Mukō-Gawa**.
+## 2.1 O Bruno transfere o repositório
 
-- **Transferir:** convidar o Israel como Owner/Admin do workspace e depois o
-  Bruno sair. Beehiiv não tem botão de "transferir conta".
-- **A chave de API** usada pelo site vive na Vercel. Ao trocar de dono, gerar
-  chave nova e substituir lá.
-- **Os campos personalizados `regiao` e `idioma` precisam continuar existindo**,
-  com esses nomes exatos. A API aceita só campos já criados: se sumirem, o
-  cadastro entra e o dado é descartado sem erro nenhum.
-- O plano estava em teste do Max. Confirmar em que plano está hoje e o que
-  acontece no vencimento.
+No GitHub dele: **Settings → General → Danger Zone → Transfer ownership**,
+digitando seu nome de usuário.
 
-Passo a passo completo do que existe: `docs/SETUP-BEEHIIV.md`.
+## 2.2 Você aceita
 
----
+Chega um e-mail do GitHub. Aceite. O repositório passa a aparecer na sua conta,
+em `github.com/SEU-USUARIO/mukogawa-site`.
 
-## 4. O domínio e o DNS — **o passo mais delicado**
+## 2.3 Baixe o projeto
 
-`mukogawa.com` está registrado na **GoDaddy**, e o DNS continua lá: a Vercel só
-recebe o apontamento.
+```bash
+git clone https://github.com/SEU-USUARIO/mukogawa-site.git
+cd mukogawa-site
+npm install
+npm run build
+```
 
-**Antes de qualquer coisa, leia `docs/DEPLOY.md`.** O resumo do risco:
-
-> O domínio serve uma caixa **Microsoft 365** comprada junto com ele. Os
-> registros `MX`, o `TXT` de verificação e o `SPF` são do e-mail. **Trocar os
-> nameservers para a Vercel apaga os três e derruba o e-mail do domínio.**
-> Só os registros `A` da raiz e `CNAME` do `www` pertencem ao site.
-
-Há também um detalhe de painel: o checkbox **"Redirect apex domains to www"**
-precisa ficar **desmarcado**. O canônico do site é a raiz, e forçar o www faria a
-trava de indexação nunca liberar, sem erro visível.
-
-**O acesso à GoDaddy hoje é delegado.** O caminho normal dá 403; entra-se por
-`account.godaddy.com/access` → "Accounts I can access" → Access Now. Para passar
-o domínio ao Israel é preciso resolver a titularidade na própria GoDaddy, com
-quem é o titular da conta.
+Tem de terminar com **22 pages built**. Se terminar, o código está inteiro na
+sua máquina e você já poderia trabalhar nele — falta só publicar.
 
 ---
 
-## 5. Contas de terceiros — só acesso, não transferência
+# PARTE 3 — A hospedagem (você, ~15 min)
 
-**Catarse** — a campanha `catarse.com.br/muko-gawa`, que abre em 03/11/2026. É do
-Israel; o site só aponta para lá. **Lembrete: no dia 03/11 o botão do site deve
-deixar de dizer "Siga a campanha" e passar a "Apoie agora"** — é uma linha em
-`src/i18n/ui.ts` (`catarse.seguir`) e um deploy.
+## 3.1 Importar o projeto
 
-**Orvalho** — vende a apostila conceitual. O site só linka. Duas correções
-pendentes com eles: a página descreve a obra como "anime", que o site não
-afirma, e escreve "Muko-Gawa" sem o macron.
+Na Vercel: **Add New → Project**, escolha `mukogawa-site` na lista, e **Import**.
 
-**Google Search Console** — se tiver sido criado, adicionar o Israel como
-proprietário. Se não existir, vale criar: é de graça e mostra por quais buscas o
-site aparece. Relevante agora, porque 45 URLs foram removidas em 16/10 e os
-redirecionamentos precisam ser acompanhados.
+Ela reconhece que é Astro sozinha. **Não mude nada** em Framework Preset, Build
+Command ou Output Directory.
+
+## 3.2 As quatro variáveis — antes do primeiro deploy
+
+Ainda na tela de importação, abra **Environment Variables** e crie as quatro.
+Se publicar sem elas, o site sobe quebrado.
+
+| Nome | Valor |
+|---|---|
+| `INDEXAVEL` | `1` |
+| `PUBLIC_WAITLIST_ENDPOINT` | `/api/inscrever` |
+| `BEEHIIV_PUBLICATION_ID` | `pub_…` (o Bruno te passa) |
+| `BEEHIIV_API_KEY` | **gere uma nova** (ver abaixo) |
+
+**A chave do Beehiiv não deve ser copiada do Bruno por mensagem.** Entre no
+painel do Beehiiv, em **Settings → Workspace Settings → API**, apague a chave
+antiga e crie outra. Cole a nova direto aqui. Uma chave já foi trocada neste
+projeto por ter passado por conversa — chave que circula em mensagem é chave
+vazada.
+
+O que cada uma faz:
+
+- **`INDEXAVEL`** libera o site para o Google. Sem ela, todas as páginas pedem
+  para não serem indexadas e o site some da busca em alguns dias, sem nenhum
+  aviso visível.
+- **`PUBLIC_WAITLIST_ENDPOINT`** diz ao formulário para onde enviar. É lida no
+  momento em que o site é construído: mudar o valor não tem efeito até sair uma
+  publicação nova.
+- As duas do **Beehiiv** ficam no servidor e nunca chegam ao navegador de quem
+  visita. É por isso que elas não levam `PUBLIC_` no nome.
+
+## 3.3 Publique e confira
+
+Clique em **Deploy**. Em um ou dois minutos a Vercel te dá um endereço do tipo
+`mukogawa-site-xxxx.vercel.app`. Abra e confira:
+
+- [ ] a home abre com "Mukō-Gawa: Bleeding Light"
+- [ ] o menu tem Início · Bleeding Light · Criadores · Loja
+- [ ] a página Bleeding Light abre e rola até o fim
+- [ ] `/en/` e `/ja/` abrem
+- [ ] o formulário da newsletter aceita um e-mail de teste
+
+**Enquanto isso, o site oficial continua no ar normalmente**, servido pelo
+projeto do Bruno. Você está testando em paralelo.
 
 ---
 
-## 6. Depois de transferir, conferir junto
+# PARTE 4 — O domínio (Bruno + você, por último)
 
-Com o Israel na máquina dele:
+É o passo delicado. **Só faça depois que a Parte 3 estiver funcionando.**
 
-- [ ] `git clone` e `npm install` funcionam
-- [ ] `npm run dev` abre o site
-- [ ] `npm run build` termina sem erro, com 22 páginas
-- [ ] `npm run auditar -- --larguras 1440,768,375 --rotas /,/bleeding-light` roda
-- [ ] `node ferramentas/gerar-fonte-kanji.mjs` roda (se reclamar do Python, o
-      próprio erro diz como reconstruir o ambiente)
-- [ ] um `git push` de teste publica na Vercel
-- [ ] o formulário da newsletter cadastra de verdade (testar com um alias novo)
+## 4.1 Leia o aviso antes
+
+> O `mukogawa.com` serve também uma **caixa de e-mail Microsoft 365**, comprada
+> junto com o domínio na GoDaddy. Os registros `MX`, o `TXT` de verificação e o
+> `SPF` pertencem ao e-mail, não ao site.
+>
+> **Trocar os nameservers do domínio para a Vercel apaga os três e derruba o
+> e-mail.** Só os registros `A` da raiz e `CNAME` do `www` são do site.
+
+O detalhamento está em `docs/DEPLOY.md`, dentro do projeto. Leia antes.
+
+## 4.2 A sequência que não derruba o site
+
+1. **O Bruno remove o domínio** do projeto antigo na Vercel. A partir daqui, e
+   só por alguns minutos, `mukogawa.com` pode ficar fora do ar.
+2. **Você adiciona** `mukogawa.com` ao seu projeto: **Settings → Domains → Add**.
+3. A Vercel mostra os registros a configurar. **Mantenha os nameservers na
+   GoDaddy** e altere apenas o `A` e o `CNAME` — é o que a Vercel chama de
+   configuração por registros, não por nameservers.
+4. No painel da GoDaddy, o checkbox **"Redirect apex domains to www"** precisa
+   ficar **desmarcado**. O endereço oficial do site é a raiz; forçar o www faz a
+   trava de indexação nunca liberar, e isso não dá erro visível.
+5. Espere a Vercel marcar o domínio como válido e abra `https://mukogawa.com`.
+6. **Confira o e-mail**: mande uma mensagem para `contact@mukogawa.com` de outro
+   endereço e veja se chega. É a prova de que o Microsoft 365 sobreviveu.
+
+## 4.3 Acesso à GoDaddy
+
+Hoje o acesso é **delegado**: o caminho normal dá erro 403, e entra-se por
+`account.godaddy.com/access` → "Accounts I can access" → Access Now.
+
+Para o domínio ficar realmente seu, é preciso resolver a titularidade dentro da
+GoDaddy com quem é o dono da conta. Enquanto isso não acontece, você depende do
+Bruno para mexer em DNS — o que é aceitável, porque DNS se mexe uma vez por ano.
 
 ---
 
-## O que o Israel deve ler, nesta ordem
+# PARTE 5 — Depois que tudo estiver no seu nome
 
-1. **`CLAUDE.md`**, na raiz — o Claude Code dele lê sozinho, mas vale ler também.
-2. **`docs/HANDOFF.md`** — o estado do projeto e as decisões que não devem ser
-   desfeitas. É o documento mais importante.
-3. **`docs/MAPA.md`** — o que falta fazer.
-4. **`docs/conteudo/VOZ.md`** — antes de escrever qualquer texto novo.
-5. **`docs/DEPLOY.md`** — só quando for mexer em domínio, DNS ou e-mail.
+- [ ] `git push` seu publica no seu projeto da Vercel
+- [ ] `https://mukogawa.com` abre a versão nova
+- [ ] o e-mail `contact@mukogawa.com` continua recebendo
+- [ ] o formulário da newsletter cadastra de verdade (teste com um alias novo,
+      tipo `seunome+teste1@gmail.com`)
+- [ ] o Bruno pode sair do repositório e da Vercel
+
+---
+
+## Uma decisão que vale tomar com calma
+
+**O plano Hobby da Vercel tem termos de uso não comercial.** O site tem loja e
+campanha de financiamento, o que fica no limite do que o plano permite. A Vercel
+raramente age nisso, mas se agir, o site sai do ar sem aviso.
+
+Não é urgente. Mas antes do lançamento de dezembro, vale subir para o plano pago
+— é a diferença entre um risco pequeno e um risco pequeno **no pior dia
+possível**.
