@@ -11,7 +11,7 @@
     "build": "astro build && rm -f dist/_auditoria.js",
     "preview": "astro preview",
     "check": "astro check",
-    "auditar": "node ../ferramentas/auditar.mjs"
+    "auditar": "node ferramentas/auditar.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
