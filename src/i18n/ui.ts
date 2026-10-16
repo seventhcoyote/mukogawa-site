@@ -26,7 +26,7 @@ export const UI = {
 
     "cta.aviseMe": "Avise-me",
     "nav.bleedingLight": "Bleeding Light",
-    "cta.apoiar": "Apoiar",
+    "cta.apoiar": "Pré-venda",
     "catarse.seguir": "Siga a campanha",
     "cta.pular": "Pular para o conteúdo",
     "cta.idioma": "Idioma",
