@@ -86,7 +86,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       {
         titulo: "O que é coletado",
         paragrafos: [
-          "Apenas o que você digita na lista de espera:",
+          "Apenas o que você digita no formulário da newsletter:",
         ],
         lista: [
           "seu endereço de e-mail;",
@@ -103,7 +103,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       {
         titulo: "Para que serve",
         paragrafos: [
-          "O e-mail serve para avisar você quando as vendas abrirem na sua região e para anunciar cada lançamento: o yomikiri, os volumes do mangá e os livros.",
+          "O e-mail serve para avisar você quando as vendas abrirem na sua região e para anunciar cada lançamento: o mangá, os volumes e os livros.",
           "Serve também para enviar novidades sobre a obra — bastidores da produção, material inédito e promoções das edições. Nada fora do universo de Mukō-Gawa.",
           "O endereço não é vendido, alugado nem cedido a terceiros. Todo envio traz um link para sair da lista, e sair vale a partir do próprio pedido.",
         ],
@@ -184,7 +184,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       },
       {
         titulo: "What is collected",
-        paragrafos: ["Only what you type into the waiting list:"],
+        paragrafos: ["Only what you type into the newsletter form:"],
         lista: [
           "your email address;",
           "the region you select (Brazil, United States, Japan or other).",
@@ -200,7 +200,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       {
         titulo: "What it is for",
         paragrafos: [
-          "The email is used to tell you when sales open in your region, and to announce each release: the yomikiri, the manga volumes and the novels.",
+          "The email is used to tell you when sales open in your region, and to announce each release: the manga, the volumes and the novels.",
           "It is also used to send news about the work — material from behind the scenes, previously unpublished art and offers on the editions. Nothing outside the world of Mukō-Gawa.",
           "The address is never sold, rented or passed to third parties. Every mailing carries a link to leave the list, and leaving takes effect from the request itself.",
         ],
@@ -279,7 +279,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       },
       {
         titulo: "Qué se recoge",
-        paragrafos: ["Solo lo que escribes en la lista de espera:"],
+        paragrafos: ["Solo lo que escribes en el formulario de la newsletter:"],
         lista: [
           "tu dirección de correo;",
           "la región que eliges (Brasil, Estados Unidos, Japón u otra).",
@@ -295,7 +295,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       {
         titulo: "Para qué sirve",
         paragrafos: [
-          "El correo sirve para avisarte cuando se abran las ventas en tu región y para anunciar cada lanzamiento: el yomikiri, los volúmenes del manga y los libros.",
+          "El correo sirve para avisarte cuando se abran las ventas en tu región y para anunciar cada lanzamiento: el manga, los volúmenes y los libros.",
           "También sirve para enviarte novedades sobre la obra — material de los bastidores, arte inédito y promociones de las ediciones. Nada ajeno al universo de Mukō-Gawa.",
           "La dirección no se vende, alquila ni cede a terceros. Cada envío incluye un enlace para salir de la lista, y salir surte efecto desde la propia solicitud.",
         ],
@@ -374,7 +374,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       },
       {
         titulo: "取得する情報",
-        paragrafos: ["事前登録にご入力いただいた内容のみです。"],
+        paragrafos: ["ニュースレターの登録フォームにご入力いただいた内容のみです。"],
         lista: [
           "メールアドレス",
           "お選びいただいた地域（ブラジル・アメリカ・日本・その他）",
@@ -390,7 +390,7 @@ export const PRIVACIDADE: Record<Idioma, ConteudoPrivacidade> = {
       {
         titulo: "利用目的",
         paragrafos: [
-          "お住まいの地域で販売が始まった際のご連絡、および読み切り・単行本・小説それぞれの刊行のお知らせに使用します。",
+          "お住まいの地域で販売が始まった際のご連絡、および漫画・単行本・小説それぞれの刊行のお知らせに使用します。",
           "あわせて、作品に関する最新情報（制作の裏側、未公開の資料、各版のご案内）の配信にも使用します。『向こう側』に関わる内容に限ります。",
           "アドレスの販売・貸与・第三者への提供は行いません。すべての配信に配信停止の導線を設けており、停止はお申し出の時点から有効です。",
         ],

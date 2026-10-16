@@ -53,4 +53,16 @@ export const EMAILS = {
  */
 export const VENDAS = {
   apostila: "https://loja.orvalho.com/livros/muko-gawa-apostila-conceitual-israel-subira",
+  /**
+   * A campanha de Bleeding Light. ABRE EM 03/11/2026 — até lá o Catarse só
+   * aceita "seguir o projeto", não apoiar, e por isso os botões do site dizem
+   * SEGUIR e não APOIAR. Decidido com o Bruno em 2026-10-16: botão que promete
+   * uma ação que a página de destino não oferece queima o clique, e quem volta
+   * frustrado não retorna na abertura. Em 03/11 troca-se o rótulo em `ui.ts`
+   * (`catarse.seguir` -> `catarse.apoiar`) e nada mais.
+   *
+   * O utm é nosso, para medir quanto tráfego o site manda — não é rastreador de
+   * rede social, e a política de privacidade continua verdadeira.
+   */
+  catarse: "https://www.catarse.com.br/muko-gawa?utm_source=mukogawaverse&utm_medium=site&utm_campaign=pre-campanha",
 } as const;

@@ -21,9 +21,16 @@ interface Props {
    * com as páginas reais. Sai do sitemap junto, no `astro.config.mjs`.
    */
   semIndice?: boolean;
+  /**
+   * Páginas de fundo CLARO. O site é preto; Bleeding Light e Criadores são
+   * brancas por decisão do autor (2026-10-16), e isso vale como exceção
+   * deliberada, não como virada de identidade. A classe vai no <body> para que
+   * cabeçalho e rodapé também saibam em que fundo estão.
+   */
+  claro?: boolean;
 }
 
-const { titulo, descricao, og = "/og.jpg", colado = false, semIndice = false } = Astro.props;
+const { titulo, descricao, og = "/og.jpg", colado = false, semIndice = false, claro = false } = Astro.props;
 
 const idioma = idiomaDaUrl(Astro.url.pathname);
 const t = usarUI(idioma);
@@ -126,7 +133,7 @@ const indexavel = podeIndexar(Astro.site) && !semIndice;
     <link rel="alternate" hreflang="x-default" href={xDefault} />
   </head>
 
-  <body>
+  <body class={claro ? "tema-claro" : undefined}>
     {ehInicio && <Intro />}
 
     <a class="pular-para-conteudo" href="#conteudo">{t("cta.pular")}</a>

@@ -19,7 +19,7 @@ import arte from "../assets/hero/hero.png";
 // fica em bloco próprio, 100% visível, e o texto vem abaixo.
 
 const c = INICIO[idiomaDaUrl(Astro.url.pathname)];
-const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
+const hrefBleeding = rota("bleedingLight", idiomaDaUrl(Astro.url.pathname));
 ---
 
 <section class="hero">
@@ -40,15 +40,19 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
   <div class="envelope conteudo">
     <p class="rotulo">{c.heroRotulo}</p>
 
+    {/* A marca continua sendo a imagem — é o diferencial visual do hero e a
+        referência do autor a trocaria por texto puro. O que entra é o TÍTULO DA
+        OBRA abaixo dela: a logo diz "Mukō-Gawa", e o que está sendo anunciado é
+        o Bleeding Light. Os dois juntos dizem a coisa inteira. */}
     <h1>
       <Image class="marca" src={logo} alt="Mukō-Gawa 向こう側" widths={[420, 760]} sizes="(max-width: 760px) 76vw, 40vw" loading="eager" fetchpriority="high" />
+      <span class="titulo-obra">{c.heroTitulo}</span>
     </h1>
 
     <p class="sinopse">{c.heroLead}</p>
 
     <div class="acoes">
-      <a class="botao" href="#lista-de-espera">{c.heroCta}</a>
-      <a class="botao botao--fantasma" href={hrefHistoria}>{c.heroSecundario}</a>
+      <a class="botao" href={hrefBleeding}>{c.heroCta}</a>
     </div>
   </div>
 
@@ -201,6 +205,19 @@ const hrefHistoria = rota("historia", idiomaDaUrl(Astro.url.pathname));
   }
 
   h1 { margin: 0 0 26px; line-height: 0; }
+  /* O título da obra vem abaixo da marca, menor, com o mesmo espacejamento dos
+     rótulos do site. Não compete com a logo: completa. */
+  .titulo-obra {
+    display: block;
+    margin-top: 14px;
+    font-family: var(--fonte-display);
+    font-size: clamp(1.1rem, 2.1vw, 1.7rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: .12em;
+    color: var(--osso);
+    text-shadow: 0 2px 16px rgba(0, 0, 0, .95);
+  }
   .marca {
     width: min(38vw, 480px);
     height: auto;
