@@ -1,0 +1,152 @@
+---
+import "../styles/global.css";
+import Cabecalho from "../components/Cabecalho.astro";
+import Rodape from "../components/Rodape.astro";
+import Intro from "../components/Intro.astro";
+import { IDIOMAS, ATIVOS, PADRAO, idiomaDaUrl, equivalente, rota } from "../i18n/idiomas";
+import { usarUI } from "../i18n/ui";
+import { podeIndexar } from "../config/indexacao";
+
+interface Props {
+  titulo: string;
+  descricao: string;
+  /** Imagem de compartilhamento. Padrão: a OG do projeto. */
+  og?: string;
+  /** Remove o respiro do topo quando a página abre com um hero sangrado. */
+  colado?: boolean;
+  /**
+   * Pede `noindex` nesta página mesmo com o site liberado para busca. É para
+   * página que só faz sentido no meio de um fluxo — a de confirmação da lista,
+   * por exemplo: em resultado de busca ela não confirma nada e ainda concorre
+   * com as páginas reais. Sai do sitemap junto, no `astro.config.mjs`.
+   */
+  semIndice?: boolean;
+  /**
+   * Páginas de fundo CLARO. O site é preto; Bleeding Light e Criadores são
+   * brancas por decisão do autor (2026-10-16), e isso vale como exceção
+   * deliberada, não como virada de identidade. A classe vai no <body> para que
+   * cabeçalho e rodapé também saibam em que fundo estão.
+   */
+  claro?: boolean;
+}
+
+const { titulo, descricao, og = "/og.jpg", colado = false, semIndice = false, claro = false } = Astro.props;
+
+const idioma = idiomaDaUrl(Astro.url.pathname);
+const t = usarUI(idioma);
+
+// A abertura só existe na home. Quem abre uma página interna veio de um link
+// compartilhado e quer aquela página, não a marca.
+const ehInicio = Astro.url.pathname.replace(/\/$/, "") === rota("inicio", idioma).replace(/\/$/, "");
+
+// O tagline muda de idioma junto com o resto. O inglês é o título do próprio
+// site antigo, e o português agora é a tradução dele — as duas versões passam
+// a dizer a mesma coisa, o que antes não acontecia.
+const TAGLINE = {
+  pt: "Mukō-Gawa 向こう側 — um conto do outro lado",
+  en: "Mukō-Gawa 向こう側 — a tale from the other side",
+  es: "Mukō-Gawa 向こう側 — un cuento del otro lado",
+} as const;
+
+const tituloCompleto = titulo === "Mukō-Gawa"
+  ? TAGLINE[idioma]
+  : `${titulo} — Mukō-Gawa 向こう側`;
+
+const canonica = new URL(Astro.url.pathname, Astro.site);
+
+// `Astro.site` e não o domínio final fixo: o `astro.config.mjs` já resolve `site`
+// a partir de VERCEL_PROJECT_PRODUCTION_URL, então no deploy esta URL aponta para
+// o host que realmente serve o arquivo. Só no build LOCAL ela cai em
+// mukogawa.com — que hoje serve o site antigo e devolve 404 no og.jpg.
+// Isso é comportamento local e não afeta o que vai ao ar: conferido no HTML
+// publicado, o og:image aponta para o preview e responde 200.
+const ogAbsoluta = new URL(og, Astro.site);
+
+// hreflang: cada página aponta para si mesma nos outros idiomas. Sem
+// equivalente (uma página de personagem, por exemplo), aponta para a home
+// daquele idioma, que é melhor que anunciar uma URL que não existe.
+const alternativas = ATIVOS.map((outro) => ({
+  idioma: outro,
+  hreflang: IDIOMAS[outro].htmlLang,
+  href: new URL(equivalente(Astro.url.pathname, outro), Astro.site).toString(),
+}));
+const xDefault = new URL(equivalente(Astro.url.pathname, PADRAO), Astro.site).toString();
+
+// Quem decide é `config/indexacao.ts`: domínio definitivo E liberação explícita
+// no ambiente. Fora disso o site pede noindex — senão o Google indexa o
+// `.vercel.app`, que depois brigaria com mukogawa.com por conteúdo duplicado, e
+// hoje também indexaria o domínio final antes de o site estar pronto como
+// produto. A URL de PRODUÇÃO da Vercel não recebe `X-Robots-Tag` automático; só
+// as de branch recebem. Verificado nesta publicação: nenhum header desse tipo veio.
+const indexavel = podeIndexar(Astro.site) && !semIndice;
+---
+
+<!doctype html>
+<html lang={IDIOMAS[idioma].htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descricao} />
+    <link rel="canonical" href={canonica} />
+    {!indexavel && <meta name="robots" content="noindex, nofollow" />}
+
+    {/* A fonte de display só era descoberta depois do CSS baixar e ser
+        processado: medido, o CSS começava em 56ms e a fonte em 101ms, em
+        localhost — numa rede móvel essa espera em série custa muito mais, e
+        ela desenha o título, que é o maior elemento da tela. O preload põe as
+        duas na mesma leva do CSS. A variante CJK fica de fora de propósito:
+        são 150 KB que o unicode-range só busca quando há kanji na página. */}
+    <link rel="preload" href="/fontes/zen-old-mincho-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fontes/zen-old-mincho-latin-600.woff2" as="font" type="font/woff2" crossorigin />
+    {/* A variante CJK são 247 KB e só entra onde há kanji. Nas páginas
+        japonesas ela desenha o texto inteiro, então lá vale a mesma antecipação
+        — nas outras, o unicode-range já evita que ela seja sequer buscada. */}
+    {idioma === "ja" && (
+      <link rel="preload" href="/fontes/zen-old-mincho-cjk-700.woff2" as="font" type="font/woff2" crossorigin />
+    )}
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0d0d0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mukō-Gawa" />
+    <meta property="og:locale" content={IDIOMAS[idioma].ogLocale} />
+    <meta property="og:title" content={tituloCompleto} />
+    <meta property="og:description" content={descricao} />
+    <meta property="og:url" content={canonica} />
+    <meta property="og:image" content={ogAbsoluta} />
+    <meta property="og:image:alt" content={tituloCompleto} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={tituloCompleto} />
+    <meta name="twitter:description" content={descricao} />
+    <meta name="twitter:image" content={ogAbsoluta} />
+
+    {alternativas.map((a) => (
+      <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={xDefault} />
+  </head>
+
+  <body class={claro ? "tema-claro" : undefined}>
+    {ehInicio && <Intro />}
+
+    {/* "Pular para o conteúdo" removido a pedido do autor em 2026-10-16. */}
+    <Cabecalho />
+    <main id="conteudo" class={colado ? "" : "respiro"}>
+      <slot />
+    </main>
+    <Rodape />
+
+    {import.meta.env.DEV && <script is:inline src="/_auditoria.js"></script>}
+
+    <style>
+      .respiro { padding-top: 76px; }
+    </style>
+  </body>
+</html>
