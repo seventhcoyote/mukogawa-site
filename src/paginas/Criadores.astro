@@ -62,11 +62,13 @@ const retratos = [retIsrael, retMatch];
 </Base>
 
 <style>
+  /* Respiro de baixo: 32vw (era 22vw). As rochas medem ~25vw de altura e, com
+     22vw, a mais alta cobria o @ do Instagram. 2026-10-16. */
   .cri {
     position: relative;
     overflow: hidden;
     background: #fff;
-    padding-block: clamp(40px, 7vw, 86px) 22vw;
+    padding-block: clamp(40px, 7vw, 86px) 32vw;
   }
   .corpo { position: relative; z-index: 1; max-width: 1080px; }
 
@@ -148,8 +150,9 @@ const retratos = [retIsrael, retMatch];
     line-height: 0;
   }
   /* As nuvens ficam mais apagadas aqui do que no Bleeding Light: nesta página
-     elas concorrem com dois retratos recortados, e a 100% roubavam a leitura. */
-  .nuvens { z-index: 0; opacity: .35; }
+     elas concorrem com dois retratos recortados e com o texto das bios.
+     .15 (era .35) — a .35 ainda atrapalhava a leitura. 2026-10-16. */
+  .nuvens { z-index: 0; opacity: .15; }
   .rochas { z-index: 2; }
   .nuvens :global(img), .rochas :global(img) { width: 100%; height: auto; display: block; }
 
