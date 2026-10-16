@@ -1,0 +1,373 @@
+---
+/**
+ * Bleeding Light — a página da campanha.
+ *
+ * Fundo BRANCO, ao contrário do resto do site. Decisão do autor em 2026-10-16,
+ * confirmada como intencional: a campanha é uma peça à parte. O tema vem do
+ * `claro` do Base, que redefine as variáveis de cor no <body> — cabeçalho e
+ * rodapé acompanham sozinhos.
+ *
+ * FONTE: a do site (Zen Old Mincho + Barlow). A referência usava Shippori
+ * Mincho B1, e trocar foi recusado em 2026-10-16: mudaria a aparência de TODAS
+ * as páginas, inclusive as que esta atualização não toca, e exigiria subsetar
+ * uma segunda fonte CJK (a atual carrega 300 KB em vez de 1,9 MB justamente por
+ * ser subsetada). As duas são serifadas japonesas próximas; a diferença na tela
+ * não paga o custo.
+ *
+ * BOTÃO DA CATARSE: diz SEGUIR, não APOIAR, até 03/11. Ver `VENDAS.catarse`.
+ */
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import { BLEEDING_LIGHT } from "../i18n/conteudo/bleedingLight";
+import { usarUI } from "../i18n/ui";
+import { VENDAS } from "../config/site";
+import { rota } from "../i18n/idiomas";
+import type { Idioma } from "../i18n/idiomas";
+
+import capa from "../assets/mukogawa/bl-campanha-capa.jpg";
+import nuvens from "../assets/mukogawa/bg-criadores-clouds.png";
+import rochas from "../assets/mukogawa/bg-criadores-rocks.png";
+import spread from "../assets/mukogawa/bl-spread-01.jpg";
+import fotoLapis from "../assets/mukogawa/bl-foto-lapis.jpg";
+import fotoSpecs from "../assets/mukogawa/bl-specs.jpg";
+import fotoSketch from "../assets/mukogawa/bl-foto-sketch.jpg";
+import fotoJapao from "../assets/mukogawa/bl-foto-japao.jpg";
+import fotoImpressao from "../assets/mukogawa/bl-foto-impressao.jpg";
+
+// Os banners mudam de arquivo por idioma; o conteúdo guarda só a chave.
+import bSinopse from "../assets/mukogawa/bl-sinopse.jpg";
+import bProjeto from "../assets/mukogawa/bl-projeto.jpg";
+import bCampanha from "../assets/mukogawa/bl-campanha.jpg";
+import bJornada from "../assets/mukogawa/bl-jornada.jpg";
+import bEnSyn from "../assets/mukogawa/bl-en-synopsis.jpg";
+import bEnPro from "../assets/mukogawa/bl-en-project.jpg";
+import bEnCam from "../assets/mukogawa/bl-en-campaign.jpg";
+import bEnJor from "../assets/mukogawa/bl-en-journey.jpg";
+import bJaSyn from "../assets/mukogawa/bl-ja-synopsis.jpg";
+import bJaPro from "../assets/mukogawa/bl-ja-project.jpg";
+import bJaCam from "../assets/mukogawa/bl-ja-campaign.jpg";
+import bJaJor from "../assets/mukogawa/bl-ja-journey.jpg";
+
+const BANNERS: Record<string, ImageMetadata> = {
+  "bl-sinopse": bSinopse, "bl-projeto": bProjeto, "bl-campanha": bCampanha, "bl-jornada": bJornada,
+  "bl-en-synopsis": bEnSyn, "bl-en-project": bEnPro, "bl-en-campaign": bEnCam, "bl-en-journey": bEnJor,
+  "bl-ja-synopsis": bJaSyn, "bl-ja-project": bJaPro, "bl-ja-campaign": bJaCam, "bl-ja-journey": bJaJor,
+};
+
+interface Props { idioma: Idioma }
+const { idioma } = Astro.props;
+const c = BLEEDING_LIGHT[idioma];
+const t = usarUI(idioma);
+
+// Só o português tem campanha aberta a apoio. Em EN e JA o botão existe, mas
+// desativado — mandar quem lê japonês para um financiamento em português seria
+// um beco, e um botão que não faz nada ao menos avisa que algo vem aí.
+const ehPt = idioma === "pt";
+const hrefAutores = rota("criadores", idioma);
+const descricao = c.lede;
+---
+
+<Base titulo={c.titulo} descricao={descricao} colado claro>
+  <div class="bl" data-bl>
+    <span class="nuvens" aria-hidden="true" data-nuvens>
+      <Image src={nuvens} alt="" widths={[1200, 2200]} sizes="100vw" loading="lazy" />
+    </span>
+
+    <header class="hero">
+      <Image class="hero-img" src={capa} alt={c.titulo} widths={[900, 1200]}
+             sizes="100vw" loading="eager" fetchpriority="high" />
+      <div class="hero-veu" aria-hidden="true"></div>
+      <div class="hero-texto envelope">
+        <h1>{c.titulo}</h1>
+        <p class="lede">{c.lede}</p>
+      </div>
+    </header>
+
+    <div class="corpo envelope">
+      {c.secoes.map((s, i) => (
+        <section class="bloco">
+          <Image class="banner" src={BANNERS[s.banner]} alt={`${s.titulo} — ${s.citacao}`}
+                 widths={[540, 1080]} sizes="(max-width: 1120px) 92vw, 1080px" loading="lazy" />
+          {s.paragrafos.map((p) => (<p>{p}</p>))}
+
+          {i === 0 && (
+            <Image class="figura" src={spread} alt={c.spreadAlt}
+                   widths={[540, 1080, 1800]} sizes="(max-width: 1120px) 92vw, 1080px" loading="lazy" />
+          )}
+          {i === 1 && (
+            <Image class="figura" src={fotoLapis} alt={c.altPencil}
+                   widths={[540, 1080, 1800]} sizes="(max-width: 1120px) 92vw, 1080px" loading="lazy" />
+          )}
+          {i === 2 && (
+            <p class="acao">
+              {ehPt ? (
+                <a class="botao-bl" href={VENDAS.catarse} target="_blank" rel="noopener noreferrer">
+                  {t("catarse.seguir")}
+                </a>
+              ) : (
+                <span class="botao-bl botao-bl--mudo" aria-disabled="true">{c.emBreve}</span>
+              )}
+            </p>
+          )}
+        </section>
+      ))}
+
+      <section class="bloco">
+        <Image class="figura" src={fotoSpecs} alt={c.coverAlt}
+               widths={[540, 1080, 1800]} sizes="(max-width: 1120px) 92vw, 1080px" loading="lazy" />
+        <h2 class="specs-titulo">{c.specsTitulo}</h2>
+        <ul class="specs">{c.specs.map((e) => (<li>{e}</li>))}</ul>
+        <p class="specs-nota">{c.specsNota}</p>
+      </section>
+
+      <section class="bloco">
+        <Image class="banner" src={BANNERS[c.jBanner]} alt={`${c.jTitulo} — ${c.jCitacao}`}
+               widths={[540, 1080]} sizes="(max-width: 1120px) 92vw, 1080px" loading="lazy" />
+        <Image class="figura" src={fotoSketch} alt={c.altSketch}
+               widths={[540, 1080, 1800]} sizes="(max-width: 1120px) 92vw, 1080px" loading="lazy" />
+        {c.jA.map((p) => (<p>{p}</p>))}
+
+        <Image class="figura" src={fotoJapao} alt={c.altJapan}
+               widths={[540, 1080, 1800]} sizes="(max-width: 1120px) 92vw, 1080px" loading="lazy" />
+
+        <blockquote class="fala">{c.jPull}</blockquote>
+
+        {c.jB.map((p) => (<p>{p}</p>))}
+
+        <Image class="figura" src={fotoImpressao} alt={c.altPrint}
+               widths={[540, 1080, 1800]} sizes="(max-width: 1120px) 92vw, 1080px" loading="lazy" />
+
+        <p class="fecho">{c.jFim}</p>
+      </section>
+
+      <div class="acoes-fim">
+        <a class="botao-bl botao-bl--contorno" href={hrefAutores}>{c.ctaAutores}</a>
+        {ehPt ? (
+          <a class="botao-bl" href={VENDAS.catarse} target="_blank" rel="noopener noreferrer">
+            {t("catarse.seguir")}
+          </a>
+        ) : (
+          <span class="botao-bl botao-bl--mudo" aria-disabled="true">{c.emBreve}</span>
+        )}
+      </div>
+    </div>
+
+    <span class="rochas" aria-hidden="true" data-rochas>
+      <Image src={rochas} alt="" widths={[1200, 2200]} sizes="100vw" loading="lazy" />
+    </span>
+  </div>
+</Base>
+
+<style>
+  .bl {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    /* as rochas ocupam a base; sem este respiro elas cobririam o texto */
+    padding-bottom: 22vw;
+  }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; }
+  .hero :global(.hero-img) {
+    display: block;
+    width: 100%;
+    height: min(82vh, 820px);
+    object-fit: cover;
+  }
+  /* Dois degradês: um da esquerda, que segura a legibilidade do texto branco;
+     outro da base para o branco da página, que esconde a borda inferior da
+     imagem. Sem o segundo, a foto termina num corte reto no meio do branco. */
+  .hero-veu {
+    position: absolute;
+    inset: 0;
+    background:
+      /* TRÊS CAMADAS, e a ordem importa.
+         O problema que a medição expôs: o degradê que funde a imagem com o
+         branco da página clareia justamente a base — que é onde o texto branco
+         fica. Medido com o texto escondido, dava 2,69:1 no título a 1440px e
+         1,05:1 no lede a 375px, contra pisos de 3 e 4,5.
+         A base escura (1) é a que carrega a legibilidade; a lateral (2) reforça
+         no desktop; e a fusão com o branco (3) foi empurrada para os últimos
+         12%, onde já não há texto. */
+      linear-gradient(0deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.72) 22%, rgba(0,0,0,.3) 48%, transparent 68%),
+      linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 50%, transparent 85%),
+      linear-gradient(180deg, transparent 88%, #fff 100%);
+  }
+  .hero-texto {
+    position: absolute;
+    /* Sobe para fora da faixa onde a imagem funde com o branco da página. */
+    left: 0; right: 0; bottom: clamp(58px, 11vh, 120px);
+    z-index: 1;
+  }
+  .hero h1 {
+    color: #fff;
+    margin: 0 0 14px;
+    font-size: clamp(2.1rem, 5.2vw, 4rem);
+    line-height: 1.08;
+    text-shadow: 0 2px 20px rgba(0,0,0,.6);
+  }
+  .lede {
+    color: #fff;
+    max-width: 46ch;
+    margin: 0;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.6;
+    text-shadow: 0 2px 16px rgba(0,0,0,.7);
+  }
+
+  /* ---------- corpo ---------- */
+  .corpo { position: relative; z-index: 1; max-width: 1080px; }
+  .bloco { margin-top: clamp(44px, 7vw, 86px); }
+  .bloco p {
+    color: #2b2927;
+    font-size: 1.06rem;
+    line-height: 1.75;
+    max-width: 68ch;
+    margin: 0 0 18px;
+  }
+
+  .bloco :global(.banner) {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: clamp(20px, 3vw, 32px);
+  }
+  .bloco :global(.figura) {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: clamp(24px, 4vw, 44px) 0;
+  }
+
+  .specs-titulo {
+    color: #0d0d0f;
+    margin: clamp(22px, 3vw, 34px) 0 14px;
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  }
+  .specs { list-style: none; margin: 0 0 12px; padding: 0; }
+  .specs li {
+    color: #2b2927;
+    font-size: 1.04rem;
+    line-height: 1.7;
+    padding-left: 18px;
+    position: relative;
+  }
+  .specs li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: .72em;
+    width: 7px; height: 1px;
+    background: #c23a2c;
+  }
+  .specs-nota { font-size: .88rem; color: #6b6560; }
+
+  /* A fala do editor da Shueisha: centralizada entre filetes, como na
+     referência. É a única citação da página e carrega o momento da história. */
+  .fala {
+    margin: clamp(30px, 5vw, 52px) auto;
+    padding: clamp(22px, 4vw, 34px) 0;
+    border-top: 1px solid #cfc9c0;
+    border-bottom: 1px solid #cfc9c0;
+    max-width: 58ch;
+    text-align: center;
+    font-family: var(--fonte-display);
+    font-size: clamp(1.1rem, 1.9vw, 1.5rem);
+    line-height: 1.55;
+    color: #0d0d0f;
+  }
+
+  .fecho {
+    font-family: var(--fonte-display);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    line-height: 1.45;
+    color: #0d0d0f !important;
+    margin-top: clamp(26px, 4vw, 40px);
+  }
+
+  /* ---------- botões ---------- */
+  .acao { margin: clamp(22px, 3vw, 32px) 0 0; }
+  .acoes-fim {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: clamp(40px, 6vw, 70px);
+  }
+  .botao-bl {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+    padding: 0 30px;
+    background: #c23a2c;
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--fonte-ui);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    /* mesmo corte diagonal dos botões do site, para a página nova não parecer
+       de outro projeto */
+    clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  }
+  .botao-bl:hover { background: #a92f23; }
+  .botao-bl--contorno {
+    background: transparent;
+    color: #0d0d0f;
+    border: 1px solid #0d0d0f;
+  }
+  .botao-bl--contorno:hover { background: #0d0d0f; color: #fff; }
+  .botao-bl--mudo {
+    background: #d6d3ce;
+    color: #55514c;
+    cursor: default;
+  }
+  .botao-bl--mudo:hover { background: #d6d3ce; }
+
+  /* ---------- fundo com parallax ---------- */
+  .nuvens, .rochas {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    line-height: 0;
+  }
+  .nuvens { z-index: 0; }
+  .rochas { z-index: 2; }
+  .nuvens :global(img), .rochas :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 620px) {
+    .acoes-fim .botao-bl { width: 100%; }
+  }
+</style>
+
+<script>
+  // Parallax: as nuvens sobem mais devagar que o conteúdo, as rochas assentam
+  // quando o fim da área aparece. Fora isso a página é estática — e quem pede
+  // menos movimento não recebe nenhum.
+  const area = document.querySelector<HTMLElement>("[data-bl]");
+  const nuvens = document.querySelector<HTMLElement>("[data-nuvens]");
+  const rochas = document.querySelector<HTMLElement>("[data-rochas]");
+  const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (area && nuvens && rochas && !quieto) {
+    let pedido = 0;
+    const mover = () => {
+      pedido = 0;
+      const r = area.getBoundingClientRect();
+      const vista = window.innerHeight;
+      // 0 quando a área entra na tela, 1 quando o fim dela chega
+      const andado = Math.min(1, Math.max(0, (vista - r.bottom) / vista + 1));
+      nuvens.style.transform = `translate3d(0, ${(1 - andado) * -160}px, 0)`;
+      rochas.style.transform = `translate3d(0, ${(1 - andado) * 400}px, 0)`;
+    };
+    const agendar = () => { if (!pedido) pedido = requestAnimationFrame(mover); };
+    addEventListener("scroll", agendar, { passive: true });
+    addEventListener("resize", agendar, { passive: true });
+    mover();
+  }
+</script>

@@ -35,12 +35,12 @@ export const ATIVOS = TODOS.filter((i) => IDIOMAS[i].pronto);
 /** Chave de página -> caminho em cada idioma. Fonte única das rotas. */
 export const ROTAS = {
   inicio: { pt: "/", en: "/en/", es: "/es/", ja: "/ja/" },
-  historia: { pt: "/historia", en: "/en/story", es: "/es/historia", ja: "/ja/story" },
-  obra: { pt: "/obra", en: "/en/work", es: "/es/obra", ja: "/ja/work" },
-  personagens: { pt: "/personagens", en: "/en/characters", es: "/es/personajes", ja: "/ja/characters" },
+  /** A página da campanha. Nome igual nos três idiomas: "Bleeding Light" é
+   *  título da obra, não expressão a traduzir — o próprio pacote do autor o
+   *  mantém em inglês no menu em japonês. */
+  bleedingLight: { pt: "/bleeding-light", en: "/en/bleeding-light", es: "/es/bleeding-light", ja: "/ja/bleeding-light" },
   criadores: { pt: "/criadores", en: "/en/creators", es: "/es/creadores", ja: "/ja/creators" },
   loja: { pt: "/loja", en: "/en/shop", es: "/es/tienda", ja: "/ja/shop" },
-  faq: { pt: "/faq", en: "/en/faq", es: "/es/faq", ja: "/ja/faq" },
   imprensa: { pt: "/imprensa", en: "/en/press", es: "/es/prensa", ja: "/ja/press" },
   privacidade: { pt: "/privacidade", en: "/en/privacy", es: "/es/privacidad", ja: "/ja/privacy" },
   /** Destino do "confirmar" no e-mail da lista. Fora do sitemap e com noindex:

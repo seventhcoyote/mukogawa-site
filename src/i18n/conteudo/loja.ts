@@ -47,7 +47,38 @@ export interface ItemVenda {
   alt: string;
 }
 
+/**
+ * O destaque da campanha, no topo da Loja. Só o português o mostra: a campanha
+ * é em português e aceita apoio do Brasil, e mandar quem lê japonês para um
+ * financiamento que ele não pode usar seria um beco.
+ *
+ * O TÍTULO NÃO DIZ "PRÉ-VENDA ABERTA", como estava na referência do autor: a
+ * campanha abre em 03/11/2026 e hoje o Catarse só aceita seguir o projeto.
+ * Anunciar uma pré-venda que ainda não começou é a mesma promessa vazia que o
+ * botão "Apoie agora" faria. Em 03/11 os dois mudam juntos.
+ */
+export interface Catarse {
+  rotulo: string;
+  titulo: string;
+  h1: string;
+  lede: string;
+  texto: string;
+  abertura: string;
+  alt: string;
+}
+
+/** EN e JA não mostram loja: a Orvalho envia só dentro do Brasil e a campanha
+ *  é em português. Em vez de uma página vazia, um aviso e um caminho. */
+export interface LojaEmBreve {
+  rotulo: string;
+  titulo: string;
+  texto: string;
+  cta: string;
+}
+
 interface ConteudoLoja {
+  catarse: Catarse;
+  emBreve: LojaEmBreve;
   capaRotulo: string;
   capaTitulo: string;
   capaTexto: string;
@@ -66,6 +97,16 @@ interface ConteudoLoja {
 
 export const LOJA: Record<Idioma, ConteudoLoja> = {
   pt: {
+    catarse: {
+      rotulo: "Campanha na Catarse // Edição em português",
+      titulo: "Mukō-Gawa: Bleeding Light",
+      h1: "Pré-venda",
+      lede: "Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica, onde anjos e demônios travam uma guerra oculta aos olhos humanos.",
+      texto: "A produção está na reta final. Apoiar o projeto nesta fase também funciona como pré-venda: você garante sua cópia física ou digital, conforme a recompensa escolhida.",
+      abertura: "A campanha abre em 3 de novembro. Até lá, siga o projeto no Catarse para ser avisado na abertura.",
+      alt: "Capa da campanha de Mukō-Gawa: Bleeding Light no Catarse",
+    },
+    emBreve: { rotulo: "Loja", titulo: "Em breve", texto: "A loja de Mukō-Gawa chega em breve.", cta: "Conheça o próximo lançamento" },
     capaRotulo: "Yomikiri // Capa",
     capaTitulo: "Mukō-Gawa: Por isso Lutamos",
     capaTexto: "A capa do yomikiri, com arte de Guilherme Match. É por ela que a obra chega às mãos de quem ainda não conhece o mundo.",
@@ -101,6 +142,16 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
   },
 
   en: {
+    catarse: {
+      rotulo: "Catarse campaign // Portuguese edition",
+      titulo: "Mukō-Gawa: Bleeding Light",
+      h1: "Pre-order",
+      lede: "Bleeding Light is a dark fantasy manga based on biblical literature, where angels and demons wage a war hidden from human eyes.",
+      texto: "Production is in its final stretch. Backing the project at this stage also works as a pre-order: you secure your copy, physical or digital, according to the reward you choose.",
+      abertura: "The campaign opens on 3 November.",
+      alt: "Cover of the Mukō-Gawa: Bleeding Light campaign on Catarse",
+    },
+    emBreve: { rotulo: "Shop", titulo: "Coming soon", texto: "The Mukō-Gawa store is coming soon.", cta: "Learn about the upcoming product" },
     capaRotulo: "Yomikiri // Cover",
     capaTitulo: "Mukō-Gawa: Why We Fight",
     capaTexto: "The cover of the yomikiri, with art by Guilherme Match. It is how the work reaches the hands of someone who does not yet know this world.",
@@ -137,6 +188,16 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
 
   // Traduzido do PT-BR. Pendente de revisão por falante nativo.
   es: {
+    catarse: {
+      rotulo: "Campaña en Catarse // Edición en portugués",
+      titulo: "Mukō-Gawa: Bleeding Light",
+      h1: "Preventa",
+      lede: "Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica, onde anjos e demônios travam uma guerra oculta aos olhos humanos.",
+      texto: "La producción está en la recta final.",
+      abertura: "La campaña abre el 3 de noviembre.",
+      alt: "Portada de la campaña de Mukō-Gawa: Bleeding Light en Catarse",
+    },
+    emBreve: { rotulo: "Tienda", titulo: "Muy pronto", texto: "La tienda de Mukō-Gawa llega muy pronto.", cta: "Conoce el próximo lanzamiento" },
     capaRotulo: "Yomikiri // Portada",
     capaTitulo: "Mukō-Gawa: Por Eso Luchamos",
     capaTexto: "La portada del yomikiri, con arte de Guilherme Match. Es por ella que la obra llega a las manos de quien aún no conoce este mundo.",
@@ -173,6 +234,16 @@ export const LOJA: Record<Idioma, ConteudoLoja> = {
 
   // Base: site modelo. Pendente de revisão.
   ja: {
+    catarse: {
+      rotulo: "Catarse キャンペーン // ポルトガル語版",
+      titulo: "Mukō-Gawa: Bleeding Light",
+      h1: "予約",
+      lede: "『向こう側:ブリーディング・ライト』は、聖書文学を基にしたダークファンタジー漫画。天使と悪魔が、人知れず戦い続ける見えざる戦争を描く。",
+      texto: "制作は最終段階にあります。",
+      abertura: "キャンペーンは11月3日に開始します。",
+      alt: "Catarse における『向こう側 Bleeding Light』キャンペーンの表紙",
+    },
+    emBreve: { rotulo: "ショップ", titulo: "近日公開", texto: "『向こう側』のストアは近日公開予定です。", cta: "新作について知る" },
     capaRotulo: "読み切り // 表紙",
     capaTitulo: "Mukō-Gawa: Tatakau Riyū",
     capaTexto: "読み切りの表紙。作画はギリェルミ・マッチ。まだこの世界を知らない読者の手に、作品が最初に届く姿である。",

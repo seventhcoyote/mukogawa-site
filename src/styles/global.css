@@ -473,3 +473,33 @@ p:last-child { margin-bottom: 0; }
   border: 1px solid var(--sangue);
   background: color-mix(in srgb, var(--sangue) 55%, transparent);
 }
+
+/* ---------------------------------------------------------------------------
+   TEMA CLARO — Bleeding Light e Criadores
+   ---------------------------------------------------------------------------
+   O site é preto. Estas duas páginas são brancas por decisão do autor
+   (2026-10-16): a campanha é uma peça à parte e foi desenhada assim.
+
+   A troca acontece no <body>, e não dentro da página, porque cabeçalho e rodapé
+   precisam saber em que fundo estão — senão o menu branco desaparece no branco.
+   Em vez de reescrever componente por componente, as variáveis de cor são
+   REDEFINIDAS: tudo que já usa --osso, --cinza, --vazio continua funcionando e
+   só muda de valor. É o mesmo mecanismo do [data-lado], que o projeto já usa.
+   --------------------------------------------------------------------------- */
+/* O escopo é o MAIN, não o body: na referência do autor o cabeçalho continua
+   escuro (rgba(13,13,15,.88)) e o logo é branco. Redefinindo no body, a barra
+   clareava e o logo branco sumia nela — defeito pego na primeira captura.
+   Cabeçalho e rodapé seguem no tema do site; só o conteúdo vira claro. */
+body.tema-claro main {
+  --vazio: #ffffff;
+  --tinta: #ffffff;
+  --tinta-2: #f4f2ef;
+  --linha: #e4e0da;
+  --linha-forte: #cfc9c0;
+  --osso: #0d0d0f;   /* era quase branco: no claro vira o quase preto dos títulos */
+  --cinza: #2b2927;  /* texto corrido, conforme a referência */
+  --poeira: #6b6560; /* 5,5:1 sobre branco — continua acima do piso de AA */
+  --sangue-vivo: #c23a2c; /* o #ff4d55 do tema escuro não passa em contraste no branco */
+  background: #ffffff;
+  color: var(--cinza);
+}

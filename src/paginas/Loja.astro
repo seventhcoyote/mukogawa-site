@@ -1,140 +1,114 @@
 ---
+/**
+ * Loja.
+ *
+ * REFEITA EM 2026-10-16. Saíram a vitrine do yomikiri e os três cartões de
+ * região, que diziam "link de venda ainda não disponível" — o lançamento passou
+ * a ser comunicado como Bleeding Light e a venda acontece na campanha.
+ *
+ * PT mostra campanha + apostila + newsletter. EN e JA mostram só um aviso: a
+ * Orvalho envia dentro do Brasil e a campanha é em português, então uma loja
+ * ali seria uma vitrine que ninguém pode usar. Em vez de página vazia, um
+ * caminho para o Bleeding Light do próprio idioma.
+ */
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
-import CapaVolume from "../components/CapaVolume.astro";
 import ListaEspera from "../components/ListaEspera.astro";
 import { LOJA } from "../i18n/conteudo/loja";
 import { VENDAS } from "../config/site";
+import { usarUI } from "../i18n/ui";
 import { rota } from "../i18n/idiomas";
 import type { Idioma } from "../i18n/idiomas";
 import apostila from "../assets/loja/kit-apostila.jpg";
+import capaCampanha from "../assets/mukogawa/bl-campanha-capa.jpg";
 
 interface Props { idioma: Idioma }
 const { idioma } = Astro.props;
-
 const c = LOJA[idioma];
-const regioes = c.regioes;
-const hrefEspera = `${rota("inicio", idioma).replace(/\/$/, "")}/#lista-de-espera`;
-const hrefFaq = rota("faq", idioma);
+const t = usarUI(idioma);
+const ehPt = idioma === "pt";
+const hrefBleeding = rota("bleedingLight", idioma);
 ---
 
-<Base titulo={c.titulo} descricao={c.descricao}>
-  <section class="secao secao--curta">
-    <div class="envelope">
-      <div class="cabecalho-secao">
-        <div class="topo"><p class="rotulo">{c.rotulo}</p></div>
-        <h1>{c.titulo}</h1>
-        <p class="lead">{c.lead}</p>
-      </div>
-
-      {/* Vem ANTES da vitrine de propósito: é a única coisa da página que o
-          leitor pode comprar hoje. Abaixo dela tudo fala no futuro, e um item
-          disponível colocado depois de três avisos de "aguarde" não seria
-          encontrado por quem chegou para comprar. */}
-      <section class="disponivel" aria-labelledby="titulo-disponivel">
-        <div class="peca">
-          <Image src={apostila} alt={c.disponivel.alt} widths={[420, 700, 1000]}
-                 sizes="(max-width: 860px) 320px, 38vw" loading="eager" />
+{ehPt ? (
+  <Base titulo={c.catarse.h1} descricao={c.catarse.lede}>
+    <section class="secao secao--curta">
+      <div class="envelope">
+        <div class="cabecalho-secao">
+          <div class="topo"><p class="rotulo">{c.rotulo}</p></div>
+          <h1>{c.catarse.h1}</h1>
         </div>
 
-        <div class="sobre">
-          <p class="rotulo rotulo--lado" data-lado="rebeldes">{c.disponivel.rotulo}</p>
-          <h2 id="titulo-disponivel">{c.disponivel.titulo}</h2>
-          <p class="texto-disponivel">{c.disponivel.texto}</p>
-
-          {/* A ficha faz o trabalho que adjetivo não faz: colecionador reconhece
-              objeto CATALOGADO — ano, natureza, tiragem —, não peça que se
-              anuncia como rara. Cada campo aqui é verificável. */}
-          <ul class="ficha">
-            {c.disponivel.ficha.map((item) => (<li>{item}</li>))}
-          </ul>
-
-          <a class="botao" href={VENDAS.apostila} target="_blank" rel="noopener noreferrer">
-            {c.disponivel.cta}
-          </a>
-          <p class="nota-envio">{c.disponivel.nota}</p>
-        </div>
-      </section>
-
-      <hr class="regua regua--corte" />
-
-      <div class="vitrine">
-        <div class="coluna-capa">
-          <CapaVolume alt={c.capaAlt} giro={0} />
-        </div>
-
-        <div class="coluna-compra">
-          <div class="sobre-capa">
-            <p class="rotulo rotulo--lado" data-lado="rebeldes">{c.capaRotulo}</p>
-            <h2>{c.capaTitulo}</h2>
-            <p class="texto-capa">{c.capaTexto}</p>
+        {/* A campanha vem antes da apostila: é o lançamento, e a apostila é
+            material de bastidor. */}
+        <section class="campanha">
+          <div class="peca">
+            <Image src={capaCampanha} alt={c.catarse.alt} widths={[420, 700, 1200]}
+                   sizes="(max-width: 860px) 92vw, 46vw" loading="eager" />
           </div>
+          <div class="sobre">
+            <p class="rotulo rotulo--lado" data-lado="rebeldes">{c.catarse.rotulo}</p>
+            <h2>{c.catarse.titulo}</h2>
+            <p class="texto">{c.catarse.lede}</p>
+            <p class="texto">{c.catarse.texto}</p>
+            <a class="botao" href={VENDAS.catarse} target="_blank" rel="noopener noreferrer">
+              {t("catarse.seguir")}
+            </a>
+            <p class="abertura">{c.catarse.abertura}</p>
+          </div>
+        </section>
 
-          <ul class="regioes">
-            {regioes.map((r) => (
-              <li class:list={["regiao", { "regiao--destaque": r.destaque }]}>
-                <div class="topo-cartao">
-                  <span class="codigo">{r.codigo}</span>
-                  <div>
-                    <p class="pais">{r.pais}</p>
-                    <p class="canal">{r.canal}</p>
-                  </div>
-                  <p class="quando">{r.quando}</p>
-                </div>
+        <hr class="regua regua--corte" />
 
-                <p class="texto">{r.texto}</p>
-
-                <div class="baixo-cartao">
-                  <p class="estado">
-                    <span class="ponto" aria-hidden="true"></span>
-                    {c.semLink}
-                  </p>
-                  <a class="botao botao--fantasma" href="#lista-de-espera">{c.aviseMe}</a>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <section class="disponivel" aria-labelledby="titulo-disponivel">
+          <div class="peca">
+            <Image src={apostila} alt={c.disponivel.alt} widths={[420, 700, 1000]}
+                   sizes="(max-width: 860px) 320px, 38vw" loading="lazy" />
+          </div>
+          <div class="sobre">
+            <p class="rotulo rotulo--lado" data-lado="rebeldes">{c.disponivel.rotulo}</p>
+            <h2 id="titulo-disponivel">{c.disponivel.titulo}</h2>
+            <p class="texto">{c.disponivel.texto}</p>
+            <ul class="ficha">{c.disponivel.ficha.map((i) => (<li>{i}</li>))}</ul>
+            <a class="botao" href={VENDAS.apostila} target="_blank" rel="noopener noreferrer">
+              {c.disponivel.cta}
+            </a>
+            <p class="abertura">{c.disponivel.nota}</p>
+          </div>
+        </section>
       </div>
+    </section>
 
-      <p class="nota">
-        {c.nota}
-        <a class="nota-link" href={hrefFaq}>{c.duvidas}</a>.
-      </p>
-    </div>
-  </section>
-
-  <ListaEspera comCapa={false} />
-</Base>
+    <ListaEspera comCapa={false} />
+  </Base>
+) : (
+  <Base titulo={c.emBreve.titulo} descricao={c.emBreve.texto}>
+    <section class="secao secao--curta">
+      <div class="envelope aviso">
+        <p class="rotulo rotulo--lado" data-lado="rebeldes">{c.emBreve.rotulo}</p>
+        <h1>{c.emBreve.titulo}</h1>
+        <p class="texto-aviso">{c.emBreve.texto}</p>
+        <a class="botao botao--fantasma" href={hrefBleeding}>{c.emBreve.cta}</a>
+      </div>
+    </section>
+  </Base>
+)}
 
 <style>
   h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); }
 
-  /* ---------- à venda agora ---------- */
-
-  /* A foto do kit é RETRATO — a arte anterior era paisagem. Numa coluna larga
-     ela ficaria altíssima e empurraria o texto para baixo. Coluna estreita, na
-     mesma medida da capa da vitrine logo abaixo, e as duas peças da página
-     passam a se alinhar em vez de competir. */
-  .disponivel {
+  .campanha, .disponivel {
     display: grid;
-    grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
     align-items: center;
     gap: clamp(28px, 4.5vw, 60px);
     margin-bottom: clamp(34px, 5vw, 56px);
   }
+  .disponivel { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); }
 
-  /* A PEÇA É UMA FOTOGRAFIA REAL, e é o único lugar do site onde isso acontece.
-     Entrou a pedido do autor em 2026-08-11, e a escolha se justifica: para um
-     item de coleção, foto do objeto na mão prova que ele existe de um jeito que
-     nenhuma arte tratada prova. O custo é que ela traz luz de ambiente e fundo
-     claro para uma página preta.
-     A sombra funda e o fio de luz no topo continuam pelo mesmo motivo de antes:
-     sem eles a foto vira o retângulo colado que este projeto recusa desde a v1. */
-  .peca {
-    position: relative;
-    line-height: 0;
-  }
+  /* Fotografia e capa sobre fundo preto: sombra funda e fio de luz no topo,
+     para lerem como objeto apoiado e não como retângulo colado. */
+  .peca { position: relative; line-height: 0; }
   .peca :global(img) {
     display: block;
     width: 100%;
@@ -145,25 +119,22 @@ const hrefFaq = rota("faq", idioma);
       0 0 80px -30px color-mix(in srgb, var(--sangue) 60%, transparent);
   }
 
-  .sobre h2 {
-    margin: 18px 0 16px;
-    font-size: clamp(1.7rem, 2.6vw, 2.3rem);
-  }
-  .texto-disponivel {
-    color: var(--cinza);
+  .sobre h2 { margin: 18px 0 16px; font-size: clamp(1.7rem, 2.6vw, 2.3rem); }
+  .texto { color: var(--cinza); max-width: 46ch; margin: 0 0 16px; }
+  .sobre .botao { margin-top: 10px; }
+  .abertura {
+    margin: 18px 0 0;
+    font-size: .88rem;
+    color: var(--poeira);
     max-width: 46ch;
-    margin: 0 0 22px;
   }
 
-  /* Ficha do item: linguagem de catálogo, não de anúncio. Caixa alta, espacejada
-     e separada por filete — a mesma gramática dos rótulos com `//` do site. O
-     filete some no primeiro item para a lista não abrir com um traço solto. */
   .ficha {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     gap: 0 14px;
-    margin: 0 0 28px;
+    margin: 0 0 24px;
     padding: 0;
     font-family: var(--fonte-ui);
     font-size: .74rem;
@@ -172,176 +143,22 @@ const hrefFaq = rota("faq", idioma);
     color: var(--poeira);
   }
   .ficha li { display: flex; align-items: center; gap: 14px; }
-  .ficha li::before {
-    content: "";
-    width: 1px;
-    height: 11px;
-    background: var(--linha-forte);
-  }
+  .ficha li::before { content: ""; width: 1px; height: 11px; background: var(--linha-forte); }
   .ficha li:first-child::before { display: none; }
-  /* A tiragem é o que diferencia esta peça: ela sai do cinza. */
   .ficha li:nth-child(2) { color: var(--sangue-vivo); }
 
-  /* O FILETE SÓ FUNCIONA ENQUANTO A FICHA CABE NUMA LINHA.
-     `:first-child` remove o traço do primeiro item da LISTA, não do primeiro de
-     cada linha — então, quando a ficha quebrava, a segunda linha abria com um
-     filete solto pendurado no nada. Foi o que a captura mostrou. Onde ela não
-     cabe, a ficha vira coluna e o separador sai de cena: em pilha, cada campo já
-     se separa sozinho. */
-  @media (max-width: 620px) {
-    .ficha {
-      display: grid;
-      gap: 7px;
-    }
-    .ficha li::before { display: none; }
-  }
-  .nota-envio {
-    margin: 18px 0 0;
-    font-size: .88rem;
-    color: var(--poeira);
-    max-width: 44ch;
-  }
+  /* EN/JA: um bloco só, centrado, sem vitrine nenhuma. */
+  .aviso { max-width: 56ch; }
+  .texto-aviso { color: var(--cinza); margin: 16px 0 30px; }
 
-  /* Empilhado abaixo de 860px, porque lado a lado o texto cairia para duas
-     palavras por linha.
-     A FOTO GANHA TETO DE LARGURA AQUI. Ela é retrato: solta em largura cheia num
-     celular de 375px, passaria de 400px de altura e empurraria título, ficha e
-     botão para fora da primeira tela — quem abrisse a Loja veria uma foto e nada
-     mais. Presa em 320px continua legível e o bloco inteiro cabe. */
   @media (max-width: 860px) {
-    .disponivel {
-      display: block;
-    }
-    .peca { max-width: 320px; }
+    .campanha, .disponivel { display: block; }
+    .disponivel .peca { max-width: 320px; }
     .sobre { margin-top: clamp(24px, 5vw, 34px); }
   }
-
   @media (max-width: 620px) {
-    .sobre :global(.botao) { width: 100%; }
-  }
-
-  /* A vitrine tinha capa alta de um lado e um texto curto do outro, e sobrava
-     quase meia tela de vazio à direita. Os cartões de região subiram para essa
-     coluna: a altura dos três acompanha a da capa, o vazio some e a informação
-     de compra fica junto do produto, que é onde ela deve estar. */
-  .vitrine {
-    display: grid;
-    grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
-    align-items: start;
-    gap: clamp(30px, 4.5vw, 66px);
-    margin-bottom: clamp(36px, 5vw, 64px);
-  }
-
-  .coluna-capa { position: sticky; top: calc(76px + 28px); }
-
-  .sobre-capa h2 { margin: 14px 0 14px; font-size: clamp(1.7rem, 2.8vw, 2.5rem); }
-  .texto-capa { color: var(--cinza); max-width: 54ch; margin: 0 0 clamp(26px, 3.4vw, 40px); }
-
-  .regioes {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 1px;
-    background: var(--linha);
-    border: 1px solid var(--linha);
-  }
-
-  .regiao {
-    display: grid;
-    gap: 12px;
-    padding: clamp(20px, 2.4vw, 28px);
-    background: var(--tinta-2);
-  }
-  .regiao--destaque { box-shadow: inset 3px 0 0 var(--sangue); }
-
-  .topo-cartao {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .codigo {
-    font-family: var(--fonte-display);
-    font-weight: 700;
-    font-size: 1.7rem;
-    line-height: 1;
-    color: var(--osso);
-  }
-  .pais {
-    margin: 0;
-    font-family: var(--fonte-ui);
-    font-weight: 600;
-    font-size: .9rem;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--osso);
-  }
-  .canal {
-    margin: 2px 0 0;
-    font-family: var(--fonte-ui);
-    font-size: .74rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--poeira);
-  }
-  .quando {
-    margin: 0 0 0 auto;
-    font-family: var(--fonte-ui);
-    font-weight: 600;
-    font-size: .74rem;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--sangue-vivo);
-  }
-
-  .texto { margin: 0; color: var(--cinza); font-size: .94rem; max-width: 62ch; }
-
-  .baixo-cartao {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 14px;
-    padding-top: 14px;
-    border-top: 1px solid var(--linha);
-  }
-  .estado {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0;
-    font-family: var(--fonte-ui);
-    font-size: .76rem;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--poeira);
-  }
-  .estado .ponto { width: 7px; height: 7px; flex: none; background: var(--poeira); }
-  .baixo-cartao .botao { min-height: 44px; padding-inline: 22px; font-size: .82rem; }
-
-  .nota {
-    margin: 0;
-    max-width: 72ch;
-    color: var(--poeira);
-    font-size: .92rem;
-  }
-  .nota-link {
-    color: var(--osso);
-    text-decoration: underline;
-    text-decoration-color: var(--linha-forte);
-    text-underline-offset: 4px;
-    transition: text-decoration-color .18s ease;
-  }
-  .nota-link:hover { text-decoration-color: var(--sangue-vivo); }
-
-  @media (max-width: 980px) {
-    .vitrine { grid-template-columns: 1fr; gap: clamp(26px, 5vw, 40px); }
-    .coluna-capa { position: static; max-width: 300px; margin-inline: auto; }
-  }
-
-  @media (max-width: 560px) {
-    .quando { margin-left: 0; width: 100%; }
-    .baixo-cartao .botao { width: 100%; }
+    .ficha { display: grid; gap: 7px; }
+    .ficha li::before { display: none; }
+    .sobre .botao, .aviso .botao { width: 100%; }
   }
 </style>

@@ -1,8 +1,11 @@
 ---
+import { Image } from "astro:assets";
 import {
   IDIOMAS, ATIVOS, idiomaDaUrl, rota as caminho, equivalente,
 } from "../i18n/idiomas";
 import { usarUI } from "../i18n/ui";
+import { VENDAS } from "../config/site";
+import logo from "../assets/mukogawa/logo-mukogawa-white.png";
 
 const atual = Astro.url.pathname.replace(/\/$/, "") || "/";
 const idioma = idiomaDaUrl(Astro.url.pathname);
@@ -17,14 +20,15 @@ const t = usarUI(idioma);
 // com folga (sobra 251px a 1440, 100px a 1180). O estouro que existia a 1024px
 // acontecia com SEIS itens também — a causa era a largura da janela, não a
 // quantidade de destinos. O hambúrguer resolve essa faixa.
+// De sete destinos para quatro, na reformulação de 2026-10-16: História, A obra,
+// Personagens e FAQ saíram do site. O comentário acima continua valendo para o
+// "Início", que foi mantido pelo mesmo motivo de antes — a marca é kanji e não
+// se lê como link.
 const links = ([
   ["inicio", "nav.inicio"],
-  ["historia", "nav.historia"],
-  ["obra", "nav.obra"],
-  ["personagens", "nav.personagens"],
+  ["bleedingLight", "nav.bleedingLight"],
   ["criadores", "nav.criadores"],
   ["loja", "nav.loja"],
-  ["faq", "nav.faqCurto"],
 ] as const).map(([chave, rotulo]) => ({
   href: caminho(chave, idioma),
   texto: t(rotulo),
@@ -32,7 +36,13 @@ const links = ([
 }));
 
 const inicio = caminho("inicio", idioma);
-const espera = `${inicio.replace(/\/$/, "")}/#lista-de-espera`;
+// O BOTÃO DO TOPO DEIXOU DE SER "Avise-me" e virou a chamada da campanha.
+// Em PT leva ao Catarse; em EN e JA, onde a campanha ainda não abriu, leva à
+// página do Bleeding Light do próprio idioma — mandar quem lê em japonês para
+// uma página de financiamento em português seria um beco.
+const ehPt = idioma === "pt";
+const acaoHref = ehPt ? VENDAS.catarse : caminho("bleedingLight", idioma);
+const acaoTexto = ehPt ? t("cta.apoiar") : t("nav.bleedingLight");
 
 const ativo = (href: string, raiz: boolean) => {
   const alvo = href.replace(/\/$/, "") || "/";
@@ -51,8 +61,8 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
 <header class="cabecalho">
   <div class="barra">
     <a class="marca" href={inicio} aria-label={t("nav.inicioAria")}>
-      <span class="kanji" aria-hidden="true">向こう側</span>
-      <span class="romaji">Mukō·Gawa</span>
+      <Image class="logo" src={logo} alt="Mukō-Gawa 向こう側" widths={[220, 440]}
+             sizes="220px" loading="eager" />
     </a>
 
     <button
@@ -107,7 +117,9 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
       </details>
       )}
 
-      <a class="cta" href={espera}>{t("cta.aviseMe")}</a>
+      <a class="cta" href={acaoHref}
+         {...(ehPt ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >{acaoTexto}</a>
     </nav>
   </div>
 </header>
@@ -141,21 +153,14 @@ const idiomasLink = ATIVOS.length > 1 ? ATIVOS.map((outro) => ({
     margin-right: auto;
     line-height: 1;
   }
-  .kanji {
-    font-family: var(--fonte-display);
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--osso);
-    letter-spacing: .04em;
-  }
-  .romaji {
-    font-family: var(--fonte-ui);
-    font-size: .68rem;
-    font-weight: 600;
-    letter-spacing: .42em;
-    text-transform: uppercase;
-    color: var(--poeira);
-    margin-top: 5px;
+  /* A marca era kanji + romaji em texto; virou o logo em 2026-10-16. Altura
+     fixa de 44px, que é também o alvo mínimo de toque — a largura acompanha a
+     proporção do arquivo. `width: auto` é obrigatório: sem ele o Astro grava o
+     width do arquivo no atributo e o logo estica. */
+  .logo {
+    display: block;
+    height: 44px;
+    width: auto;
   }
 
   .menu {

@@ -1,185 +1,180 @@
 ---
+/**
+ * Criadores.
+ *
+ * Fundo CLARO, como a Bleeding Light — as duas páginas da reformulação de
+ * 2026-10-16. Cabeçalho e rodapé seguem escuros: ver o comentário do tema claro
+ * em `global.css`.
+ *
+ * Os retratos são PNG recortado, direto sobre o fundo, sem card. Alinhados pela
+ * base numa caixa 4:5, para os dois ficarem na mesma linha de chão mesmo tendo
+ * enquadramentos diferentes.
+ */
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
-import israelImg from "../assets/criadores/israel-subira.jpg";
-import bretasImg from "../assets/criadores/daniel-bretas.jpg";
-import matchImg from "../assets/criadores/guilherme-match.jpg";
 import { CRIADORES } from "../i18n/conteudo/criadores";
 import type { Idioma } from "../i18n/idiomas";
+
+import nuvens from "../assets/mukogawa/bg-criadores-clouds.png";
+import rochas from "../assets/mukogawa/bg-criadores-rocks.png";
+import retIsrael from "../assets/mukogawa/israel-subira.png";
+import retMatch from "../assets/mukogawa/guilherme-match.png";
 
 interface Props { idioma: Idioma }
 const { idioma } = Astro.props;
 const c = CRIADORES[idioma];
-
-// Página renomeada de "Autor" para "Criadores": o autor é um só, mas a obra
-// tem três nomes. Papel explícito no lugar da hierarquia autor/artistas.
-const equipe = [
-  { ...c.israel, img: israelImg, principal: true,
-    instagram: { rotulo: "@israelsubira", href: "https://www.instagram.com/israelsubira/" } },
-  { ...c.bretas, img: bretasImg, principal: false,
-    instagram: { rotulo: "@calaboca.co", href: "https://www.instagram.com/calaboca.co" } },
-  { ...c.match, img: matchImg, principal: false,
-    instagram: { rotulo: "@yohke", href: "https://www.instagram.com/yohke" } },
-];
-
-const principal = equipe.find((e) => e.principal)!;
-const artistas = equipe.filter((e) => !e.principal);
+const retratos = [retIsrael, retMatch];
 ---
 
-<Base titulo={c.titulo} descricao={c.descricao}>
-  <section class="secao secao--curta">
-    <div class="envelope">
+<Base titulo={c.titulo} descricao={c.descricao} claro>
+  <div class="cri" data-cri>
+    <span class="nuvens" aria-hidden="true" data-nuvens>
+      <Image src={nuvens} alt="" widths={[1200, 2200]} sizes="100vw" loading="lazy" />
+    </span>
+
+    <div class="envelope corpo">
       <div class="cabecalho-secao">
-        <div class="topo"><p class="rotulo">{c.rotulo}</p></div>
+        <div class="topo"><p class="rotulo rotulo--claro">{c.rotulo}</p></div>
         <h1>{c.titulo}</h1>
-      </div>
-    </div>
-  </section>
-
-  <section class="secao secao--curta">
-    <div class="envelope destaque">
-      <div class="retrato">
-        <Image src={principal.img} alt={principal.nome} widths={[380, 700]} sizes="(max-width: 880px) 70vw, 34vw" loading="eager" />
-        <span class="cantos" aria-hidden="true"></span>
-      </div>
-      <div class="texto">
-        <p class="rotulo rotulo--lado" data-lado="rebeldes">{principal.papel} // {c.papelPrincipal}</p>
-        <h2>{principal.nome}</h2>
-        <div class="corpo">
-          {principal.paragrafos.map((t) => <p>{t}</p>)}
-        </div>
-        <a class="perfil" href={principal.instagram.href} target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
-            <rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4" />
-            <circle cx="12" cy="12" r="4.2" />
-            <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none" />
-          </svg>
-          <span>{c.instagramDe(principal.nome)}</span>
-          <span class="arroba">{principal.instagram.rotulo}</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <hr class="regua" />
-
-  <section class="secao">
-    <div class="envelope">
-      <div class="cabecalho-secao">
-        <div class="topo"><p class="rotulo">{c.rotuloArte}</p></div>
-        <h2>{c.tituloArte}</h2>
       </div>
 
       <div class="dupla">
-        {artistas.map((a) => (
-          <article class="cartao">
-            <div class="retrato retrato--menor">
-              <Image src={a.img} alt={a.nome} widths={[320, 600]} sizes="(max-width: 760px) 88vw, 30vw" loading="lazy" />
-              <span class="cantos" aria-hidden="true"></span>
+        {c.criadores.map((p, i) => (
+          <article class="pessoa">
+            <div class="retrato">
+              <Image src={retratos[i]} alt={p.nome} widths={[420, 840]}
+                     sizes="(max-width: 860px) 86vw, 42vw" loading={i === 0 ? "eager" : "lazy"} />
             </div>
-            <p class="rotulo">{a.papel}</p>
-            <h3>{a.nome}</h3>
-            <div class="corpo texto-cartao">
-              {a.paragrafos.map((t) => <p>{t}</p>)}
-            </div>
-            <a class="perfil" href={a.instagram.href} target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
-                <rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4" />
-                <circle cx="12" cy="12" r="4.2" />
-                <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none" />
-              </svg>
-              <span>{c.instagramDe(a.nome)}</span>
-              <span class="arroba">{a.instagram.rotulo}</span>
-            </a>
+            <h2>{p.nome}</h2>
+            <p class="funcao">{p.funcao}</p>
+            <p class="bio">{p.bio}</p>
+            <a class="instagram" href={`https://instagram.com/${p.instagram}`}
+               target="_blank" rel="noopener noreferrer">@{p.instagram}</a>
           </article>
         ))}
       </div>
     </div>
-  </section>
+
+    <span class="rochas" aria-hidden="true" data-rochas>
+      <Image src={rochas} alt="" widths={[1200, 2200]} sizes="100vw" loading="lazy" />
+    </span>
+  </div>
 </Base>
 
 <style>
-  h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); }
-
-  .destaque {
-    display: grid;
-    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-    gap: clamp(28px, 5vw, 66px);
-    align-items: start;
+  .cri {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    padding-block: clamp(40px, 7vw, 86px) 22vw;
   }
+  .corpo { position: relative; z-index: 1; max-width: 1080px; }
 
-  .retrato { position: relative; }
-  .retrato :global(img) {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    filter: grayscale(1) contrast(1.05);
-    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
-    transition: filter .4s ease;
-  }
-  .retrato:hover :global(img) { filter: grayscale(0) contrast(1.08); }
-  .retrato .cantos {
-    position: absolute; inset: -10px;
-    pointer-events: none;
-    background:
-      linear-gradient(var(--sangue), var(--sangue)) 0 0 / 1px 38px no-repeat,
-      linear-gradient(var(--sangue), var(--sangue)) 0 0 / 38px 1px no-repeat,
-      linear-gradient(var(--sangue), var(--sangue)) 100% 100% / 1px 38px no-repeat,
-      linear-gradient(var(--sangue), var(--sangue)) 100% 100% / 38px 1px no-repeat;
-  }
+  /* A referência pedia #d9463a no sobretítulo, mas medido dá 4,30:1 sobre
+     branco e o piso para texto pequeno é 4,5. #c23a2c — o mesmo vermelho que a
+     referência usa nas funções — dá 5,34:1 e mantém a cor da peça. */
+  .rotulo--claro { color: #c23a2c; }
+  h1 { color: #0d0d0f; }
 
-  .texto h2 { margin: 16px 0 22px; font-size: clamp(2rem, 4vw, 3.2rem); }
-
-  /* Os dois cartões são idênticos em estrutura: mesma largura de imagem,
-     mesmo ritmo vertical e botão colado na base, para os textos de tamanhos
-     diferentes não desalinharem nada. */
   .dupla {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(28px, 4vw, 60px);
-    align-items: stretch;
+    gap: clamp(32px, 5vw, 70px);
+    margin-top: clamp(30px, 5vw, 56px);
   }
-  .cartao {
+
+  /* 4:5 com a imagem presa na base: os dois retratos têm enquadramento
+     diferente e, sem isso, um flutuaria mais alto que o outro. */
+  .retrato {
+    aspect-ratio: 4 / 5;
     display: flex;
-    flex-direction: column;
-    height: 100%;
+    align-items: flex-end;
+    margin-bottom: 18px;
   }
-  .cartao .rotulo { margin-top: 24px; }
-  .cartao h3 { margin: 8px 0 16px; }
-  .texto-cartao { flex: 1 1 auto; }
-
-  /* Os artistas nunca aparecem maiores que o criador. */
-  .retrato--menor { width: 100%; max-width: 340px; }
-
-  @media (max-width: 760px) {
-    .dupla { grid-template-columns: 1fr; }
+  .retrato :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    object-position: bottom;
   }
 
-  /* Botão de perfil padronizado: mesmo formato para os três. */
-  .perfil {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    min-height: 50px;
-    margin-top: 26px;
-    padding: 0 20px;
-    border: 1px solid var(--linha-forte);
-    color: var(--cinza);
+  .pessoa h2 {
+    color: #0d0d0f;
+    margin: 0 0 6px;
+    font-size: clamp(1.4rem, 2.3vw, 2rem);
+  }
+  .funcao {
+    color: #c23a2c;
     font-family: var(--fonte-ui);
-    font-weight: 600;
     font-size: .82rem;
     letter-spacing: .16em;
     text-transform: uppercase;
-    text-decoration: none;
-    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
-    transition: color .2s ease, border-color .2s ease, background .2s ease;
+    margin: 0 0 16px;
   }
-  .perfil:hover { color: var(--osso); border-color: var(--osso); background: rgba(255,255,255,.05); }
-  .perfil .arroba { color: var(--poeira); }
-  .cartao .perfil { align-self: flex-start; margin-top: 26px; }
+  .bio {
+    color: #2b2927;
+    font-size: 1.02rem;
+    line-height: 1.72;
+    margin: 0 0 16px;
+  }
+  /* O link tinha 18px de altura — abaixo do alvo mínimo de toque. Vira
+     inline-flex com altura de 44px e o filete passa para um pseudo-elemento,
+     para a sublinha continuar colada ao texto e não à caixa inteira. */
+  .instagram {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    position: relative;
+    color: #c23a2c;
+    font-family: var(--fonte-ui);
+    font-size: .88rem;
+    letter-spacing: .08em;
+    text-decoration: none;
+  }
+  .instagram::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 12px;
+    height: 1px;
+    background: currentColor;
+  }
+  .instagram:hover { color: #0d0d0f; }
 
-  @media (max-width: 880px) {
-    .destaque { grid-template-columns: 1fr; }
-    .destaque .retrato { max-width: 340px; }
+  .nuvens, .rochas {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    line-height: 0;
+  }
+  /* As nuvens ficam mais apagadas aqui do que no Bleeding Light: nesta página
+     elas concorrem com dois retratos recortados, e a 100% roubavam a leitura. */
+  .nuvens { z-index: 0; opacity: .35; }
+  .rochas { z-index: 2; }
+  .nuvens :global(img), .rochas :global(img) { width: 100%; height: auto; display: block; }
+
+  @media (max-width: 860px) {
+    .dupla { grid-template-columns: minmax(0, 1fr); }
+    .retrato { max-width: 420px; }
   }
 </style>
+
+<script>
+  const area = document.querySelector<HTMLElement>("[data-cri]");
+  const nuvens = document.querySelector<HTMLElement>("[data-nuvens]");
+  const rochas = document.querySelector<HTMLElement>("[data-rochas]");
+  if (area && nuvens && rochas && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let pedido = 0;
+    const mover = () => {
+      pedido = 0;
+      const r = area.getBoundingClientRect();
+      const andado = Math.min(1, Math.max(0, (window.innerHeight - r.bottom) / window.innerHeight + 1));
+      nuvens.style.transform = `translate3d(0, ${(1 - andado) * -160}px, 0)`;
+      rochas.style.transform = `translate3d(0, ${(1 - andado) * 400}px, 0)`;
+    };
+    const agendar = () => { if (!pedido) pedido = requestAnimationFrame(mover); };
+    addEventListener("scroll", agendar, { passive: true });
+    addEventListener("resize", agendar, { passive: true });
+    mover();
+  }
+</script>

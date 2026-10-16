@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/historia", "destination": "/", "permanent": true },
+    { "source": "/obra", "destination": "/", "permanent": true },
+    { "source": "/personagens", "destination": "/", "permanent": true },
+    { "source": "/personagens/:slug*", "destination": "/", "permanent": true },
+    { "source": "/faq", "destination": "/", "permanent": true },
+
+    { "source": "/en/story", "destination": "/en/", "permanent": true },
+    { "source": "/en/work", "destination": "/en/", "permanent": true },
+    { "source": "/en/characters", "destination": "/en/", "permanent": true },
+    { "source": "/en/characters/:slug*", "destination": "/en/", "permanent": true },
+    { "source": "/en/faq", "destination": "/en/", "permanent": true },
+
+    { "source": "/ja/story", "destination": "/ja/", "permanent": true },
+    { "source": "/ja/work", "destination": "/ja/", "permanent": true },
+    { "source": "/ja/characters", "destination": "/ja/", "permanent": true },
+    { "source": "/ja/characters/:slug*", "destination": "/ja/", "permanent": true },
+    { "source": "/ja/faq", "destination": "/ja/", "permanent": true }
+  ]
+}

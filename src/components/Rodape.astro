@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import logo from "../assets/marca/logo-mukogawa.png";
+import logo from "../assets/mukogawa/logo-mukogawa-white.png";
 import { idiomaDaUrl, rota as caminho } from "../i18n/idiomas";
 import { usarUI } from "../i18n/ui";
 import { REDES as redes, EMAILS } from "../config/site";
@@ -9,13 +9,14 @@ const idioma = idiomaDaUrl(Astro.url.pathname);
 const t = usarUI(idioma);
 const inicio = caminho("inicio", idioma);
 
+// História, A obra, Personagens e FAQ saíram do site em 2026-10-16. O rodapé
+// perdeu esses quatro destinos junto — link para página que não existe mais é
+// pior que ausência, e o build acusaria.
 const secoes = [
   {
     titulo: t("rodape.obra"),
     itens: [
-      { texto: t("nav.historia"), href: caminho("historia", idioma) },
-      { texto: t("nav.obra"), href: caminho("obra", idioma) },
-      { texto: t("nav.personagens"), href: caminho("personagens", idioma) },
+      { texto: t("nav.bleedingLight"), href: caminho("bleedingLight", idioma) },
       { texto: t("nav.criadores"), href: caminho("criadores", idioma) },
     ],
   },
@@ -23,7 +24,6 @@ const secoes = [
     titulo: t("rodape.publicacao"),
     itens: [
       { texto: t("nav.loja"), href: caminho("loja", idioma) },
-      { texto: t("nav.faq"), href: caminho("faq", idioma) },
       { texto: t("rodape.listaEspera"), href: `${inicio.replace(/\/$/, "")}/#lista-de-espera` },
     ],
   },
@@ -34,7 +34,7 @@ const secoes = [
   <div class="envelope">
     <div class="grade">
       <div class="marca">
-        <Image class="logo" src={logo} alt="Mukō-Gawa 向こう側" widths={[260, 520]} sizes="240px" loading="lazy" />
+        <Image class="logo" src={logo} alt="Mukō-Gawa 向こう側" widths={[180, 360]} sizes="180px" loading="lazy" />
         <p class="frase">
           {t("rodape.frase")}
         </p>
@@ -134,7 +134,7 @@ const secoes = [
     gap: clamp(28px, 4vw, 56px);
   }
 
-  .logo { width: 240px; height: auto; }
+  .logo { width: 180px; height: auto; }
   .frase {
     margin: 22px 0 0;
     max-width: 34ch;

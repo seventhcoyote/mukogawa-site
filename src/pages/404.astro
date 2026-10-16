@@ -19,8 +19,8 @@ import { ATIVOS, IDIOMAS, rota } from "../i18n/idiomas";
 
 const t = usarUI("pt");
 
-const destinos = (["inicio", "historia", "personagens", "loja", "faq"] as const).map((chave) => ({
-  texto: t(chave === "faq" ? "nav.faq" : `nav.${chave}`),
+const destinos = (["inicio", "bleedingLight", "criadores", "loja"] as const).map((chave) => ({
+  texto: t(`nav.${chave}` as const),
   href: rota(chave, "pt"),
 }));
 ---

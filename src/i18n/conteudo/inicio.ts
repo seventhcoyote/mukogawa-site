@@ -13,6 +13,9 @@ interface Escalao { nome: string; nota?: string }
 interface ConteudoInicio {
   descricao: string;
   heroRotulo: string;
+  /** "Bleeding Light" — o título da obra, abaixo da marca. Entrou em
+   *  2026-10-16: a logo diz "Mukō-Gawa" e o anúncio é do Bleeding Light. */
+  heroTitulo: string;
   heroLead: string;
   heroCta: string;
   heroSecundario: string;
@@ -53,8 +56,9 @@ export const INICIO: Record<Idioma, ConteudoInicio> = {
   pt: {
     descricao: "Uma guerra civil entre os Eternos pela fenda entre o que é e o que foi prometido. O yomikiri, capítulo piloto do mangá, chega em 1º de dezembro de 2026; a série de livros, em 2027.",
     heroRotulo: "Um conto do outro lado",
-    heroLead: "Assim como as antigas sagas nórdicas e os épicos gregos, Mukō-Gawa é uma imersão nas profundezas da mitologia cristã, que revela a história da Criação e da Redenção, enquanto uma Guerra Celestial se consome até que dela nasça a Paz Eterna.",
-    heroCta: "Avise-me do lançamento",
+    heroTitulo: "Bleeding Light",
+    heroLead: "Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica, onde anjos e demônios travam uma guerra oculta aos olhos humanos.",
+    heroCta: "Saiba mais",
     heroSecundario: "Ler a história",
     heroDescer: "Ir para o anúncio",
     anuncioRotulo: "Anúncio",
@@ -101,8 +105,9 @@ export const INICIO: Record<Idioma, ConteudoInicio> = {
   en: {
     descricao: "A civil war among the Eternals over the fold between what is and what was promised. The yomikiri, the manga's pilot chapter, arrives 1 December 2026; the novels, from 2027.",
     heroRotulo: "A tale from the other side",
-    heroLead: "Much like the Norse sagas and the Greek epics, Mukō-Gawa is a deep dive into Christian mythology. The supposal fictional narrative shares the tale of Creation and Redemption, as a celestial war culminates in eternal peace.",
-    heroCta: "Notify me about the release",
+    heroTitulo: "Bleeding Light",
+    heroLead: "Bleeding Light is a dark fantasy manga based on biblical literature, where angels and demons wage a war hidden from human eyes.",
+    heroCta: "Learn more",
     heroSecundario: "Read the story",
     heroDescer: "Go to the announcement",
     anuncioRotulo: "Announcement",
@@ -150,8 +155,9 @@ export const INICIO: Record<Idioma, ConteudoInicio> = {
   es: {
     descricao: "Una guerra civil entre los Eternos por la grieta entre lo que es y lo que fue prometido. El yomikiri, el capítulo piloto del manga, llega el 1 de diciembre de 2026; la serie de libros, en 2027.",
     heroRotulo: "Un cuento del otro lado",
+    heroTitulo: "Bleeding Light",
     heroLead: "Como las antiguas sagas nórdicas y las epopeyas griegas, Mukō-Gawa es una inmersión en las profundidades de la mitología cristiana, que revela la historia de la Creación y la Redención, mientras una Guerra Celestial se consume hasta que de ella nace la Paz Eterna.",
-    heroCta: "Avísame del lanzamiento",
+    heroCta: "Saber más",
     heroSecundario: "Leer la historia",
     heroDescer: "Ir al anuncio",
     anuncioRotulo: "Anuncio",
@@ -199,8 +205,9 @@ export const INICIO: Record<Idioma, ConteudoInicio> = {
   ja: {
     descricao: "現にあるものと約束されたものとの折り目をめぐる、永遠者たちの内戦。読み切りは2026年12月1日、小説シリーズは2027年より。",
     heroRotulo: "向こう側からの物語",
-    heroLead: "北欧のサガやギリシアの叙事詩のように、『向こう側』はキリスト教神話の深みへの潜行である。神話と神秘のあいだに織られた想定譜として、創造と贖罪の物語を語り、天上の戦は燃え尽きて永遠の平和を生む。",
-    heroCta: "発売のお知らせを受け取る",
+    heroTitulo: "Bleeding Light",
+    heroLead: "『向こう側:ブリーディング・ライト』は、聖書文学を基にしたダークファンタジー漫画。天使と悪魔が、人知れず戦い続ける見えざる戦争を描く。",
+    heroCta: "詳しく見る",
     heroSecundario: "物語を読む",
     heroDescer: "お知らせへ",
     anuncioRotulo: "お知らせ",
