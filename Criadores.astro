@@ -1,0 +1,183 @@
+---
+/**
+ * Criadores.
+ *
+ * Fundo CLARO, como a Bleeding Light — as duas páginas da reformulação de
+ * 2026-10-16. Cabeçalho e rodapé seguem escuros: ver o comentário do tema claro
+ * em `global.css`.
+ *
+ * Os retratos são PNG recortado, direto sobre o fundo, sem card. Alinhados pela
+ * base numa caixa 4:5, para os dois ficarem na mesma linha de chão mesmo tendo
+ * enquadramentos diferentes.
+ */
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import { CRIADORES } from "../i18n/conteudo/criadores";
+import type { Idioma } from "../i18n/idiomas";
+
+import nuvens from "../assets/mukogawa/bg-criadores-clouds.png";
+import rochas from "../assets/mukogawa/bg-criadores-rocks.png";
+import retIsrael from "../assets/mukogawa/israel-subira.png";
+import retMatch from "../assets/mukogawa/guilherme-match.png";
+
+interface Props { idioma: Idioma }
+const { idioma } = Astro.props;
+const c = CRIADORES[idioma];
+const retratos = [retIsrael, retMatch];
+---
+
+<Base titulo={c.titulo} descricao={c.descricao} claro>
+  <div class="cri" data-cri>
+    <span class="nuvens" aria-hidden="true" data-nuvens>
+      <Image src={nuvens} alt="" widths={[1200, 2200]} sizes="100vw" loading="lazy" />
+    </span>
+
+    <div class="envelope corpo">
+      <div class="cabecalho-secao">
+        <div class="topo"><p class="rotulo rotulo--claro">{c.rotulo}</p></div>
+        <h1>{c.titulo}</h1>
+      </div>
+
+      <div class="dupla">
+        {c.criadores.map((p, i) => (
+          <article class="pessoa">
+            <div class="retrato">
+              <Image src={retratos[i]} alt={p.nome} widths={[420, 840]}
+                     sizes="(max-width: 860px) 86vw, 42vw" loading={i === 0 ? "eager" : "lazy"} />
+            </div>
+            <h2>{p.nome}</h2>
+            <p class="funcao">{p.funcao}</p>
+            <p class="bio">{p.bio}</p>
+            <a class="instagram" href={`https://instagram.com/${p.instagram}`}
+               target="_blank" rel="noopener noreferrer">@{p.instagram}</a>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <span class="rochas" aria-hidden="true" data-rochas>
+      <Image src={rochas} alt="" widths={[1200, 2200]} sizes="100vw" loading="lazy" />
+    </span>
+  </div>
+</Base>
+
+<style>
+  /* Respiro de baixo: 32vw (era 22vw). As rochas medem ~25vw de altura e, com
+     22vw, a mais alta cobria o @ do Instagram. 2026-10-16. */
+  .cri {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    padding-block: clamp(40px, 7vw, 86px) 32vw;
+  }
+  .corpo { position: relative; z-index: 1; max-width: 1080px; }
+
+  /* A referência pedia #d9463a no sobretítulo, mas medido dá 4,30:1 sobre
+     branco e o piso para texto pequeno é 4,5. #c23a2c — o mesmo vermelho que a
+     referência usa nas funções — dá 5,34:1 e mantém a cor da peça. */
+  .rotulo--claro { color: #c23a2c; }
+  h1 { color: #0d0d0f; }
+
+  .dupla {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(32px, 5vw, 70px);
+    margin-top: clamp(30px, 5vw, 56px);
+  }
+
+  /* 4:5 com a imagem presa na base: os dois retratos têm enquadramento
+     diferente e, sem isso, um flutuaria mais alto que o outro. */
+  .retrato {
+    aspect-ratio: 4 / 5;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 18px;
+  }
+  .retrato :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    object-position: bottom;
+  }
+
+  .pessoa h2 {
+    color: #0d0d0f;
+    margin: 0 0 6px;
+    font-size: clamp(1.4rem, 2.3vw, 2rem);
+  }
+  .funcao {
+    color: #c23a2c;
+    font-family: var(--fonte-ui);
+    font-size: .82rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+  }
+  .bio {
+    color: #2b2927;
+    font-size: 1.02rem;
+    line-height: 1.72;
+    margin: 0 0 16px;
+  }
+  /* O link tinha 18px de altura — abaixo do alvo mínimo de toque. Vira
+     inline-flex com altura de 44px e o filete passa para um pseudo-elemento,
+     para a sublinha continuar colada ao texto e não à caixa inteira. */
+  .instagram {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    position: relative;
+    color: #c23a2c;
+    font-family: var(--fonte-ui);
+    font-size: .88rem;
+    letter-spacing: .08em;
+    text-decoration: none;
+  }
+  .instagram::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 12px;
+    height: 1px;
+    background: currentColor;
+  }
+  .instagram:hover { color: #0d0d0f; }
+
+  .nuvens, .rochas {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    line-height: 0;
+  }
+  /* As nuvens ficam mais apagadas aqui do que no Bleeding Light: nesta página
+     elas concorrem com dois retratos recortados e com o texto das bios.
+     .15 (era .35) — a .35 ainda atrapalhava a leitura. 2026-10-16. */
+  .nuvens { z-index: 0; opacity: .15; }
+  .rochas { z-index: 2; }
+  .nuvens :global(img), .rochas :global(img) { width: 100%; height: auto; display: block; }
+
+  @media (max-width: 860px) {
+    .dupla { grid-template-columns: minmax(0, 1fr); }
+    .retrato { max-width: 420px; }
+  }
+</style>
+
+<script>
+  const area = document.querySelector<HTMLElement>("[data-cri]");
+  const nuvens = document.querySelector<HTMLElement>("[data-nuvens]");
+  const rochas = document.querySelector<HTMLElement>("[data-rochas]");
+  if (area && nuvens && rochas && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let pedido = 0;
+    const mover = () => {
+      pedido = 0;
+      const r = area.getBoundingClientRect();
+      const andado = Math.min(1, Math.max(0, (window.innerHeight - r.bottom) / window.innerHeight + 1));
+      nuvens.style.transform = `translate3d(0, ${(1 - andado) * -160}px, 0)`;
+      rochas.style.transform = `translate3d(0, ${(1 - andado) * 400}px, 0)`;
+    };
+    const agendar = () => { if (!pedido) pedido = requestAnimationFrame(mover); };
+    addEventListener("scroll", agendar, { passive: true });
+    addEventListener("resize", agendar, { passive: true });
+    mover();
+  }
+</script>
