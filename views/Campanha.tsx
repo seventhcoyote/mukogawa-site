@@ -16,7 +16,7 @@ import Footer from "@/components/Footer";
 import { Brackets, RuleH, Svg } from "@/components/Ornaments";
 import { Body, Title } from "@/components/Type";
 import { asLang, getDict } from "@/content";
-import { CAMPAIGN_URL } from "@/lib/links";
+import { ANCHORS, CAMPAIGN_URL } from "@/lib/links";
 import { Mobile, MSection, MTitle, MBody, MPhoto, MFooter } from "@/components/m/Mobile";
 import MHero from "@/components/m/MHero";
 import MRewards from "@/components/m/MRewards";
@@ -56,7 +56,7 @@ export default async function Campanha({ params }: Props) {
           <Hero d={d} cta={d.hero.presale} calm />
 
           {/* projeto */}
-          <Title x={975} y={1024} rx figma="253:2074" data-rise data-anchor="projeto">{d.projeto.title}</Title>
+          <Title x={975} y={1024} rx figma="253:2074" data-rise data-anchor={ANCHORS[lang].campanha}>{d.projeto.title}</Title>
           <Drip x={943} y={1127} len={169} />
           <Body x={909} y={1187} w={766} rx className="text-right" figma="253:2075" data-rise>
             <p><strong className="font-bold text-blood-deep">{d.projeto.lead}</strong>{d.projeto.text}</p>
@@ -150,7 +150,7 @@ export default async function Campanha({ params }: Props) {
           <MHero d={d} />
           {/* projeto: text over the faint sigil, then the three arches */}
           <MSection className="m-stack">
-            <MTitle size={44} align="right" drips={[150, 0]} anchor="projeto">{d.projeto.title}</MTitle>
+            <MTitle size={44} align="right" drips={[150, 0]} anchor={ANCHORS[lang].campanha}>{d.projeto.title}</MTitle>
             {/* text and sigil side by side — the sigil never sits under the words (2026-10-19) */}
             <MBody>
               <div className="m-sigil" aria-hidden="true"><img loading="lazy" src="/img/sigil.webp" alt="" /></div>

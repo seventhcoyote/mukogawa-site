@@ -12,7 +12,8 @@ import Drip from "@/components/Drip";
 import HomeScroll from "@/components/HomeScroll";
 import { RuleH, Svg } from "@/components/Ornaments";
 import { Body, Title } from "@/components/Type";
-import { getDict } from "@/content";
+import { asLang, getDict } from "@/content";
+import { ANCHORS } from "@/lib/links";
 import { Mobile, MSection, MTitle, MBody, MFooter } from "@/components/m/Mobile";
 import MHero from "@/components/m/MHero";
 import MobileChrome from "@/components/m/MobileChrome";
@@ -25,7 +26,7 @@ type Props = { params: Promise<{ lang: string }> };
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => ({ title: getDict((await params).lang).meta.autores });
 
 export default async function Autores({ params }: Props) {
-  const d = getDict((await params).lang), t = d.autores;
+  const lang = asLang((await params).lang), d = getDict(lang), t = d.autores;
   return (
     <Site menu="closed">
       <main>
@@ -39,7 +40,7 @@ export default async function Autores({ params }: Props) {
             </A>
           </Footer>
 
-          <Title x={741} y={1024} cx figma="253:1573" data-rise data-anchor="autores">{t.title}</Title>
+          <Title x={741} y={1024} cx figma="253:1573" data-rise data-anchor={ANCHORS[lang].autores}>{t.title}</Title>
           <RuleH src="rule-h-316-l.svg" x={156} y={1086} w={316.586} />
           <RuleH src="rule-h-316-r.svg" x={1009} y={1086} w={316.586} flip />
           {/* blood runs from the outer diamonds of the title rules */}
@@ -78,7 +79,7 @@ export default async function Autores({ params }: Props) {
         <Mobile>
           <MHero d={d} />
           <MSection>
-            <MTitle size={44} drips={[110, 170]} anchor="autores">{t.title}</MTitle>
+            <MTitle size={44} drips={[110, 170]} anchor={ANCHORS[lang].autores}>{t.title}</MTitle>
           </MSection>
           <MSection className="m-stack">
             <div className="m-portrait m-portrait-isra" data-speed={0.05}>
