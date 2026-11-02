@@ -3,7 +3,7 @@
 export const pt = {
   lang: "pt-BR",
   nav: { home: "Início", campanha: "Projeto", autores: "Autores", loja: "Loja", menu: "Abrir menu", close: "Fechar menu", language: "Idioma", current: "PT" },
-  hero: { bleeding: "BLEEDING", light: "LIGHT", shop: "Compre já", presale: "Pré-venda", available: "DISPONÍVEL EM 1º DE DEZEMBRO", logoAlt: "向こう側 Muko-Gawa" },
+  hero: { bleeding: "BLEEDING", light: "LIGHT", shop: "Compre já", presale: "Pré-venda", available: "DISPONÍVEL DIA 3 DE NOVEMBRO", logoAlt: "向こう側 Muko-Gawa" },
   tagline: ["Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica,", "onde anjos e demônios travam uma guerra oculta aos olhos humanos."],
   video: { title: "Muko-Gawa: one-shot Bleeding Light", id: "7drIevtAxCo", shortId: "rlIlJ5ZZmn4", shortTitle: "Muko-Gawa: Anúncio Pré-Campanha", unmute: "Ouvir com som", mute: "Silenciar", pause: "Pausar", watch: "Assistir ao vídeo", close: "Fechar vídeo" },
   sinopse: {
