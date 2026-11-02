@@ -235,6 +235,11 @@ img { display: block; max-width: none; }
 .video-poster { transition: opacity 600ms ease; }
 .video-poster[data-hidden="true"] { opacity: 0; }
 .video-shade { opacity: calc(0.49 - var(--lift) * 0.31); }   /* Figma: 49% black at rest, lighter once uncovered */
+/* no video (English): the battle drawing on white paper with the page's grain, and the welcome title */
+.video-art { background: #fff; }
+.video-art::before { content: ""; position: absolute; inset: 0; background: url("/img/paper-d.webp") 50% 0 / calc(1866 * var(--u)) auto repeat-y; opacity: 0.32; mix-blend-mode: multiply; }
+.video-art-img { mix-blend-mode: darken; opacity: 0.8; }
+.video-title { width: calc(760 * var(--u)); height: auto; translate: -50% -50%; }
 .video-cta { gap: calc(14 * var(--u)); opacity: var(--lift); transition: transform 200ms ease; }
 .video-play { transition: transform 200ms ease; }
 .video-hit:hover .video-play { transform: scale(1.08); }
@@ -670,6 +675,10 @@ img { display: block; max-width: none; }
 .m-video-card { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; max-height: 80svh; border: 0; padding: 0; overflow: hidden; background: #000; cursor: pointer; }
 .m-video-card > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .m-video-shade { position: absolute; inset: 0; background: rgb(0 0 0 / 0.4); }
+/* no video (English): the battle drawing, full width on the paper, with the welcome title */
+.m-art { position: relative; }
+.m-art-img { display: block; width: 100%; height: auto; mix-blend-mode: darken; opacity: 0.8; }
+.m-art-title { position: absolute; left: 50%; top: 50%; width: 82%; height: auto; translate: -50% -50%; }
 .m-video-cta { position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: flex; flex-direction: column; align-items: center; gap: calc(14 * var(--u)); color: #fff; font-size: calc(12 * var(--u)); letter-spacing: calc(4 * var(--u)); white-space: nowrap; }
 .m-video-cta img { width: calc(96 * var(--u)); height: calc(96 * var(--u)); transition: transform 200ms ease; }
 .m-video-card:active .m-video-cta img { transform: scale(0.94); }

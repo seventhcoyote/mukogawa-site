@@ -23,6 +23,7 @@ import MHero from "@/components/m/MHero";
 import MJoin from "@/components/m/MJoin";
 import MVideo, { MPressStart, MVideoCard } from "@/components/m/MVideo";
 import MobileChrome from "@/components/m/MobileChrome";
+import MArt from "@/components/m/MArt";
 import AngelLand from "@/components/AngelLand";
 
 /** Home — started from Figma 245:562 "home-menu_lateral"; from 2026-10-16 the layout below the
@@ -107,7 +108,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         {/* phone: the same story in one column; the video opens full screen */}
         <Mobile>
           <MHero d={d} intro><MPressStart label={d.alt.scroll} /></MHero>
-          {d.has.video && <section className="m-video-sec"><MVideoCard /></section>}
+          {d.has.video ? <section className="m-video-sec"><MVideoCard /></section> : <MArt />}
           <MSection>
             <p className="m-tagline font-mincho font-semibold" data-rise>{d.tagline[0]} {d.tagline[1]}</p>
           </MSection>

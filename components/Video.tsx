@@ -17,7 +17,8 @@ const SRC = `https://www.youtube-nocookie.com/embed/${ID}?autoplay=1&mute=1&loop
 const DESK = "(min-width: 1100px)";
 const onDeskChange = (cb: () => void) => { const m = matchMedia(DESK); m.addEventListener("change", cb); return () => m.removeEventListener("change", cb); };
 
-/** `still`: no video, just the still frame under the paper (languages without a video yet). */
+/** `still`: no video (languages without one yet): the battle drawing on the paper instead, with
+ *  "welcome to MUKŌ·GAWA" over it, fading out as the page scrolls on past it. */
 export default function Video({ still }: { still?: boolean }) {
   // phones get their own full-screen player (components/m/MVideo); don't load this one there
   const desk = useSyncExternalStore(onDeskChange, () => matchMedia(DESK).matches, () => false);
@@ -45,6 +46,24 @@ export default function Video({ still }: { still?: boolean }) {
     return () => removeEventListener("mg:press-start", on);
   });
 
+  // still: the title fades out over the first 35% of a screen after the paper has fully lifted
+  const title = useRef<HTMLImageElement>(null);
+  useEffect(() => {
+    const el = title.current, box = stage.current?.parentElement;
+    if (!still || !el || !box || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const set = () => {
+      raf = 0;
+      const pinEnd = box.offsetHeight - innerHeight, past = -box.getBoundingClientRect().top - pinEnd;
+      el.style.opacity = String(1 - Math.min(1, Math.max(0, past / (innerHeight * 0.35))));
+    };
+    const on = () => { if (!raf) raf = requestAnimationFrame(set); };
+    set();
+    addEventListener("scroll", on, { passive: true });
+    addEventListener("resize", on);
+    return () => { removeEventListener("scroll", on); removeEventListener("resize", on); cancelAnimationFrame(raf); };
+  }, [still]);
+
   // Out of view → back to silent.
   useEffect(() => {
     const el = stage.current;
@@ -58,11 +77,21 @@ export default function Video({ still }: { still?: boolean }) {
 
   return (
     <A x={0} y={0} w={1648} h={1646} figma="245:701">
-      <div ref={stage} id="video" className="video-stage sticky top-0 h-screen w-full overflow-hidden bg-black">
+      <div ref={stage} id="video" className={`video-stage sticky top-0 h-screen w-full overflow-hidden ${still ? "video-art" : "bg-black"}`}>
         {!still && <iframe ref={frame} src={desk ? SRC : undefined} title={t.title} allow="autoplay; encrypted-media; picture-in-picture" tabIndex={-1}
           className="video-frame pointer-events-none absolute border-0" onLoad={() => setTimeout(() => setReady(true), 900)} />}
-        <img loading="lazy" src="/img/hero-still.webp" alt="" className="video-poster absolute inset-0 size-full object-cover" data-hidden={ready} />
-        <span className="video-shade absolute inset-0 bg-black" />
+        {still ? (
+          <>
+            {/* the battle drawing printed on the paper: darken at 80% over the page's paper texture */}
+            <img loading="lazy" src="/img/battle.webp" alt="" className="video-art-img absolute inset-0 size-full object-cover" />
+            <img ref={title} src="/img/welcome.webp" alt="Welcome to Muko-Gawa" className="video-title absolute left-1/2 top-1/2" />
+          </>
+        ) : (
+          <>
+            <img loading="lazy" src="/img/hero-still.webp" alt="" className="video-poster absolute inset-0 size-full object-cover" data-hidden={ready} />
+            <span className="video-shade absolute inset-0 bg-black" />
+          </>
+        )}
         {!still && <button type="button" onClick={toggle} aria-pressed={sound} aria-label={sound ? t.pause : t.unmute}
           className="video-hit absolute inset-0 size-full cursor-pointer border-0 bg-transparent p-0">
           <span className="video-cta absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center" data-sound={sound}>
