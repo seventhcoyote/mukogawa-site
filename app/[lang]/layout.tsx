@@ -20,6 +20,17 @@ const shippori = localFont({
   ],
   variable: "--font-shippori", display: "swap",
 });
+// Japanese pages (/ja/): Shippori Mincho for text and Yuji Boku for titles, subset to the characters in
+// content/ja.ts (npm run fonts:ja). Not preloaded: only /ja/ pages, which use them, download them.
+const shipporiJa = localFont({
+  src: [
+    { path: "../fonts/shippori-ja-400.woff2", weight: "400" },
+    { path: "../fonts/shippori-ja-600.woff2", weight: "600" },
+    { path: "../fonts/shippori-ja-700.woff2", weight: "700" },
+  ],
+  variable: "--font-shippori-ja", display: "swap", preload: false,
+});
+const yuji = localFont({ src: "../fonts/yuji-boku-ja.woff2", variable: "--font-yuji", display: "swap", preload: false });
 const fell = IM_Fell_Double_Pica_SC({ weight: "400", subsets: ["latin"], variable: "--font-im-fell", display: "block" });
 const barlow = Barlow({ weight: "600", subsets: ["latin"], variable: "--font-barlow-v", display: "block" });
 
@@ -43,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function RootLayout({ children, params }: Props & { children: React.ReactNode }) {
   const lang = asLang((await params).lang);
   return (
-    <html lang={getDict(lang).lang} className={`${darkcastle.variable} ${pier.variable} ${shippori.variable} ${fell.variable} ${barlow.variable}`}>
+    <html lang={getDict(lang).lang} className={`${darkcastle.variable} ${pier.variable} ${shippori.variable} ${fell.variable} ${barlow.variable} ${shipporiJa.variable} ${yuji.variable}`}>
       <body><LangProvider lang={lang}>{children}</LangProvider></body>
     </html>
   );

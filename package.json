@@ -8,7 +8,8 @@
     "serve": "node scripts/serve.mjs",
     "lint": "eslint",
     "baseline": "node scripts/layout.cjs baseline",
-    "check": "node scripts/layout.cjs check"
+    "check": "node scripts/layout.cjs check",
+    "fonts:ja": "node scripts/ja-fonts.mjs"
   },
   "dependencies": {
     "next": "16.4.1",

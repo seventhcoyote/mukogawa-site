@@ -61,6 +61,15 @@ img { display: block; max-width: none; }
 .ls { letter-spacing: calc(var(--ls) * var(--u)); }
 
 /* Darkcastle stylistic set 05, as set in Figma */
+/* Japanese pages: titles in Yuji Boku (Darkcastle has no Japanese); Japanese characters in the other
+   fonts come from Shippori Mincho (Latin letters keep their usual fonts) */
+:root:lang(ja) {
+  --font-castle: var(--font-yuji);
+  --font-mincho: var(--font-shippori), var(--font-shippori-ja);
+  --font-pier: var(--font-pier-sans), var(--font-shippori-ja);
+  --font-barlow: var(--font-barlow-v), var(--font-shippori-ja);
+  --font-fell: var(--font-im-fell), var(--font-shippori-ja);
+}
 .castle { font-family: var(--font-castle); font-feature-settings: "ss05" 1; font-weight: 400; line-height: normal; }
 
 /* Paragraph spacing: Figma uses an empty 1.5-line paragraph between blocks */
