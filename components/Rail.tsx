@@ -54,7 +54,10 @@ export default function Rail({ top, height }: { top: number; height: number }) {
               </ul>
             )}
           </div>
-          <ul className="absolute flex flex-col items-center" style={{ left: u(47), top: u(505), width: u(90), gap: u(48) }}>
+          {/* the links sit at 505, moved up on short windows so the Pré-venda button never covers the last ones
+              (button: 48 tall, 56 from the bottom; the list: ~224 tall; 48 of air) — never above the language;
+              on very wide, short windows the gaps between the links shrink too */}
+          <ul className="absolute flex flex-col items-center" style={{ left: u(47), top: `max(${u(330)}, min(${u(505)}, 100vh - ${u(376)}))`, width: u(90), gap: `max(${u(16)}, min(${u(48)}, (100vh - ${u(546)}) / 3))` }}>
             {ITEMS.map((it) => {
               const active = it.path === `/${lang}/` ? path === it.path : path.startsWith(it.path);
               return (
