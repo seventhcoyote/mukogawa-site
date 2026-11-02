@@ -622,6 +622,7 @@ img { display: block; max-width: none; }
 /* buttons in the flow: the caps hang 10u outside the body */
 .m-cta { padding-inline: calc(10 * var(--u)); }
 .m-cta-center { display: flex; justify-content: center; }
+.m-cta-right { display: flex; justify-content: flex-end; }
 .m-meta { display: flex; flex-wrap: wrap; gap: calc(8 * var(--u)) calc(18 * var(--u)); font-size: calc(11 * var(--u)); letter-spacing: calc(2.6 * var(--u)); color: var(--color-ink-soft); }
 
 /* ── Campanha (phone) ── */
