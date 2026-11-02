@@ -9,14 +9,14 @@ import { useState } from "react";
 import { useMenu } from "./Site";
 import { useLang, useT } from "./Lang";
 import type { Dict } from "@/content";
-import { CAMPAIGN_URL, LANGS, LANG_NAMES, ext, home, inLang, page, rememberLang, type Lang } from "@/lib/links";
+import { CAMPAIGN_URL, LANGS, LANG_NAMES, ext, home, inLang, page, pathOf, rememberLang, type Lang } from "@/lib/links";
 
 /** Menu entries in the page's language; `path` marks the current page. */
 export const navItems = (t: Dict, lang: Lang) => [
   { href: home(lang), path: `/${lang}/`, label: t.nav.home },
-  { href: page(lang).campanha, path: `/${lang}/campanha/`, label: t.nav.campanha },
-  { href: page(lang).autores, path: `/${lang}/autores/`, label: t.nav.autores },
-  { href: page(lang).loja, path: `/${lang}/loja/`, label: t.nav.loja },
+  { href: page(lang).campanha, path: pathOf(lang, "campanha"), label: t.nav.campanha },
+  { href: page(lang).autores, path: pathOf(lang, "autores"), label: t.nav.autores },
+  { href: page(lang).loja, path: pathOf(lang, "loja"), label: t.nav.loja },
 ];
 /** Where the menu's red button goes: the campaign, or this language's store page. */
 export const ctaHref = (t: Dict, lang: Lang) => (t.has.store ? CAMPAIGN_URL : page(lang).loja);
