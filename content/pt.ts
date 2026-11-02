@@ -51,7 +51,7 @@ export const pt = {
     escritorName: "Israel Subirá",
     escritorText: [" tem escolaridade em Literatura Bíblica, é escritor, Dungeon Master nas horas vagas e está debutando no mundo dos quadrinhos com Muko-Gawa: Bleeding Light.", "Ama universos de fantasia, é um grande admirador dos livros de Brandon Sanderson, Attack on Titan, os mangás de Hiromu Arakawa e a arte de Hideo Minaba."],
     ilustrador: "o ilustrador",
-    ilustradorText: ["Guilherme Match é quadrinista e ilustrador. Autor de KOPHEE e co-autor de SOUNDTRACK, ambas publicadas pela Editora JBC e indicadas ao troféu HQmix. É apaixonado por universos distópicos, ficção pós-apocalíptica e personagens com visuais maneiros. A Lâmina do Imortal, Monster e Aldra estão entre suas obras preferidas.", "Bleeding Light marca sua estreia nos mangás de fantasia."],
+    ilustradorText: ["Guilherme Match é quadrinista e ilustrador. Autor de KOPHEE e co-autor de SOUNDTRACK, ambas publicadas pela Editora JBC e indicadas ao troféu HQmix. É apaixonado por universos distópicos, ficção pós-apocalíptica e personagens com visuais maneiros. A Lâmina do Imortal, Monster e Akira estão entre suas obras preferidas.", "Bleeding Light marca sua estreia nos mangás de fantasia."],
     israAlt: "Retrato ilustrado de Israel Subirá",
     matchAlt: "Retrato ilustrado de Guilherme Match",
   },
