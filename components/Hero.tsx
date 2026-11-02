@@ -10,8 +10,8 @@ import HeroMontage from "./HeroMontage";
 import HeroGlitch from "./HeroGlitch";
 import HeroSmoke from "./HeroSmoke";
 import PressStart from "./PressStart";
-import { pt } from "@/content/pt";
-import { STORE_URL } from "@/lib/links";
+import type { Dict } from "@/content";
+import { home, page, type Lang } from "@/lib/links";
 
 /** Hero elements are centred on the canvas (x 824). Figma had BLEEDING ✦ LIGHT 29px and the button
  *  12px right of centre; re-centred at Fellipe's request (2026-10-16).
@@ -20,8 +20,9 @@ import { STORE_URL } from "@/lib/links";
  *  `intro`: Home only — blood-drop entrance and the paper rising off the video still.
  *  `calm`: a lighter, slower Home hero (Campanha): bigger logo, smoke, corner drips, a slow montage on
  *  the left half, and a gentle fade-in — with the regular button and the date. */
-export default function Hero({ cta, href = STORE_URL, tall, intro, calm }: { cta: string; href?: string; tall?: boolean; intro?: boolean; calm?: boolean }) {
-  const t = pt.hero;
+export default function Hero({ d, cta, href, tall, intro, calm }: { d: Dict; cta: string; href?: string; tall?: boolean; intro?: boolean; calm?: boolean }) {
+  const t = d.hero, lang = d.code as Lang;
+  href ??= page(lang).loja;
   return (
     <HeroMotion intro={intro} calm={calm}>
       {/* the red paper: everything that rises / is painted in by the drop */}
@@ -79,14 +80,14 @@ export default function Hero({ cta, href = STORE_URL, tall, intro, calm }: { cta
           <Img src="/img/logo.webp" className="logo-layer logo-emboss object-cover opacity-17" eager />
           <Img src="/img/logo.webp" className="logo-layer object-cover opacity-57" eager />
           {/* inner pages: the big logo takes you home */}
-          {!intro && <Link href="/" className="hero-home absolute inset-0" aria-label="Muko-Gawa — Início" />}
+          {!intro && <Link href={home(lang)} className="hero-home absolute inset-0" aria-label={d.alt.homeLink} />}
         </A>
         <div className="hero-in" aria-hidden="true">
           <Svg src="star-hero.svg" x={800} y={544} w={48} h={114} shift={false} />
           <A x={768} y={554} rx className="fs ls whitespace-nowrap font-pier text-right text-white" style={{ "--fs": 20, "--ls": 13.8 } as React.CSSProperties}>{t.bleeding}</A>
           <A x={880} y={554} className="fs ls whitespace-nowrap font-pier text-white" style={{ "--fs": 20, "--ls": 13.8 } as React.CSSProperties}>{t.light}</A>
         </div>
-        {intro ? <PressStart /> : (
+        {intro ? <PressStart label={d.alt.scroll} /> : (
           <A x={710.5} y={697} className="hero-in" figma="245:622">
             <Button href={href} w={227} inset={12.5} light>{cta}</Button>
           </A>

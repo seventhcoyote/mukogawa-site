@@ -1,3 +1,5 @@
+import { pt } from "@/content/pt";
+
 // Newsletter signups → Google Form "Muko-Gawa — newsletter" → its linked Google Sheet (2026-10-20).
 // The site keeps its own form; this posts the two fields to the Form's formResponse endpoint.
 // Google answers without CORS headers, so the response is opaque: we can't read success, only send.
@@ -12,8 +14,9 @@ export function subscribe(form: HTMLFormElement): "invalid" | "done" {
   const email = data.get("email")?.toString().trim() ?? "";
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "invalid";
   if (data.get(TRAP)) return "done";
-  const select = form.querySelector<HTMLSelectElement>("select[name=country]");
-  const country = select ? select.options[select.selectedIndex].text : data.get("country")?.toString() ?? "";
+  // the country's Portuguese name, whatever the page's language, so the Sheet keeps one spelling
+  const code = data.get("country")?.toString() ?? "";
+  const country = pt.join.countries.find(([v]) => v === code)?.[1] ?? code;
   const body = new URLSearchParams({ [FIELD.email]: email, [FIELD.country]: country });
   fetch(FORM, { method: "POST", mode: "no-cors", body }).catch(() => {});
   return "done";

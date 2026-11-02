@@ -5,16 +5,18 @@ import Button from "../Button";
 import HeroMontage from "../HeroMontage";
 import HeroGlitch from "../HeroGlitch";
 import { MDrip } from "./Mobile";
-import { pt } from "@/content/pt";
-import { STORE_URL } from "@/lib/links";
+import type { Dict } from "@/content";
+import { home, page, type Lang } from "@/lib/links";
 
 /** The calm hero, recomposed for a phone: one screen of torn red paper (the same photo, grain and
  *  burned drawing as desktop), the slow comic frames, smoke, the corner ornaments with their white
  *  drips, logo, BLEEDING ✦ LIGHT, the button and the date. `.hero` + data-calm reuse the desktop
  *  fade-in and HeroMontage. `intro` (Home): the comic burst before the logo, the TV glitch, and
  *  `children` in place of the button and date (PRESS START). */
-export default function MHero({ cta = pt.hero.presale, href = STORE_URL, intro, children }: { cta?: string; href?: string; intro?: boolean; children?: React.ReactNode }) {
-  const t = pt.hero;
+export default function MHero({ d, cta, href, intro, children }: { d: Dict; cta?: string; href?: string; intro?: boolean; children?: React.ReactNode }) {
+  const t = d.hero, lang = d.code as Lang;
+  cta ??= t.presale;
+  href ??= page(lang).loja;
   return (
     <header className="hero m-hero" data-calm={intro ? undefined : ""} data-state="done">
       <span className="m-hero-red" aria-hidden="true" />
@@ -41,7 +43,7 @@ export default function MHero({ cta = pt.hero.presale, href = STORE_URL, intro, 
           <Img src="/img/logo.webp" className="logo-layer logo-emboss object-cover opacity-17" eager />
           <Img src="/img/logo.webp" className="logo-layer object-cover opacity-57" eager />
           {/* inner pages: the big logo takes you home */}
-          {!intro && <Link href="/" className="hero-home absolute inset-0" aria-label="Muko-Gawa — Início" />}
+          {!intro && <Link href={home(lang)} className="hero-home absolute inset-0" aria-label={d.alt.homeLink} />}
         </h1>
         <p className="hero-in m-bl font-pier" aria-hidden="true">
           <span>{t.bleeding}</span><img src="/svg/star-hero.svg" alt="" /><span>{t.light}</span>

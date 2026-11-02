@@ -1,8 +1,30 @@
-// Portuguese copy (main language). Everything is Portuguese except the title "Bleeding Light".
-// EN and JA come later; components read from this dictionary.
+// Portuguese copy. Everything is Portuguese except the title "Bleeding Light".
+// Other languages: content/en.ts (same keys). Pages and components read the page's language from
+// content/index.ts.
 export const pt = {
   lang: "pt-BR",
-  nav: { home: "Início", campanha: "Projeto", autores: "Autores", loja: "Loja", menu: "Abrir menu", close: "Fechar menu", language: "Idioma", current: "PT" },
+  code: "pt",
+  // what this language's pages show (English has no video, rewards or store yet)
+  has: { video: true, rewards: true, store: true },
+  meta: {
+    title: "Muko-Gawa: Bleeding Light",
+    description: "Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica, onde anjos e demônios travam uma guerra oculta aos olhos humanos.",
+    share: "Mukō-Gawa é um mangá de dark fantasy baseado em literatura bíblica, onde anjos e demônios travam uma guerra oculta aos olhos humanos.",
+    locale: "pt_BR",
+    campanha: "Campanha · Muko-Gawa: Bleeding Light",
+    autores: "Autores · Muko-Gawa: Bleeding Light",
+    loja: "Loja · Muko-Gawa: Bleeding Light",
+  },
+  alt: {
+    angel: "O anjo Thaevi com asas abertas e espada",
+    cover: "Capa de Muko-Gawa: Bleeding Light",
+    manga: "Páginas abertas do mangá Bleeding Light",
+    homeLink: "Muko-Gawa — Início",
+    scroll: "Role para baixo",
+    prev: "Anterior",
+    next: "Próxima",
+  },
+  nav: { home: "Início", campanha: "Projeto", autores: "Autores", loja: "Loja", menu: "Abrir menu", close: "Fechar menu", language: "Idioma", current: "PT", main: "Principal" },
   hero: { bleeding: "BLEEDING", light: "LIGHT", shop: "Compre já", presale: "Pré-venda", available: "DISPONÍVEL DIA 3 DE NOVEMBRO", logoAlt: "向こう側 Muko-Gawa" },
   tagline: ["Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica,", "onde anjos e demônios travam uma guerra oculta aos olhos humanos."],
   video: { title: "Muko-Gawa: one-shot Bleeding Light", id: "7drIevtAxCo", shortId: "rlIlJ5ZZmn4", shortTitle: "Muko-Gawa: Anúncio Pré-Campanha", unmute: "Ouvir com som", mute: "Silenciar", pause: "Pausar", watch: "Assistir ao vídeo", close: "Fechar vídeo" },
@@ -62,6 +84,7 @@ export const pt = {
     email: "seuemail@email.com",
     emailLabel: "E-mail",
     country: "País",
+    defaultCountry: "BR",
     countries: [["BR", "Brasil"], ["PT", "Portugal"], ["US", "EUA"], ["JP", "Japão"], ["OTHER", "Outro"]] as const,
     cta: "Avise-me no lançamento",
     invalid: "Digite um e-mail válido.",
@@ -93,8 +116,7 @@ export const pt = {
       alt: "Foto do kit de Muko-Gawa segurado na mão: a apostila conceitual em espiral, com estudo em traço na capa, sobre o print do anúncio do yomikiri, de fundo vermelho",
     },
     disclaimer: "Edições, preços e frete são responsabilidade do varejista de cada região. As datas seguem o calendário atual da editora e podem mudar.",
+    soon: { title: "em breve", text: "" },
   },
   footer: { rights: "© 2026 Muko-Gawa. Todos os direitos reservados.", social: "Muko-Gawa nas redes sociais" },
 } as const;
-
-export type Dict = typeof pt;

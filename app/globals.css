@@ -445,6 +445,7 @@ img { display: block; max-width: none; }
 /* Menu links and text links: the underline draws in on hover */
 .rail-link { background: linear-gradient(currentColor, currentColor) 50% 100% / 0 1px no-repeat; transition: background-size 220ms ease, opacity 160ms ease; padding-bottom: 2px; }
 .rail-link:hover { background-size: 100% 1px; opacity: 1; }
+.rail-lang button { cursor: pointer; color: inherit; font: inherit; letter-spacing: inherit; }
 
 /* Social icons: lift and glow */
 .social:hover { filter: drop-shadow(0 0 calc(6 * var(--u)) rgb(255 60 60 / 0.6)); }
@@ -593,6 +594,10 @@ img { display: block; max-width: none; }
 /* the desktop rail button (chamfered caps, dark red), at phone size */
 .m-menu-cta { position: relative; width: calc(190 * var(--u)); height: calc(52 * var(--u)); margin-bottom: calc(12 * var(--u)); color: #fff; text-decoration: none; }
 .m-menu-cta .rail-btn-body { font-size: calc(14 * var(--u)); }
+/* language row above the button: small, the current one white and underlined */
+.m-menu ul.m-menu-lang { flex: none; flex-direction: row; gap: calc(26 * var(--u)); margin-bottom: calc(22 * var(--u)); }
+.m-menu .m-menu-lang a { font-size: calc(14 * var(--u)); letter-spacing: calc(3.96 * var(--u)); color: rgb(255 255 255 / 0.62); padding-bottom: 2px; }
+.m-menu .m-menu-lang a[aria-current="true"] { color: #fff; border-bottom: 1px solid #fff; }
 
 @media (prefers-reduced-motion: reduce) { .m-menu-sheet, .m-menu li, .m-burger span { transition: none; } }
 

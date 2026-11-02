@@ -12,7 +12,7 @@ import Drip from "@/components/Drip";
 import HomeScroll from "@/components/HomeScroll";
 import { RuleH, Svg } from "@/components/Ornaments";
 import { Body, Title } from "@/components/Type";
-import { pt } from "@/content/pt";
+import { getDict } from "@/content";
 import { Mobile, MSection, MTitle, MBody, MFooter } from "@/components/m/Mobile";
 import MHero from "@/components/m/MHero";
 import MobileChrome from "@/components/m/MobileChrome";
@@ -21,20 +21,21 @@ import AngelLand from "@/components/AngelLand";
 /** Autores — Figma 253:1458 "autores-menu_lateral" (open) / 253:2481 (closed), 1648 × 4328.
  *  Same treatment as Campanha: menu closed, calm hero, blood drips, parallax, rise-in, free scroll. */
 const H = 4328;
-export const metadata: Metadata = { title: "Autores · Muko-Gawa: Bleeding Light" };
+type Props = { params: Promise<{ lang: string }> };
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => ({ title: getDict((await params).lang).meta.autores });
 
-export default function Autores() {
-  const t = pt.autores;
+export default async function Autores({ params }: Props) {
+  const d = getDict((await params).lang), t = d.autores;
   return (
     <Site menu="closed">
       <main>
         <div className="desk">
         <Canvas height={H} figma="253:1458">
           <Paper top={560} height={H} />
-          <Hero cta={pt.hero.presale} calm />
-          <Footer height={H} clouds={{ y: 2128, h: 2066 }}>
+          <Hero d={d} cta={d.hero.presale} calm />
+          <Footer d={d} height={H} clouds={{ y: 2128, h: 2066 }}>
             <A x={200} y={H - 2101} w={1131} h={1184} shift className="pointer-events-none" data-angel>
-              <Img src="/img/angel.webp" alt="O anjo Thaevi com asas abertas e espada" className="object-fill" />
+              <Img src="/img/angel.webp" alt={d.alt.angel} className="object-fill" />
             </A>
           </Footer>
 
@@ -75,7 +76,7 @@ export default function Autores() {
 
         {/* phone */}
         <Mobile>
-          <MHero />
+          <MHero d={d} />
           <MSection>
             <MTitle size={44} drips={[110, 170]} anchor="autores">{t.title}</MTitle>
           </MSection>
@@ -96,8 +97,8 @@ export default function Autores() {
             <MTitle as="h3" size={32} align="right">{t.ilustrador}</MTitle>
             <MBody align="right"><p>{t.ilustradorText[0]}</p><p>{t.ilustradorText[1]}</p></MBody>
           </MSection>
-          <MFooter tall>
-            <img src="/img/angel.webp" alt="O anjo Thaevi com asas abertas e espada" loading="lazy" className="m-angel" data-angel />
+          <MFooter d={d} tall>
+            <img src="/img/angel.webp" alt={d.alt.angel} loading="lazy" className="m-angel" data-angel />
           </MFooter>
         </Mobile>
         <AngelLand />

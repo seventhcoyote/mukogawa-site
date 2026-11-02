@@ -4,12 +4,12 @@
 import { useState, type CSSProperties, type FormEvent } from "react";
 import A from "./A";
 import Button from "./Button";
-import { pt } from "@/content/pt";
+import { useT } from "./Lang";
 import { subscribe, TRAP } from "@/lib/newsletter";
 
 /** Join the launch form (Figma Group 60). Signups go to the Google Form/Sheet (lib/newsletter.ts, 2026-10-20). */
 export default function JoinForm({ x, y }: { x: number; y: number }) {
-  const t = pt.join;
+  const t = useT().join;
   const [status, setStatus] = useState<"" | "invalid" | "done">("");
   const u = (n: number) => `calc(${n} * var(--u))`;
   const field: CSSProperties = { height: u(48), borderWidth: u(2), borderRadius: u(11), paddingInline: u(12), fontSize: u(16), letterSpacing: u(0.48), lineHeight: 1.5 };
@@ -30,7 +30,7 @@ export default function JoinForm({ x, y }: { x: number; y: number }) {
         onInput={() => status === "invalid" && setStatus("")} />
       <label className="sr-only" htmlFor="country">{t.country}</label>
       <span className="absolute" style={{ left: u(292), top: 0 }}>
-        <select id="country" name="country" defaultValue="BR" className="field appearance-none bg-white font-mincho text-ink-soft" style={{ ...field, paddingRight: u(44), cursor: "pointer" }}>
+        <select id="country" name="country" defaultValue={t.defaultCountry} className="field appearance-none bg-white font-mincho text-ink-soft" style={{ ...field, paddingRight: u(44), cursor: "pointer" }}>
           {t.countries.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
         </select>
         <img src="/svg/chevron-red.svg" alt="" className="pointer-events-none absolute" style={{ right: u(14), top: u(20), width: u(16), height: u(6), transform: "rotate(180deg)" }} />

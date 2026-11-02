@@ -12,8 +12,10 @@ import Button from "@/components/Button";
 import Footer from "@/components/Footer";
 import { Brackets, RuleH } from "@/components/Ornaments";
 import { Body, Title } from "@/components/Type";
-import { pt } from "@/content/pt";
-import { CAMPAIGN_URL, ORVALHO_URL } from "@/lib/links";
+import { asLang, getDict, type Dict } from "@/content";
+import { CAMPAIGN_URL, ORVALHO_URL, page, type Lang } from "@/lib/links";
+import JoinForm from "@/components/JoinForm";
+import MJoin from "@/components/m/MJoin";
 import { Mobile, MSection, MTitle, MBody, MLabel, MPhoto, MFooter } from "@/components/m/Mobile";
 import MHero from "@/components/m/MHero";
 import MobileChrome from "@/components/m/MobileChrome";
@@ -23,7 +25,8 @@ import AngelLand from "@/components/AngelLand";
  *  layout. No Figma frame: built from Campanha's pieces (calm hero, bracketed photos with drips,
  *  parallax, rise-in, free scroll). */
 const H = 4000;
-export const metadata: Metadata = { title: "Loja · Muko-Gawa: Bleeding Light" };
+type Props = { params: Promise<{ lang: string }> };
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => ({ title: getDict((await params).lang).meta.loja });
 
 /** Blood running from the lower ends of the two top brackets of a frame (Brackets at x, y). */
 function PhotoDrips({ x, y }: { x: number; y: number }) {
@@ -58,16 +61,18 @@ function Framed({ x, y, src, alt, speed }: { x: number; y: number; src: string; 
   );
 }
 
-export default function Loja() {
-  const t = pt.loja, c = t.campanha, k = t.kit;
+export default async function Loja({ params }: Props) {
+  const lang = asLang((await params).lang), d = getDict(lang);
+  if (!d.has.store) return <Soon d={d} lang={lang} />;
+  const t = d.loja, c = t.campanha, k = t.kit;
   return (
     <Site menu="closed">
       <main>
         <div className="desk">
         <Canvas height={H} figma="none (mukogawa.com/loja)">
           <Paper top={560} height={H} />
-          <Hero cta={pt.hero.presale} href={CAMPAIGN_URL} calm />
-          <Footer height={H} clouds={{ y: 3000, h: H - 3000 }} />
+          <Hero d={d} cta={d.hero.presale} href={CAMPAIGN_URL} calm />
+          <Footer d={d} height={H} clouds={{ y: 3000, h: H - 3000 }} />
 
           {/* onde comprar · pré-venda */}
           <Label x={715.5} y={990} cx>{t.eyebrow}</Label>
@@ -104,7 +109,7 @@ export default function Loja() {
 
         {/* phone */}
         <Mobile>
-          <MHero href={CAMPAIGN_URL} />
+          <MHero d={d} href={CAMPAIGN_URL} />
           <MSection className="m-stack">
             <MLabel className="text-center">{t.eyebrow}</MLabel>
             <MTitle size={44} anchor="loja">{t.title}</MTitle>
@@ -136,8 +141,54 @@ export default function Loja() {
             <span className="m-mini-rule" aria-hidden="true" />
             <MBody size={12} className="m-disclaimer"><p>{t.disclaimer}</p></MBody>
           </MSection>
-          <MFooter tall>
-            <img src="/img/angel.webp" alt="O anjo Thaevi com asas abertas e espada" loading="lazy" className="m-angel" data-angel />
+          <MFooter d={d} tall>
+            <img src="/img/angel.webp" alt={d.alt.angel} loading="lazy" className="m-angel" data-angel />
+          </MFooter>
+        </Mobile>
+        <AngelLand />
+        <MobileChrome />
+      </main>
+    </Site>
+  );
+}
+
+/** Languages without a store yet: "coming soon" and the launch e-mail list (same form as Home). */
+const HS = 2700;
+function Soon({ d, lang }: { d: Dict; lang: Lang }) {
+  const t = d.loja;
+  return (
+    <Site menu="closed">
+      <main>
+        <div className="desk">
+        <Canvas height={HS} figma="none">
+          <Paper top={560} height={HS} />
+          <Hero d={d} cta={d.hero.presale} href={page(lang).loja} calm />
+          <Footer d={d} height={HS} clouds={{ y: 1700, h: HS - 1700 }} />
+
+          <Label x={715.5} y={990} cx>{t.eyebrow}</Label>
+          <Title x={715.5} y={1024} cx data-rise data-anchor="loja">{t.soon.title}</Title>
+          <RuleH src="rule-h-316-l.svg" x={130} y={1086} w={316.586} />
+          <RuleH src="rule-h-316-r.svg" x={983} y={1086} w={316.586} flip />
+          <Body x={715.5} y={1250} w={620} cx className="text-center" data-rise><p>{t.soon.text}</p></Body>
+          <JoinForm x={715.5 - 224} y={1420} />
+
+          <Rail top={1000} height={HS - 1000} />
+          <HomeScroll lift={false} />
+        </Canvas>
+        </div>
+
+        {/* phone */}
+        <Mobile>
+          <MHero d={d} href={page(lang).loja} />
+          <MSection className="m-stack">
+            <MLabel className="text-center">{t.eyebrow}</MLabel>
+            <MTitle size={44} anchor="loja">{t.soon.title}</MTitle>
+            <MBody align="center"><p>{t.soon.text}</p></MBody>
+            <MJoin />
+          </MSection>
+          <MFooter d={d} tall>
+            {/* eslint-disable-next-line @next/next/no-img-element -- static export */}
+            <img src="/img/angel.webp" alt={d.alt.angel} loading="lazy" className="m-angel" data-angel />
           </MFooter>
         </Mobile>
         <AngelLand />

@@ -3,11 +3,13 @@
 /* eslint-disable @next/next/no-img-element -- static export */
 import { useEffect, useRef, useState } from "react";
 import REWARDS from "@/content/rewards.json";
+import { useT } from "../Lang";
 
 /** Phone recompensas: the 12 pieces of the rewards board (scripts/rewards.mjs, labels baked in) as a
  *  native swipe carousel (scroll-snap). The card in the centre comes forward; the others sit back,
  *  slightly turned, like loose prints on a table. A counter shows where you are. */
 export default function MRewards({ label }: { label: string }) {
+  const t = useT();
   const track = useRef<HTMLDivElement>(null);
   const [at, setAt] = useState(0);
 
@@ -51,9 +53,9 @@ export default function MRewards({ label }: { label: string }) {
         ))}
       </div>
       <div className="m-rw-nav font-barlow font-semibold">
-        <button type="button" onClick={() => go(-1)} aria-label="Anterior" disabled={at === 0}>‹</button>
+        <button type="button" onClick={() => go(-1)} aria-label={t.alt.prev} disabled={at === 0}>‹</button>
         <span aria-live="polite">{String(at + 1).padStart(2, "0")} / {REWARDS.length}</span>
-        <button type="button" onClick={() => go(1)} aria-label="Próxima" disabled={at === REWARDS.length - 1}>›</button>
+        <button type="button" onClick={() => go(1)} aria-label={t.alt.next} disabled={at === REWARDS.length - 1}>›</button>
       </div>
     </div>
   );
