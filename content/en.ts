@@ -72,6 +72,7 @@ export const en: Dict = {
     ilustradorText: ["Guilherme Match is a comic artist and illustrator. Author of KOPHEE and co-author of SOUNDTRACK, both published by Editora JBC and nominated for the HQMix award. He's passionate about dystopian worlds, post-apocalyptic fiction, and characters with cool visual designs. Blade of the Immortal, Monster, and Akira are among his favorite works.", "Bleeding Light marks his debut in fantasy manga."],
     israAlt: "Illustrated portrait of Israel Subirá",
     matchAlt: "Illustrated portrait of Guilherme Match",
+    cta: "Discover the project",
   },
   join: {
     title: "join the launch",

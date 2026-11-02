@@ -13,7 +13,8 @@ import HomeScroll from "@/components/HomeScroll";
 import { RuleH, Svg } from "@/components/Ornaments";
 import { Body, Title } from "@/components/Type";
 import { asLang, getDict } from "@/content";
-import { ANCHORS } from "@/lib/links";
+import { ANCHORS, page } from "@/lib/links";
+import Button from "@/components/Button";
 import { Mobile, MSection, MTitle, MBody, MFooter } from "@/components/m/Mobile";
 import MHero from "@/components/m/MHero";
 import MobileChrome from "@/components/m/MobileChrome";
@@ -69,6 +70,8 @@ export default async function Autores({ params }: Props) {
           <Body x={673} y={2174} w={509} rx className="text-right" figma="253:1577" data-rise>
             <p>{t.ilustradorText[0]}</p><p>{t.ilustradorText[1]}</p>
           </Body>
+          {/* on to the project page, so the visit carries on */}
+          <A x={673} y={2720} rx shift className="z-[2]" data-rise><Button href={page(lang).campanha} w={365} inset={15.5}>{t.cta}</Button></A>
 
           <Rail top={1000} height={H - 1000} />   {/* starts below the hero (the white), as on Home */}
           <HomeScroll lift={false} />
@@ -97,6 +100,7 @@ export default async function Autores({ params }: Props) {
             </div>
             <MTitle as="h3" size={32} align="right">{t.ilustrador}</MTitle>
             <MBody align="right"><p>{t.ilustradorText[0]}</p><p>{t.ilustradorText[1]}</p></MBody>
+            <div className="m-cta m-cta-right" data-rise><Button href={page(lang).campanha} w={330} inset={13}>{t.cta}</Button></div>
           </MSection>
           <MFooter d={d} tall>
             <img src="/img/angel.webp" alt={d.alt.angel} loading="lazy" className="m-angel" data-angel />

@@ -76,6 +76,7 @@ export const pt = {
     ilustradorText: ["Guilherme Match é quadrinista e ilustrador. Autor de KOPHEE e co-autor de SOUNDTRACK, ambas publicadas pela Editora JBC e indicadas ao troféu HQmix. É apaixonado por universos distópicos, ficção pós-apocalíptica e personagens com visuais maneiros. A Lâmina do Imortal, Monster e Akira estão entre suas obras preferidas.", "Bleeding Light marca sua estreia nos mangás de fantasia."],
     israAlt: "Retrato ilustrado de Israel Subirá",
     matchAlt: "Retrato ilustrado de Guilherme Match",
+    cta: "Conheça o projeto",
   },
   join: {
     title: "participe do lançamento",
