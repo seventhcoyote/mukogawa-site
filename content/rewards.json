@@ -1,0 +1,98 @@
+[
+  {
+    "name": "bookplate",
+    "src": "/img/rewards/01-bookplate.webp",
+    "x": 83.2,
+    "y": 4279.3,
+    "w": 179.6,
+    "h": 265.2
+  },
+  {
+    "name": "digital",
+    "src": "/img/rewards/02-digital.webp",
+    "x": 309.1,
+    "y": 4280.7,
+    "w": 154.7,
+    "h": 257.6
+  },
+  {
+    "name": "pin",
+    "src": "/img/rewards/03-pin.webp",
+    "x": 526.6,
+    "y": 4297.3,
+    "w": 184.4,
+    "h": 77.4
+  },
+  {
+    "name": "camiseta",
+    "src": "/img/rewards/04-camiseta.webp",
+    "x": 769.7,
+    "y": 4251,
+    "w": 359.1,
+    "h": 254.2
+  },
+  {
+    "name": "adesivos",
+    "src": "/img/rewards/05-adesivos.webp",
+    "x": 1142,
+    "y": 4288.3,
+    "w": 194.8,
+    "h": 227.9
+  },
+  {
+    "name": "impressa",
+    "src": "/img/rewards/06-impressa.webp",
+    "x": 589.5,
+    "y": 4438.8,
+    "w": 263.1,
+    "h": 269.3
+  },
+  {
+    "name": "marcapagina",
+    "src": "/img/rewards/07-marcapagina.webp",
+    "x": 419.6,
+    "y": 4487.2,
+    "w": 127.8,
+    "h": 185.8
+  },
+  {
+    "name": "ecobag",
+    "src": "/img/rewards/08-ecobag.webp",
+    "x": 103.3,
+    "y": 4584.6,
+    "w": 276.3,
+    "h": 390.9
+  },
+  {
+    "name": "conceitos",
+    "src": "/img/rewards/09-conceitos.webp",
+    "x": 456.9,
+    "y": 4704,
+    "w": 331.5,
+    "h": 243.1
+  },
+  {
+    "name": "arte",
+    "src": "/img/rewards/10-arte.webp",
+    "x": 828.4,
+    "y": 4529.3,
+    "w": 203,
+    "h": 291.4
+  },
+  {
+    "name": "caixa",
+    "src": "/img/rewards/11-caixa.webp",
+    "x": 1053.6,
+    "y": 4595.6,
+    "w": 283.2,
+    "h": 230
+  },
+  {
+    "name": "nota",
+    "src": "/img/rewards/12-nota.webp",
+    "x": 963.1,
+    "y": 4860.8,
+    "w": 377.8,
+    "h": 70.4
+  }
+]

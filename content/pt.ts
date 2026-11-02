@@ -1,0 +1,100 @@
+// Portuguese copy (main language). Everything is Portuguese except the title "Bleeding Light".
+// EN and JA come later; components read from this dictionary.
+export const pt = {
+  lang: "pt-BR",
+  nav: { home: "Início", campanha: "Projeto", autores: "Autores", loja: "Loja", menu: "Abrir menu", close: "Fechar menu", language: "Idioma", current: "PT" },
+  hero: { bleeding: "BLEEDING", light: "LIGHT", shop: "Compre já", presale: "Pré-venda", available: "DISPONÍVEL EM 1º DE DEZEMBRO", logoAlt: "向こう側 Muko-Gawa" },
+  tagline: ["Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica,", "onde anjos e demônios travam uma guerra oculta aos olhos humanos."],
+  video: { title: "Muko-Gawa: one-shot Bleeding Light", id: "7drIevtAxCo", shortId: "rlIlJ5ZZmn4", shortTitle: "Muko-Gawa: Anúncio Pré-Campanha", unmute: "Ouvir com som", mute: "Silenciar", pause: "Pausar", watch: "Assistir ao vídeo", close: "Fechar vídeo" },
+  sinopse: {
+    title: "sinopse",
+    text: "Um homem abandona o pacto que seus ancestrais carregavam com os céus. Enquanto sua esperança se esvai, os Anjos que o guardam sangram num campo de batalha invisível, resilientes apesar da ignorância da humanidade quanto ao conflito que os consome. Mas mesmo com os céus manchados pelas marcas dessa guerra, um novo descendente se levanta, disposto a carregar o pacto adiante.",
+    cta: "Conheça o projeto",
+  },
+  projeto: {
+    title: "projeto",
+    lead: "Muko-Gawa (que em japonês significa “Do Outro Lado”)",
+    text: " é uma ficção inspirada na literatura bíblica, onde o antigo conflito entre anjos e demônios se entrelaça com a fé dos humanos. A história é contada da perspectiva do outro lado, habitação dos seres eternos. Numa atmosfera que mistura fantasia sombria e cenas de ação brutais com reflexões sobre a coragem de servir, Bleeding Light é um conto sobre Thaevi, um soldado que, apesar da desvantagem, se recusa a desistir. Se você curte histórias inspiradas em mitologia, literatura bíblica com uma dose de fantasia e sequências de combate empolgantes, esse mangá é perfeito pra você!",
+  },
+  campanha: {
+    title: "campanha",
+    text: "A produção do mangá está na reta final. Todo o desenvolvimento até aqui foi bancado pelos próprios autores, com o auxílio de apoiadores que adquiriram material conceitual oferecido anteriormente. Agora precisamos cobrir os custos finais de diagramação, impressão e envio do mangá.",
+    cta: "Conheça os autores",
+    crowdfunding: "Ver no financiamento coletivo",
+    band: "Apoiar o projeto nesta fase também funciona como pré-venda, garantindo sua cópia do mangá (física ou digital) além de itens exclusivos da campanha, dependendo do nível de recompensa escolhido.",
+  },
+  recompensas: {
+    title: "recompensas",
+    note: ["Há diferentes recompensas disponíveis de acordo com o nível de apoio que você escolher.", "As imagens das recompensas são ilustrativas. A versão final será divulgada em breve."],
+    alt: "Recompensas da campanha: edição impressa, versão digital do mangá, bookplate exclusivo, pin de metal, camiseta, adesivos, marca-página, ecobag, livro de conceitos, arte original exclusiva e caixa personalizada",
+    cta: "Siga a campanha",
+  },
+  jornada: {
+    title: "a jornada",
+    p1: [
+      "Isra começou a trabalhar na narrativa de Muko-Gawa em 2019, e os primeiros anos foram dedicados à construção de mundo, adaptando o universo da literatura bíblica à sistemas de fantasia, até que a fundação estivesse completa. Deste processo surgiram 7 livros cobrindo a narrativa bíblica pela perspectiva dos eternos.",
+      "Em 2025, ele esteve em Tokyo e se reuniu com um editor da Shueisha (a maior editora de mangá do mundo) para apresentar a visão que tinha pra essa grande saga que havia desenvolvido nos últimos sete anos.",
+      "O editor ficou muito impressionado com o projeto, elogiou a narrativa e os visuais. Também disse que pensava que o projeto estava pronto pra ser apresentado pra estúdios de animação, mas que se o Isra quisesse desenvolver isso em forma de mangá, ele deveria começar com um yomikiri (uma história fechada em um único capítulo).",
+    ],
+    quote: "embora tudo isso seja muito interessante, o melhor jeito de se provar como um escritor pra mangás seria contando uma curta história primeiro",
+    p2: [
+      "Esse conselho se tornou uma missão. Não demorou muito pra ele desenvolver o primeiro esboço da história e apresentar a um ilustrador, com a proposta de realizarem essa obra juntos. A proficiência em quadrinhos do Match, especialmente por conta das sequências de ação e do storytelling excelente, como o Isra havia percebido em Track e KOPHEE, era exatamente o que esse mangá precisava.",
+      "Depois de anunciar a parceria, foram várias mensagens, reuniões e inúmeras versões da história até chegar ao resultado que vocês estão prestes a conhecer. A colisão de dois mundos, o da literatura e o do mangá. Fruto da vontade de criar boas histórias inspiradas pela maior de todas as histórias.",
+    ],
+    photo1: "Isra em Tóquio, com o roteiro de Muko-Gawa",
+    photo2: "Isra e Match diante do público",
+    nasce: ["É assim que nasce", "Muko-Gawa: Bleeding Light!"],   // no ō: Darkcastle has no macron glyph
+  },
+  autores: {
+    title: "os autores",
+    escritor: "o escritor",
+    escritorName: "Israel Subirá",
+    escritorText: [" tem escolaridade em Literatura Bíblica, é escritor, Dungeon Master nas horas vagas e está debutando no mundo dos quadrinhos com Muko-Gawa: Bleeding Light.", "Ama universos de fantasia, é um grande admirador dos livros de Brandon Sanderson, Attack on Titan, os mangás de Hiromu Arakawa e a arte de Hideo Minaba."],
+    ilustrador: "o ilustrador",
+    ilustradorText: ["Guilherme Match é quadrinista e ilustrador. Autor de KOPHEE e co-autor de SOUNDTRACK, ambas publicadas pela Editora JBC e indicadas ao troféu HQmix. É apaixonado por universos distópicos, ficção pós-apocalíptica e personagens com visuais maneiros. A Lâmina do Imortal, Monster e Aldra estão entre suas obras preferidas.", "Bleeding Light marca sua estreia nos mangás de fantasia."],
+    israAlt: "Retrato ilustrado de Israel Subirá",
+    matchAlt: "Retrato ilustrado de Guilherme Match",
+  },
+  join: {
+    title: "participe do lançamento",
+    text: "Se você chegou até aqui, está pronto para atravessar para o reino invisível. Junte-se a nós em 1º de dezembro e esteja entre os primeiros leitores.",
+    available: "DISPONÍVEL EM 1º DE DEZEMBRO",
+    email: "seuemail@email.com",
+    emailLabel: "E-mail",
+    country: "País",
+    countries: [["BR", "Brasil"], ["PT", "Portugal"], ["US", "EUA"], ["JP", "Japão"], ["OTHER", "Outro"]] as const,
+    cta: "Avise-me no lançamento",
+    invalid: "Digite um e-mail válido.",
+    done: "Pronto! Avisaremos você no lançamento.",
+    privacy: ["Usamos seu e-mail apenas para avisar sobre Muko-Gawa. Para sair da lista, escreva para ", "contact@mukogawa.com", "."],
+  },
+  // Loja — copy from mukogawa.com/loja (2026-10-16)
+  loja: {
+    eyebrow: "ONDE COMPRAR",
+    title: "pré-venda",
+    campanha: {
+      label: "CAMPANHA NA CATARSE // EDIÇÃO EM PORTUGUÊS",
+      title: "Muko-Gawa: Bleeding Light",
+      text: [
+        "Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica, onde anjos e demônios travam uma guerra oculta aos olhos humanos.",
+        "A produção está na reta final. Apoiar o projeto nesta fase também funciona como pré-venda: você garante sua cópia física ou digital, conforme a recompensa escolhida.",
+      ],
+      cta: "Siga a campanha",
+      note: "A campanha abre em 3 de novembro. Até lá, siga o projeto no Catarse para ser avisado na abertura.",
+      alt: "Capa da campanha de Muko-Gawa: Bleeding Light no Catarse",
+    },
+    kit: {
+      label: "ITEM DE COLEÇÃO // À VENDA AGORA",
+      title: "apostila conceitual + print",
+      text: "Antes de existir como obra publicada, Muko-Gawa foi um caderno de apresentação: o conceito, o enredo e os personagens em traço e estudo. É esse documento de 2025 que está impresso aqui, em espiral, e com ele vai o print do anúncio do yomikiri. Material de bastidor que quase nunca chega ao leitor — quem tem este kit chegou antes do primeiro capítulo.",
+      meta: ["2025", "TIRAGEM LIMITADA", "APOSTILA + PRINT"],
+      cta: "Comprar na Orvalho",
+      note: "Edição em português, com envio dentro do Brasil, pela Orvalho.",
+      alt: "Foto do kit de Muko-Gawa segurado na mão: a apostila conceitual em espiral, com estudo em traço na capa, sobre o print do anúncio do yomikiri, de fundo vermelho",
+    },
+    disclaimer: "Edições, preços e frete são responsabilidade do varejista de cada região. As datas seguem o calendário atual da editora e podem mudar.",
+  },
+  footer: { rights: "© 2026 Muko-Gawa. Todos os direitos reservados.", social: "Muko-Gawa nas redes sociais" },
+} as const;
+
+export type Dict = typeof pt;

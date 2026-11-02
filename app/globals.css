@@ -1,0 +1,758 @@
+@import "tailwindcss";
+
+/* ── Tokens (Figma "Muko-gawa Website" › Content and Identity Review › menu lateral) ── */
+@theme inline {
+  --color-blood: #e7141a;       /* section titles */
+  --color-blood-deep: #da1319;  /* emphasised names in body copy */
+  --color-red: #c10007;         /* button body */
+  --color-red-edge: #e6252c;    /* button border, field border, caps */
+  --color-red-launch: #f4313c;  /* AVAILABLE DECEMBER 1st on paper */
+  --color-rail: #d21c26;        /* side menu */
+  --color-rail-btn: #551010;
+  --color-rail-btn-edge: #6c0e14;
+  --color-ink: #000000;
+  --color-ink-soft: #3a3a3a;
+
+  --font-castle: var(--font-darkcastle);
+  --font-pier: var(--font-pier-sans);
+  --font-mincho: var(--font-shippori);
+  --font-fell: var(--font-im-fell);
+  --font-barlow: var(--font-barlow-v);
+}
+
+html, body { margin: 0; padding: 0; background: #fff; }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+p, h1, h2, h3, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+img { display: block; max-width: none; }
+
+/* ── The canvas ───────────────────────────────────────────────────────────────────────────────
+   The design is drawn on a 1648-wide canvas: 1463 of page + the 185-wide side menu.
+   1 design pixel = --u. Every placed element carries its Figma geometry (see components/A.tsx). */
+@property --menu-dx { syntax: "<number>"; inherits: true; initial-value: 0; }
+@property --menu-cw { syntax: "<number>"; inherits: true; initial-value: 1463; }
+
+.site {
+  container-type: inline-size;
+  overflow-x: clip;
+  --menu-dx: 0;       /* body content shift when the menu is closed (re-centred on 1648) */
+  --menu-cw: 1463;    /* width the page content spans: 1463 with the menu open, 1648 closed */
+  transition: --menu-dx 520ms cubic-bezier(0.65, 0, 0.35, 1), --menu-cw 520ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.site[data-menu="closed"] { --menu-dx: 92.5; --menu-cw: 1648; }
+
+.canvas { --u: calc(100cqw / 1648); position: relative; width: 100%; height: calc(var(--h) * var(--u)); overflow: clip; }
+
+.abs {
+  position: absolute;
+  left: calc(var(--x, 0) * var(--u));
+  top: calc(var(--y, 0) * var(--u));
+  width: calc(var(--w) * var(--u));
+  height: calc(var(--h) * var(--u));
+}
+/* Page content follows the menu; full-bleed layers (hero, paper sheets) don't. */
+.shift { left: calc((var(--x, 0) + var(--menu-dx)) * var(--u)); }
+.bleed { width: calc(var(--menu-cw) * var(--u)); }
+.abs.cx { transform: translateX(-50%); width: max-content; }
+.abs.rx { transform: translateX(-100%); }
+
+/* Type sizes in design pixels */
+.fs { font-size: calc(var(--fs) * var(--u)); }
+.ls { letter-spacing: calc(var(--ls) * var(--u)); }
+
+/* Darkcastle stylistic set 05, as set in Figma */
+.castle { font-family: var(--font-castle); font-feature-settings: "ss05" 1; font-weight: 400; line-height: normal; }
+
+/* Paragraph spacing: Figma uses an empty 1.5-line paragraph between blocks */
+.paras > p + p { margin-top: 1.5em; }
+
+@media (prefers-reduced-motion: reduce) {
+  .site { transition: none; }
+}
+
+/* ── Button (Figma Group 41 / 47 / 57) ────────────────────────────────────────────────────────── */
+.btn {
+  position: relative;
+  display: block;
+  width: calc(var(--bw) * var(--u));
+  height: calc(59 * var(--u));
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none;
+  isolation: isolate;
+  transition: transform 180ms ease;
+}
+.btn::before, .btn::after {          /* caps: 59 × 39 polygons turned 90° into 39 × 59 slots */
+  content: "";
+  position: absolute;
+  top: calc(10 * var(--u));
+  width: calc(59 * var(--u));
+  height: calc(39 * var(--u));
+  background: url("/svg/cap-r.svg") 0 0 / 100% 100% no-repeat;
+  z-index: -1;
+}
+.btn::before { left: calc(-10 * var(--u)); background-image: url("/svg/cap-l.svg"); transform: rotate(90deg) scaleY(-1); }
+.btn::after { right: calc(-10 * var(--u)); transform: rotate(90deg); }
+.btn-light::before { background-image: url("/svg/cap-white-l.svg"); }
+.btn-light::after { background-image: url("/svg/cap-white-r.svg"); }
+.btn-body {
+  position: absolute;
+  inset: 0 calc(var(--bi) * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: calc(5.61 * var(--u));     /* Figma centres without the trailing letter-space */
+  background: var(--color-red);
+  border: calc(2 * var(--u)) solid var(--color-red-edge);
+  border-radius: calc(11 * var(--u));
+  font-family: var(--font-fell);
+  font-size: calc(17 * var(--u));
+  line-height: 1.5;
+  letter-spacing: calc(5.61 * var(--u));
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+.btn-light .btn-body { border-color: #fff; }
+@media (hover: hover) {
+  .btn:hover { transform: translateY(calc(-2 * var(--u))); }
+  .btn:hover .btn-body { background: #d8000a; }
+}
+.btn:active { transform: translateY(calc(1 * var(--u))); }
+.btn:active .btn-body { background: #a80006; }
+.btn:focus-visible { outline: none; }
+.btn:focus-visible .btn-body { box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--color-red-edge); }
+
+/* ── Hero motion ──────────────────────────────────────────────────────────────────────────────── */
+/* No z-index / will-change: the hero must not be a stacking context, or its paper (LINEAR_BURN →
+   multiply) can't blend with the video still beneath it the way it does in Figma. */
+.hero { pointer-events: none; }
+.hero .hero-content a, .hero .hero-content button { pointer-events: auto; }
+.hero-drop { position: absolute; left: 50%; top: 0; width: calc(200 * var(--u)); height: calc(600 * var(--u)); transform: translateX(-50%); z-index: 3; overflow: visible; display: none; }
+.drop-fall { fill: #c8101a; }
+
+/* 1 · the drop falls onto the paper (0 → 0.55s) */
+.hero[data-state="drop"] .hero-drop { display: block; }
+.hero[data-state="drop"] .drop-fall { animation: drop-fall 0.55s cubic-bezier(0.55, 0, 1, 0.45) both; transform-origin: 50px 20px; }
+@keyframes drop-fall {
+  0%   { transform: translateY(-30px) scale(0.6, 1.1); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translateY(68px) scale(1.15, 0.85); opacity: 1; }
+}
+/* 2 · it splats and spreads, painting in the paper (0.5 → 2.0s): an SVG splat mask that grows */
+.hero[data-state="drop"] .hero-paper {
+  -webkit-mask: url("/svg/splat.svg") 50% calc(98 * var(--u)) / 0 0 no-repeat;
+          mask: url("/svg/splat.svg") 50% calc(98 * var(--u)) / 0 0 no-repeat;
+  animation: splat 1.6s cubic-bezier(0.2, 0.7, 0.15, 1) 0.48s both;
+}
+@keyframes splat {
+  0%   { -webkit-mask-size: 0 0; mask-size: 0 0; }
+  14%  { -webkit-mask-size: calc(160 * var(--u)) calc(160 * var(--u)); mask-size: calc(160 * var(--u)) calc(160 * var(--u)); }
+  99%  { -webkit-mask-size: calc(6000 * var(--u)) calc(6000 * var(--u)); mask-size: calc(6000 * var(--u)) calc(6000 * var(--u)); }
+  100% { -webkit-mask-size: calc(6000 * var(--u)) calc(6000 * var(--u)); mask-size: calc(6000 * var(--u)) calc(6000 * var(--u)); -webkit-mask-image: none; mask-image: none; }
+}
+.hero[data-state="drop"] .hero-drop { animation: drop-hide 0.2s linear 0.62s both; }
+@keyframes drop-hide { to { opacity: 0; } }
+/* 3 · logo, tagline, button rise in (from 1.2s) */
+.hero[data-state="drop"] .hero-in { animation: hero-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.hero[data-state="drop"] .hero-in:nth-child(1) { animation-delay: 1.15s; }
+.hero[data-state="drop"] .hero-in:nth-child(2) { animation-delay: 1.3s; }
+.hero[data-state="drop"] .hero-in:nth-child(3) { animation-delay: 1.45s; }
+.hero[data-state="drop"] .hero-in:nth-child(4) { animation-delay: 1.55s; }
+.hero[data-state="quick"] .hero-in { animation: hero-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.hero[data-state="quick"] .hero-paper { animation: fade-in 0.5s ease both; }
+@keyframes hero-in { from { opacity: 0; translate: 0 calc(24 * var(--u)); } to { opacity: 1; translate: 0 0; } }   /* translate, not transform: .cx centring uses transform */
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.hero[data-state="idle"] .hero-paper, .hero[data-state="idle"] .hero-in { opacity: 0; }
+
+/* ── Side menu ────────────────────────────────────────────────────────────────────────────────── */
+.rail { transition: transform 520ms cubic-bezier(0.65, 0, 0.35, 1); }
+.rail[data-open="false"] { transform: translateX(100%); }
+.rail a, .rail button { color: inherit; text-decoration: none; }
+.rail-x { background: none; border: 0; padding: 0; cursor: pointer; }
+.rail-link { transition: opacity 160ms ease; }
+.rail-link:hover { opacity: 0.75; }
+.rail-logo:hover { opacity: 0.85; }
+.rail-btn { display: block; isolation: isolate; }
+.rail-btn::before, .rail-btn::after {   /* caps: 48 × 31 polygons turned 90° into 31 × 48 slots */
+  content: ""; position: absolute; top: calc(8.5 * var(--u)); width: calc(48 * var(--u)); height: calc(31 * var(--u));
+  background: url("/svg/rail-cap-b.svg") 0 0 / 100% 100% no-repeat; z-index: -1;
+}
+.rail-btn::before { left: calc(-8.5 * var(--u)); background-image: url("/svg/rail-cap-a.svg"); transform: rotate(90deg) scaleY(-1); }
+.rail-btn::after { right: calc(-8.5 * var(--u)); transform: rotate(90deg); }
+.rail-btn-body {
+  position: absolute; inset: 0 calc(9 * var(--u));
+  display: flex; align-items: center; justify-content: center; padding-left: calc(3.96 * var(--u));
+  background: var(--color-rail-btn); border: calc(1 * var(--u)) solid var(--color-rail-btn-edge); border-radius: calc(11 * var(--u));
+  font-family: var(--font-fell); font-size: calc(12 * var(--u)); letter-spacing: calc(3.96 * var(--u)); line-height: 1.5; text-transform: uppercase;
+  transition: background-color 160ms ease;
+}
+.rail-btn:hover .rail-btn-body { background: #6e1414; }
+.menu-btn {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  display: flex; flex-direction: column; justify-content: center; gap: calc(9 * var(--u));
+  transition: opacity 300ms ease 200ms;
+}
+.menu-btn span {
+  display: block; height: calc(3 * var(--u)); border-radius: calc(2 * var(--u));
+  background: var(--color-red); transition: width 220ms ease, transform 220ms ease;
+}
+.menu-btn span:nth-child(1) { width: 100%; }
+.menu-btn span:nth-child(2) { width: 72%; margin-left: auto; }
+.menu-btn span:nth-child(3) { width: 86%; margin-left: auto; }
+.menu-btn:hover span { width: 100%; }
+.menu-btn:hover span:nth-child(2) { transform: translateX(calc(-4 * var(--u))); }
+.menu-btn:focus-visible { outline: 2px solid var(--color-red); outline-offset: calc(6 * var(--u)); }
+.menu-btn[data-open="true"] { opacity: 0; pointer-events: none; transition-delay: 0ms; }
+@media (prefers-reduced-motion: reduce) { .rail, .menu-btn { transition: none; } }
+
+/* ── Form fields (Figma Frame 1321317052/54) ───────────────────────────────────────────────────── */
+.field { border-style: solid; border-color: var(--color-red-edge); outline: none; transition: border-color 160ms ease, box-shadow 160ms ease; }
+.field:hover { border-color: var(--color-red); }
+.field:focus { box-shadow: 0 0 0 3px rgb(230 37 44 / 0.25); }
+.social { transition: transform 160ms ease, opacity 160ms ease; }
+.social:hover { transform: translateY(calc(-2 * var(--u))); opacity: 0.85; }
+
+/* Hero logo layers: Figma image filters (all −1) turn the white logo black */
+/* (measured against Figma's render: the filtered logo is #181818, not pure black) */
+.logo-layer { filter: brightness(0) invert(0.095); }
+/* The logo leads (diverges from Figma's 57%, 2026-10-16): it must read above the comic montage */
+.hero .logo-layer.opacity-57 { opacity: 0.94; }
+.logo-emboss { filter: brightness(0) invert(0.095) drop-shadow(0 calc(4 * var(--u)) calc(2 * var(--u)) rgb(255 255 255 / 0.13)); }
+
+/* Figma draws the paper sheets over the side menu too (LINEAR_BURN, 32%), giving the red its grain. */
+.rail::after { content: ""; position: absolute; inset: 0; background: url("/img/paper.webp") center / cover; mix-blend-mode: multiply; opacity: 0.32; pointer-events: none; }
+.rail > * { z-index: 1; }
+
+/* ── Video stage (Home) ── */
+.video-stage { --lift: 0; }
+.video-frame {             /* 16:9 player scaled to cover the window */
+  left: 50%; top: 50%; width: max(100%, 177.78vh); height: max(100%, 56.25vw); transform: translate(-50%, -50%) scale(1.02);
+}
+.video-poster { transition: opacity 600ms ease; }
+.video-poster[data-hidden="true"] { opacity: 0; }
+.video-shade { opacity: calc(0.49 - var(--lift) * 0.31); }   /* Figma: 49% black at rest, lighter once uncovered */
+.video-cta { gap: calc(14 * var(--u)); opacity: var(--lift); transition: transform 200ms ease; }
+.video-play { transition: transform 200ms ease; }
+.video-hit:hover .video-play { transform: scale(1.08); }
+/* playing with sound: the button goes away — just the video (a click pauses and brings it back) */
+.video-cta[data-sound="true"] { opacity: 0; transition: opacity 500ms ease, transform 200ms ease; }
+.video-hit:has(.video-cta[data-sound="true"]) { cursor: default; }
+.video-label { font-size: calc(12 * var(--u)); letter-spacing: calc(3.96 * var(--u)); padding-left: calc(3.96 * var(--u)); text-shadow: 0 1px 6px rgb(0 0 0 / 0.6); }
+.video-hit:focus-visible { outline: 3px solid #fff; outline-offset: -8px; }
+
+/* ── Rise-in (Home): text and buttons fade up once as they arrive ── */
+[data-rise] { opacity: 0; translate: 0 calc(40 * var(--u)); transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), translate 1s cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: calc(var(--rise-i, 0) * 110ms); }
+[data-rise].is-in { opacity: 1; translate: 0 0; }
+[data-speed] { will-change: translate; }
+@media (prefers-reduced-motion: reduce) { [data-rise] { opacity: 1; translate: none; transition: none; } }
+
+/* The red paper ends at its torn edge: below it (design y 930 → 1000) Figma has a hard-edged dark band
+   over the video. Faded out instead, so the edge reads cleanly at rest and while the paper lifts. */
+.hero-paper {
+  --edge-u: calc(var(--edge, 0) * var(--u));
+  /* tall enough that the mask (clipped to this box) covers the pushed-down edge on every screen */
+  bottom: auto; height: calc((1250 + var(--edge, 0)) * var(--u));
+  -webkit-mask: linear-gradient(#000 0 calc(925 * var(--u) + var(--edge-u)), transparent calc(990 * var(--u) + var(--edge-u))) 0 0 / 100% calc(1200 * var(--u) + var(--edge-u)) no-repeat;
+          mask: linear-gradient(#000 0 calc(925 * var(--u) + var(--edge-u)), transparent calc(990 * var(--u) + var(--edge-u))) 0 0 / 100% calc(1200 * var(--u) + var(--edge-u)) no-repeat;
+}
+.hero-sheet {
+  translate: 0 calc(var(--edge, 0) * var(--u));
+  /* only the lower part shows, faded in over the original between design y 560 and 760 */
+  -webkit-mask: linear-gradient(transparent calc((560 - var(--edge, 0)) * var(--u)), #000 calc((760 - var(--edge, 0)) * var(--u))) 0 0 / 100% calc(3000 * var(--u)) no-repeat;
+          mask: linear-gradient(transparent calc((560 - var(--edge, 0)) * var(--u)), #000 calc((760 - var(--edge, 0)) * var(--u))) 0 0 / 100% calc(3000 * var(--u)) no-repeat;
+}
+/* Home: the paper grain continues down to the pushed torn edge (cover, so never stretched) */
+.hero-sheet ~ .hero-tex.tex-grain { height: calc((1038 + var(--edge, 0)) * var(--u)); }
+/* the burned drawing ends softly instead of on a line */
+/* burn.webp has a white border; on Home its lower edge (design y ~936) lightened the red in a band
+   above the tear (2026-10-19) — the layer fades out before it */
+.hero-burn { -webkit-mask: linear-gradient(#000 66%, transparent 90%); mask: linear-gradient(#000 66%, transparent 90%); }
+
+/* ── Blood drip (components/Drip.tsx). Lengths in SVG user units = design px via --len. ── */
+.drip { --lenpx: calc(var(--len) * 1px); }
+.drip .drip-trail { clip-path: inset(0 0 100% 0); }
+.drip .drip-bead { transform-box: fill-box; transform-origin: center; transform: scale(0); }
+.drip .drip-head { opacity: 0; }
+.drip .drip-diamond { transform-box: fill-box; transform-origin: center; transform: scale(0); }
+.drip .drip-drop { opacity: 0; transform-box: fill-box; transform-origin: 50% 0; }
+
+/* 1 · the bead swells */
+.drip[data-drip="run"] .drip-bead { animation: drip-bead 0.7s cubic-bezier(0.3, 1.4, 0.5, 1) var(--d) forwards; }
+@keyframes drip-bead { to { transform: scale(1); } }
+/* 2 · it runs down: hesitates, runs, slows */
+.drip[data-drip="run"] .drip-trail { animation: drip-trail 2.6s cubic-bezier(0.62, 0, 0.18, 1) calc(var(--d) + 0.5s) forwards; }
+@keyframes drip-trail { to { clip-path: inset(0 0 0 0); } }
+.drip[data-drip="run"] .drip-head { animation: drip-head 2.6s cubic-bezier(0.62, 0, 0.18, 1) calc(var(--d) + 0.5s) forwards; }
+@keyframes drip-head {
+  0%   { opacity: 0; transform: translateY(0) scale(0.6); }
+  8%   { opacity: 1; transform: translateY(2px) scale(1, 1.15); }
+  92%  { opacity: 1; transform: translateY(calc(var(--lenpx) + 1px)) scale(1.15, 1); }
+  100% { opacity: 1; transform: translateY(calc(var(--lenpx) + 3px)) scale(1.25, 0.95); }
+}
+/* diamond end: the tip becomes the diamond */
+.drip-diamond[data-drip="run"] .drip-head { animation-name: drip-head-diamond; }
+@keyframes drip-head-diamond {
+  0%   { opacity: 0; transform: translateY(0) scale(0.6); }
+  8%   { opacity: 1; transform: translateY(2px) scale(1, 1.15); }
+  92%  { opacity: 1; transform: translateY(calc(var(--lenpx) + 1px)) scale(1.15, 1); }
+  100% { opacity: 0; transform: translateY(calc(var(--lenpx) + 5px)) scale(1.4, 0.9); }
+}
+.drip[data-drip="run"] .drip-diamond { animation: drip-diamond 0.75s cubic-bezier(0.3, 1.6, 0.5, 1) calc(var(--d) + 2.85s) forwards; }
+@keyframes drip-diamond { 0% { transform: scale(0.3, 0.6); } 60% { transform: scale(1.12, 0.92); } 100% { transform: scale(1); } }
+/* 3 · then, every few seconds, a droplet gathers and falls */
+.drip[data-drip="run"] .drip-drop { animation: drip-drop var(--every) ease-in calc(var(--d) + 4.2s) infinite; }
+@keyframes drip-drop {
+  0%   { opacity: 0; transform: translateY(0) scale(0.2); }
+  18%  { opacity: 1; transform: translateY(0.6px) scale(0.9, 1.1); }
+  30%  { opacity: 1; transform: translateY(1.4px) scale(0.85, 1.25); }
+  46%  { opacity: 1; transform: translateY(70px) scale(0.75, 1.5); }
+  54%  { opacity: 0; transform: translateY(110px) scale(0.6, 1.6); }
+  100% { opacity: 0; transform: translateY(110px) scale(0.6, 1.6); }
+}
+/* finished state (reduced motion) */
+.drip[data-drip="done"] .drip-trail { clip-path: none; }
+.drip[data-drip="done"] .drip-bead, .drip[data-drip="done"] .drip-diamond { transform: none; }
+.drip-drop[data-drip="done"] .drip-head { opacity: 1; transform: translateY(calc(var(--lenpx) + 3px)); }
+
+/* ── Hero montage (Home): comic frames printed into the red paper, in the corners ── */
+.montage {
+  left: 0; top: 0; width: 100%; height: calc(930 * var(--u));
+  mix-blend-mode: multiply;
+  overflow: hidden;
+  /* the centre (logo, title, button) stays clear: frames fade out toward the middle */
+  -webkit-mask: radial-gradient(ellipse 30% 36% at 50% 47%, rgb(0 0 0 / 0.25) 30%, #000 100%);
+          mask: radial-gradient(ellipse 30% 36% at 50% 47%, rgb(0 0 0 / 0.25) 30%, #000 100%);
+}
+/* placed and sized by HeroMontage at the image's own aspect ratio — never stretched */
+.montage[data-phase="burst"] { -webkit-mask: none; mask: none; }   /* the centre is free until the logo comes */
+.montage-frame {
+  position: absolute; object-fit: contain;
+  will-change: transform, opacity; backface-visibility: hidden;
+  filter: contrast(0.8) brightness(1.15);
+  /* soft edges, so a photo or sketch-page frame never shows as a hard box */
+  -webkit-mask: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%);
+          mask: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%);
+}
+.montage-flash { background: #ffe9e6; opacity: 0; mix-blend-mode: normal; }
+
+/* The logo waits for the montage burst (Home): HeroMontage sets data-logo wait → go */
+.hero[data-logo="wait"] .hero-in { animation: none !important; opacity: 0; }
+.hero[data-logo="go"] .hero-in { animation: hero-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.hero[data-logo="go"] .hero-in:nth-child(1) { animation-delay: 0.05s; }
+.hero[data-logo="go"] .hero-in:nth-child(2) { animation-delay: 0.2s; }
+.hero[data-logo="go"] .hero-in:nth-child(3) { animation-delay: 0.35s; }
+.hero[data-logo="go"] .hero-in:nth-child(4) { animation-delay: 0.45s; }
+
+/* Home: the burned-in drawing appears with the logo and stays */
+.hero .hero-burn { transition: opacity 1.2s ease; }
+.hero[data-logo="wait"] .hero-burn { opacity: 0; transition: none; }
+.hero[data-lifted="true"] .hero-burn { opacity: 0; }
+
+/* ── Home hero: TV glitch over the red paper ── */
+.glitch { left: 0; top: 0; width: 100%; height: calc(930 * var(--u)); z-index: 4; opacity: 0; overflow: hidden; }
+.glitch[data-on] { opacity: 1; }
+.glitch-static { position: absolute; inset: -20%; background: url("/svg/static.svg") 0 0 / 300px 300px; opacity: 0.32; mix-blend-mode: overlay; }
+.glitch[data-on] .glitch-static { animation: g-static 90ms steps(1) infinite; }
+@keyframes g-static { 0% { transform: translate(0, 0); } 25% { transform: translate(-47px, 31px); } 50% { transform: translate(63px, -19px); } 75% { transform: translate(-21px, -58px); } }
+.glitch-lines { position: absolute; inset: 0; background: repeating-linear-gradient(to bottom, rgb(0 0 0 / 0.28) 0 1px, transparent 1px 3px); mix-blend-mode: multiply; }
+.glitch-roll { position: absolute; left: 0; right: 0; height: 22%; top: -22%; background: linear-gradient(to bottom, transparent, rgb(255 255 255 / 0.16) 40%, rgb(0 0 0 / 0.25) 60%, transparent); }
+.glitch[data-on] .glitch-roll { animation: g-roll var(--g-dur, 400ms) linear; }
+@keyframes g-roll { to { top: 100%; } }
+
+/* ── Home hero: smoke around the logo ── */
+.smoke-wisp { mix-blend-mode: multiply; opacity: 0; animation: smoke-in 3s ease 0.6s forwards, var(--drift) ease-in-out infinite alternate; will-change: transform; }
+.smoke-a { --drift: smoke-a 23s; --o: 0.42; }
+.smoke-b { --drift: smoke-b 29s; --o: 0.36; }
+.smoke-c { --drift: smoke-c 31s; --o: 0.3; }
+.smoke-d { --drift: smoke-d 37s; --o: 0.26; }
+@keyframes smoke-in { to { opacity: var(--o); } }
+@keyframes smoke-a { from { transform: translate(-4%, 2%) rotate(-3deg) scale(1); } to { transform: translate(9%, -5%) rotate(5deg) scale(1.12); } }
+@keyframes smoke-b { from { transform: translate(5%, -3%) rotate(4deg) scale(1.05); } to { transform: translate(-10%, 4%) rotate(-4deg) scale(0.95); } }
+@keyframes smoke-c { from { transform: translate(-6%, 3%) scale(1.1); } to { transform: translate(6%, -6%) scale(0.92) rotate(6deg); } }
+@keyframes smoke-d { from { transform: translate(3%, 4%) rotate(8deg); } to { transform: translate(-5%, -2%) rotate(-6deg) scale(1.15); } }
+.hero[data-logo="wait"] .smoke-wisp { animation-play-state: paused; }
+
+/* ── Home hero: PRESS START ── */
+.press-start {
+  display: inline-flex; align-items: center; gap: calc(18 * var(--u));
+  padding: calc(16 * var(--u)) calc(28 * var(--u)) calc(14 * var(--u));
+  /* Darkcastle, like the section titles (Fellipe, 2026-10-16); lowercase as the titles are, since
+     blackletter capitals don't read */
+  font-family: var(--font-castle); font-feature-settings: "ss05" 1; font-size: calc(40 * var(--u)); letter-spacing: calc(1 * var(--u)); text-transform: lowercase; line-height: 1;
+  color: #fff; text-decoration: none; white-space: nowrap;
+  text-shadow: 0 0 calc(10 * var(--u)) rgb(255 255 255 / 0.55), calc(2 * var(--u)) calc(2 * var(--u)) 0 #5a0005;
+}
+.press-start-label { animation: press-blink 1.1s steps(1) infinite; }
+/* a drawn triangle, not "▶" — iOS renders that character as an emoji */
+.press-start-arrow { width: 0; height: 0; border-style: solid; border-width: calc(7 * var(--u)) 0 calc(7 * var(--u)) calc(11 * var(--u)); border-color: transparent transparent transparent #fff; filter: drop-shadow(calc(2 * var(--u)) calc(2 * var(--u)) 0 #5a0005); animation: press-nudge 1.1s ease-in-out infinite; }
+@keyframes press-blink { 0%, 62% { opacity: 1; } 63%, 100% { opacity: 0; } }
+@keyframes press-nudge { 0%, 100% { translate: 0 0; } 50% { translate: calc(6 * var(--u)) 0; } }
+.press-start:hover .press-start-label, .press-start:focus-visible .press-start-label { animation-duration: 0.18s; }
+.press-start:focus-visible { outline: 2px solid #fff; outline-offset: calc(6 * var(--u)); }
+@media (prefers-reduced-motion: reduce) { .press-start-label, .press-start-arrow, .smoke-wisp { animation: none; } .smoke-wisp { opacity: 0.3; } }
+
+/* ════════════════════════════════════════════════════════════════════════════════════════════
+   "This is clickable" — every interactive thing invites a click (2026-10-16).
+   Idle: a periodic cue (menu lines, button shine, video ring). Hover: a clear response.
+   All cues stop with prefers-reduced-motion.
+   ════════════════════════════════════════════════════════════════════════════════════════════ */
+
+/* Menu (three lines): every 4s the lines ripple out and back, one after another */
+.menu-btn[data-open="false"] span { animation: menu-call 4s ease-in-out infinite; }
+.menu-btn[data-open="false"] span:nth-child(2) { animation-delay: 0.12s; }
+.menu-btn[data-open="false"] span:nth-child(3) { animation-delay: 0.24s; }
+@keyframes menu-call {
+  0%, 78%, 100% { translate: 0 0; }
+  84% { translate: calc(-10 * var(--u)) 0; }
+  90% { translate: calc(3 * var(--u)) 0; }
+  95% { translate: 0 0; }
+}
+.menu-btn:hover span { animation-play-state: paused; }
+
+/* Red buttons: a light sweep runs across the body every 6s; hover lights it up */
+.btn-body { overflow: hidden; }
+.btn-body::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: -40%; width: 30%;
+  background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.35), transparent);
+  transform: skewX(-18deg); animation: btn-shine 6s ease-in-out infinite; pointer-events: none;
+}
+@keyframes btn-shine { 0%, 82% { left: -40%; } 100% { left: 130%; } }
+.btn:hover .btn-body { box-shadow: 0 0 calc(18 * var(--u)) rgb(255 60 60 / 0.55); }
+.btn:hover .btn-body::after { animation-duration: 1.1s; }
+.btn, .rail-btn, .menu-btn, .social, .video-hit, .press-start, .rail-link, .rail-logo { cursor: pointer; }
+
+/* Rail "Loja": same shine, darker */
+.rail-btn-body { overflow: hidden; }
+.rail-btn-body::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: -40%; width: 30%;
+  background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.22), transparent);
+  transform: skewX(-18deg); animation: btn-shine 6s ease-in-out 1.5s infinite; pointer-events: none;
+}
+
+/* Video diamond: a ring pulses out from it while the sound is off */
+.video-cta::before {
+  content: ""; position: absolute; left: 50%; top: calc(69 * var(--u)); width: calc(110 * var(--u)); height: calc(110 * var(--u));
+  border: calc(2 * var(--u)) solid rgb(255 255 255 / 0.7); border-radius: 50%;
+  translate: -50% -50%; animation: video-ring 2.4s ease-out infinite; pointer-events: none;
+}
+.video-cta[data-sound="true"]::before { display: none; }
+@keyframes video-ring { 0% { scale: 0.7; opacity: 0.8; } 100% { scale: 1.7; opacity: 0; } }
+
+/* Menu links and text links: the underline draws in on hover */
+.rail-link { background: linear-gradient(currentColor, currentColor) 50% 100% / 0 1px no-repeat; transition: background-size 220ms ease, opacity 160ms ease; padding-bottom: 2px; }
+.rail-link:hover { background-size: 100% 1px; opacity: 1; }
+
+/* Social icons: lift and glow */
+.social:hover { filter: drop-shadow(0 0 calc(6 * var(--u)) rgb(255 60 60 / 0.6)); }
+
+/* Form fields: the border warms up on hover */
+.field:hover { box-shadow: 0 0 0 calc(3 * var(--u)) rgb(230 37 44 / 0.12); }
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-btn span, .btn-body::after, .rail-btn-body::after, .video-cta::before { animation: none; }
+}
+
+/* Calm hero (Campanha): the logo, title, button and date drift in slowly, one after another */
+.hero[data-calm] .hero-in { animation: hero-in 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.hero[data-calm] .hero-in:nth-child(2) { animation-delay: 0.3s; }
+.hero[data-calm] .hero-in:nth-child(3) { animation-delay: 0.6s; }
+.hero[data-calm] .hero-in:nth-child(4) { animation-delay: 0.85s; }
+.hero[data-calm] .hero-in:nth-child(5) { animation-delay: 1.1s; }
+
+/* Calm hero (Campanha): no seam under the torn edge. The paper multiplies onto the page's own paper
+   sheets (which start under the hero), so the white below the tear is the same paper as the page;
+   the grain and the burned drawing fade out instead of stopping on a line (y 957 / 886). */
+.hero[data-calm] .hero-paper { mix-blend-mode: multiply; }
+.hero[data-calm] .hero-tex { -webkit-mask: linear-gradient(#000 78%, transparent 97%); mask: linear-gradient(#000 78%, transparent 97%); }
+/* the slow comic frames stop above the tear (they may hang 20% below their box) */
+.hero[data-calm] .montage { overflow: hidden; -webkit-mask: linear-gradient(#000 84%, transparent 93%); mask: linear-gradient(#000 84%, transparent 93%); }
+
+/* ══ Phone layout (< 1100px) — components/m/*. Our own design; desktop stays as it is. ══════════════
+   Pages render both layouts; one shows. --u is a phone design pixel (≈1px on a 390-wide phone,
+   capped at 480 so tablets get a roomier column, not giant type). */
+.mob, .m-fixed { --u: calc(min(100vw, 480px) / 390); }
+.mob { display: none; }
+.m-fixed { display: none; }
+@media (max-width: 1099.98px) {   /* phone layout up to 1100: iPad Pro 13" portrait (1024) included, 2026-10-20 */
+  .desk { display: none; }
+  .mob { display: block; }
+  .m-fixed { display: block; }
+}
+.mob { position: relative; isolation: isolate; overflow-x: clip; background: #fff; }
+/* the crumpled paper, as on desktop (32% multiply): paper-m.webp is the sheet turned to portrait with a
+   mirrored copy under it, so it tiles down the page without a seam */
+.mob::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url("/img/paper-m.webp") 50% 0 / 100% auto repeat-y; opacity: 0.32; mix-blend-mode: multiply; }
+
+.m-sec { position: relative; padding-block: calc(56 * var(--u)); }
+.m-col { width: min(100% - 2 * 24px, 600px); margin-inline: auto; position: relative; }
+.m-anchor { position: absolute; width: 0; height: 0; }
+.m-anchor > .abs { position: absolute; }
+.m-stack > .m-col > * + * { margin-top: calc(22 * var(--u)); }
+.m-stack > .m-col > .m-label + * { margin-top: calc(8 * var(--u)); }
+
+/* titles with ruled lines and diamond ends */
+.m-title { display: flex; align-items: center; gap: calc(14 * var(--u)); }
+.m-title > :is(h1, h2, h3, p) { color: var(--color-blood); mix-blend-mode: multiply; line-height: 1.05; white-space: nowrap; }
+.m-title-left > :is(h1, h2, h3, p) { white-space: normal; }
+.m-rule { position: relative; flex: 1 1 0; min-width: calc(14 * var(--u)); height: 1px; background: var(--color-blood); }
+.m-rule::after { content: ""; position: absolute; top: 50%; width: calc(7 * var(--u)); height: calc(7 * var(--u)); background: var(--color-blood); transform: translate(-50%, -50%) rotate(45deg); }
+.m-rule-l::after { left: 0; }
+.m-rule-r::after { left: 100%; }
+/* text sits inset from the title rules, so the drips from their ends fall in the margin, not on the words */
+.m-body { line-height: 1.6; color: #000; padding-inline: calc(20 * var(--u)); }
+.m-label, .m-meta { padding-inline: calc(20 * var(--u)); }
+.m-title-left > :is(h1, h2, h3, p), .m-title-right > :is(h1, h2, h3, p) { max-width: calc(100% - 30 * var(--u)); }
+.m-label { font-size: calc(12 * var(--u)); letter-spacing: calc(3 * var(--u)); line-height: 1.5; color: #d31217; }
+
+/* bracket frame (desktop Brackets around a 544.776 × 639.649 window, in % of the 648.5 × 743.4 frame) */
+.m-frame { position: relative; aspect-ratio: 648.536 / 743.41; }
+.m-br { position: absolute; width: 22.64%; aspect-ratio: 1; pointer-events: none; }
+.m-br-tl { left: 0; top: 0; transform: rotate(180deg); }
+.m-br-tr { left: 76.57%; top: 0; transform: scaleY(-1); }
+.m-br-bl { left: 0; top: 80.46%; transform: rotate(180deg) scaleY(-1); }
+.m-br-br { left: 76.57%; top: 80.46%; }
+.m-frame-photo { position: absolute; inset: 6.98% 8%; overflow: hidden; }
+.m-frame-img { position: absolute; left: 0; top: -8%; width: 100%; height: 116%; object-fit: cover; }
+
+/* ── phone hero: one screen of torn red paper ── */
+.m-hero { position: relative; height: max(100svh, calc(640 * var(--u))); overflow: hidden; pointer-events: none; }
+.m-hero-paper { position: absolute; inset: 0; mix-blend-mode: multiply; }
+.m-hero-red { position: absolute; inset: 0 0 13%; pointer-events: none; }   /* MobileChrome: the hamburger is white while over this */
+/* the photo is the desktop paper turned 180°, cropped as on desktop (box 1622 tall at y −447, tear at
+   ~1357): 164% tall from −45.3% puts the red from the top and the tear at ~92% of the hero */
+.m-hero-photo { position: absolute; top: -45.3%; left: 50%; height: 164%; width: auto; aspect-ratio: 3000 / 1832; max-width: none; translate: -50% 0; rotate: 180deg; filter: contrast(0.958) brightness(1.164); }
+.m-hero-grain { position: absolute; inset: 0 0 12%; width: 100%; height: 88%; object-fit: cover; opacity: 0.32; mix-blend-mode: multiply; }
+/* burn-m.webp: burn.webp without its white margins; the drawing sits on the right, fading out low */
+.m-hero-burn { position: absolute; right: -60%; top: 0; height: 84%; width: auto; max-width: none; opacity: 0.41; mix-blend-mode: color-burn;
+  -webkit-mask: linear-gradient(#000 62%, transparent 100%); mask: linear-gradient(#000 62%, transparent 100%); }
+.m-hero .montage { height: 86%; -webkit-mask: radial-gradient(ellipse 42% 30% at 50% 42%, rgb(0 0 0 / 0.2) 30%, #000 100%); mask: radial-gradient(ellipse 42% 30% at 50% 42%, rgb(0 0 0 / 0.2) 30%, #000 100%); }
+.m-corner { position: absolute; top: calc(12 * var(--u)); width: calc(104 * var(--u)); height: calc(104 * var(--u)); }
+.m-corner-l { left: calc(10 * var(--u)); transform: rotate(180deg); }
+.m-corner-r { right: calc(10 * var(--u)); transform: scaleY(-1); }
+.m-hero-content { position: absolute; inset: 0 0 10%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(26 * var(--u)); }
+.m-hero-content a, .m-hero-content button { pointer-events: auto; }
+.m-smoke { position: absolute; inset: 0; pointer-events: none; }
+.m-smoke img { position: absolute; }
+.m-smoke .smoke-a { left: -30%; top: 18%; width: 90%; }
+.m-smoke .smoke-b { left: 35%; top: 22%; width: 95%; }
+.m-smoke .smoke-c { left: 0%; top: 34%; width: 100%; }
+.m-logo { position: relative; width: calc(310 * var(--u)); aspect-ratio: 800 / 317.5; }
+.m-bl { display: flex; align-items: center; gap: calc(14 * var(--u)); color: #fff; font-size: calc(14 * var(--u)); letter-spacing: calc(9 * var(--u)); margin-top: calc(-6 * var(--u)); }
+.m-bl img { width: calc(22 * var(--u)); height: calc(52 * var(--u)); }
+.m-date { color: #fff; font-size: calc(11 * var(--u)); letter-spacing: calc(6 * var(--u)); padding-left: calc(6 * var(--u)); white-space: nowrap; margin-top: calc(-8 * var(--u)); }
+
+/* ── phone footer ── */
+.m-foot { position: relative; height: calc(620 * var(--u)); overflow: visible; }   /* visible: the descending angel comes from above it (.mob clips the sides) */
+.m-foot-tall { height: calc(900 * var(--u)); }
+.m-clouds { position: absolute; left: 0; top: 0; width: 100%; height: 78%; object-fit: cover; object-position: 50% 100%;
+  -webkit-mask: linear-gradient(transparent, #000 22%); mask: linear-gradient(transparent, #000 22%); }
+.m-rocks { position: absolute; left: 0; bottom: calc(120 * var(--u)); width: 100%; height: calc(230 * var(--u)); object-fit: cover; object-position: left center; }
+.m-foot-fade { position: absolute; inset: auto 0 0; height: calc(330 * var(--u)); background: linear-gradient(rgb(0 0 0 / 0), #000 70%); }
+.m-foot-info { position: absolute; inset: auto 0 0; display: flex; flex-direction: column; align-items: center; gap: calc(20 * var(--u)); padding-bottom: calc(30 * var(--u) + env(safe-area-inset-bottom)); }
+.m-flogo { width: calc(150 * var(--u)); height: auto; }
+.m-socials { display: flex; gap: calc(26 * var(--u)); }
+.m-socials a { width: calc(34 * var(--u)); height: calc(34 * var(--u)); }
+.m-rights { color: rgb(255 255 255 / 0.7); font-size: calc(9.5 * var(--u)); letter-spacing: calc(2.6 * var(--u)); text-align: center; padding-inline: 16px; }
+
+/* ── phone chrome (portalled): hamburger, menu sheet ── */
+.m-burger { position: fixed; z-index: 70; top: calc(16 * var(--u) + env(safe-area-inset-top)); right: calc(14 * var(--u)); width: calc(48 * var(--u)); height: calc(48 * var(--u)); padding: calc(12 * var(--u)) calc(8 * var(--u)); border: 0; background: none; cursor: pointer;
+  display: flex; flex-direction: column; justify-content: space-between; }
+.m-burger span { display: block; height: calc(3 * var(--u)); border-radius: calc(2 * var(--u)); background: var(--color-red); transition: background-color 250ms ease, transform 300ms ease, width 300ms ease, opacity 200ms ease; }
+.m-burger span:nth-child(2) { width: 72%; margin-left: auto; }
+.m-burger span:nth-child(3) { width: 86%; margin-left: auto; }
+.m-burger[data-open="true"] span { background: #fff; }
+/* not on the hero: the hamburger appears once the page turns white, as on desktop (2026-10-19) */
+.m-burger { transition: opacity 300ms ease; }
+.m-burger[data-red="true"] { opacity: 0; pointer-events: none; }
+.m-burger[data-open="true"] span:nth-child(1) { transform: translateY(calc(9.5 * var(--u))) rotate(45deg); }
+.m-burger[data-open="true"] span:nth-child(2) { opacity: 0; }
+.m-burger[data-open="true"] span:nth-child(3) { width: 100%; transform: translateY(calc(-9.5 * var(--u))) rotate(-45deg); }
+
+.m-menu { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
+.m-menu[data-open="true"] { pointer-events: auto; }
+.m-menu-dim { position: absolute; inset: 0; background: rgb(0 0 0 / 0.45); opacity: 0; transition: opacity 400ms ease; }
+.m-menu[data-open="true"] .m-menu-dim { opacity: 1; }
+/* the sheet: the red paper with its torn edge, dropping from the top */
+.m-menu-sheet { position: absolute; inset: 0 0 auto; height: 92svh; overflow: hidden; translate: 0 -105%; transition: translate 620ms cubic-bezier(0.7, 0, 0.2, 1); }
+.m-menu[data-open="true"] .m-menu-sheet { translate: 0 0; }
+.m-menu-photo { position: absolute; top: -45.3%; left: 50%; height: 164%; width: auto; aspect-ratio: 3000 / 1832; max-width: none; translate: -50% 0; rotate: 180deg; filter: contrast(0.958) brightness(1.164) saturate(1.05); }
+.m-menu-grain { position: absolute; inset: 0 0 12%; width: 100%; height: 88%; object-fit: cover; opacity: 0.32; mix-blend-mode: multiply; }
+.m-menu-in { position: absolute; inset: 0 0 12%; display: flex; flex-direction: column; align-items: center; padding-top: calc(70 * var(--u) + env(safe-area-inset-top)); }
+.m-menu-logo img { width: calc(150 * var(--u)); height: auto; }
+.m-menu ul { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(10 * var(--u)); }
+.m-menu li { opacity: 0; translate: 0 calc(16 * var(--u)); transition: opacity 400ms ease, translate 500ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+.m-menu[data-open="true"] li { opacity: 1; translate: 0 0; transition-delay: calc(260ms + var(--i) * 70ms); }
+.m-menu li a { display: block; color: #fff; font-size: calc(54 * var(--u)); line-height: 1.15; text-decoration: none; }
+/* the current page stays white (dark red vanished on the red sheet), marked with a small diamond */
+.m-menu li a[aria-current="page"] { position: relative; }
+.m-menu li a[aria-current="page"]::before { content: ""; position: absolute; right: calc(100% + 14 * var(--u)); top: 55%; width: calc(9 * var(--u)); height: calc(9 * var(--u)); background: #fff; transform: translateY(-50%) rotate(45deg); }
+/* the desktop rail button (chamfered caps, dark red), at phone size */
+.m-menu-cta { position: relative; width: calc(190 * var(--u)); height: calc(52 * var(--u)); margin-bottom: calc(12 * var(--u)); color: #fff; text-decoration: none; }
+.m-menu-cta .rail-btn-body { font-size: calc(14 * var(--u)); }
+
+@media (prefers-reduced-motion: reduce) { .m-menu-sheet, .m-menu li, .m-burger span { transition: none; } }
+
+/* Autores portraits */
+/* multiply on the outer box: its rotate / mask makes it a stacking context, so it blends as a whole */
+.m-portrait { position: relative; mix-blend-mode: multiply; }
+.m-portrait img { width: 100%; height: 100%; object-fit: cover; }
+.m-portrait-isra { width: 74%; margin-inline: auto 6%; aspect-ratio: 458.193 / 566.107; rotate: 7.51deg; }
+.m-portrait-match { width: 80%; margin-inline: 4% auto; aspect-ratio: 505.949 / 625.11; }
+/* the Figma mask box (498.148 × 554 at 4.047, 29.354) with the photo re-expanded to the full box */
+.m-portrait-mask { position: absolute; left: 0.8%; top: 4.7%; width: 98.46%; height: 88.62%; overflow: hidden;
+  -webkit-mask: url("/svg/portrait-match-mask.svg") 0 0 / 100% 100% no-repeat; mask: url("/svg/portrait-match-mask.svg") 0 0 / 100% 100% no-repeat; }
+.m-portrait-mask img { position: absolute; max-width: none; left: -0.81%; top: -5.3%; width: 101.57%; height: 112.84%; }
+
+/* phone buttons: tighter tracking so long labels fit the column */
+.mob .btn-body, .m-fixed .btn-body { font-size: calc(16 * var(--u)); letter-spacing: calc(3.6 * var(--u)); padding-left: calc(3.6 * var(--u)); }
+/* buttons in the flow: the caps hang 10u outside the body */
+.m-cta { padding-inline: calc(10 * var(--u)); }
+.m-cta-center { display: flex; justify-content: center; }
+.m-meta { display: flex; flex-wrap: wrap; gap: calc(8 * var(--u)) calc(18 * var(--u)); font-size: calc(11 * var(--u)); letter-spacing: calc(2.6 * var(--u)); color: var(--color-ink-soft); }
+
+/* ── Campanha (phone) ── */
+/* the sigil floats right: the text runs beside it, then full width below — never over it (2026-10-19) */
+.m-sigil { float: right; width: 36%; margin: calc(4 * var(--u)) 0 calc(10 * var(--u)) calc(14 * var(--u)); opacity: 0.32; pointer-events: none; mix-blend-mode: multiply; shape-outside: margin-box; }
+.m-sigil img { width: 100%; height: auto; }
+/* arches and stars at the desktop geometry (Figma 253:1272, box x 149–1196, y 1662–2786), as % of
+   that box, so the stars sit on the same arch edges as on desktop (2026-10-19) */
+.m-arches { position: relative; width: 100%; aspect-ratio: 1047 / 1124; margin-top: calc(40 * var(--u)) !important; }
+.m-arch { position: absolute; overflow: hidden; border-radius: 999px 999px 0 0; }
+.m-arch img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.m-arch img.object-bottom { object-position: bottom; }
+.m-arch-1 { left: 0; top: 28.56%; width: 32.19%; height: 53.38%; }
+.m-arch-3 { left: 33.33%; top: 0; width: 33.33%; height: 72.24%; }
+.m-arch-2 { left: 67.81%; top: 46.62%; width: 32.19%; height: 53.38%; }
+.m-star { position: absolute; z-index: 1; pointer-events: none; height: auto; }
+.m-star-100 { left: 61.89%; top: 20.91%; width: 9.55%; }
+.m-star-66 { left: 29.04%; top: 55.78%; width: 6.30%; }
+.m-star-40 { left: 65.90%; top: 92.08%; width: 3.82%; }
+.m-band { position: relative; padding: calc(56 * var(--u)) 28px; margin-block: calc(10 * var(--u)); }
+.m-band img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: hue-rotate(-9deg) saturate(1.05) brightness(0.9); }
+.m-band p { position: relative; color: #fff; text-align: center; font-size: calc(21 * var(--u)); line-height: 1.45; letter-spacing: calc(0.8 * var(--u)); max-width: 560px; margin-inline: auto; }
+.m-quote { position: relative; padding-bottom: calc(22 * var(--u)); display: flex; flex-wrap: wrap; align-items: center; gap: 0 calc(140 * var(--u)); }
+.m-quote p { flex: 1 0 100%; color: #d31217; text-align: center; font-size: calc(19 * var(--u)); line-height: 1.5; margin-bottom: calc(18 * var(--u)); }
+.m-quote .m-rule { flex: 1 1 0; }
+.m-nasce { padding-bottom: 0; }
+.m-nasce-title { color: #dc1319; mix-blend-mode: multiply; text-align: center; font-size: calc(32 * var(--u)); line-height: 1.35; letter-spacing: calc(1 * var(--u)); }
+.m-cover { width: 40%; margin: calc(44 * var(--u)) 4% 0 auto; rotate: 10deg; position: relative; z-index: 2; box-shadow: 0 calc(6 * var(--u)) calc(30 * var(--u)) rgb(0 0 0 / 0.25); }
+.m-cover img { width: 100%; height: auto; display: block; }
+/* 112% of a phone; capped at 437u so on wider phone layouts (iPads in portrait) he stays phone-sized
+   instead of growing with the window and covering the text above the footer (2026-10-20). Up to 480px
+   wide min() picks 112%, so phones are unchanged. Centred by margin: AngelLand owns translate. */
+.m-angel { --aw: min(112%, calc(437 * var(--u))); position: absolute; left: 50%; top: calc(-40 * var(--u)); width: var(--aw); height: auto; aspect-ratio: 1700 / 1826; max-width: none; margin-left: calc(var(--aw) / -2); }
+.m-foot-tall .m-angel { top: calc(-120 * var(--u)); }
+
+/* recompensas carousel */
+.m-rw { margin-inline: calc(-24px); }
+.m-rw-track { display: flex; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: calc(16 * var(--u)) 18%; overscroll-behavior-x: contain; }
+.m-rw-track::-webkit-scrollbar { display: none; }
+.m-rw-card { flex: 0 0 64%; scroll-snap-align: center; margin: 0; height: calc(280 * var(--u)); display: flex; align-items: center; justify-content: center;
+  transform: rotate(calc(var(--tilt) * var(--k, 1))) scale(calc(1 - 0.2 * var(--k, 1))); opacity: calc(1 - 0.55 * var(--k, 1)); transition: transform 120ms linear, opacity 120ms linear; }
+.m-rw-card img { max-width: 92%; max-height: 100%; width: auto; height: auto; mix-blend-mode: multiply; }
+.m-rw-nav { display: flex; align-items: center; justify-content: center; gap: calc(26 * var(--u)); font-size: calc(13 * var(--u)); letter-spacing: calc(3 * var(--u)); color: #d31217; margin-top: calc(6 * var(--u)); }
+.m-rw-nav button { width: calc(40 * var(--u)); height: calc(40 * var(--u)); border: 1px solid #d31217; border-radius: 50%; background: none; color: #d31217; font-size: calc(20 * var(--u)); line-height: 1; cursor: pointer; }
+.m-rw-nav button:disabled { opacity: 0.3; cursor: default; }
+
+/* ── Home (phone) ── */
+.m-hero .glitch { height: 88%; }
+.m-press { pointer-events: auto; margin-top: calc(14 * var(--u)); background: none; border: 0; cursor: pointer; font-size: calc(38 * var(--u)); }
+.m-video-sec { position: relative; padding: calc(28 * var(--u)) 0 0; }
+.m-video-card { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; max-height: 80svh; border: 0; padding: 0; overflow: hidden; background: #000; cursor: pointer; }
+.m-video-card > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.m-video-shade { position: absolute; inset: 0; background: rgb(0 0 0 / 0.4); }
+.m-video-cta { position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: flex; flex-direction: column; align-items: center; gap: calc(14 * var(--u)); color: #fff; font-size: calc(12 * var(--u)); letter-spacing: calc(4 * var(--u)); white-space: nowrap; }
+.m-video-cta img { width: calc(96 * var(--u)); height: calc(96 * var(--u)); transition: transform 200ms ease; }
+.m-video-card:active .m-video-cta img { transform: scale(0.94); }
+.m-tagline { color: var(--color-blood); text-align: center; font-size: calc(19 * var(--u)); line-height: 1.5; }
+.m-manga { width: 118%; margin: calc(-10 * var(--u)) 0 calc(-20 * var(--u)) -14%; rotate: -7.83deg; position: relative; z-index: -0; }
+.m-manga img { width: 100%; height: auto; display: block; }
+.m-btn-sm .btn-body { font-size: calc(12.5 * var(--u)); letter-spacing: calc(1.6 * var(--u)); padding-left: calc(1.6 * var(--u)); }
+.m-join { overflow: hidden; }
+.m-join-sketch { position: absolute; right: -40%; top: 0; width: 120%; opacity: 0.13; mix-blend-mode: multiply; pointer-events: none; z-index: -1; }
+.m-join-sketch img { width: 100%; height: auto; transform: scaleX(-1); }
+.m-available { color: var(--color-red-launch); font-size: calc(11 * var(--u)); letter-spacing: calc(3.6 * var(--u)); white-space: nowrap; }
+.m-join-form { display: grid; grid-template-columns: 1fr auto; gap: calc(12 * var(--u)); margin-top: calc(28 * var(--u)) !important; }
+.m-field { width: 100%; height: 48px; border: 2px solid var(--color-red-edge); border-radius: 11px; padding-inline: 12px; font-size: 16px; color: var(--color-ink-soft); background: #fff; }
+.m-select { position: relative; }
+.m-select select { appearance: none; padding-right: 38px; }
+.m-select img { position: absolute; right: 12px; top: 21px; width: 14px; height: 6px; transform: rotate(180deg); pointer-events: none; }
+.m-join-form .m-cta { grid-column: 1 / -1; margin-top: calc(6 * var(--u)); }
+.m-join-status { grid-column: 1 / -1; color: var(--color-blood); font-size: 15px; min-height: 1.5em; text-align: center; }
+
+/* full-screen video (portalled) */
+/* stays mounted (warm) but invisible until opened, so the tap is instant; fades in */
+.m-video { position: fixed; inset: 0; z-index: 90; background: #000; display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 280ms ease, visibility 0s linear 280ms; }
+.m-video[data-open="true"] { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity 280ms ease; }
+/* the portrait Short fills the screen: 9:16, as big as the window allows */
+.m-video-frame { width: min(100vw, 56.25svh); height: min(100svh, 177.78vw); border: 0; }
+.m-video-x { position: absolute; top: calc(14px + env(safe-area-inset-top)); right: 14px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgb(255 255 255 / 0.12); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.m-video-x img { width: 16px; height: 16px; }
+
+/* the band: the image's orange-red brought to the site's crimson; stretched a little (fill) so both
+   torn edges show on desktop */
+.band-img { filter: hue-rotate(-9deg) saturate(1.05) brightness(0.9); }
+
+/* the hero logo on inner pages is a link home */
+.hero .hero-home { pointer-events: auto; cursor: pointer; }
+.hero .hero-home:focus-visible { outline: 2px solid #fff; outline-offset: 6px; }
+
+/* desktop paper: one seamless background (components/Paper.tsx) */
+.paper-bg { background: url("/img/paper-d.webp") 50% 0 / calc(1866 * var(--u)) auto repeat-y; opacity: 0.32; }
+
+/* ── Home hero: scroll hint (replaced PRESS START) — bobs down and back, the chevrons leading ── */
+.scroll-hint { display: block; padding: calc(10 * var(--u)); pointer-events: auto; cursor: pointer; filter: drop-shadow(0 calc(2 * var(--u)) calc(8 * var(--u)) rgb(0 0 0 / 0.35)); }
+.scroll-hint img { display: block; animation: hint-bob 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+.scroll-hint:hover img, .scroll-hint:focus-visible img { animation-duration: 1s; }
+.scroll-hint:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 8px; }
+@keyframes hint-bob { 0%, 100% { translate: 0 0; opacity: 0.75; } 50% { translate: 0 calc(10 * var(--u)); opacity: 1; } }
+.m-press.scroll-hint img { width: calc(28 * var(--u)); height: auto; }   /* 70% (2026-10-19) */
+@media (prefers-reduced-motion: reduce) { .scroll-hint img { animation: none; opacity: 1; } }
+
+/* the angel floats: a slow bob on transform (AngelLand owns translate) */
+[data-angel] { animation: angel-float 4.2s ease-in-out infinite; will-change: transform, translate; }
+@keyframes angel-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(calc(-14 * var(--u))); } }
+.m-angel { pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { [data-angel] { animation: none; } }
+
+/* phone: page text stays above the descending angel — by putting the FOOTER (clouds, angel, rocks)
+   underneath, not by lifting the sections: a z-index on a section isolates it, and the portraits' and
+   textures' multiply blend then shows white boxes (2026-10-19). */
+.mob .m-foot { z-index: -1; }
+/* desktop: text, buttons and the form stay above the descending angel */
+.desk [data-rise], .desk .canvas form { z-index: 1; }
+/* desktop angel: sized to the window so he fits whole once landed (head to rocks), centred where Figma
+   centred him (x 765.5); AngelLand measures the box, so the landing follows */
+.desk [data-angel] {
+  --ah: min(calc(1184 * var(--u)), 66svh);
+  height: var(--ah); width: calc(var(--ah) * 1131 / 1184);
+  left: calc((765.5 + var(--menu-dx)) * var(--u) - var(--ah) * 1131 / 1184 / 2);
+}
+/* phone hamburger: a soft grey glow behind it so it reads over photos and drawings (2026-10-19,
+   from the client's blurred-dot reference; done in CSS) */
+.m-burger { isolation: isolate; }
+.m-burger::before { content: ""; position: absolute; z-index: -1; left: 50%; top: 50%; width: 170%; height: 170%; translate: -50% -50%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgb(186 186 186 / 0.75), rgb(186 186 186 / 0.45) 45%, rgb(186 186 186 / 0.12) 75%, transparent); }
+.m-burger[data-open="true"]::before { opacity: 0; }
+/* titles without rules (Loja products, join): aligned with the text column, a little air between lines */
+.m-title-left:not(:has(.m-rule)) { padding-inline: calc(20 * var(--u)); }
+.m-title-left:not(:has(.m-rule)) > :is(h1, h2, h3, p) { line-height: 1.15; max-width: none; }
+
+/* Loja (phone): product heading block, stacked labels and facts, the disclaimer's little rule */
+.m-prod-head { display: flex; flex-direction: column; align-items: center; gap: calc(6 * var(--u)); text-align: center; }
+.m-prod-title { color: var(--color-blood); mix-blend-mode: multiply; line-height: 1.1; }
+.m-prod-sub { display: flex; align-items: center; justify-content: center; gap: calc(12 * var(--u)); width: 100%; padding-inline: calc(20 * var(--u)); color: #d31217; font-size: calc(12 * var(--u)); letter-spacing: calc(5 * var(--u)); }
+.m-prod-sub .m-rule { flex: 0 1 calc(40 * var(--u)); min-width: calc(20 * var(--u)); }
+.m-label-stack { display: flex; flex-direction: column; margin-top: calc(14 * var(--u)) !important; }
+.m-prod-head .m-label-stack { align-items: center; color: var(--color-ink-soft); }
+.m-meta-stack { flex-direction: column; gap: calc(4 * var(--u)); color: #d31217; }
+.m-mini-rule { display: block; position: relative; width: calc(46 * var(--u)); height: 1px; background: #d31217; margin: 0 0 calc(14 * var(--u)) calc(20 * var(--u)); }
+.m-mini-rule::after { content: ""; position: absolute; right: 0; top: 50%; width: calc(6 * var(--u)); height: calc(6 * var(--u)); background: #d31217; transform: translate(50%, -50%) rotate(45deg); }
+.mob .m-disclaimer { color: #d31217; }
+.m-join-privacy { grid-column: 1 / -1; color: var(--color-ink-soft); font-size: 12px; line-height: 1.5; text-align: center; }
+.m-join-privacy a { text-decoration: underline; }
