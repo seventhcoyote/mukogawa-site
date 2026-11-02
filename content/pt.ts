@@ -57,8 +57,8 @@ export const pt = {
   },
   join: {
     title: "participe do lançamento",
-    text: "Se você chegou até aqui, está pronto para atravessar para o reino invisível. Junte-se a nós em 1º de dezembro e esteja entre os primeiros leitores.",
-    available: "DISPONÍVEL EM 1º DE DEZEMBRO",
+    text: "Se você chegou até aqui, está pronto para atravessar para o reino invisível. Junte-se a nós e esteja entre os primeiros leitores.",
+    available: "DISPONÍVEL DIA 3 DE NOVEMBRO",
     email: "seuemail@email.com",
     emailLabel: "E-mail",
     country: "País",

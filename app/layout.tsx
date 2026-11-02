@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   title: "Muko-Gawa: Bleeding Light",
   description: "Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica, onde anjos e demônios travam uma guerra oculta aos olhos humanos.",
   metadataBase: new URL("https://mukogawa.com"),
-  openGraph: { title: "Muko-Gawa: Bleeding Light", description: "Um mangá de dark fantasy baseado em literatura bíblica. Disponível em 1º de dezembro.", locale: "pt_BR", type: "website" },
+  openGraph: { title: "Muko-Gawa: Bleeding Light", description: "Mukō-Gawa é um mangá de dark fantasy baseado em literatura bíblica, onde anjos e demônios travam uma guerra oculta aos olhos humanos.", locale: "pt_BR", type: "website" },
   twitter: { card: "summary_large_image" },
 };
 
