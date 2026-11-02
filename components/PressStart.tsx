@@ -11,7 +11,7 @@ import A from "./A";
  *  HomeScroll and Video). */
 export const pressStart = () => dispatchEvent(new Event("mg:press-start"));
 
-export default function PressStart({ label = "Role para baixo" }: { label?: string }) {
+export default function PressStart({ label }: { label: string }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Enter" || scrollY > innerHeight * 0.5 || (e.target as HTMLElement).closest("input, select, textarea, button, a")) return;

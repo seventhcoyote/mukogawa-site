@@ -3,13 +3,13 @@
 /* eslint-disable @next/next/no-img-element -- static export */
 import { useState, type FormEvent } from "react";
 import Button from "../Button";
-import { pt } from "@/content/pt";
+import { useT } from "../Lang";
 import { subscribe, TRAP } from "@/lib/newsletter";
 
 /** Join the launch, phone version of JoinForm (same copy; signups go to the Google Form/Sheet,
  *  lib/newsletter.ts). Inputs at 16px so iOS doesn't zoom in on focus. */
 export default function MJoin() {
-  const t = pt.join;
+  const t = useT().join;
   const [status, setStatus] = useState<"" | "invalid" | "done">("");
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ export default function MJoin() {
         className="m-field font-mincho" onInput={() => status === "invalid" && setStatus("")} />
       <label className="sr-only" htmlFor="m-country">{t.country}</label>
       <span className="m-select">
-        <select id="m-country" name="country" defaultValue="BR" className="m-field font-mincho">
+        <select id="m-country" name="country" defaultValue={t.defaultCountry} className="m-field font-mincho">
           {t.countries.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
         </select>
         <img src="/svg/chevron-red.svg" alt="" />

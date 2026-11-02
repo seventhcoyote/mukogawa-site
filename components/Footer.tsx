@@ -2,13 +2,13 @@
 import type { CSSProperties, ReactNode } from "react";
 import A from "./A";
 import Img from "./Img";
-import { pt } from "@/content/pt";
+import type { Dict } from "@/content";
 import { SOCIAL, ext } from "@/lib/links";
 
 /** Page foot (Figma Frame 1321317079): black gradient with logo, socials and copyright.
  *  `clouds`: the cloud bank (BG2_CLOUDS) at clouds.y; rocks (BG3_ROCKS) sit 134 above the end.
  *  `children` render between the clouds and the rocks (Campanha's angel stands in the clouds). */
-export default function Footer({ height, clouds, children }: { height: number; clouds?: { y: number; h: number }; children?: ReactNode }) {
+export default function Footer({ d, height, clouds, children }: { d: Dict; height: number; clouds?: { y: number; h: number }; children?: ReactNode }) {
   const top = height - 725;
   return (
     <footer>
@@ -27,7 +27,7 @@ export default function Footer({ height, clouds, children }: { height: number; c
       <A x={195} y={top + 430} w={198} h={78} shift>
         <Img src="/img/footer-logo.webp" alt="Muko-Gawa 向こう側" className="object-cover" />
       </A>
-      <A as="ul" x={1078} y={top + 449} shift className="flex" style={{ gap: "calc(24 * var(--u))" }} aria-label={pt.footer.social}>
+      <A as="ul" x={1078} y={top + 449} shift className="flex" style={{ gap: "calc(24 * var(--u))" }} aria-label={d.footer.social}>
         {(["instagram", "discord", "youtube"] as const).map((k) => (
           <li key={k}>
             <a href={SOCIAL[k]} {...ext(SOCIAL[k])} aria-label={k[0].toUpperCase() + k.slice(1)} className="social block" style={{ width: "calc(40 * var(--u))", height: "calc(40 * var(--u))" }}>
@@ -37,7 +37,7 @@ export default function Footer({ height, clouds, children }: { height: number; c
         ))}
       </A>
       <A as="p" x={720.5} y={top + 575} cx shift className="fs ls font-barlow font-semibold uppercase text-white opacity-70" style={{ "--fs": 12, "--ls": 3.96, lineHeight: 1.5 } as CSSProperties}>
-        {pt.footer.rights}
+        {d.footer.rights}
       </A>
     </footer>
   );

@@ -18,7 +18,7 @@ const MODE = process.argv[2];                       // "baseline" | "check"
 const URL = process.env.SITE_URL || "http://localhost:3021";
 const CHROME = process.env.CHROME_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const DIR = ".layout";
-const PAGES = ["/", "/campanha/", "/autores/", "/loja/"];
+const PAGES = ["/pt/", "/pt/campanha/", "/pt/autores/", "/pt/loja/", "/en/", "/en/campanha/", "/en/autores/", "/en/loja/"];
 // phone · iPad mini/Air portrait · just under the switch · switch to desktop · iPad landscape · laptop · big screen
 const WIDTHS = [[390, 844, true], [768, 1024, true], [1023, 768, true], [1100, 800, false], [1180, 820, false], [1440, 900, false], [1920, 1080, false]];
 

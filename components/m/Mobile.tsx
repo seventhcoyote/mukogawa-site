@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- static export */
 import type { CSSProperties, ReactNode } from "react";
 import Drip from "../Drip";
-import { pt } from "@/content/pt";
+import type { Dict } from "@/content";
 import { SOCIAL, ext } from "@/lib/links";
 
 /** Phone layout (< 1100px) building blocks. No Figma frames: our own design (ruled 2026-10-16).
@@ -79,7 +79,7 @@ export function MPhoto({ src, alt, speed = 0.06, drips = true, imgStyle }: { src
 
 /** Page foot: clouds, rocks (`data-rocks`, for AngelLand), black fade, logo, socials, rights.
  *  `children` stand between the clouds and the rocks (Campanha's angel). */
-export function MFooter({ children, tall }: { children?: ReactNode; tall?: boolean }) {
+export function MFooter({ d, children, tall }: { d: Dict; children?: ReactNode; tall?: boolean }) {
   return (
     <footer className={`m-foot ${tall ? "m-foot-tall" : ""}`}>
       <img src="/img/clouds.webp" alt="" loading="lazy" className="m-clouds" />
@@ -88,12 +88,12 @@ export function MFooter({ children, tall }: { children?: ReactNode; tall?: boole
       <div className="m-foot-fade" />
       <div className="m-foot-info">
         {/* no logo here (2026-10-20): the angel lands where it sat */}
-        <ul className="m-socials" aria-label={pt.footer.social}>
+        <ul className="m-socials" aria-label={d.footer.social}>
           {(["instagram", "discord", "youtube"] as const).map((k) => (
             <li key={k}><a href={SOCIAL[k]} {...ext(SOCIAL[k])} aria-label={k[0].toUpperCase() + k.slice(1)} className="social block"><img src={`/svg/icon-${k}.svg`} alt="" className="size-full" /></a></li>
           ))}
         </ul>
-        <p className="m-rights font-barlow font-semibold uppercase">{pt.footer.rights}</p>
+        <p className="m-rights font-barlow font-semibold uppercase">{d.footer.rights}</p>
       </div>
     </footer>
   );
