@@ -1,0 +1,28 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="144" height="144" viewBox="0 0 144 144" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Group 41">
+<path id="Polygon 9" d="M120.191 52.7934C120.696 53.2022 120.99 53.8135 120.991 54.4638C120.997 60.4335 121.008 74.875 120.991 88.0115C120.99 88.6622 120.696 89.2769 120.189 89.6856L104.549 102.309C94.4667 110.22 74 106.133 74 90.3109L74 52.1682C74 36.3461 94.4667 32.2349 104.549 40.1459L120.191 52.7934Z" fill="#E6252C"/>
+<path id="Polygon 16" d="M22.7865 53.0553C22.2946 53.4644 22.0098 54.0654 22.0091 54.7052C22.0027 60.8223 21.9924 75.7475 22.0089 89.3081C22.0097 89.9485 22.2951 90.5544 22.7878 90.9634L38.4512 103.966C48.5333 112.103 69 107.9 69 91.6256L69 52.3931C69 36.1189 48.5333 31.8902 38.4512 40.0273L22.7865 53.0553Z" fill="#E6252C"/>
+<g id="Polygon 14">
+<use xlink:href="#stroke0_0_4" fill="#C10007"/>
+<mask id="stroke1_0_4" fill="white">
+<use xlink:href="#stroke0_0_4"/>
+</mask>
+<path d="M36 53.789L36 90.2108C36 100.035 43.9644 108 53.789 108H90.2108C100.035 108 108 100.035 108 90.2108V53.789C108 43.9644 100.035 36 90.2108 36H53.789C43.9644 36 36 43.9644 36 53.789Z" stroke-width="10.7812" stroke="url(#paint0_linear_0_4)" mask="url(#stroke1_0_4)"/>
+</g>
+<g id="Group 80">
+<path id="Line 39" d="M61.0007 63H83.0007" stroke-width="2" stroke-linecap="round" stroke="white"/>
+<path id="Line 38" d="M61.0007 71H83.0007" stroke-width="2" stroke-linecap="round" stroke="white"/>
+<path id="Line 37" d="M61.0007 79H83.0007" stroke-width="2" stroke-linecap="round" stroke="white"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_4" x1="48.3739" y1="50.3426" x2="96.1863" y2="98.1551" gradientUnits="userSpaceOnUse">
+<stop stop-color="#E6252C"/>
+<stop offset="0.245192" stop-color="#FFBEC2"/>
+<stop offset="0.5" stop-color="#E6252C"/>
+<stop offset="0.75" stop-color="#FCB6BA"/>
+<stop offset="1" stop-color="#E6252C"/>
+</linearGradient>
+<path id="stroke0_0_4" d="M90.2108 36C100.035 36 108 43.9644 108 53.789V90.2108C108 100.035 100.035 108 90.2108 108H53.789C43.9644 108 36 100.035 36 90.2108V53.789C36 43.9644 43.9644 36 53.789 36H90.2108Z"/>
+</defs>
+</svg>
