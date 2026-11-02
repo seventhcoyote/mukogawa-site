@@ -13,7 +13,7 @@ import Footer from "@/components/Footer";
 import { Brackets, RuleH } from "@/components/Ornaments";
 import { Body, Title } from "@/components/Type";
 import { asLang, getDict, type Dict } from "@/content";
-import { CAMPAIGN_URL, ORVALHO_URL, page, type Lang } from "@/lib/links";
+import { ANCHORS, CAMPAIGN_URL, ORVALHO_URL, page, type Lang } from "@/lib/links";
 import JoinForm from "@/components/JoinForm";
 import MJoin from "@/components/m/MJoin";
 import { Mobile, MSection, MTitle, MBody, MLabel, MPhoto, MFooter } from "@/components/m/Mobile";
@@ -76,7 +76,7 @@ export default async function Loja({ params }: Props) {
 
           {/* onde comprar · pré-venda */}
           <Label x={715.5} y={990} cx>{t.eyebrow}</Label>
-          <Title x={715.5} y={1024} cx data-rise data-anchor="loja">{t.title}</Title>
+          <Title x={715.5} y={1024} cx data-rise data-anchor={ANCHORS[lang].loja}>{t.title}</Title>
           <RuleH src="rule-h-316-l.svg" x={130} y={1086} w={316.586} />
           <RuleH src="rule-h-316-r.svg" x={983} y={1086} w={316.586} flip />
 
@@ -112,7 +112,7 @@ export default async function Loja({ params }: Props) {
           <MHero d={d} href={CAMPAIGN_URL} />
           <MSection className="m-stack">
             <MLabel className="text-center">{t.eyebrow}</MLabel>
-            <MTitle size={44} anchor="loja">{t.title}</MTitle>
+            <MTitle size={44} anchor={ANCHORS[lang].loja}>{t.title}</MTitle>
           </MSection>
           {/* campanha: centred title block (Muko-Gawa / ── BLEEDING LIGHT ── / label in two lines), then photo,
               text, button — layout from Fellipe's mockup, 2026-10-19; font sizes unchanged */}
@@ -166,7 +166,7 @@ function Soon({ d, lang }: { d: Dict; lang: Lang }) {
           <Footer d={d} height={HS} clouds={{ y: 1700, h: HS - 1700 }} />
 
           <Label x={715.5} y={990} cx>{t.eyebrow}</Label>
-          <Title x={715.5} y={1024} cx data-rise data-anchor="loja">{t.soon.title}</Title>
+          <Title x={715.5} y={1024} cx data-rise data-anchor={ANCHORS[lang].loja}>{t.soon.title}</Title>
           <RuleH src="rule-h-316-l.svg" x={130} y={1086} w={316.586} />
           <RuleH src="rule-h-316-r.svg" x={983} y={1086} w={316.586} flip />
           <Body x={715.5} y={1250} w={620} cx className="text-center" data-rise><p>{t.soon.text}</p></Body>
@@ -182,7 +182,7 @@ function Soon({ d, lang }: { d: Dict; lang: Lang }) {
           <MHero d={d} href={page(lang).loja} />
           <MSection className="m-stack">
             <MLabel className="text-center">{t.eyebrow}</MLabel>
-            <MTitle size={44} anchor="loja">{t.soon.title}</MTitle>
+            <MTitle size={44} anchor={ANCHORS[lang].loja}>{t.soon.title}</MTitle>
             <MBody align="center"><p>{t.soon.text}</p></MBody>
             <MJoin />
           </MSection>

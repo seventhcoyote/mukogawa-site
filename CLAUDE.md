@@ -29,11 +29,13 @@ changed and how he can see it, not how the code works.
 | Domain | `public/CNAME` (`mukogawa.com`) |
 
 Languages: every page exists once per language, at `/pt/…` and `/en/…` (list in `lib/links.ts` → `LANGS`).
+Each language has its own address words and #section names (`SLUGS` and `ANCHORS` in `lib/links.ts`):
+`/pt/campanha/#projeto` is `/en/project/#project`.
 `mukogawa.com/` and the old addresses (`/campanha/` etc.) are small pages in `public/` that pick the visitor's
 language. What each language shows (video, rewards, store) is `has` in its `content/` file.
 
-Pages: `app/[lang]/page.tsx` (Home), `app/[lang]/campanha/page.tsx` (menu label "Projeto"), `app/[lang]/autores/page.tsx`,
-`app/[lang]/loja/page.tsx`. Changing these, `components/` or `app/globals.css` changes layout — only do it when he
+Pages: `app/[lang]/page.tsx` (Home), `views/Campanha.tsx` (menu label "Projeto"), `views/Autores.tsx`,
+`views/Loja.tsx` (served at each language's address by `app/[lang]/[slug]/page.tsx`). Changing these, `components/` or `app/globals.css` changes layout — only do it when he
 asked for a layout change, and always run the layout check.
 
 ## How the site is built (read before touching layout)
