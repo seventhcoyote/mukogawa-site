@@ -115,7 +115,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           <MSection className="m-stack">
             <MTitle size={44} align="left" drips={[0, 160]}>{d.sinopse.title}</MTitle>
             <MBody><p>{d.sinopse.text}</p></MBody>
-            <div className="m-cta" data-rise><Button href={PAGE.campanha} w={290} inset={13}>{d.sinopse.cta}</Button></div>
+            {/* English "Discover the project" is longer: a wider button so it isn't cut */}
+            <div className="m-cta" data-rise><Button href={PAGE.campanha} w={lang === "pt" ? 290 : 330} inset={13}>{d.sinopse.cta}</Button></div>
           </MSection>
           <div className="m-manga" data-speed={-0.08} aria-hidden="true"><img src="/img/manga-open.webp" alt="" loading="lazy" /></div>
           <MSection className="m-stack">
