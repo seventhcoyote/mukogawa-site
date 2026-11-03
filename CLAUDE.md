@@ -20,7 +20,7 @@ changed and how he can see it, not how the code works.
 ## Where things are
 | What he wants to change | File |
 |---|---|
-| **Any text** on any page (titles, paragraphs, buttons, the menu) | `content/pt.ts` (Portuguese) and `content/en.ts` (English) — the only places text lives; same keys in both |
+| **Any text** on any page (titles, paragraphs, buttons, the menu) | `content/pt.ts` (Portuguese), `content/en.ts` (English), `content/ja.ts` (Japanese) — the only places text lives; same keys in all |
 | **Links** (Catarse, Orvalho, Instagram, Discord, YouTube) | `lib/links.ts` |
 | The Home video (YouTube id) and the phone video | `content/pt.ts` → `video` (English has no video yet: `has.video` in `content/en.ts`) |
 | Images | `public/img/` (replace a file with one of the same name and shape; WebP, keep it small) |
@@ -28,7 +28,7 @@ changed and how he can see it, not how the code works.
 | Old mukogawa.com addresses that redirect | `public/<old-path>/index.html` |
 | Domain | `public/CNAME` (`mukogawa.com`) |
 
-Languages: every page exists once per language, at `/pt/…` and `/en/…` (list in `lib/links.ts` → `LANGS`).
+Languages: every page exists once per language, at `/pt/…`, `/en/…` and `/ja/…` (list in `lib/links.ts` → `LANGS`).
 Each language has its own address words and #section names (`SLUGS` and `ANCHORS` in `lib/links.ts`):
 `/pt/campanha/#projeto` is `/en/project/#project`.
 `mukogawa.com/` and the old addresses (`/campanha/` etc.) are small pages in `public/` that pick the visitor's
@@ -52,7 +52,9 @@ asked for a layout change, and always run the layout check.
   fade-in on scroll (`components/HomeScroll.tsx`, `data-speed` / `data-rise`), the angel that descends and
   lands behind the rocks (`components/AngelLand.tsx`). These are delicate; don't touch unless asked.
 - Fonts: Darkcastle (titles) — **personal-use licence file; a commercial licence must be bought.**
-  Shippori Mincho (body, subset), Barlow, IM Fell, Pier Sans.
+  Shippori Mincho (body, subset), Barlow, IM Fell, Pier Sans. Japanese pages: Yuji Boku (titles) and
+  Shippori Mincho, both subset to the characters in `content/ja.ts` — **after changing Japanese text, run
+  `npm run fonts:ja`** (it rebuilds `app/fonts/*-ja.woff2`), or new characters show in a fallback font.
 - Newsletter: both forms post to a Google Form whose answers land in a Google Sheet he owns. The site
   can't confirm delivery (Google doesn't allow it); "Pronto!" shows when it's sent.
 

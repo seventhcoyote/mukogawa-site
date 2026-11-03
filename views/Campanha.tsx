@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import { Fragment, type CSSProperties } from "react";
 import type { Metadata } from "next";
 import Site from "@/components/Site";
 import Canvas from "@/components/Canvas";
@@ -126,7 +126,7 @@ export default async function Campanha({ params }: Props) {
 
           {/* É assim que nasce */}
           <Title as="p" x={715.5} y={7674 + dy} cx size={48} className="text-center leading-[1.5] text-[#dc1319] mix-blend-normal ls" style={{ "--ls": 1.92 } as CSSProperties} figma="253:2143" data-rise>
-            {j.nasce[0]}<br />{j.nasce[1]}
+            {j.nasce.map((l, i) => <Fragment key={l}>{i > 0 && <br />}{l}</Fragment>)}
           </Title>
           <Svg src="ornament-l.svg" x={155} y={7713 + dy} w={157} h={66} />
           <Svg src="ornament-r.svg" x={1119} y={7713 + dy} w={157} h={66} transform="rotate(180deg) scaleY(-1)" />
@@ -200,7 +200,7 @@ export default async function Campanha({ params }: Props) {
           </MSection>
           {/* É assim que nasce — the cover, and the angel coming down onto the rocks of the footer */}
           <MSection className="m-nasce">
-            <p className="castle m-nasce-title" data-rise>{j.nasce[0]}<br />{j.nasce[1]}</p>
+            <p className="castle m-nasce-title" data-rise>{j.nasce.map((l, i) => <Fragment key={l}>{i > 0 && <br />}{l}</Fragment>)}</p>
             <div className="m-cover" data-speed={0.05}><img src="/img/cover.webp" alt={d.alt.cover} loading="lazy" /></div>
           </MSection>
           <MFooter d={d} tall>

@@ -4,11 +4,12 @@ export const ORVALHO_URL = "https://loja.orvalho.com/livros/muko-gawa-apostila-c
 // YouTube: mukogawa.com links no channel; both of its videos are on Isra's channel.
 export const SOCIAL = { instagram: "https://www.instagram.com/mukogawaverse/", discord: "https://discord.gg/xjXtrfGPZx", youtube: "https://www.youtube.com/@IsraelSubira" };
 
-// Languages: each one lives under its own folder (/pt/, /en/). mukogawa.com/ picks one from the
-// browser's language (public/index.html). To add Japanese: content/ja.ts, then "ja" here.
-export const LANGS = ["pt", "en"] as const;
+// Languages: each one lives under its own folder (/pt/, /en/, /ja/). mukogawa.com/ picks one from the
+// browser's language (public/index.html). A new language: content/<code>.ts, then its code here, in
+// SLUGS and ANCHORS below, and in the small pages in public/ (index.html, campanha/, autores/, loja/).
+export const LANGS = ["pt", "en", "ja"] as const;
 export type Lang = (typeof LANGS)[number];
-export const LANG_NAMES: Record<Lang, string> = { pt: "PT", en: "EN" };
+export const LANG_NAMES: Record<Lang, string> = { pt: "PT", en: "EN", ja: "JA" };
 
 // Each language has its own words in the address: /pt/campanha/#projeto, /en/project/#project.
 // The page files stay the same (views/); only the address and the #section name change.
@@ -16,11 +17,13 @@ export type PageKey = "campanha" | "autores" | "loja";
 export const SLUGS: Record<Lang, Record<PageKey, string>> = {
   pt: { campanha: "campanha", autores: "autores", loja: "loja" },
   en: { campanha: "project", autores: "authors", loja: "store" },
+  ja: { campanha: "project", autores: "authors", loja: "store" },
 };
 // The section each page opens on (its #name).
 export const ANCHORS: Record<Lang, Record<PageKey, string>> = {
   pt: { campanha: "projeto", autores: "autores", loja: "loja" },
   en: { campanha: "project", autores: "authors", loja: "store" },
+  ja: { campanha: "project", autores: "authors", loja: "store" },
 };
 export const pathOf = (lang: Lang, key: PageKey) => `/${lang}/${SLUGS[lang][key]}/`;
 /** Which page an address word is, in a language (undefined if none). */
