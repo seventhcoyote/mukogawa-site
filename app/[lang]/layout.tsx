@@ -45,8 +45,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: m.title,
     description: m.description,
     metadataBase: new URL("https://mukogawa.com"),
-    // the red title screen (public/og-image.jpg, 1200 × 630) when a link is shared in a chat
-    openGraph: { title: m.title, description: m.share, locale: m.locale, type: "website", images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: m.title }] },
+    // the battle drawing in red with the white BLEEDING LIGHT title (public/og-bleeding-light.jpg, 1200 × 630,
+    // 2026-11-03) when a link is shared in a chat
+    openGraph: { title: m.title, description: m.share, locale: m.locale, type: "website", images: [{ url: "/og-bleeding-light.jpg", width: 1200, height: 630, alt: m.title }] },
     twitter: { card: "summary_large_image" },
   };
 }
