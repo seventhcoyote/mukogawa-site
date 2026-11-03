@@ -5,7 +5,6 @@ import Canvas from "@/components/Canvas";
 import A from "@/components/A";
 import Img from "@/components/Img";
 import Paper from "@/components/Paper";
-import Rotated from "@/components/Rotated";
 import Drip from "@/components/Drip";
 import HomeScroll from "@/components/HomeScroll";
 import AngelLand from "@/components/AngelLand";
@@ -16,7 +15,7 @@ import Footer from "@/components/Footer";
 import { Brackets, RuleH, Svg } from "@/components/Ornaments";
 import { Body, Title } from "@/components/Type";
 import { asLang, getDict } from "@/content";
-import { ANCHORS, CAMPAIGN_URL } from "@/lib/links";
+import { ANCHORS, CAMPAIGN_URL, page } from "@/lib/links";
 import { Mobile, MSection, MTitle, MBody, MPhoto, MFooter } from "@/components/m/Mobile";
 import MHero from "@/components/m/MHero";
 import MRewards from "@/components/m/MRewards";
@@ -26,7 +25,7 @@ import MobileChrome from "@/components/m/MobileChrome";
 const H0 = 10096;
 /** Without the rewards section (languages with other products), everything from "a jornada" down moves
  *  up by its height: from the rewards title (3964) to the jornada title (5311). */
-const NO_REWARDS = 3964 - 5311;
+const NO_REWARDS = 3964 - 5311 + 120;   // + room for the campaign button under the band (2026-11-03)
 type Props = { params: Promise<{ lang: string }> };
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => ({ title: getDict((await params).lang).meta.campanha });
 
@@ -47,6 +46,7 @@ export default async function Campanha({ params }: Props) {
   const lang = asLang((await params).lang);
   const d = getDict(lang), j = d.jornada;
   const dy = d.has.rewards ? 0 : NO_REWARDS, H = H0 + dy;
+  const buy = d.has.store ? CAMPAIGN_URL : page(lang).loja;
   return (
     <Site menu="closed">
       <main>
@@ -88,6 +88,8 @@ export default async function Campanha({ params }: Props) {
           <A as="p" x={256} y={3541.1} w={955.7} shift className="castle fs ls text-center leading-[1.5] text-white" style={{ "--fs": 28, "--ls": 1.12 } as CSSProperties} figma="253:1411" data-rise>
             {d.campanha.band}
           </A>
+          {/* under the band: to the campaign (Catarse) or, where it doesn't sell, this language's store */}
+          <A x={550.5} y={3836} shift data-rise><Button href={buy} w={330} inset={14}>{d.campanha.cta}</Button></A>
 
           {d.has.rewards && (<>
           {/* recompensas */}
@@ -130,15 +132,14 @@ export default async function Campanha({ params }: Props) {
           </Title>
           <Svg src="ornament-l.svg" x={155} y={7713 + dy} w={157} h={66} />
           <Svg src="ornament-r.svg" x={1119} y={7713 + dy} w={157} h={66} transform="rotate(180deg) scaleY(-1)" />
+          {/* on to the authors, so the visit carries on (the flying cover was removed, 2026-11-03) */}
+          <A x={533} y={7674 + dy + j.nasce.length * 72 + 44} shift className="z-[2]" data-rise><Button href={page(lang).autores} w={365} inset={15.5}>{d.campanha.authors}</Button></A>
 
           <Footer d={d} height={H} clouds={{ y: 7892 + dy, h: 2070 }}>
             <A x={200} y={7995 + dy} w={1131} h={1184} shift className="pointer-events-none" figma="253:1454" data-angel>
               <Img src="/img/angel.webp" alt={d.alt.angel} className="object-fill" />
             </A>
           </Footer>
-          <Rotated x={1073} y={7796 + dy} bw={346} bh={399} w={238} h={334} transform="rotate(22deg)" shift figma="262:89" speed={0.18}>
-            <span className="absolute inset-0 shadow-[0_4px_36px_rgba(0,0,0,0.25)]"><Img src="/img/cover.webp" alt={d.alt.cover} className="object-cover" /></span>
-          </Rotated>
           <Rail top={1000} height={H - 1000} />   {/* starts below the hero (the white), as on Home */}
           <HomeScroll lift={false} />
           <AngelLand />
@@ -174,6 +175,7 @@ export default async function Campanha({ params }: Props) {
             <img loading="lazy" src="/img/band.webp" alt="" />
             <p className="castle">{d.campanha.band}</p>
           </div>
+          <div className="m-cta m-cta-center m-cta-after-band" data-rise><Button href={buy} w={290} inset={13}>{d.campanha.cta}</Button></div>
           {d.has.rewards && (<>
           {/* recompensas: the board's pieces in a swipe carousel */}
           <MSection className="m-stack">
@@ -201,7 +203,7 @@ export default async function Campanha({ params }: Props) {
           {/* É assim que nasce — the cover, and the angel coming down onto the rocks of the footer */}
           <MSection className="m-nasce">
             <p className="castle m-nasce-title" data-rise>{j.nasce.map((l, i) => <Fragment key={l}>{i > 0 && <br />}{l}</Fragment>)}</p>
-            <div className="m-cover" data-speed={0.05}><img src="/img/cover.webp" alt={d.alt.cover} loading="lazy" /></div>
+            <div className="m-cta m-cta-center m-cta-after-band" data-rise><Button href={page(lang).autores} w={290} inset={13}>{d.campanha.authors}</Button></div>
           </MSection>
           <MFooter d={d} tall>
             <img src="/img/angel.webp" alt={d.alt.angel} loading="lazy" className="m-angel" data-angel />

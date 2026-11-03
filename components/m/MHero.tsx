@@ -37,17 +37,26 @@ export default function MHero({ d, cta, href, intro, children }: { d: Dict; cta?
           <img src="/svg/smoke.svg" alt="" className="smoke-wisp smoke-b" />
           <img src="/svg/smoke.svg" alt="" className="smoke-wisp smoke-c" />
         </div>
+        {/* Home: the Bleeding Light title lockup, then the pre-order button and the scroll arrows */}
+        {intro ? (
+          <h1 className="hero-in m-lockup">
+            <span className="sr-only">{t.logoAlt} — Bleeding Light</span>
+            <img src="/img/bleeding-light.webp" alt="" />
+          </h1>
+        ) : (<>
         <h1 className="hero-in m-logo">
           <span className="sr-only">{t.logoAlt} — Bleeding Light</span>
           <Img src="/img/logo.webp" className="logo-layer logo-emboss object-cover opacity-2" eager />
           <Img src="/img/logo.webp" className="logo-layer logo-emboss object-cover opacity-17" eager />
           <Img src="/img/logo.webp" className="logo-layer object-cover opacity-57" eager />
           {/* inner pages: the big logo takes you home */}
-          {!intro && <Link href={home(lang)} className="hero-home absolute inset-0" aria-label={d.alt.homeLink} />}
+          <Link href={home(lang)} className="hero-home absolute inset-0" aria-label={d.alt.homeLink} />
         </h1>
         <p className="hero-in m-bl font-pier" aria-hidden="true">
           <span>{t.bleeding}</span><img src="/svg/star-hero.svg" alt="" /><span>{t.light}</span>
         </p>
+        </>)}
+        {intro && <div className="hero-in"><Button href={href} w={210} inset={11} light>{cta}</Button></div>}
         {children ?? (
           <>
             <div className="hero-in"><Button href={href} w={210} inset={11} light>{cta}</Button></div>

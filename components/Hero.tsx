@@ -70,8 +70,21 @@ export default function Hero({ d, cta, href, tall, intro, calm }: { d: Dict; cta
       {/* the content on the paper */}
       <div className="hero-content absolute inset-0">
         {(intro || calm) && <HeroSmoke />}
-        {/* Home: the logo at 125% (800 × 317.5), centred, bottom kept clear of BLEEDING LIGHT */}
-        <A as="h1" x={intro || calm ? 424 : 503} y={intro || calm ? 212 : 265} w={intro || calm ? 800 : 640} h={intro || calm ? 317.5 : 254} className="hero-in" figma="245:575">
+        {/* Home: the Bleeding Light title lockup (向こう側 small above BLEEDING LIGHT, white; 2026-11-03),
+            then the pre-order button and the scroll arrows */}
+        {intro && (
+          <A as="h1" x={349} y={250} w={950} h={254} className="hero-in">
+            <span className="sr-only">{t.logoAlt} — Bleeding Light</span>
+            <Img src="/img/bleeding-light.webp" className="object-contain" eager />
+          </A>
+        )}
+        {intro && (
+          <A x={710.5} y={600} className="hero-in">
+            <Button href={href} w={227} inset={12.5} light>{cta}</Button>
+          </A>
+        )}
+        {/* inner pages: the logo at 125% (800 × 317.5), centred, bottom kept clear of BLEEDING LIGHT */}
+        {!intro && <A as="h1" x={intro || calm ? 424 : 503} y={intro || calm ? 212 : 265} w={intro || calm ? 800 : 640} h={intro || calm ? 317.5 : 254} className="hero-in" figma="245:575">
           <span className="sr-only">{t.logoAlt} — Bleeding Light</span>
           {/* three stacked copies of the raw white logo (one image in Figma, hash 976c70), each darkened
               by Figma's image filters (all −1) → black, at 2% / 17% / 57%; the first two carry the emboss.
@@ -80,13 +93,13 @@ export default function Hero({ d, cta, href, tall, intro, calm }: { d: Dict; cta
           <Img src="/img/logo.webp" className="logo-layer logo-emboss object-cover opacity-17" eager />
           <Img src="/img/logo.webp" className="logo-layer object-cover opacity-57" eager />
           {/* inner pages: the big logo takes you home */}
-          {!intro && <Link href={home(lang)} className="hero-home absolute inset-0" aria-label={d.alt.homeLink} />}
-        </A>
-        <div className="hero-in" aria-hidden="true">
+          <Link href={home(lang)} className="hero-home absolute inset-0" aria-label={d.alt.homeLink} />
+        </A>}
+        {!intro && <div className="hero-in" aria-hidden="true">
           <Svg src="star-hero.svg" x={800} y={544} w={48} h={114} shift={false} />
           <A x={768} y={554} rx className="fs ls whitespace-nowrap font-pier text-right text-white" style={{ "--fs": 20, "--ls": 13.8 } as React.CSSProperties}>{t.bleeding}</A>
           <A x={880} y={554} className="fs ls whitespace-nowrap font-pier text-white" style={{ "--fs": 20, "--ls": 13.8 } as React.CSSProperties}>{t.light}</A>
-        </div>
+        </div>}
         {intro ? <PressStart label={d.alt.scroll} /> : (
           <A x={710.5} y={697} className="hero-in" figma="245:622">
             <Button href={href} w={227} inset={12.5} light>{cta}</Button>

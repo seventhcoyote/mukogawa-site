@@ -556,6 +556,8 @@ img { display: block; max-width: none; }
 .m-smoke .smoke-b { left: 35%; top: 22%; width: 95%; }
 .m-smoke .smoke-c { left: 0%; top: 34%; width: 100%; }
 .m-logo { position: relative; width: calc(310 * var(--u)); aspect-ratio: 800 / 317.5; }
+.m-lockup { position: relative; width: calc(340 * var(--u)); }
+.m-lockup img { display: block; width: 100%; height: auto; }
 .m-bl { display: flex; align-items: center; gap: calc(14 * var(--u)); color: #fff; font-size: calc(14 * var(--u)); letter-spacing: calc(9 * var(--u)); margin-top: calc(-6 * var(--u)); }
 .m-bl img { width: calc(22 * var(--u)); height: calc(52 * var(--u)); }
 .m-date { color: #fff; font-size: calc(11 * var(--u)); letter-spacing: calc(6 * var(--u)); padding-left: calc(6 * var(--u)); white-space: nowrap; margin-top: calc(-8 * var(--u)); }
@@ -632,6 +634,7 @@ img { display: block; max-width: none; }
 .m-cta { padding-inline: calc(10 * var(--u)); }
 .m-cta-center { display: flex; justify-content: center; }
 .m-cta-right { display: flex; justify-content: flex-end; }
+.m-cta-after-band { margin-top: calc(28 * var(--u)); }
 .m-meta { display: flex; flex-wrap: wrap; gap: calc(8 * var(--u)) calc(18 * var(--u)); font-size: calc(11 * var(--u)); letter-spacing: calc(2.6 * var(--u)); color: var(--color-ink-soft); }
 
 /* ── Campanha (phone) ── */
@@ -685,6 +688,14 @@ img { display: block; max-width: none; }
 .m-video-card { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; max-height: 80svh; border: 0; padding: 0; overflow: hidden; background: #000; cursor: pointer; }
 .m-video-card > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .m-video-shade { position: absolute; inset: 0; background: rgb(0 0 0 / 0.4); }
+/* Phone Home: the next thing waits under the hero, pinned, and is uncovered as the hero scrolls away */
+.m-reveal { position: relative; }
+/* the box is the hero's height + a pause; the picture is pinned for all of it, the hero is laid on top */
+.m-reveal-under { position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; justify-content: center; z-index: 0; overflow: hidden; }
+.m-reveal-top { position: absolute; inset: 0 0 auto; z-index: 1; }
+.m-reveal-run { height: calc(max(100svh, 640 * var(--u)) + 30svh); }
+.m-reveal[data-zoom] .m-art-img { transform: scale(var(--z, 1)); transform-origin: 50% 50%; will-change: transform; }
+.m-reveal .m-video-sec { padding: 0; }
 /* no video (English): the battle drawing, full width on the paper, with the welcome title */
 .m-art { position: relative; }
 .m-art-img { display: block; width: 100%; height: auto; mix-blend-mode: darken; opacity: 0.8; }

@@ -7,7 +7,7 @@ export const pt = {
   // what this language's pages show (English has no video, rewards or store yet)
   // the title over the battle drawing (pages without a video)
   welcome: "/img/welcome.webp",
-  has: { video: true, rewards: true, store: true },
+  has: { video: true, rewards: false, store: true },
   meta: {
     title: "Muko-Gawa: Bleeding Light",
     description: "Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica, onde anjos e demônios travam uma guerra oculta aos olhos humanos.",
@@ -28,7 +28,7 @@ export const pt = {
     next: "Próxima",
   },
   nav: { home: "Início", campanha: "Projeto", autores: "Autores", loja: "Loja", menu: "Abrir menu", close: "Fechar menu", language: "Idioma", current: "PT", main: "Principal" },
-  hero: { bleeding: "BLEEDING", light: "LIGHT", shop: "Compre já", presale: "Pré-venda", available: "DISPONÍVEL DIA 3 DE NOVEMBRO", logoAlt: "向こう側 Muko-Gawa" },
+  hero: { bleeding: "BLEEDING", light: "LIGHT", shop: "Compre já", presale: "Pré-venda", available: "DISPONÍVEL AGORA", logoAlt: "向こう側 Muko-Gawa" },
   tagline: ["Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica,", "onde anjos e demônios travam uma guerra oculta aos olhos humanos."],
   video: { title: "Muko-Gawa: one-shot Bleeding Light", id: "7drIevtAxCo", shortId: "rlIlJ5ZZmn4", shortTitle: "Muko-Gawa: Anúncio Pré-Campanha", unmute: "Ouvir com som", mute: "Silenciar", pause: "Pausar", watch: "Assistir ao vídeo", close: "Fechar vídeo" },
   sinopse: {
@@ -44,7 +44,8 @@ export const pt = {
   campanha: {
     title: "campanha",
     text: "A produção do mangá está na reta final. Todo o desenvolvimento até aqui foi bancado pelos próprios autores, com o auxílio de apoiadores que adquiriram material conceitual oferecido anteriormente. Agora precisamos cobrir os custos finais de diagramação, impressão e envio do mangá.",
-    cta: "Conheça os autores",
+    cta: "Apoie no Catarse",
+    authors: "Conheça os autores",
     crowdfunding: "Ver no financiamento coletivo",
     band: "Apoiar o projeto nesta fase também funciona como pré-venda, garantindo sua cópia do mangá (física ou digital) além de itens exclusivos da campanha, dependendo do nível de recompensa escolhido.",
   },
@@ -82,17 +83,17 @@ export const pt = {
     cta: "Conheça o projeto",
   },
   join: {
-    title: "participe do lançamento",
-    text: "Se você chegou até aqui, está pronto para atravessar para o reino invisível. Junte-se a nós e esteja entre os primeiros leitores.",
-    available: "DISPONÍVEL DIA 3 DE NOVEMBRO",
+    title: "fique por dentro das novidades",
+    text: "Se você chegou até aqui, está pronto para atravessar para o reino invisível. Deixe seu e-mail e receba as novidades de Muko-Gawa em primeira mão.",
+    available: "DISPONÍVEL AGORA",
     email: "seuemail@email.com",
     emailLabel: "E-mail",
     country: "País",
     defaultCountry: "BR",
     countries: [["BR", "Brasil"], ["PT", "Portugal"], ["US", "EUA"], ["JP", "Japão"], ["OTHER", "Outro"]] as const,
-    cta: "Avise-me no lançamento",
+    cta: "Quero receber novidades",
     invalid: "Digite um e-mail válido.",
-    done: "Pronto! Avisaremos você no lançamento.",
+    done: "Pronto! Você vai receber nossas novidades.",
     privacy: ["Usamos seu e-mail apenas para avisar sobre Muko-Gawa. Para sair da lista, escreva para ", "contact@mukogawa.com", "."],
   },
   // Loja — copy from mukogawa.com/loja (2026-10-16)
@@ -106,8 +107,8 @@ export const pt = {
         "Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica, onde anjos e demônios travam uma guerra oculta aos olhos humanos.",
         "A produção está na reta final. Apoiar o projeto nesta fase também funciona como pré-venda: você garante sua cópia física ou digital, conforme a recompensa escolhida.",
       ],
-      cta: "Siga a campanha",
-      note: "A campanha abre em 3 de novembro. Até lá, siga o projeto no Catarse para ser avisado na abertura.",
+      cta: "Apoie no Catarse",
+      note: "A campanha está no ar no Catarse: garanta já a sua cópia na pré-venda.",
       alt: "Capa da campanha de Muko-Gawa: Bleeding Light no Catarse",
     },
     kit: {

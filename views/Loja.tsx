@@ -24,7 +24,9 @@ import AngelLand from "@/components/AngelLand";
 /** Loja — the content of mukogawa.com/loja (Catarse pre-sale + the Orvalho kit; no newsletter) in our
  *  layout. No Figma frame: built from Campanha's pieces (calm hero, bracketed photos with drips,
  *  parallax, rise-in, free scroll). */
-const H = 4000;
+/** The content moved up by UP when the page heading went (2026-11-03). */
+const UP = 200;
+const H = 4000 - UP;
 type Props = { params: Promise<{ lang: string }> };
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => ({ title: getDict((await params).lang).meta.loja });
 
@@ -72,35 +74,31 @@ export default async function Loja({ params }: Props) {
         <Canvas height={H} figma="none (mukogawa.com/loja)">
           <Paper top={560} height={H} />
           <Hero d={d} cta={d.hero.presale} href={CAMPAIGN_URL} calm />
-          <Footer d={d} height={H} clouds={{ y: 3000, h: H - 3000 }} />
+          <Footer d={d} height={H} clouds={{ y: 3000 - UP, h: H - 3000 + UP }} />
 
-          {/* onde comprar · pré-venda */}
-          <Label x={715.5} y={990} cx>{t.eyebrow}</Label>
-          <Title x={715.5} y={1024} cx data-rise data-anchor={ANCHORS[lang].loja}>{t.title}</Title>
-          <RuleH src="rule-h-316-l.svg" x={130} y={1086} w={316.586} />
-          <RuleH src="rule-h-316-r.svg" x={983} y={1086} w={316.586} flip />
-
+          {/* the page opens straight on the campaign ("onde comprar · pré-venda" heading removed, 2026-11-03);
+              everything below sits UP design px higher than before */}
           {/* the Catarse campaign: text left (right-aligned), photo right */}
-          <Label x={658} y={1340} rx>{c.label}</Label>
-          <Title as="h3" x={658} y={1380} rx size={56} className="text-right" data-rise>{c.title}</Title>
-          <Body x={658} y={1490} w={535} rx className="text-right" data-rise>{c.text.map((p) => <p key={p.slice(0, 12)}>{p}</p>)}</Body>
-          <A x={658} y={1900} rx shift data-rise><Button href={CAMPAIGN_URL} w={330} inset={14}>{c.cta}</Button></A>
-          <Body x={658} y={1985} w={430} rx size={16} className="text-right text-ink-soft" data-rise><p>{c.note}</p></Body>
-          <Framed x={754} y={1290} src="/img/loja-campanha.webp" alt={c.alt} speed={-0.06} />
+          <Label x={658} y={1340 - UP} rx>{c.label}</Label>
+          <Title as="h3" x={658} y={1380 - UP} rx size={56} className="text-right" data-rise data-anchor={ANCHORS[lang].loja}>{c.title}</Title>
+          <Body x={658} y={1490 - UP} w={535} rx className="text-right" data-rise>{c.text.map((p) => <p key={p.slice(0, 12)}>{p}</p>)}</Body>
+          <A x={658} y={1900 - UP} rx shift data-rise><Button href={CAMPAIGN_URL} w={330} inset={14}>{c.cta}</Button></A>
+          <Body x={658} y={1985 - UP} w={430} rx size={16} className="text-right text-ink-soft" data-rise><p>{c.note}</p></Body>
+          <Framed x={754} y={1290 - UP} src="/img/loja-campanha.webp" alt={c.alt} speed={-0.06} />
 
           {/* the Orvalho kit: photo left, text right */}
-          <Framed x={73} y={2240} src="/img/loja-kit.webp" alt={k.alt} speed={0.06} />
-          <Label x={835} y={2290}>{k.label}</Label>
-          <Title as="h3" x={835} y={2335} size={48} data-rise>{k.title}</Title>
-          <Body x={835} y={2440} w={535} data-rise><p>{k.text}</p></Body>
-          <A as="ul" x={835} y={2830} shift className="fs ls flex font-barlow font-semibold uppercase text-ink-soft" style={{ "--fs": 13, "--ls": 3, gap: "calc(28 * var(--u))" } as CSSProperties} data-rise>
+          <Framed x={73} y={2240 - UP} src="/img/loja-kit.webp" alt={k.alt} speed={0.06} />
+          <Label x={835} y={2290 - UP}>{k.label}</Label>
+          <Title as="h3" x={835} y={2335 - UP} size={48} data-rise>{k.title}</Title>
+          <Body x={835} y={2440 - UP} w={535} data-rise><p>{k.text}</p></Body>
+          <A as="ul" x={835} y={2830 - UP} shift className="fs ls flex font-barlow font-semibold uppercase text-ink-soft" style={{ "--fs": 13, "--ls": 3, gap: "calc(28 * var(--u))" } as CSSProperties} data-rise>
             {k.meta.map((m) => <li key={m}>{m}</li>)}
           </A>
-          <A x={835} y={2885} shift data-rise><Button href={ORVALHO_URL} w={400} inset={14}>{k.cta}</Button></A>
-          <Body x={835} y={2970} w={430} size={16} className="text-ink-soft" data-rise><p>{k.note}</p></Body>
+          <A x={835} y={2885 - UP} shift data-rise><Button href={ORVALHO_URL} w={400} inset={14}>{k.cta}</Button></A>
+          <Body x={835} y={2970 - UP} w={430} size={16} className="text-ink-soft" data-rise><p>{k.note}</p></Body>
 
           {/* the retailers' disclaimer */}
-          <Body x={715.5} y={3160} w={760} cx size={14} className="text-center text-ink-soft" data-rise><p>{t.disclaimer}</p></Body>
+          <Body x={715.5} y={3160 - UP} w={760} cx size={14} className="text-center text-ink-soft" data-rise><p>{t.disclaimer}</p></Body>
 
           <Rail top={1000} height={H - 1000} />   {/* starts below the hero (the white), as on Home */}
           <HomeScroll lift={false} />
@@ -110,14 +108,10 @@ export default async function Loja({ params }: Props) {
         {/* phone */}
         <Mobile>
           <MHero d={d} href={CAMPAIGN_URL} />
-          <MSection className="m-stack">
-            <MLabel className="text-center">{t.eyebrow}</MLabel>
-            <MTitle size={44} anchor={ANCHORS[lang].loja}>{t.title}</MTitle>
-          </MSection>
           {/* campanha: centred title block (Muko-Gawa / ── BLEEDING LIGHT ── / label in two lines), then photo,
               text, button — layout from Fellipe's mockup, 2026-10-19; font sizes unchanged */}
           <MSection className="m-stack">
-            <div className="m-prod-head" data-rise>
+            <div className="m-prod-head" data-rise data-anchor={ANCHORS[lang].loja}>
               <h3 className="castle fs m-prod-title" style={{ "--fs": 32 } as CSSProperties}>{c.title.split(": ")[0]}</h3>
               <p className="m-prod-sub font-barlow font-semibold uppercase"><span className="m-rule m-rule-l" />{c.title.split(": ")[1]}<span className="m-rule m-rule-r" /></p>
               <p className="m-label m-label-stack text-center">{c.label.split(" // ").map((l) => <span key={l}>{l}</span>)}</p>

@@ -25,7 +25,7 @@ export default function PressStart({ label }: { label: string }) {
   return (
     <A x={824} y={760} cx className="hero-in">
       <a href="#video" className="scroll-hint" aria-label={label} onClick={(e) => { e.preventDefault(); pressStart(); }}>
-        <img src="/img/scroll-hint.webp" alt="" style={{ width: "calc(32.2 * var(--u))", height: "calc(70 * var(--u))" }} />
+        <img src="/img/scroll-arrows.webp" alt="" style={{ width: "calc(32.2 * var(--u))", height: "auto" }} />
       </a>
     </A>
   );
