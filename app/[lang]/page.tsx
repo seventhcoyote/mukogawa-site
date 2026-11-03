@@ -17,7 +17,8 @@ import HomeScroll from "@/components/HomeScroll";
 import { RuleH, RuleV } from "@/components/Ornaments";
 import { Body, Title } from "@/components/Type";
 import { asLang, getDict } from "@/content";
-import { page } from "@/lib/links";
+import { CAMPAIGN_URL, page } from "@/lib/links";
+import MReveal from "@/components/m/MReveal";
 import { Mobile, MSection, MTitle, MBody, MFooter } from "@/components/m/Mobile";
 import MHero from "@/components/m/MHero";
 import MJoin from "@/components/m/MJoin";
@@ -29,13 +30,16 @@ import AngelLand from "@/components/AngelLand";
 /** Home — started from Figma 245:562 "home-menu_lateral"; from 2026-10-16 the layout below the
  *  video departs from Figma on purpose (centred campanha, band with its own CTA,
  *  join section sized as a closing screen). */
-const H = 7500;   // 6340 + a closing stretch below "participe do lançamento" for the angel (2026-10-19)
+// 7500 until 2026-11-03; the red band between campanha and the sign-up moved to Projeto (−730)
+const H = 6770;   // 6340 + a closing stretch below the sign-up for the angel (2026-10-19), − the band
 /** The closing screen sits on the footer: everything is placed relative to the page foot. */
-const J = 5460;
+const J = 4730;
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const lang = asLang((await params).lang);
   const d = getDict(lang), PAGE = page(lang);
+  // pre-order buttons: the Catarse campaign where it sells (Portuguese), else this language's store page
+  const buy = d.has.store ? CAMPAIGN_URL : PAGE.loja;
   return (
     <Site menu="closed">
       <main>
@@ -46,7 +50,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           {/* the video stage: pinned, playing muted behind the red paper */}
           <Video still={!d.has.video} />
 
-          <Hero d={d} cta={d.hero.shop} tall intro />
+          <Hero d={d} cta={d.hero.presale} href={buy} tall intro />
 
           {/* the open manga — rises into place from below; drawn under the sinopse button */}
           <Rotated x={-132} y={2566} bw={1374.98} bh={1071.196} w={1263.089} h={907.537} transform="rotate(-7.83deg)" shift figma="245:715" speed={-0.14}>
@@ -76,15 +80,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           <RuleH src="rule-h-316-l.svg" x={168} y={3762} w={316.586} />
           <RuleH src="rule-h-316-r.svg" x={979} y={3762} w={316.586} flip />
           <Body x={351.5} y={3860} w={760} className="text-center" figma="245:718" data-rise><p>{d.campanha.text}</p></Body>
-          <A x={549} y={4120} shift data-rise><Button href={PAGE.autores} w={365} inset={16}>{d.campanha.cta}</Button></A>
-
-          {/* torn red band */}
-          <A x={1} y={4520} h={379.978} bleed className="pointer-events-none" figma="245:722">
-            <Img src="/img/band.webp" className="band-img object-fill" />
-          </A>
-          <A as="p" x={256} y={4655} w={955} shift className="castle fs ls text-center leading-[1.5] text-white" style={{ "--fs": 28, "--ls": 1.12 } as CSSProperties} figma="245:723" data-rise>
-            {d.campanha.band}
-          </A>
+          <A x={549} y={4120} shift data-rise><Button href={buy} w={365} inset={16}>{d.campanha.cta}</Button></A>
 
           {/* join the launch — a closing screen on the footer */}
           <A x={681} y={J - 399} w={829} h={1001} shift className="pointer-events-none mix-blend-multiply opacity-15" figma="245:806" data-speed={-0.1}>
@@ -92,7 +88,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </A>
           <Title x={187} y={J} size={64} figma="245:802" data-rise>{d.join.title}</Title>
           <Body x={187} y={J + 106} w={432} size={16} className="text-ink-soft" style={{ letterSpacing: "calc(0.48 * var(--u))" }} figma="245:787" data-rise><p>{d.join.text}</p></Body>
-          <A as="p" x={187} y={J + 233} shift className="fs ls whitespace-nowrap font-pier text-red-launch" style={{ "--fs": 16, "--ls": 11.04 } as CSSProperties} figma="245:803" data-rise>{d.join.available}</A>
           <JoinForm x={820} y={J + 129} />
 
           <Footer d={d} height={H} clouds={{ y: H - 2204, h: 2070 }}>
@@ -107,8 +102,10 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
         {/* phone: the same story in one column; the video opens full screen */}
         <Mobile>
-          <MHero d={d} intro><MPressStart label={d.alt.scroll} /></MHero>
-          {d.has.video ? <section className="m-video-sec"><MVideoCard /></section> : <MArt />}
+          {/* the video card / the battle drawing waits under the hero and is uncovered as you scroll */}
+          <MReveal zoom={!d.has.video} hero={<MHero d={d} cta={d.hero.presale} href={buy} intro><MPressStart label={d.alt.scroll} /></MHero>}>
+            {d.has.video ? <section className="m-video-sec"><MVideoCard /></section> : <MArt />}
+          </MReveal>
           <MSection>
             <p className="m-tagline font-mincho font-semibold" data-rise>{d.tagline[0]} {d.tagline[1]}</p>
           </MSection>
@@ -122,17 +119,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           <MSection className="m-stack">
             <MTitle size={44} drips={[110, 170]}>{d.campanha.title}</MTitle>
             <MBody align="center"><p>{d.campanha.text}</p></MBody>
-            <div className="m-cta m-cta-center" data-rise><Button href={PAGE.autores} w={290} inset={13}>{d.campanha.cta}</Button></div>
+            <div className="m-cta m-cta-center" data-rise><Button href={buy} w={290} inset={13}>{d.campanha.cta}</Button></div>
           </MSection>
-          <div className="m-band" data-rise>
-            <img loading="lazy" src="/img/band.webp" alt="" />
-            <p className="castle">{d.campanha.band}</p>
-          </div>
           <MSection className="m-stack m-join">
             <div className="m-join-sketch" data-speed={-0.08} aria-hidden="true"><img src="/img/join-sketch.webp" alt="" loading="lazy" /></div>
             <MTitle size={44} align="left" rules={false}>{d.join.title}</MTitle>
             <MBody size={15} className="text-ink-soft"><p>{d.join.text}</p></MBody>
-            <p className="m-available font-pier" data-rise>{d.join.available}</p>
             <MJoin />
           </MSection>
           <MFooter d={d} tall>

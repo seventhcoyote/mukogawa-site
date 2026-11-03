@@ -5,10 +5,8 @@ import Canvas from "@/components/Canvas";
 import A from "@/components/A";
 import Img from "@/components/Img";
 import Paper from "@/components/Paper";
-import Rotated from "@/components/Rotated";
 import Drip from "@/components/Drip";
 import HomeScroll from "@/components/HomeScroll";
-import AngelLand from "@/components/AngelLand";
 import Hero from "@/components/Hero";
 import Rail from "@/components/Rail";
 import Button from "@/components/Button";
@@ -16,17 +14,16 @@ import Footer from "@/components/Footer";
 import { Brackets, RuleH, Svg } from "@/components/Ornaments";
 import { Body, Title } from "@/components/Type";
 import { asLang, getDict } from "@/content";
-import { ANCHORS, CAMPAIGN_URL } from "@/lib/links";
+import { ANCHORS, CAMPAIGN_URL, page } from "@/lib/links";
 import { Mobile, MSection, MTitle, MBody, MPhoto, MFooter } from "@/components/m/Mobile";
 import MHero from "@/components/m/MHero";
 import MRewards from "@/components/m/MRewards";
 import MobileChrome from "@/components/m/MobileChrome";
 
 /** Campanha — Figma 253:1272 "campanha-menu_lateral" (1648 × 10096). */
-const H0 = 10096;
 /** Without the rewards section (languages with other products), everything from "a jornada" down moves
  *  up by its height: from the rewards title (3964) to the jornada title (5311). */
-const NO_REWARDS = 3964 - 5311;
+const NO_REWARDS = 3964 - 5311 + 120;   // + room for the campaign button under the band (2026-11-03)
 type Props = { params: Promise<{ lang: string }> };
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => ({ title: getDict((await params).lang).meta.campanha });
 
@@ -46,7 +43,12 @@ function PhotoDrips({ x, y }: { x: number; y: number }) {
 export default async function Campanha({ params }: Props) {
   const lang = asLang((await params).lang);
   const d = getDict(lang), j = d.jornada;
-  const dy = d.has.rewards ? 0 : NO_REWARDS, H = H0 + dy;
+  const m = j.more;
+  const dy = d.has.rewards ? 0 : NO_REWARDS;
+  const btnY = 7674 + dy + j.nasce.length * 72 + 44;   // "Conheça os autores", under "É assim que nasce"
+  const end = m.text ? btnY + 330 + 450 : btnY + 60;   // where the page's content ends
+  const H = end + 1150;   // then the foot: clouds, rocks, logo
+  const buy = d.has.store ? CAMPAIGN_URL : page(lang).loja;
   return (
     <Site menu="closed">
       <main>
@@ -88,6 +90,8 @@ export default async function Campanha({ params }: Props) {
           <A as="p" x={256} y={3541.1} w={955.7} shift className="castle fs ls text-center leading-[1.5] text-white" style={{ "--fs": 28, "--ls": 1.12 } as CSSProperties} figma="253:1411" data-rise>
             {d.campanha.band}
           </A>
+          {/* under the band: to the campaign (Catarse) or, where it doesn't sell, this language's store */}
+          <A x={550.5} y={3836} shift data-rise><Button href={buy} w={330} inset={14}>{d.campanha.cta}</Button></A>
 
           {d.has.rewards && (<>
           {/* recompensas */}
@@ -130,18 +134,23 @@ export default async function Campanha({ params }: Props) {
           </Title>
           <Svg src="ornament-l.svg" x={155} y={7713 + dy} w={157} h={66} />
           <Svg src="ornament-r.svg" x={1119} y={7713 + dy} w={157} h={66} transform="rotate(180deg) scaleY(-1)" />
+          {/* on to the authors, so the visit carries on (the flying cover was removed, 2026-11-03) */}
+          <A x={533} y={btnY} shift className="z-[2]" data-rise><Button href={page(lang).autores} w={365} inset={15.5}>{d.campanha.authors}</Button></A>
 
-          <Footer d={d} height={H} clouds={{ y: 7892 + dy, h: 2070 }}>
-            <A x={200} y={7995 + dy} w={1131} h={1184} shift className="pointer-events-none" figma="253:1454" data-angel>
-              <Img src="/img/angel.webp" alt={d.alt.angel} className="object-fill" />
-            </A>
-          </Footer>
-          <Rotated x={1073} y={7796 + dy} bw={346} bh={399} w={238} h={334} transform="rotate(22deg)" shift figma="262:89" speed={0.18}>
-            <span className="absolute inset-0 shadow-[0_4px_36px_rgba(0,0,0,0.25)]"><Img src="/img/cover.webp" alt={d.alt.cover} className="object-cover" /></span>
-          </Rotated>
+          {/* Portuguese only: Isra's books (from 2027) and a taste of the narrative */}
+          {m.text && (
+            <>
+              <Body x={715.5 - 380} y={btnY + 150} w={760} className="text-center" data-rise><p>{m.text}</p></Body>
+              <A x={715.5 - 400} y={btnY + 330} w={800} h={450} shift className="overflow-hidden bg-black" data-rise>
+                <iframe src={`https://www.youtube-nocookie.com/embed/${m.video}?rel=0`} title={m.title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen className="absolute inset-0 size-full border-0" />
+              </A>
+            </>
+          )}
+
+          {/* a short foot (no descending angel here since 2026-11-03: it lands on Home) */}
+          <Footer d={d} height={H} clouds={{ y: end + 60, h: H - end - 60 }} />
           <Rail top={1000} height={H - 1000} />   {/* starts below the hero (the white), as on Home */}
           <HomeScroll lift={false} />
-          <AngelLand />
         </Canvas>
         </div>
 
@@ -157,9 +166,9 @@ export default async function Campanha({ params }: Props) {
               <p><strong className="font-bold text-blood-deep">{d.projeto.lead}</strong>{d.projeto.text}</p>
             </MBody>
             <div className="m-arches" aria-hidden="true">
-              <div className="m-arch m-arch-1" style={{ background: "#807b7b" }} data-speed={0.05}><img loading="lazy" src="/img/arch-1.webp" alt="" className="object-bottom" /></div>
-              <div className="m-arch m-arch-3" style={{ background: "#aba9a9" }} data-speed={0.09}><img loading="lazy" src="/img/arch-3.webp" alt="" className="object-bottom" /></div>
-              <div className="m-arch m-arch-2" style={{ background: "#807b7b" }} data-speed={-0.06}><img loading="lazy" src="/img/arch-2.webp" alt="" className="object-cover" /></div>
+              <div className="m-arch m-arch-1" style={{ background: "#807b7b" }}><img loading="lazy" src="/img/arch-1.webp" alt="" className="object-bottom" /></div>
+              <div className="m-arch m-arch-3" style={{ background: "#aba9a9" }}><img loading="lazy" src="/img/arch-3.webp" alt="" className="object-bottom" /></div>
+              <div className="m-arch m-arch-2" style={{ background: "#807b7b" }}><img loading="lazy" src="/img/arch-2.webp" alt="" className="object-cover" /></div>
               <img src="/svg/star-100.svg" alt="" className="m-star m-star-100" />
               <img src="/svg/star-66.svg" alt="" className="m-star m-star-66" />
               <img src="/svg/star-40.svg" alt="" className="m-star m-star-40" />
@@ -174,6 +183,7 @@ export default async function Campanha({ params }: Props) {
             <img loading="lazy" src="/img/band.webp" alt="" />
             <p className="castle">{d.campanha.band}</p>
           </div>
+          <div className="m-cta m-cta-center m-cta-after-band" data-rise><Button href={buy} w={290} inset={13}>{d.campanha.cta}</Button></div>
           {d.has.rewards && (<>
           {/* recompensas: the board's pieces in a swipe carousel */}
           <MSection className="m-stack">
@@ -188,7 +198,7 @@ export default async function Campanha({ params }: Props) {
           <MSection className="m-stack">
             <MTitle size={44}>{j.title}</MTitle>
             <MBody>{j.p1.map((p) => <p key={p.slice(0, 12)}>{p}</p>)}</MBody>
-            <MPhoto src="/img/jornada.webp" alt={j.photo1} speed={0.04} imgStyle={{ left: "-29.93%", top: "-12.51%", width: "261.22%", height: "125.14%", objectFit: "fill" }} />
+            <MPhoto src="/img/jornada.webp" alt={j.photo1} speed={0} imgStyle={{ left: "-29.93%", top: "-12.51%", width: "261.22%", height: "125.14%", objectFit: "fill" }} />
           </MSection>
           <MSection className="m-stack">
             <div className="m-quote" data-rise>
@@ -196,16 +206,22 @@ export default async function Campanha({ params }: Props) {
               <span className="m-rule m-rule-l" /><span className="m-rule m-rule-r" />
             </div>
             <MBody>{j.p2.map((p) => <p key={p.slice(0, 12)}>{p}</p>)}</MBody>
-            <MPhoto src="/img/jornada.webp" alt={j.photo2} speed={-0.04} imgStyle={{ left: "-130.57%", top: "-12.51%", width: "260.87%", height: "125.14%", objectFit: "fill" }} />
+            <MPhoto src="/img/jornada.webp" alt={j.photo2} speed={0} imgStyle={{ left: "-130.57%", top: "-12.51%", width: "260.87%", height: "125.14%", objectFit: "fill" }} />
           </MSection>
-          {/* É assim que nasce — the cover, and the angel coming down onto the rocks of the footer */}
+          {/* É assim que nasce, and on to the authors */}
           <MSection className="m-nasce">
             <p className="castle m-nasce-title" data-rise>{j.nasce.map((l, i) => <Fragment key={l}>{i > 0 && <br />}{l}</Fragment>)}</p>
-            <div className="m-cover" data-speed={0.05}><img src="/img/cover.webp" alt={d.alt.cover} loading="lazy" /></div>
+            <div className="m-cta m-cta-center m-cta-after-band" data-rise><Button href={page(lang).autores} w={290} inset={13}>{d.campanha.authors}</Button></div>
           </MSection>
-          <MFooter d={d} tall>
-            <img src="/img/angel.webp" alt={d.alt.angel} loading="lazy" className="m-angel" data-angel />
-          </MFooter>
+          {m.text && (
+            <MSection className="m-stack">
+              <MBody align="center"><p>{m.text}</p></MBody>
+              <div className="m-yt" data-rise>
+                <iframe src={`https://www.youtube-nocookie.com/embed/${m.video}?rel=0`} title={m.title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+              </div>
+            </MSection>
+          )}
+          <MFooter d={d} />
         </Mobile>
         <MobileChrome />
       </main>

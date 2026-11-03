@@ -58,13 +58,13 @@ export default function MVideo() {
 }
 
 /** The scroll hint on the phone hero (replaced PRESS START, 2026-10-19): bobs to say "scroll"; a tap
- *  glides down to the video card (or the first section). */
+ *  scrolls the hero away, uncovering the video card or the drawing underneath. */
 export function MPressStart({ label }: { label: string }) {
-  // to what follows the hero: the video card, or the first section where there's no video
-  const go = () => document.querySelector(".mob .m-hero")?.nextElementSibling?.scrollIntoView({ behavior: "smooth", block: "start" });
+  // scroll the hero away: what waits underneath (the video card or the drawing) is uncovered
+  const go = () => { const h = document.querySelector<HTMLElement>(".mob .m-hero"); if (h) scrollTo({ top: h.offsetHeight, behavior: "smooth" }); };
   return (
     <button type="button" className="hero-in scroll-hint m-press" onClick={go} aria-label={label}>
-      <img src="/img/scroll-hint.webp" alt="" />
+      <img src="/img/scroll-arrows.webp" alt="" />
     </button>
   );
 }

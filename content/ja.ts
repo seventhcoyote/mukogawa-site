@@ -47,7 +47,8 @@ export const ja: Dict = {
   campanha: {
     title: "キャンペーン",
     text: "漫画の制作は最終段階を迎えている。ここまでの開発費はすべて著者自身が負担し、以前に提供したコンセプト素材を購入してくれた支援者たちの協力にも支えられてきた。今は、漫画のレイアウト、印刷、発送にかかる最終費用を賄う段階だ。",
-    cta: "制作者を知る",
+    cta: "予約",
+    authors: "制作者を知る",
     crowdfunding: "",
     band: "この段階でのプロジェクト支援は予約購入としても機能し、選んだリワードの段階に応じて、漫画のコピー(紙版またはデジタル版)に加え、キャンペーン限定アイテムが手に入る。",
   },
@@ -67,6 +68,7 @@ export const ja: Dict = {
     photo1: "東京にて、『向こう側』の脚本を手にするイスラ",
     photo2: "観客の前に立つイスラとマッチ",
     // three lines: Japanese title lettering is wide, two would run into the ornaments beside it
+    more: { text: "", video: "", title: "" },
     nasce: ["こうして、『向こう側:", "ブリーディング・ライト』", "は生まれた。"],
   },
   autores: {
@@ -81,17 +83,17 @@ export const ja: Dict = {
     cta: "プロジェクトを見る",
   },
   join: {
-    title: "参加しよう",
-    text: "ここまでたどり着いたなら、見えざる世界へ渡る準備はできている。最初の読者の一人になろう。",
+    title: "最新情報",
+    text: "ここまでたどり着いたなら、見えざる世界へ渡る準備はできている。メールアドレスを登録して、『向こう側』の最新情報をいち早く受け取ろう。",
     available: "近日公開",
     email: "youremail@email.com",
     emailLabel: "メールアドレス",
     country: "国",
     defaultCountry: "JP",
     countries: [["BR", "ブラジル"], ["PT", "ポルトガル"], ["US", "アメリカ"], ["JP", "日本"], ["OTHER", "その他"]],
-    cta: "発売時に通知を受け取る",
+    cta: "最新情報を受け取る",
     invalid: "有効なメールアドレスを入力してください。",
-    done: "登録が完了しました。発売時にお知らせします。",
+    done: "登録が完了しました。最新情報をお届けします。",
     privacy: ["メールアドレスは『向こう側』に関するお知らせにのみ使用します。配信停止をご希望の場合は ", "contact@mukogawa.com", " までご連絡ください。"],
   },
   loja: {
