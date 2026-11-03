@@ -30,7 +30,7 @@ export const pt = {
   nav: { home: "Início", campanha: "Projeto", autores: "Autores", loja: "Loja", menu: "Abrir menu", close: "Fechar menu", language: "Idioma", current: "PT", main: "Principal" },
   hero: { bleeding: "BLEEDING", light: "LIGHT", shop: "Compre já", presale: "Pré-venda", available: "DISPONÍVEL AGORA", logoAlt: "向こう側 Muko-Gawa" },
   tagline: ["Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica,", "onde anjos e demônios travam uma guerra oculta aos olhos humanos."],
-  video: { title: "Muko-Gawa: one-shot Bleeding Light", id: "7drIevtAxCo", shortId: "rlIlJ5ZZmn4", shortTitle: "Muko-Gawa: Anúncio Pré-Campanha", unmute: "Ouvir com som", mute: "Silenciar", pause: "Pausar", watch: "Assistir ao vídeo", close: "Fechar vídeo" },
+  video: { title: "Muko-Gawa: one-shot Bleeding Light", id: "JKnr_ZQKsos", shortId: "rlIlJ5ZZmn4", shortTitle: "Muko-Gawa: Anúncio Pré-Campanha", unmute: "Ouvir com som", mute: "Silenciar", pause: "Pausar", watch: "Assistir ao vídeo", close: "Fechar vídeo" },
   sinopse: {
     title: "sinopse",
     text: "Um homem abandona o pacto que seus ancestrais carregavam com os céus. Enquanto sua esperança se esvai, os Anjos que o guardam sangram num campo de batalha invisível, resilientes apesar da ignorância da humanidade quanto ao conflito que os consome. Mas mesmo com os céus manchados pelas marcas dessa guerra, um novo descendente se levanta, disposto a carregar o pacto adiante.",
