@@ -635,6 +635,8 @@ img { display: block; max-width: none; }
 .m-cta-center { display: flex; justify-content: center; }
 .m-cta-right { display: flex; justify-content: flex-end; }
 .m-cta-after-band { margin-top: calc(28 * var(--u)); }
+.m-yt { position: relative; aspect-ratio: 16 / 9; background: #000; }
+.m-yt iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .m-meta { display: flex; flex-wrap: wrap; gap: calc(8 * var(--u)) calc(18 * var(--u)); font-size: calc(11 * var(--u)); letter-spacing: calc(2.6 * var(--u)); color: var(--color-ink-soft); }
 
 /* ── Campanha (phone) ── */
@@ -695,6 +697,12 @@ img { display: block; max-width: none; }
 .m-reveal-top { position: absolute; inset: 0 0 auto; z-index: 1; }
 .m-reveal-run { height: calc(max(100svh, 640 * var(--u)) + 30svh); }
 .m-reveal[data-zoom] .m-art-img { transform: scale(var(--z, 1)); transform-origin: 50% 50%; will-change: transform; }
+/* the drawing (English, Japanese): only its own height, held in the middle of the screen while pinned, so
+   the text follows right under it (art 2000 × 1429 → 71.45vw tall); pinned for the hero + a short pause */
+.m-reveal[data-zoom] .m-reveal-under { height: auto; top: calc(50svh - 35.725vw); }
+.m-reveal[data-zoom] .m-reveal-run { height: calc(max(100svh, 640 * var(--u)) + 20svh + 50svh - 35.725vw); }
+/* its bottom fades into the paper */
+.m-art { -webkit-mask-image: linear-gradient(#000 72%, transparent); mask-image: linear-gradient(#000 72%, transparent); }
 .m-reveal .m-video-sec { padding: 0; }
 /* no video (English): the battle drawing, full width on the paper, with the welcome title */
 .m-art { position: relative; }

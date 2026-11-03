@@ -65,6 +65,7 @@ export const en: Dict = {
     ],
     photo1: "Isra in Tokyo, with the script of Muko-Gawa",
     photo2: "Isra and Match in front of the audience",
+    more: { text: "", video: "", title: "" },
     nasce: ["And so was born", "Muko-Gawa: Bleeding Light!"],   // no ō: Darkcastle has no macron glyph
   },
   autores: {

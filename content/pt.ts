@@ -69,6 +69,11 @@ export const pt = {
     ],
     photo1: "Isra em Tóquio, com o roteiro de Muko-Gawa",
     photo2: "Isra e Match diante do público",
+    more: {
+      text: "Bleeding Light é nosso primeiro mangá, mas os livros que o Isra escreveu têm previsão de começar a ser publicados em 2027. Aqui está um gosto da narrativa:",
+      video: "IEQqYgudmh8",
+      title: "Muko-Gawa: um gosto da narrativa",
+    },
     nasce: ["É assim que nasce", "Muko-Gawa: Bleeding Light!"],   // no ō: Darkcastle has no macron glyph
   },
   autores: {

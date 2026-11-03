@@ -68,6 +68,7 @@ export const ja: Dict = {
     photo1: "東京にて、『向こう側』の脚本を手にするイスラ",
     photo2: "観客の前に立つイスラとマッチ",
     // three lines: Japanese title lettering is wide, two would run into the ornaments beside it
+    more: { text: "", video: "", title: "" },
     nasce: ["こうして、『向こう側:", "ブリーディング・ライト』", "は生まれた。"],
   },
   autores: {
