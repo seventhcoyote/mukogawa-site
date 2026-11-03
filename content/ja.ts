@@ -8,6 +8,8 @@ import type { Dict } from "./index";
 export const ja: Dict = {
   lang: "ja",
   code: "ja",
+  // the title over the battle drawing (pages without a video)
+  welcome: "/img/welcome-ja.webp",
   has: { video: false, rewards: false, store: false },
   meta: {
     title: "向こう側:ブリーディング・ライト",
@@ -24,6 +26,7 @@ export const ja: Dict = {
     manga: "漫画『ブリーディング・ライト』の見開きページ",
     homeLink: "向こう側 — ホーム",
     scroll: "下へスクロール",
+    welcome: "向こう側へようこそ",
     prev: "前へ",
     next: "次へ",
   },

@@ -2,11 +2,13 @@
 
 /* eslint-disable @next/next/no-img-element -- static export */
 import { useEffect, useRef } from "react";
+import { useT } from "../Lang";
 
 /** Phone, languages without a video (English): the battle drawing on the paper (darken 80%) with
  *  "welcome to MUKŌ·GAWA" over it, in place of the video card. The title fades out as the drawing
  *  scrolls up out of the screen (same as the computer layout's still, components/Video.tsx). */
 export default function MArt() {
+  const d = useT();
   const box = useRef<HTMLElement>(null);
   const title = useRef<HTMLImageElement>(null);
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function MArt() {
   return (
     <section ref={box} className="m-art">
       <img src="/img/battle.webp" alt="" loading="lazy" className="m-art-img" />
-      <img ref={title} src="/img/welcome.webp" alt="Welcome to Muko-Gawa" className="m-art-title" />
+      <img ref={title} src={d.welcome} alt={d.alt.welcome} className="m-art-title" data-lang={d.code} />
     </section>
   );
 }

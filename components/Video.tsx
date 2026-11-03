@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import A from "./A";
 import { pt } from "@/content/pt";
+import { useT } from "./Lang";
 
 /** The video under the red paper (Figma image 305 + 49% black + play mark 245:703).
  *  A stage from the top of the page to the end of the video block (y 0 → 1646). Inside it the video
@@ -22,7 +23,7 @@ const onDeskChange = (cb: () => void) => { const m = matchMedia(DESK); m.addEven
 export default function Video({ still }: { still?: boolean }) {
   // phones get their own full-screen player (components/m/MVideo); don't load this one there
   const desk = useSyncExternalStore(onDeskChange, () => matchMedia(DESK).matches, () => false);
-  const t = pt.video;
+  const t = pt.video, d = useT();
   const frame = useRef<HTMLIFrameElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
@@ -84,7 +85,7 @@ export default function Video({ still }: { still?: boolean }) {
           <>
             {/* the battle drawing printed on the paper: darken at 80% over the page's paper texture */}
             <img loading="lazy" src="/img/battle.webp" alt="" className="video-art-img absolute inset-0 size-full object-cover" />
-            <img ref={title} src="/img/welcome.webp" alt="Welcome to Muko-Gawa" className="video-title absolute left-1/2 top-1/2" />
+            <img ref={title} src={d.welcome} alt={d.alt.welcome} className="video-title absolute left-1/2 top-1/2" data-lang={d.code} />
           </>
         ) : (
           <>
