@@ -5,6 +5,8 @@ export const pt = {
   lang: "pt-BR",
   code: "pt",
   // what this language's pages show (English has no video, rewards or store yet)
+  // the title over the battle drawing (pages without a video)
+  welcome: "/img/welcome.webp",
   has: { video: true, rewards: true, store: true },
   meta: {
     title: "Muko-Gawa: Bleeding Light",
@@ -21,6 +23,7 @@ export const pt = {
     manga: "Páginas abertas do mangá Bleeding Light",
     homeLink: "Muko-Gawa — Início",
     scroll: "Role para baixo",
+    welcome: "Bem-vindo a Muko-Gawa",
     prev: "Anterior",
     next: "Próxima",
   },

@@ -6,6 +6,8 @@ import type { Dict } from "./index";
 export const en: Dict = {
   lang: "en",
   code: "en",
+  // the title over the battle drawing (pages without a video)
+  welcome: "/img/welcome.webp",
   has: { video: false, rewards: false, store: false },
   meta: {
     title: "Muko-Gawa: Bleeding Light",
@@ -22,6 +24,7 @@ export const en: Dict = {
     manga: "Open pages of the manga Bleeding Light",
     homeLink: "Muko-Gawa — Home",
     scroll: "Scroll down",
+    welcome: "Welcome to Muko-Gawa",
     prev: "Previous",
     next: "Next",
   },
