@@ -25,9 +25,26 @@ export default function Site({ children, menu = "open" }: { children: ReactNode;
       scrollTo(0, Math.max(0, y));
       document.documentElement.style.scrollBehavior = "";
     };
+    // The browser can't find these sections itself (they have no id), and some (Safari, slow phones)
+    // scroll back to the top once the page has loaded, undoing the jump (2026-11-03). So: jump soon,
+    // and again when the page has fully loaded and a moment later, unless the visitor scrolled already.
+    let touched = false;
+    const touch = () => { touched = true; };
+    const again = () => { if (!touched) go(); };
+    if (location.hash) history.scrollRestoration = "manual";
     const t = setTimeout(() => go(), 60);   // after the router's own scroll
+    const t2 = setTimeout(again, 700);
+    const onLoad = () => setTimeout(again, 50);
+    if (document.readyState === "complete") onLoad(); else addEventListener("load", onLoad, { once: true });
+    addEventListener("wheel", touch, { passive: true, once: true });
+    addEventListener("touchmove", touch, { passive: true, once: true });
+    addEventListener("keydown", touch, { once: true });
     addEventListener("hashchange", go);
-    return () => { clearTimeout(t); removeEventListener("hashchange", go); };
+    return () => {
+      clearTimeout(t); clearTimeout(t2);
+      removeEventListener("load", onLoad); removeEventListener("wheel", touch); removeEventListener("touchmove", touch); removeEventListener("keydown", touch);
+      removeEventListener("hashchange", go);
+    };
   }, []);
   return (
     <MenuContext.Provider value={{ open, setOpen }}>

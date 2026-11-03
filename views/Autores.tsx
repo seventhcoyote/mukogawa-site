@@ -72,6 +72,8 @@ export default async function Autores({ params }: Props) {
           </Body>
           {/* on to the project page, so the visit carries on */}
           <A x={673} y={2720} rx shift className="z-[2]" data-rise><Button href={page(lang).campanha} w={365} inset={15.5}>{t.cta}</Button></A>
+          {/* and, to its right, the store */}
+          <A x={697} y={2720} shift className="z-[2]" data-rise><Button href={page(lang).loja} w={200} inset={15.5}>{d.nav.loja}</Button></A>
 
           <Rail top={1000} height={H - 1000} />   {/* starts below the hero (the white), as on Home */}
           <HomeScroll lift={false} />
@@ -100,7 +102,10 @@ export default async function Autores({ params }: Props) {
             </div>
             <MTitle as="h3" size={32} align="right">{t.ilustrador}</MTitle>
             <MBody align="right"><p>{t.ilustradorText[0]}</p><p>{t.ilustradorText[1]}</p></MBody>
-            <div className="m-cta m-cta-right" data-rise><Button href={page(lang).campanha} w={330} inset={13}>{t.cta}</Button></div>
+            <div className="m-cta m-cta-right m-cta-pair" data-rise>
+              <Button href={page(lang).campanha} w={330} inset={13}>{t.cta}</Button>
+              <Button href={page(lang).loja} w={160} inset={13}>{d.nav.loja}</Button>
+            </div>
           </MSection>
           <MFooter d={d} tall>
             <img src="/img/angel.webp" alt={d.alt.angel} loading="lazy" className="m-angel" data-angel />

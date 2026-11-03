@@ -1,4 +1,5 @@
 import { Fragment, type CSSProperties } from "react";
+import AngelLand from "@/components/AngelLand";
 import type { Metadata } from "next";
 import Site from "@/components/Site";
 import Canvas from "@/components/Canvas";
@@ -47,7 +48,7 @@ export default async function Campanha({ params }: Props) {
   const dy = d.has.rewards ? 0 : NO_REWARDS;
   const btnY = 7674 + dy + j.nasce.length * 72 + 44;   // "Conheça os autores", under "É assim que nasce"
   const end = m.text ? btnY + 330 + 450 : btnY + 60;   // where the page's content ends
-  const H = end + 1150;   // then the foot: clouds, rocks, logo
+  const H = end + 2278;   // then the foot: clouds with the descending angel, rocks, logo (as before 2026-11-03)
   const buy = d.has.store ? CAMPAIGN_URL : page(lang).loja;
   return (
     <Site menu="closed">
@@ -147,8 +148,12 @@ export default async function Campanha({ params }: Props) {
             </>
           )}
 
-          {/* a short foot (no descending angel here since 2026-11-03: it lands on Home) */}
-          <Footer d={d} height={H} clouds={{ y: end + 60, h: H - end - 60 }} />
+          {/* the foot: the angel comes down through the clouds onto the rocks (back since 2026-11-03) */}
+          <Footer d={d} height={H} clouds={{ y: end + 74, h: 2070 }}>
+            <A x={200} y={end + 177} w={1131} h={1184} shift className="pointer-events-none" figma="253:1454" data-angel>
+              <Img src="/img/angel.webp" alt={d.alt.angel} className="object-fill" />
+            </A>
+          </Footer>
           <Rail top={1000} height={H - 1000} />   {/* starts below the hero (the white), as on Home */}
           <HomeScroll lift={false} />
         </Canvas>
@@ -166,9 +171,9 @@ export default async function Campanha({ params }: Props) {
               <p><strong className="font-bold text-blood-deep">{d.projeto.lead}</strong>{d.projeto.text}</p>
             </MBody>
             <div className="m-arches" aria-hidden="true">
-              <div className="m-arch m-arch-1" style={{ background: "#807b7b" }}><img loading="lazy" src="/img/arch-1.webp" alt="" className="object-bottom" /></div>
-              <div className="m-arch m-arch-3" style={{ background: "#aba9a9" }}><img loading="lazy" src="/img/arch-3.webp" alt="" className="object-bottom" /></div>
-              <div className="m-arch m-arch-2" style={{ background: "#807b7b" }}><img loading="lazy" src="/img/arch-2.webp" alt="" className="object-cover" /></div>
+              <div className="m-arch m-arch-1" style={{ background: "#807b7b" }} data-speed={0.05}><img loading="lazy" src="/img/arch-1.webp" alt="" className="object-bottom" /></div>
+              <div className="m-arch m-arch-3" style={{ background: "#aba9a9" }} data-speed={0.09}><img loading="lazy" src="/img/arch-3.webp" alt="" className="object-bottom" /></div>
+              <div className="m-arch m-arch-2" style={{ background: "#807b7b" }} data-speed={-0.06}><img loading="lazy" src="/img/arch-2.webp" alt="" className="object-cover" /></div>
               <img src="/svg/star-100.svg" alt="" className="m-star m-star-100" />
               <img src="/svg/star-66.svg" alt="" className="m-star m-star-66" />
               <img src="/svg/star-40.svg" alt="" className="m-star m-star-40" />
@@ -221,8 +226,11 @@ export default async function Campanha({ params }: Props) {
               </div>
             </MSection>
           )}
-          <MFooter d={d} />
+          <MFooter d={d} tall>
+            <img src="/img/angel.webp" alt={d.alt.angel} loading="lazy" className="m-angel" data-angel />
+          </MFooter>
         </Mobile>
+        <AngelLand />
         <MobileChrome />
       </main>
     </Site>
