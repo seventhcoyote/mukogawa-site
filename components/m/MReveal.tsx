@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 
-/** Phone Home: what follows the red hero (the video card, or the battle drawing) waits underneath it,
- *  pinned to the screen, and is uncovered as the hero scrolls away — like the paper lifting off the
- *  video on the computer layout. `zoom`: the drawing starts close up and zooms out as you scroll. */
+/** Phone Home: what follows the red hero (the video card, or the battle drawing) is tucked under the
+ *  hero's torn edge, so it comes up right under the paper as you scroll — no empty paper between them
+ *  (2026-11-03; a pinned version left gaps). `zoom`: the drawing starts close up and zooms out as the
+ *  hero scrolls away. */
 export default function MReveal({ hero, children, zoom }: { hero: ReactNode; children: ReactNode; zoom?: boolean }) {
   const box = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -25,10 +26,8 @@ export default function MReveal({ hero, children, zoom }: { hero: ReactNode; chi
   }, [zoom]);
   return (
     <div ref={box} className="m-reveal" data-zoom={zoom ? "" : undefined}>
-      {/* pinned while the hero (laid over it) scrolls away, then a short pause, then it scrolls on */}
-      <div className="m-reveal-under">{children}</div>
       <div className="m-reveal-top">{hero}</div>
-      <div className="m-reveal-run" aria-hidden="true" />
+      <div className="m-reveal-under">{children}</div>
     </div>
   );
 }
