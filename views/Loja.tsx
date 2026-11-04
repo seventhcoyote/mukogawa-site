@@ -30,6 +30,9 @@ const H = 4000 - UP;
 type Props = { params: Promise<{ lang: string }> };
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => ({ title: getDict((await params).lang).meta.loja });
 
+/** Phone title block: "Muko-Gawa" / "Bleeding Light" — split at the colon (Japanese uses the full-width ：). */
+const TITLE_SPLIT = /\s*[:：]\s*/;
+
 /** Blood running from the lower ends of the two top brackets of a frame (Brackets at x, y). */
 function PhotoDrips({ x, y }: { x: number; y: number }) {
   return (
@@ -112,8 +115,8 @@ export default async function Loja({ params }: Props) {
               text, button — layout from Fellipe's mockup, 2026-10-19; font sizes unchanged */}
           <MSection className="m-stack">
             <div className="m-prod-head" data-rise data-anchor={ANCHORS[lang].loja}>
-              <h3 className="castle fs m-prod-title" style={{ "--fs": 32 } as CSSProperties}>{c.title.split(": ")[0]}</h3>
-              <p className="m-prod-sub font-barlow font-semibold uppercase"><span className="m-rule m-rule-l" />{c.title.split(": ")[1]}<span className="m-rule m-rule-r" /></p>
+              <h3 className="castle fs m-prod-title" style={{ "--fs": 32 } as CSSProperties}>{c.title.split(TITLE_SPLIT)[0]}</h3>
+              <p className="m-prod-sub font-barlow font-semibold uppercase"><span className="m-rule m-rule-l" />{c.title.split(TITLE_SPLIT)[1]}<span className="m-rule m-rule-r" /></p>
               <p className="m-label m-label-stack text-center">{c.label.split(" // ").map((l) => <span key={l}>{l}</span>)}</p>
             </div>
             <MPhoto src="/img/loja-capa.webp" alt={c.alt} speed={-0.05} />
@@ -183,8 +186,8 @@ function Soon({ d, lang }: { d: Dict; lang: Lang }) {
           <MHero d={d} href={page(lang).loja} />
           <MSection className="m-stack">
             <div className="m-prod-head" data-rise data-anchor={ANCHORS[lang].loja}>
-              <h3 className="castle fs m-prod-title" style={{ "--fs": 32 } as CSSProperties}>{c.title.split(": ")[0]}</h3>
-              <p className="m-prod-sub font-barlow font-semibold uppercase"><span className="m-rule m-rule-l" />{c.title.split(": ")[1]}<span className="m-rule m-rule-r" /></p>
+              <h3 className="castle fs m-prod-title" style={{ "--fs": 32 } as CSSProperties}>{c.title.split(TITLE_SPLIT)[0]}</h3>
+              <p className="m-prod-sub font-barlow font-semibold uppercase"><span className="m-rule m-rule-l" />{c.title.split(TITLE_SPLIT)[1]}<span className="m-rule m-rule-r" /></p>
               <p className="m-label m-label-stack text-center"><span>{c.label}</span></p>
             </div>
             <MPhoto src="/img/loja-capa.webp" alt={c.alt} speed={-0.05} />
