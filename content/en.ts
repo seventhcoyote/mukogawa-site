@@ -96,7 +96,7 @@ export const en: Dict = {
   loja: {
     eyebrow: "STORE",
     title: "coming soon",
-    campanha: { label: "", title: "", text: ["", ""], cta: "", note: "", alt: "" },
+    campanha: { label: "ENGLISH EDITION", title: "Muko-Gawa: Bleeding Light", text: ["Bleeding Light is a dark fantasy manga based on biblical literature, where angels and demons wage a war hidden from human eyes."], cta: "", note: "", alt: "Cover of Muko-Gawa: Bleeding Light" },
     kit: { label: "", title: "", text: "", meta: ["", "", ""], cta: "", note: "", alt: "" },
     disclaimer: "",
     soon: { title: "coming soon", text: "The English edition isn't available yet. Leave your email and we'll let you know as soon as it is." },

@@ -111,7 +111,7 @@ export const pt = {
       text: [
         "Bleeding Light é um mangá de dark fantasy baseado em literatura bíblica, onde anjos e demônios travam uma guerra oculta aos olhos humanos.",
       ],
-      cta: "Apoie no Catarse",
+      cta: "Garanta o seu",
       note: "A campanha está no ar no Catarse: garanta já a sua cópia na pré-venda.",
       alt: "Capa da campanha de Muko-Gawa: Bleeding Light no Catarse",
     },

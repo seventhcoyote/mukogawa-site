@@ -10,13 +10,13 @@ import Hero from "@/components/Hero";
 import Rail from "@/components/Rail";
 import Button from "@/components/Button";
 import Footer from "@/components/Footer";
-import { Brackets, RuleH } from "@/components/Ornaments";
+import { Brackets } from "@/components/Ornaments";
 import { Body, Title } from "@/components/Type";
 import { asLang, getDict, type Dict } from "@/content";
 import { ANCHORS, CAMPAIGN_URL, ORVALHO_URL, page, type Lang } from "@/lib/links";
 import JoinForm from "@/components/JoinForm";
 import MJoin from "@/components/m/MJoin";
-import { Mobile, MSection, MTitle, MBody, MLabel, MPhoto, MFooter } from "@/components/m/Mobile";
+import { Mobile, MSection, MTitle, MBody, MPhoto, MFooter } from "@/components/m/Mobile";
 import MHero from "@/components/m/MHero";
 import MobileChrome from "@/components/m/MobileChrome";
 import AngelLand from "@/components/AngelLand";
@@ -84,7 +84,7 @@ export default async function Loja({ params }: Props) {
           <Body x={658} y={1490 - UP} w={535} rx className="text-right" data-rise>{c.text.map((p) => <p key={p.slice(0, 12)}>{p}</p>)}</Body>
           <A x={658} y={1900 - UP} rx shift data-rise><Button href={CAMPAIGN_URL} w={330} inset={14}>{c.cta}</Button></A>
           <Body x={658} y={1985 - UP} w={430} rx size={16} className="text-right text-ink-soft" data-rise><p>{c.note}</p></Body>
-          <Framed x={754} y={1290 - UP} src="/img/loja-campanha.webp" alt={c.alt} speed={-0.06} />
+          <Framed x={754} y={1290 - UP} src="/img/loja-capa.webp" alt={c.alt} speed={-0.06} />
 
           {/* the Orvalho kit: photo left, text right */}
           <Framed x={73} y={2240 - UP} src="/img/loja-kit.webp" alt={k.alt} speed={0.06} />
@@ -116,7 +116,7 @@ export default async function Loja({ params }: Props) {
               <p className="m-prod-sub font-barlow font-semibold uppercase"><span className="m-rule m-rule-l" />{c.title.split(": ")[1]}<span className="m-rule m-rule-r" /></p>
               <p className="m-label m-label-stack text-center">{c.label.split(" // ").map((l) => <span key={l}>{l}</span>)}</p>
             </div>
-            <MPhoto src="/img/loja-campanha.webp" alt={c.alt} speed={-0.05} imgStyle={{ objectPosition: "62% 50%" }} />
+            <MPhoto src="/img/loja-capa.webp" alt={c.alt} speed={-0.05} />
             <MBody>{c.text.map((p) => <p key={p.slice(0, 12)}>{p}</p>)}</MBody>
             <div className="m-cta" data-rise><Button href={CAMPAIGN_URL} w={270} inset={13}>{c.cta}</Button></div>
             <MBody size={13} className="text-ink-soft"><p>{c.note}</p></MBody>
@@ -146,10 +146,12 @@ export default async function Loja({ params }: Props) {
   );
 }
 
-/** Languages without a store yet: "coming soon" and the launch e-mail list (same form as Home). */
-const HS = 2700;
+/** Languages without a store yet: the same book block as Portuguese (cover, title, description) with
+ *  "coming soon" in place of the button, then the launch e-mail list (same form as Home). */
+const HS = 3300;
 function Soon({ d, lang }: { d: Dict; lang: Lang }) {
-  const t = d.loja;
+  const t = d.loja, c = t.campanha;
+  const soonLine = "fs ls whitespace-nowrap font-pier text-red-launch";
   return (
     <Site menu="closed">
       <main>
@@ -157,14 +159,19 @@ function Soon({ d, lang }: { d: Dict; lang: Lang }) {
         <Canvas height={HS} figma="none">
           <Paper top={560} height={HS} />
           <Hero d={d} cta={d.hero.presale} href={page(lang).loja} calm />
-          <Footer d={d} height={HS} clouds={{ y: 1700, h: HS - 1700 }} />
+          <Footer d={d} height={HS} clouds={{ y: 2400, h: HS - 2400 }} />
 
-          <Label x={715.5} y={990} cx>{t.eyebrow}</Label>
-          <Title x={715.5} y={1024} cx data-rise data-anchor={ANCHORS[lang].loja}>{t.soon.title}</Title>
-          <RuleH src="rule-h-316-l.svg" x={130} y={1086} w={316.586} />
-          <RuleH src="rule-h-316-r.svg" x={983} y={1086} w={316.586} flip />
-          <Body x={715.5} y={1250} w={620} cx className="text-center" data-rise><p>{t.soon.text}</p></Body>
-          <JoinForm x={715.5 - 224} y={1420} />
+          {/* the book: text left (right-aligned), cover right — as on the Portuguese store */}
+          <Label x={658} y={1340 - UP} rx>{c.label}</Label>
+          {/* the Japanese title lettering is wider: a bit smaller so it fits */}
+          <Title as="h3" x={658} y={1380 - UP} rx size={lang === "ja" ? 44 : 56} className="text-right" data-rise data-anchor={ANCHORS[lang].loja}>{c.title}</Title>
+          <Body x={658} y={1490 - UP} w={535} rx className="text-right" data-rise>{c.text.map((p) => <p key={p.slice(0, 12)}>{p}</p>)}</Body>
+          <A as="p" x={658} y={1910 - UP} rx shift className={soonLine} style={{ "--fs": 16, "--ls": 11.04 } as CSSProperties} data-rise>{d.hero.available}</A>
+          <Framed x={754} y={1290 - UP} src="/img/loja-capa.webp" alt={c.alt} speed={-0.06} />
+
+          {/* the launch e-mail list */}
+          <Body x={715.5 - 310} y={2010} w={620} className="text-center" data-rise><p>{t.soon.text}</p></Body>
+          <JoinForm x={715.5 - 224} y={2140} />
 
           <Rail top={1000} height={HS - 1000} />
           <HomeScroll lift={false} />
@@ -175,8 +182,16 @@ function Soon({ d, lang }: { d: Dict; lang: Lang }) {
         <Mobile>
           <MHero d={d} href={page(lang).loja} />
           <MSection className="m-stack">
-            <MLabel className="text-center">{t.eyebrow}</MLabel>
-            <MTitle size={44} anchor={ANCHORS[lang].loja}>{t.soon.title}</MTitle>
+            <div className="m-prod-head" data-rise data-anchor={ANCHORS[lang].loja}>
+              <h3 className="castle fs m-prod-title" style={{ "--fs": 32 } as CSSProperties}>{c.title.split(": ")[0]}</h3>
+              <p className="m-prod-sub font-barlow font-semibold uppercase"><span className="m-rule m-rule-l" />{c.title.split(": ")[1]}<span className="m-rule m-rule-r" /></p>
+              <p className="m-label m-label-stack text-center"><span>{c.label}</span></p>
+            </div>
+            <MPhoto src="/img/loja-capa.webp" alt={c.alt} speed={-0.05} />
+            <MBody>{c.text.map((p) => <p key={p.slice(0, 12)}>{p}</p>)}</MBody>
+            <p className="m-available font-pier" data-rise>{d.hero.available}</p>
+          </MSection>
+          <MSection className="m-stack">
             <MBody align="center"><p>{t.soon.text}</p></MBody>
             <MJoin />
           </MSection>

@@ -99,7 +99,7 @@ export const ja: Dict = {
   loja: {
     eyebrow: "STORE",
     title: "近日公開",
-    campanha: { label: "", title: "", text: ["", ""], cta: "", note: "", alt: "" },
+    campanha: { label: "日本語版", title: "Muko-Gawa: Bleeding Light", text: ["『向こう側:ブリーディング・ライト』は、聖書文学を基にしたダークファンタジー漫画。天使と悪魔が、人知れず戦い続ける見えざる戦争を描く。"], cta: "", note: "", alt: "『向こう側:ブリーディング・ライト』の表紙" },
     kit: { label: "", title: "", text: "", meta: ["", "", ""], cta: "", note: "", alt: "" },
     disclaimer: "",
     soon: { title: "近日公開", text: "日本語版はまだ販売していません。メールアドレスをご登録いただければ、販売開始時にお知らせします。" },
